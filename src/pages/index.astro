@@ -135,6 +135,24 @@ const schema = [
     </div>
   </section>
 
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">See the Difference</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">Real results from a recent job right here in Arkadelphia.</p>
+      <div class="ba-grid">
+        <figure class="ba-item">
+          <img src="/images/arkadelphia-ar-large-tree-risk-assessment-backyard-deck.webp" width="800" height="600" loading="lazy" decoding="async" alt="Large tree looming over a backyard deck in Arkadelphia, AR before removal" />
+          <figcaption class="ba-label ba-before">Before</figcaption>
+        </figure>
+        <figure class="ba-item">
+          <img src="/images/arkadelphia-ar-tree-clearing-backyard-deck-renovation.webp" width="800" height="600" loading="lazy" decoding="async" alt="Cleared backyard with a rebuilt deck after tree removal in Arkadelphia, AR" />
+          <figcaption class="ba-label ba-after">After</figcaption>
+        </figure>
+      </div>
+      <p class="center section-cta"><a class="btn btn-primary btn-lg" href="#quote">Get This Done for Your Yard</a></p>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
       <h2 class="center">Our Crew at Work</h2>
@@ -171,4 +189,11 @@ const schema = [
   .step p { color: #c9ddcf; }
   .gallery-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
   .gallery-grid img { border-radius: var(--radius); width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; box-shadow: var(--shadow); }
+  .ba-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr 1fr; max-width: 920px; margin-inline: auto; }
+  .ba-item { margin: 0; }
+  .ba-item img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow); display: block; }
+  .ba-label { margin-top: 0.7rem; text-align: center; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 800; font-size: 0.95rem; }
+  .ba-before { color: #b4503f; }
+  .ba-after { color: var(--green-700); }
+  @media (max-width: 560px) { .ba-grid { grid-template-columns: 1fr; } }
 </style>
