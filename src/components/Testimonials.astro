@@ -1,14 +1,36 @@
 ---
-import testimonials from '../data/testimonials.json';
+import data from '../data/reviews.json';
 import business from '../data/business.json';
-const { heading = 'What Your Neighbors Are Saying', intro = 'Real reviews from real people right here in Clark County.', alt = false } = Astro.props;
+export interface Props {
+  heading?: string;
+  intro?: string;
+  alt?: boolean;
+  /** Service-matched set: removal | emergency | trimming | stump | general */
+  category?: string;
+  count?: number;
+}
+const {
+  heading = 'What Our Customers Say',
+  intro = `Real 5-star Google reviews from folks across Clark County and southwest Arkansas.`,
+  alt = false,
+  category = 'general',
+  count = 3,
+} = Astro.props;
+
+// Pull service-matched reviews; fall back to general so a section is never empty.
+let picks = data.reviews.filter((r) => r.tags.includes(category));
+if (picks.length < count) {
+  const fillers = data.reviews.filter((r) => r.tags.includes('general') && !picks.includes(r));
+  picks = [...picks, ...fillers];
+}
+picks = picks.slice(0, count);
 ---
 <section class={`testi section ${alt ? 'section-alt' : ''}`}>
   <div class="container">
     <h2 class="center">{heading}</h2>
     <p class="center lead measure testi-intro">{intro}</p>
     <div class="grid grid-3">
-      {testimonials.map((t) => (
+      {picks.map((t) => (
         <figure class="testi-card">
           <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
           <blockquote>{t.text}</blockquote>
@@ -21,7 +43,7 @@ const { heading = 'What Your Neighbors Are Saying', intro = 'Real reviews from r
                 <path fill="#EA4335" d="M12 4.74c1.7 0 3.22.58 4.42 1.72l3.3-3.3C17.73 1.2 15.12 0 12 0 7.36 0 3.36 2.66 1.69 6.55l3.84 2.99C6.44 6.81 8.99 4.74 12 4.74z"/>
               </svg>
             </span>
-            <span class="testi-name"><strong>{t.author}</strong> — {t.location}</span>
+            <span class="testi-name"><strong>{t.author}</strong> · Google review</span>
           </figcaption>
         </figure>
       ))}
@@ -36,7 +58,7 @@ const { heading = 'What Your Neighbors Are Saying', intro = 'Real reviews from r
   .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
   .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
   .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
-  .testi-author { margin-top: auto; display: flex; align-items: center; gap: 0.6rem; color: var(--body); font-size: 0.92rem; }
+  .testi-author { margin-top: auto; display: flex; align-items: center; gap: 0.6rem; color: var(--muted); font-size: 0.9rem; }
   .testi-author .testi-name strong { color: var(--ink); }
   .g-avatar { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); flex: none; }
   .testi-cta { margin-top: 2rem; }

@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -142,12 +143,6 @@ const whyUs = [
   { h: '📸 Photo Updates for Absentee Owners', p: 'If you can’t be at the lake, we send before-and-after photos. You see exactly what was done without having to drive out.' },
   { h: '📋 Licensed and Insured', p: 'Full liability and workers’ comp. Critical when working on properties with valuable structures and high replacement costs.' },
   { h: '🧹 Lake-Standard Cleanup', p: 'No debris in the water, no woodchips on the dock, no track marks across your lawn. Lakefront cleanup standards are higher and we meet them.' },
-];
-
-const testimonials = [
-  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
-  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
-  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
 ];
 
 const schema = [
@@ -368,25 +363,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="center">What Lake Customers Say</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real Clark County customers — including lakefront work over the years.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-      <p class="center" style="margin-top:1.5rem">
-        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
-      </p>
-    </div>
-  </section>
+  <Testimonials category="removal" heading="What Lake Customers Say" />
 
   <ArkadelphiaServicesBlock current={path} />
 

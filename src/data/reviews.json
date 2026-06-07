@@ -1,0 +1,34 @@
+{
+  "_comment": "Curated real Google reviews (verbatim, lightly trimmed for length). Attributed by first name + last initial, shown with the Google G avatar. No town shown — the source reviews don't include one. Tagged so each page can show service-matched reviews. Single source of truth for all on-page testimonials.",
+  "reviews": [
+    { "author": "WalkingTall A.", "tags": ["removal"], "text": "One of the best tree removal services in Clark County by far. Very reliable, fair priced, and not trying to take unnecessary money like most try to throw in there. They clean up the area awesome and never leave your yard or property a mess." },
+    { "author": "David H.", "tags": ["removal"], "text": "I had some trees removed — close to a power line, the house, and the edge of the driveway. Did an amazing job. He was the cheapest and had the equipment to get it all done, cleanup and everything." },
+    { "author": "Amy W.", "tags": ["removal"], "text": "Plyler's removed several trees for us. The attention to detail and knowledge of tree removal was unmatched. They finished ahead of schedule and right on budget. I've recommended them to family and friends." },
+    { "author": "Ron Y.", "tags": ["removal"], "text": "Did a great job keeping a big pine off my shop. Excellent." },
+    { "author": "Stephani P.", "tags": ["removal"], "text": "Got a large tree down from over a carport and cleaned up in a day. Didn't leave a mess and no further trimming necessary." },
+    { "author": "Anthony G.", "tags": ["removal"], "text": "They removed the trees and cleaned up so well that you would never know the downed trees were there. Fast, reliable and very detailed work. Would definitely recommend." },
+    { "author": "Arjon", "tags": ["removal"], "text": "Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him." },
+    { "author": "Cass W.", "tags": ["removal"], "text": "These guys are amazing! Very hard workers, very efficient, very safe. Cut a huge tree over my home! Would definitely recommend." },
+
+    { "author": "Jason J.", "tags": ["emergency"], "text": "Plyler's has been a lifesaver and a house saver for us! When a huge tree fell on my parents' house, they showed up the next morning and stayed for 14 hours until they had the tree completely off the house. They will always have my business." },
+    { "author": "B.J. J.", "tags": ["emergency"], "text": "Had a tree fall on my house during a storm and they were right over to help and make life normal again. On time, efficient, cleaned everything up and hauled it off. Great people!" },
+    { "author": "Karen T.", "tags": ["emergency"], "text": "Severe storm passed through and created some very dangerous tree problems for us. Plyler's came out, cut the trees down and removed them, leaving my yard as though nothing ever happened. By far the best rates in the area." },
+    { "author": "Kendall F.", "tags": ["emergency"], "text": "Had storm damage with a tree on our roof. Robbie immediately came out and got it taken care of. Excellent work." },
+    { "author": "Sarah H.", "tags": ["emergency"], "text": "Plyler's came and got a tree off my roof. The way it looked, I figured it would mess up a lot, but they got it off with no problems. They're very good at what they do — I'd refer them to anyone." },
+    { "author": "Blake F.", "tags": ["emergency"], "text": "If you're in a bind and need good quality work, call this guy. Robbie works with every insurance company on the market." },
+
+    { "author": "Meghan G.", "tags": ["trimming"], "text": "Excellent work! Very knowledgeable and all around a great experience. 10/10 will have Plyler's trim again!" },
+    { "author": "Rebecca O.", "tags": ["trimming", "stump"], "text": "Robbie did an amazing job trimming and cleaning up a beast of a tree in our front yard. He also helped remove several stumps even though that wasn't part of why we originally contacted him. Very friendly and quick service." },
+    { "author": "Sherry C.", "tags": ["trimming"], "text": "Excellent service, great job with difficult trees! Reliable, dependable and very fair on pricing. Most definitely recommend." },
+
+    { "author": "Ben C.", "tags": ["stump"], "text": "They did an outstanding job. Very affordable. Went above and beyond while completing the job. Down to earth guys. I feel like I got more for my money — and they do a professional job." },
+    { "author": "David H.", "tags": ["stump"], "text": "Had him take down a very big tree that had died. He did an awesome cleanup too — cleaned up all the small stuff and hauled it off, and made sure my driveway was clean. You can't even tell the tree was there now." },
+
+    { "author": "Tana M.", "tags": ["general"], "text": "Robbie is one-of-a-kind. Engaging personality, stellar work ethic, super responsive by text. His estimate was very reasonable and he showed up exactly when he said he would. My 89-year-old father trusts no one and is rarely satisfied — he could not have been happier with Robbie's work and the price. Two thumbs up!" },
+    { "author": "Denise R.", "tags": ["general"], "text": "Robbie Plyler is so honest and hard working. We'd trust him with any of our tree service needs!" },
+    { "author": "Carson E.", "tags": ["general"], "text": "10/10 recommend Plyler's for any of your tree needs. Very professional and very price competitive. Robbie goes above and beyond for his customers." },
+    { "author": "Lyla R.", "tags": ["general"], "text": "Great service! Wonderful people, and Robbie explains everything and keeps you in the loop, which is priceless. I'll never use another tree service!" },
+    { "author": "Robert M.", "tags": ["general"], "text": "Robbie has cut difficult and dangerous trees for me on multiple occasions over several years. He is dependable and professional. He is a good man and I highly recommend him." },
+    { "author": "Kent A.", "tags": ["general"], "text": "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job." }
+  ]
+}

@@ -8,6 +8,7 @@ import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.ast
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -107,11 +108,6 @@ const towns = [
   { h: 'Pearcy', p: 'Lake Hamilton area — wooded lakefront lots that need skilled care.' },
 ];
 
-const testimonials = [
-  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
-  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
-  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
-];
 
 const schema = [
   {
@@ -235,22 +231,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="center">What Your Neighbors Are Saying</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real customers across Arkadelphia and Clark County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Testimonials category="general" heading="What Your Neighbors Are Saying" />
 
   <section class="section section-alt">
     <div class="container">

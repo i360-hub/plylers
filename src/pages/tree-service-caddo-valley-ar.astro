@@ -8,6 +8,7 @@ import ServicesGrid from '../components/ServicesGrid.astro';
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -78,11 +79,6 @@ const neighborhoods = [
   },
 ];
 
-const testimonials = [
-  "If you're in a bind and need good quality work call this guy. Robby works with every insurance company on the market.",
-  'One of the best tree removal services in Clark County by far. Very reliable priced and not trying to take unnecessary money like most try to throw in there. They clean up the area awesome and will never let your yard or property messed up. I had work done for my mother and will be getting some more work done in the next couple months coming up. Thank you!',
-  "They did an outstanding job. Very affordable. Went above and beyond while completing the job. I'd recommend them to anyone needing professional service. Down to earth guys. I feel like I got more for my money. Again very affordable and they do a professional job!!!",
-];
 
 // Towns within the service area.
 const towns = [
@@ -200,22 +196,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="center">What Your Neighbors Are Saying</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real customers across Caddo Valley, Arkadelphia, and Clark County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Testimonials category="general" heading="What Your Neighbors Are Saying" />
 
   <section class="section section-alt">
     <div class="container">

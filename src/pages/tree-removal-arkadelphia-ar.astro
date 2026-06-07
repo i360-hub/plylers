@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -55,12 +56,6 @@ const whyUs = [
   { h: '📋 Licensed and Insured', p: "Full liability and workers' comp on every removal. We'll show you proof before we start a saw. Never hire a tree company that can't." },
   { h: '💬 Free Written Estimate', p: "Robbie comes out, walks the tree, gives you a price in writing. If the tree doesn't need to come down, he says so." },
   { h: '🧹 Complete Cleanup', p: 'Brush chipped, logs hauled, sawdust raked, every piece picked up. Your yard looks better than when we got there.' },
-];
-
-const testimonials = [
-  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
-  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
-  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
 ];
 
 const schema = [
@@ -249,25 +244,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="center">What Arkadelphia Customers Say</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real removals across Clark County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-      <p class="center" style="margin-top:1.5rem">
-        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
-      </p>
-    </div>
-  </section>
+  <Testimonials category="removal" heading="What Arkadelphia Customers Say" />
 
   <ArkadelphiaServicesBlock
     current={path}

@@ -8,6 +8,7 @@ import ServicesGrid from '../components/ServicesGrid.astro';
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -58,11 +59,6 @@ const whyUs = [
   { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
 ];
 
-const testimonials = [
-  "Robby and his crew have taken down many trees for me over the years! They do an excellent job!! He was even willing to bring his bucket truck over to help us get the kids' drone out of a tree once! Stand up guy!",
-  'Robbie and Billy were so great!! I called them needing help with 2 dead trees on my dad’s property. They happen to be in the area and came out that afternoon and laid them down between the house and the fence no problem!! My dad and I both HIGHLY recommend these guys!!',
-  'These guys are amazing! Very hard workers very efficient very safe as well. They impressed us very much!! Cut a huge tree over my home! Would definitely recommend!!',
-];
 
 // Lake Greeson and Pike County recreational-property breakdowns.
 const character = [
@@ -194,22 +190,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="center">What Your Neighbors Are Saying</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real customers across Glenwood, the Lake Greeson area, and Pike County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Testimonials category="general" heading="What Your Neighbors Are Saying" />
 
   <section class="section section-alt">
     <div class="container">

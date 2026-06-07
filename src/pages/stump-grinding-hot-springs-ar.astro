@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import HotSpringsServicesBlock from '../components/HotSpringsServicesBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 
@@ -102,11 +103,6 @@ const whyUs = [
   { h: '🧹 Filled, Raked & Clean', p: 'We fill the hole, rake the grindings, and clean the area. Your yard is ready to mow, plant, or build over.' },
 ];
 
-const testimonials = [
-  "Robbie did an amazing job trimming and cleaning up a beast of a tree in our front yard. He also helped remove several stumps (that would have otherwise taken a significant amount of manual labor) even though that wasn't part of why we originally contacted him. Very friendly and quick service.",
-  'These gentlemen completed outstanding work in an exceptional amount of time and conducted themselves with the highest level of professionalism. They truly transformed our backyard.',
-  "Plyler's tree service removed several trees for us. The attention to detail and knowledge was unmatched. They went above and beyond, finishing ahead of schedule and right on budget. Highly recommend!!",
-];
 ---
 <BaseLayout title={title} description={description} path={path} schema={schema}>
   <Breadcrumbs items={crumbs} />
@@ -246,25 +242,7 @@ const testimonials = [
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="center">What Hot Springs Customers Say</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real jobs across Garland County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-      <p class="center" style="margin-top:1.5rem">
-        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
-      </p>
-    </div>
-  </section>
+  <Testimonials category="stump" heading="What Hot Springs Customers Say" />
 
   <HotSpringsServicesBlock
     current={path}

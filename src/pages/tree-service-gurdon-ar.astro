@@ -8,6 +8,7 @@ import ServicesGrid from '../components/ServicesGrid.astro';
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -58,11 +59,6 @@ const whyUs = [
   { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
 ];
 
-const testimonials = [
-  "Excellent Service & Rates!! Severe storm passed through and created some very dangerous tree problems for us. Plyler's Tree Service came out and cut the trees down and removed them, leaving my yard as though nothing ever happened! The work they performed was excellent, by far they had the best rates in the area and the crew was hard working and friendly! I highly recommend Plyler's Tree Service!!!",
-  'Robbie does great work! He is very efficient and friendly! He does great work in a timely manner. He does difficult jobs as well! Very dependable!',
-  "I had some trees removed close to a power line, house, and at the edge of the driveway. Did an amazing job. I wouldn't ever think about hiring anyone else. He was also the cheapest and had the equipment to get it all done. Clean up and everything. Thanks for the awesome job.",
-];
 
 // Railroad and timber town breakdowns.
 const character = [
@@ -195,22 +191,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="center">What Your Neighbors Are Saying</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real customers across Gurdon and south Clark County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Testimonials category="general" heading="What Your Neighbors Are Saying" />
 
   <section class="section section-alt">
     <div class="container">

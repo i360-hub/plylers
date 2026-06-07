@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -97,11 +98,6 @@ const whyUs = [
   { h: '💬 Honest Recommendations', p: 'If a damaged tree can be saved with corrective trimming, we tell you that. If it has to come down, we tell you that too. No upsells.' },
 ];
 
-const testimonials = [
-  'A big pine fell on our fence during a storm. They were out the next morning. Professional, fast, and they even fixed the fence section. Can’t say enough good things.',
-  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
-  'Best tree service around. They trimmed six trees in our yard and ground two stumps in one day. Left the yard cleaner than they found it.',
-];
 
 const schema = [
   {
@@ -360,25 +356,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="center">Storm Cleanup Reviews from Arkadelphia Customers</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real storm cleanup jobs across Clark County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-      <p class="center" style="margin-top:1.5rem">
-        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
-      </p>
-    </div>
-  </section>
+  <Testimonials category="emergency" heading="Storm Cleanup Reviews from Arkadelphia Customers" />
 
   <ArkadelphiaServicesBlock current={path} />
 

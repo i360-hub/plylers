@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import HotSpringsServicesBlock from '../components/HotSpringsServicesBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 
@@ -104,11 +105,6 @@ const whyUs = [
   { h: '🧹 Complete Cleanup', p: 'Brush chipped, logs hauled, sawdust raked — even off slopes where debris wants to roll. Your yard looks better than when we got there.' },
 ];
 
-const testimonials = [
-  "Plyler's tree service removed several trees for us. The attention to detail and knowledge of tree removal was unmatched. They went above and beyond our expectations finishing the job ahead of schedule and right on budget. Highly recommend!!",
-  'These gentlemen completed outstanding work in an exceptional amount of time and conducted themselves with the highest level of professionalism. They truly transformed our backyard.',
-  "Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.",
-];
 ---
 <BaseLayout title={title} description={description} path={path} schema={schema}>
   <Breadcrumbs items={crumbs} />
@@ -275,25 +271,7 @@ const testimonials = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="center">What Hot Springs Customers Say</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real removals across Garland County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-      <p class="center" style="margin-top:1.5rem">
-        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
-      </p>
-    </div>
-  </section>
+  <Testimonials category="removal" heading="What Hot Springs Customers Say" />
 
   <HotSpringsServicesBlock
     current={path}

@@ -8,6 +8,7 @@ import ServicesGrid from '../components/ServicesGrid.astro';
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -78,11 +79,6 @@ const neighborhoods = [
   },
 ];
 
-const testimonials = [
-  'Did a great job keeping a big pine off my shop. Excellent.',
-  "Plyler's Tree Service come got a tree off my roof. The way it looked I figured it would mess up a lot but thanks to them they got it off no problems. They are very good at what they do. I would refer them to anyone.",
-  'Had storm damage with a tree on our roof. Robbie immediately came out and got it taken care of. Excellent work.',
-];
 
 // Towns in the service area.
 const towns = [
@@ -200,22 +196,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="center">What Your Neighbors Are Saying</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real customers across Bismarck, DeGray Lake, and Hot Spring County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Testimonials category="general" heading="What Your Neighbors Are Saying" />
 
   <section class="section section-alt">
     <div class="container">

@@ -9,6 +9,7 @@ import HotSpringsServicesBlock from '../components/HotSpringsServicesBlock.astro
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -79,11 +80,6 @@ const neighborhoods = [
   },
 ];
 
-const testimonials = [
-  "Plyler's tree service removed several trees for us. The attention to detail and knowledge of tree removal was unmatched. They went above and beyond our expectations finishing the job ahead of schedule and right on budget. I have recommended them to several family and friends that they also ended up doing work for. Can't say enough good things about them. Highly recommend!!",
-  "Robbie did an amazing job trimming and cleaning up a beast of a tree in our front yard. He also helped remove several stumps (that would have otherwise taken a significant amount of manual labor) even though that wasn't part of why we originally contacted him. Very friendly and quick service.",
-  'These gentlemen completed outstanding work in an exceptional amount of time and conducted themselves with the highest level of professionalism. They truly transformed our backyard.',
-];
 
 // Towns within 40 miles.
 const towns = [
@@ -204,22 +200,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="center">What Your Neighbors Are Saying</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real customers across Hot Springs and Garland County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Testimonials category="general" heading="What Your Neighbors Are Saying" />
 
   <section class="section section-alt">
     <div class="container">

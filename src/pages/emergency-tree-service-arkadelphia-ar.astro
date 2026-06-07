@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -96,11 +97,6 @@ const whyUs = [
   { h: '⭐ 5.0 Stars · 70+ Reviews', p: 'Perfect Google rating from real Clark County customers — including plenty of emergency calls. The reviews tell the story.' },
 ];
 
-const testimonials = [
-  'A big pine fell on our fence during a storm. They were out the next morning. Professional, fast, and they even fixed the fence section. Can’t say enough good things.',
-  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
-  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
-];
 
 const schema = [
   {
@@ -305,25 +301,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="center">Emergency Reviews from Arkadelphia Customers</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real emergencies across Clark County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-      <p class="center" style="margin-top:1.5rem">
-        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
-      </p>
-    </div>
-  </section>
+  <Testimonials category="emergency" heading="Emergency Reviews from Arkadelphia Customers" />
 
   <ArkadelphiaServicesBlock current={path} />
 

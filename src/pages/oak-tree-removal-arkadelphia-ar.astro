@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -72,12 +73,6 @@ const whyUs = [
   { h: '📋 Licensed and Insured', p: "Full liability and workers' comp. Heavy hardwood removal carries real risk — never hire a tree company without proof of insurance." },
   { h: '💬 Oak Wilt Knowledgeable', p: "We respect the April–July restriction, we know proper wood disposal protocols, and we'll tell you when an oak should wait until fall." },
   { h: '🧹 Complete Cleanup', p: 'Oak generates a lot of debris. We chip everything, haul the trunk wood (or cut to firewood), and rake the spot clean. Your yard is finished.' },
-];
-
-const testimonials = [
-  'Called on a Monday, Robbie came out Tuesday morning. Had a huge oak removed by Wednesday afternoon. Fair price, clean yard, no hassle.',
-  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
-  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
 ];
 
 const schema = [
@@ -320,25 +315,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="center">What Arkadelphia Customers Say</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real oak removals across Clark County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-      <p class="center" style="margin-top:1.5rem">
-        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
-      </p>
-    </div>
-  </section>
+  <Testimonials category="removal" heading="What Arkadelphia Customers Say" />
 
   <ArkadelphiaServicesBlock
     current={path}

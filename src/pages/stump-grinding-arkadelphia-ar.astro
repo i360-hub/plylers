@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 
@@ -71,12 +72,6 @@ const whyUs = [
   { h: '📋 Licensed and Insured', p: 'Full liability and workers’ comp on every job. If the grinder kicks a rock into a fence or scratches a driveway, our insurance covers it. We’ll show proof.' },
   { h: '💬 Honest Pricing', p: 'Written quote before any work. No surprise charges when the bill comes. If you’ve got multiple stumps, we tell you up front what the volume discount looks like.' },
   { h: '🧹 Complete Cleanup', p: 'Hole backfilled with chips (free), sawdust raked, perimeter swept. Half the reviews we get mention cleanup specifically — it tells you how seriously we take it.' },
-];
-
-const testimonials = [
-  'Best tree service around. They trimmed six trees in our yard and ground two stumps in one day. Left the yard cleaner than they found it.',
-  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
-  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
 ];
 
 // FRESH FAQ — generated for this thin page in the local, plainspoken Plyler's voice.
@@ -276,25 +271,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="center">What Arkadelphia Customers Say</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real customers across Clark County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-      <p class="center" style="margin-top:2rem;color:var(--muted)">
-        <a href="/reviews">Read all 70+ five-star reviews →</a>
-      </p>
-    </div>
-  </section>
+  <Testimonials category="stump" heading="What Arkadelphia Customers Say" />
 
   <FaqSection
     items={faq}

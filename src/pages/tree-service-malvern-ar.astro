@@ -8,6 +8,7 @@ import ServicesGrid from '../components/ServicesGrid.astro';
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -58,11 +59,6 @@ const whyUs = [
   { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
 ];
 
-const testimonials = [
-  "Plyler's Tree Service has been a lifesaver and a house saver for us! When a huge tree fell on my parents' house they showed up the next morning and stayed for 14 hours until they had the tree completely off the house. They will always have my business.",
-  'So impressed by the professional, quality work of this service. They were on time, efficient and cleaned everything up and hauled it off. Would definitely use them again and recommend them. Had a tree fall on my house during a storm and they were right over to help and make life normal again! Great People!!',
-  "Great experience. Got a large tree down from over a carport and cleaned up in a day. Didn't leave a mess and no further trimming necessary.",
-];
 
 // Towns within the service area.
 const towns = [
@@ -174,22 +170,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="center">What Your Neighbors Are Saying</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real customers across Malvern, Lake Catherine, and Hot Spring County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Testimonials category="general" heading="What Your Neighbors Are Saying" />
 
   <section class="section">
     <div class="container">

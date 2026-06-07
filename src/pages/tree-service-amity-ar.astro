@@ -8,6 +8,7 @@ import ServicesGrid from '../components/ServicesGrid.astro';
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -58,11 +59,6 @@ const whyUs = [
   { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
 ];
 
-const testimonials = [
-  'Plyler cut down 2 trees for me, as well as torn down an old dilapidated car port. They were fair priced, worked fast, were very professional, and cleaned up everything afterwards. I highly recommend them!!',
-  'Plyler’s tree service is the best around! Had him come out and look at a few trees I needed taken down off my property he gave me a free estimate and a very reasonable price. He and his crew were out the next week had it all taken down cleaned up and gone in a day they are very impressive at what they do 10/10 would recommend!!',
-  'Always does a great job anytime we have asked for his help. Was able to get to us very quickly and had everything cleaned up and looking great when they left. Highly recommended!',
-];
 
 // Caddo River country and rural acreage breakdowns.
 const character = [
@@ -193,22 +189,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="center">What Your Neighbors Are Saying</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real customers across Amity, the Caddo River area, and Clark County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Testimonials category="general" heading="What Your Neighbors Are Saying" />
 
   <section class="section section-alt">
     <div class="container">

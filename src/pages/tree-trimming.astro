@@ -6,6 +6,7 @@ import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
 import GhlForm from '../components/GhlForm.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
@@ -47,12 +48,6 @@ const whyUs = [
   { h: 'We Clean Up Everything', p: 'When we leave, your yard looks better than when we got there. Every time.' },
   { h: '24/7 Emergency Calls', p: 'Storm at midnight? Big limb on your roof? Call us. We answer and we show up.' },
   { h: 'Local People, Local Company', p: 'We live here. Our kids go to school here. We treat your property like it’s our own.' },
-];
-
-const testimonials = [
-  'Called on a Monday, Robbie came out Tuesday morning. Had a huge oak removed by Wednesday afternoon. Fair price, clean yard, no hassle.',
-  'A big pine fell on our fence during a storm. They were out the next morning. Professional, fast, and they even fixed the fence section. Can’t say enough good things.',
-  'Best tree service around. They trimmed six trees in our yard and ground two stumps in one day. Left the yard cleaner than they found it.',
 ];
 
 const schema = [
@@ -196,22 +191,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="center">What Our Customers Say</h2>
-      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
-        Real reviews from real customers across Clark County.
-      </p>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
-          <figure class="testi-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>{t}</blockquote>
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Testimonials category="trimming" heading="What Our Customers Say" />
 
   <section class="section">
     <div class="container measure center">
