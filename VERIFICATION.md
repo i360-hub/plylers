@@ -95,7 +95,7 @@ Performance work applied: responsive WebP (saved ~3 MB), inlined CSS (removed re
 
 | Item | Status |
 |---|---|
-| GHL lead form (verbatim iframe `…/widget/form/4GbeOTv0UeNs4bE2JDAe`) | ✓ on the same 9 pages; renders & loads on preview (`/contact` confirmed) |
+| GHL lead form (verbatim iframe `…/widget/form/4GbeOTv0UeNs4bE2JDAe`) | ✓ renders & loads (`/contact` confirmed). **Placement tuned for CRO/SEO** (deliberate change from the live site): now on the 14 high-intent pages — home, contact, the 4 service pages, and all 8 city hubs — and removed from info/trust pages (about, gallery, reviews) which use a CTA band instead. Lazy-loaded below the fold (negligible perf cost). |
 | GHL reviews widget (`reputationhub.site/…/gmgznEWM6sm6aqWPghSP`) | ✓ verbatim on `/reviews` |
 | Google Maps embeds (per-city centers) | ✓ home + all 8 city hubs |
 | GA4 `G-911S3HC2CY` | ✓ all pages (loads after idle/first interaction) |
