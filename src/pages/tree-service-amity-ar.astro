@@ -1,0 +1,274 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+import maps from '../data/maps.json';
+
+const title = "Amity Tree Service | Caddo River Area | Plyler's";
+const description =
+  "Amity trusted tree service since 2002. Tree removal, trimming, stump grinding & 24/7 storm cleanup. 5.0 stars, 70+ reviews. Free estimates.";
+const path = '/tree-service-amity-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Amity', path },
+];
+const faq = faqData['tree-service-amity-ar'] ?? [];
+
+// What we do — the five core service summaries from the live page.
+const coreServices = [
+  {
+    h: 'Tree Removal',
+    p: "Tall pines crowding a house off Highway 27, a dead oak leaning toward the barn out near Joplin Mountain, or a hardwood that's outgrown a riverfront lot along the Caddo — we bring them down safe and haul off every branch. Rural acreage, tight in-town lots, wooded river property — doesn't matter. We handle it.",
+  },
+  {
+    h: 'Tree Trimming',
+    p: 'Limbs scraping the roof off Bee Mountain Road, branches hanging over the driveway, canopy blocking sunlight from your yard — we trim them back the right way. No topping, no hacking. Just proper cuts that keep the tree healthy and your property safe.',
+  },
+  {
+    h: 'Stump Grinding',
+    p: "That stump you've been mowing around for three years? We grind it 6 to 8 inches below ground and fill the hole. Flat enough to grow grass over or plant something new. We do multiple stumps in one trip and save you money.",
+  },
+  {
+    h: 'Emergency Storm Damage',
+    p: 'When a storm rolls down out of the Ouachitas and drops a tree on your house, blocks Highway 8, or takes out a fence at 2 a.m., call us any time — nights, weekends, holidays. Our crew is just 20 minutes south in Arkadelphia and can be on the way fast.',
+  },
+  {
+    h: 'Tree Assessments',
+    p: "Not sure if a tree needs to come down or just needs some work? Robbie has spent 24 years looking at trees across this area — reading the lean, checking the trunk, spotting root damage and disease that most people walk right past. He'll walk your property and give you a straight answer on what's healthy and what's a problem.",
+  },
+];
+
+// Why Amity calls first.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Google Reviews', p: 'A perfect rating from more than 70 homeowners who trusted us with their property. Not filtered, not fake — real people in Amity, Glenwood, the Caddo River area, and across the surrounding counties who picked up the phone and then took the time to say we did it right.' },
+  { h: '20 Minutes Down Highway 8 — In Amity Every Week', p: "We're based in Arkadelphia, just 20 minutes south of Amity on Highway 8. Our crews are in Amity and the Caddo River area multiple times a week — and there's never a trip fee or travel charge. The price is based on the job, not the drive." },
+  { h: '24 Years and Counting', p: "Robbie started this company in 2002. Fly-by-night outfits come through town every storm season and disappear a month later. We've been doing this for two decades and we're not going anywhere." },
+  { h: 'Licensed and Insured — Always', p: "Full liability and workers' comp on every job. If a branch nicks your gutter or a piece of equipment scratches your driveway, our insurance covers it. We'll show you proof before we ever start a saw." },
+  { h: 'Free Estimates — No Sales Pitch', p: "Robbie comes out, looks at the tree, and gives you an honest number in writing. If it doesn't need to come down, he'll tell you that. We don't push work you don't need just to fill a schedule." },
+  { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
+];
+
+const testimonials = [
+  'Plyler cut down 2 trees for me, as well as torn down an old dilapidated car port. They were fair priced, worked fast, were very professional, and cleaned up everything afterwards. I highly recommend them!!',
+  'Plyler’s tree service is the best around! Had him come out and look at a few trees I needed taken down off my property he gave me a free estimate and a very reasonable price. He and his crew were out the next week had it all taken down cleaned up and gone in a day they are very impressive at what they do 10/10 would recommend!!',
+  'Always does a great job anytime we have asked for his help. Was able to get to us very quickly and had everything cleaned up and looking great when they left. Highly recommended!',
+];
+
+// Caddo River country and rural acreage breakdowns.
+const character = [
+  {
+    h: '🌊 Caddo River Bottomland Trees',
+    p: 'The bottomland along the Caddo River grows different trees than the surrounding hills — bald cypress, water oak, river birch, and big willow oaks that root in saturated soil. These trees take heavy stress when the river floods or when the water table shifts, and they show damage years after the original event. Hidden root rot, hollow trunks under healthy-looking bark, sudden lean from undermined banks. We walk the property and read what’s actually going on before we recommend anything.',
+  },
+  {
+    h: '🛣️ Highway 8 and the Backroads',
+    p: "Most of the work around Amity is rural — properties strung out along Highway 8 east toward Glenwood and west toward Caddo Gap, plus the back-county roads heading up into Montgomery County. Long driveways, gravel access, properties where you can't see the next house. We bring the right equipment for the terrain — chip trucks that can navigate narrow gravel turns, and rigging gear for properties where bucket-truck access just isn't going to happen.",
+  },
+  {
+    h: '🌲 Ouachita Pine and Hardwood Acreage',
+    p: "South and west of Amity, you're heading into the Ouachita foothills proper. Heavy shortleaf and loblolly pine plantation, hardwood ridges, and rural acreage that often backs up to the Ouachita National Forest. Ice storms and straight-line winds do real damage out here — entire sections of pine stand can come down in a single weather event. We handle the storm-damaged section clearing, the dangerous lean removals, and the long-haul rural work that property owners out this way actually need.",
+  },
+  {
+    h: '🏡 Amity Town Lots and Old-Town Trees',
+    p: 'The older properties in Amity proper — along Main Street, the streets off Highway 8 through downtown, and the established residential areas — have mature pecans, white oaks, and pines that have been growing in town for decades. Tight lots, close-set houses, power lines and outbuildings to work around. The work takes patience and the right approach. We’ve been doing it for years and we know which old trees on which streets are next in line for attention.',
+  },
+];
+
+// Towns within the service area.
+const towns = [
+  { h: 'Glenwood', p: '7 miles up Highway 8 — Pike County neighbor and quick response every time.' },
+  { h: 'Caddo Gap', p: 'Montgomery County — rural acreage and wooded river lots.' },
+  { h: 'Norman', p: 'Up Highway 8 into Montgomery County — heavy pine country.' },
+  { h: 'Mount Ida', p: 'Montgomery County seat — Lake Ouachita area and forest properties.' },
+  { h: 'Caddo Valley', p: 'Down Highway 27 toward I-30 — quick run between Amity and Arkadelphia.' },
+  { h: 'Arkadelphia', p: 'Home base — Clark County seat, 20 minutes south on Highway 8.' },
+  { h: 'Bismarck', p: 'Hot Spring County — DeGray Lake area properties and acreage.' },
+  { h: 'Murfreesboro', p: 'Pike County seat — Lake Greeson area, rural acreage.' },
+  { h: 'Bonnerdale', p: 'Garland County — wooded properties between Amity and Hot Springs.' },
+  { h: 'Hot Springs', p: 'Garland County — residential and commercial tree work in the Spa City.' },
+  { h: 'Gurdon', p: 'South Clark County on Highway 67 — established homes and acreage.' },
+  { h: 'Malvern', p: 'Hot Spring County — older neighborhoods with big oaks and pecans.' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Service in Amity, AR',
+    serviceType: 'Tree removal, trimming, stump grinding & storm cleanup',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Amity, Arkansas · Clark County"
+    title="Tree Service in Amity, AR"
+    subtitle="The crew Amity, Glenwood, and Caddo River homeowners have trusted for over two decades. Tree removal, trimming, stump grinding, and same-day storm response — serving Amity and the surrounding Caddo Valley from our Arkadelphia base."
+    image="/images/glenwood-ar-arborist-harness-high-canopy-branch-removal.webp"
+    imageAlt="Arborist in a harness removing high canopy branches in the Caddo River area, AR"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Amity's Go-To Tree Service for Over 24 Years</h2>
+      <p>
+        Plyler's Tree Service has been taking care of trees in Amity and the Caddo River valley for over two decades.
+        We know the older homes along Highway 27, the wooded acreage out past Joplin Mountain, the riverfront lots
+        down the Caddo, and the rural properties around Ouachita Hills and Caddo Cove Road. From in-town removals near
+        downtown Amity to long-driveway jobs deep in northwestern Clark County, we've handled tree work across every
+        part of this area.
+      </p>
+      <p>
+        Amity sits in the Ouachita foothills along the Caddo River, surrounded by national forest on three sides.
+        That means big mature pines, dense hardwood canopy, and storms that hit hard when a system rolls down out of
+        the mountains. When a tree comes down across Highway 27 at midnight or a dead oak leans toward your roof off
+        Bee Mountain Road, you need somebody who knows the area. Our crew is based about 20 minutes south in
+        Arkadelphia and runs jobs up Highway 8 to Amity multiple times a week — no trip fee, no travel charge.
+      </p>
+      <p>
+        We carry a perfect 5.0-star rating on Google with more than 70 reviews from homeowners across the area. Every
+        estimate is free, every price is in writing before we start, and we clean up everything before we leave.
+        That's how we've done it since day one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What We Do in Amity</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every service a homeowner or property owner in the Caddo River area could need — all from one local crew.
+      </p>
+      <div class="grid grid-3">
+        {coreServices.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ServicesGrid current={path} />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Amity Calls Plyler's First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Your Neighbors Are Saying</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Amity, the Caddo River area, and Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Caddo River Country and Rural Acreage Tree Work</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Amity sits at the edge of the Ouachitas where the Caddo River cuts through rural Clark and Pike County
+        terrain. The tree work out here is different from anywhere else we go. Here's what we see.
+      </p>
+      <div class="grid grid-2">
+        {character.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Serving Amity and the Caddo River Area</h2>
+      <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">
+        Arkadelphia is home base. Our crews head out from here every morning and cover a full 40-mile radius —
+        including Amity, Glenwood, and the entire Caddo River area, just 20 minutes up Highway 8. No trip fee, no
+        travel charge — the price is based on the job, not the drive.
+      </p>
+      <MapEmbed src={maps[path]} title="Amity service area map" />
+      <div class="grid grid-3" style="margin-top:2.4rem">
+        {towns.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        We also serve: Alpine, Rosboro, Kirby, Daisy, Delight, Antoine, Okolona, Beirne, Donaldson, Pearcy, Lake
+        Catherine, Lake Hamilton, Hot Springs Village, Sparkman, Princeton, and Bluff City. Don't see your town? Give
+        us a call at <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — if you're nearby, we'll make
+        it work.
+      </p>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Service Questions — Amity"
+    intro="Answers to the things Amity homeowners ask us most."
+  />
+
+  <CtaBand
+    title="Ready to Get That Tree Taken Care Of?"
+    text="We serve Amity from our home base in Arkadelphia — just 20 minutes down Highway 8. Call Robbie, tell him what's going on, and we'll have somebody at your property to give you an honest price. No charge for the estimate. No obligation to say yes. ⭐ 5.0 Stars · 70+ Google Reviews · 24+ Years in Arkadelphia · Serving Amity & the Caddo Valley · Licensed & Insured."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

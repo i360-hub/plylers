@@ -1,0 +1,281 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+import maps from '../data/maps.json';
+
+const title = "Caddo Valley Tree Service | Clark County | Plyler's";
+const description =
+  "Caddo Valley, AR tree service. Removal, trimming, stump grinding, 24/7 storm cleanup. Residential & I-30 commercial corridor. 5.0 stars, 70+ reviews.";
+const path = '/tree-service-caddo-valley-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Caddo Valley', path },
+];
+const faq = faqData['tree-service-caddo-valley-ar'] ?? [];
+
+// What we do — the five core service summaries from the live page.
+const coreServices = [
+  {
+    h: 'Tree Removal',
+    p: "A storm-cracked pine leaning toward a Caddo Drive home, a dead oak threatening a hotel parking lot off I-30, or a hardwood that's outgrown a Caddo River lot — we bring them down safe and haul off every branch. Residential, commercial, rural acreage — doesn't matter. We handle it.",
+  },
+  {
+    h: 'Tree Trimming',
+    p: 'Pine branches scraping a residential roof, oak limbs hanging over a commercial parking lot, canopy blocking visibility for an I-30 sign — we trim them back the right way. No topping, no hacking. Just proper cuts that keep the tree healthy and your property safe.',
+  },
+  {
+    h: 'Stump Grinding',
+    p: "That stump you've been mowing around for three years? We grind it 6 to 8 inches below ground and fill the hole. Flat enough to grow grass over or plant something new. We do multiple stumps in one trip and save you money.",
+  },
+  {
+    h: 'Emergency Storm Damage',
+    p: 'When a storm drops a tree on your house, blocks Caddo Drive, or takes out signage along I-30 at 2 a.m., call us any time — nights, weekends, holidays. Our crew is just 5 minutes south in Arkadelphia and can be on the way fast.',
+  },
+  {
+    h: 'Tree Assessments',
+    p: "Not sure if a tree needs to come down or just needs some work? Robbie has spent 24 years looking at trees across this area — reading the lean, checking the trunk, spotting root damage and disease that most people walk right past. He'll walk your property and give you a straight answer on what's healthy and what's a problem.",
+  },
+];
+
+// Why Caddo Valley calls first.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Google Reviews', p: 'A perfect rating from more than 70 homeowners and property managers who trusted us with their property. Not filtered, not fake — real people in Caddo Valley, Arkadelphia, and across Clark County who picked up the phone and then took the time to say we did it right.' },
+  { h: "5 Minutes from Home Base — We're in Caddo Valley Daily", p: "We're based in Arkadelphia, just 5 minutes south of Caddo Valley on Highway 7. Our trucks pass through Caddo Valley on the way to nearly every job we do. Same county, same school district, same community. There's never a trip fee or travel charge." },
+  { h: '24 Years and Counting', p: "Robbie started this company in 2002. Fly-by-night outfits come through town every storm season and disappear a month later. We've been doing this for two decades and we're not going anywhere." },
+  { h: 'Licensed and Insured — Always', p: "Full liability and workers' comp on every job. If a branch nicks your gutter or a piece of equipment scratches your driveway, our insurance covers it. We'll show you proof before we ever start a saw." },
+  { h: 'Free Estimates — No Sales Pitch', p: "Robbie comes out, looks at the tree, and gives you an honest number in writing. If it doesn't need to come down, he'll tell you that. We don't push work you don't need just to fill a schedule." },
+  { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
+];
+
+// Neighborhood / property breakdowns.
+const neighborhoods = [
+  {
+    h: '🏡 Residential — Caddo Drive and the Side Streets',
+    p: 'The residential streets in Caddo Valley — Caddo Drive, Valley Road, the side roads off Highway 7 — have a mix of established homes with mature canopy and newer builds with younger trees still figuring out where they want to grow. We see a lot of the same issues across these properties: shortleaf pines getting too tall and leaning toward houses, post oaks splitting at the crotch after 40–50 years, and sweetgum and hickory dropping limbs without warning. Standard residential work, done by a crew that\'s already in the neighborhood.',
+  },
+  {
+    h: '🌊 Caddo River Frontage Properties',
+    p: 'Properties along the Caddo River as it runs through and around Caddo Valley grow a different tree mix than upland lots — water oak, willow oak, sycamore, and the occasional cypress that root in soil that stays wet. These trees show damage years after a flood event and they fail in ways that don\'t show on the surface. We walk the property, read what\'s actually going on with the trunks and root systems, and recommend what makes sense for your situation.',
+  },
+  {
+    h: '🏨 I-30 Corridor Commercial Properties',
+    p: "Caddo Valley's commercial corridor runs both sides of I-30 at exits 78 and 73 — hotels, restaurants, retail, gas stations. Commercial tree work is different from residential. Signage visibility matters. Parking lot canopy needs to be trimmed back without damaging customer vehicles or blocking access. Property managers want the work done at off-hours or scheduled around peak business times. We've been doing commercial tree maintenance along the I-30 corridor for over 24 years — we know the routine, we coordinate with property managers, and we don't disrupt your operations.",
+  },
+  {
+    h: '⛈️ Interstate Storm Response',
+    p: "When a storm rolls through and drops a tree across the access road to a hotel parking lot, or a commercial property loses signage to a fallen limb, we're 5 minutes south and ready to respond. Same goes for residential — Caddo Valley is essentially next door to us. Storm cleanup along the I-30 corridor takes coordination with property managers, sometimes with the highway department if anything's near the right-of-way, and a crew that can mobilize fast. That's been our specialty for two decades.",
+  },
+];
+
+const testimonials = [
+  "If you're in a bind and need good quality work call this guy. Robby works with every insurance company on the market.",
+  'One of the best tree removal services in Clark County by far. Very reliable priced and not trying to take unnecessary money like most try to throw in there. They clean up the area awesome and will never let your yard or property messed up. I had work done for my mother and will be getting some more work done in the next couple months coming up. Thank you!',
+  "They did an outstanding job. Very affordable. Went above and beyond while completing the job. I'd recommend them to anyone needing professional service. Down to earth guys. I feel like I got more for my money. Again very affordable and they do a professional job!!!",
+];
+
+// Towns within the service area.
+const towns = [
+  { h: 'Arkadelphia', p: 'Home base — Clark County seat, 5 minutes south on Highway 7.' },
+  { h: 'Bismarck', p: 'DeGray Lake gateway — 15 minutes north on Highway 7.' },
+  { h: 'DeGray Lake', p: 'Cabin lots, lakefront properties, and the State Park.' },
+  { h: 'Gurdon', p: 'South Clark County on Highway 67 — 20 minutes south.' },
+  { h: 'Amity', p: 'West Clark County — Caddo River area on Highway 8.' },
+  { h: 'Malvern', p: 'Hot Spring County seat — 20 minutes east on I-30.' },
+  { h: 'Glenwood', p: 'Pike County — 30 minutes west on Highway 8.' },
+  { h: 'Hot Springs', p: 'Garland County — 30 minutes north for residential and commercial work.' },
+  { h: 'Hollywood', p: 'Rural Clark County — east of Gurdon, mature timber country.' },
+  { h: 'Curtis', p: 'Clark County — between Arkadelphia and Gurdon.' },
+  { h: 'Donaldson', p: 'Hot Spring County — east of Bismarck, rural homes.' },
+  { h: 'Friendship', p: 'Hot Spring County — between Bismarck and Malvern.' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Service in Caddo Valley, AR',
+    serviceType: 'Tree removal, trimming, stump grinding & storm cleanup',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Caddo Valley, Arkansas · Clark County"
+    title="Tree Service in Caddo Valley, AR"
+    subtitle="The crew Caddo Valley homeowners and I-30 corridor property owners have trusted for over two decades. Tree removal, trimming, stump grinding, and same-day storm response — serving Caddo Valley from our Arkadelphia base, just 5 minutes south."
+    image="/images/malvern-ar-large-mature-oak-tree-assessment-commercial.webp"
+    imageAlt="Large mature oak assessed for commercial property tree work near Caddo Valley, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Caddo Valley's Tree Service Crew for Over 24 Years</p>
+      <p class="lead">
+        Plyler's Tree Service has been working in Caddo Valley since 2002. We know the homes along Caddo Drive, the
+        properties off Valley Road and Highway 7, the riverfront lots tucked along the Caddo River, and the commercial
+        corridor running both sides of I-30 at exits 78 and 73. From residential removals to commercial property
+        maintenance for hotels and restaurants along the interstate, we've handled tree work across every part of this
+        area.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Caddo Valley's Tree Service Crew for Over 24 Years</h2>
+      <p>
+        Caddo Valley sits right at the doorstep of Arkadelphia — same school district, same shopping, same county. The
+        two communities run together. We're based 5 minutes south in Arkadelphia and we're in Caddo Valley basically
+        every day. Our trucks pass through here on the way to nearly every job. When a tree comes down across Caddo
+        Drive at midnight, or a hotel manager needs canopy trimmed back from their property along I-30 before peak
+        season, you need somebody who's already in the neighborhood. That's us.
+      </p>
+      <p>
+        We carry a perfect 5.0-star rating on Google with more than 70 reviews from homeowners and property managers
+        across the area. Every estimate is free, every price is in writing before we start, and we clean up everything
+        before we leave. That's how we've done it since day one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What We Do in Caddo Valley</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every service a homeowner, business owner, or property manager in Clark County could need — all from one local
+        crew.
+      </p>
+      <div class="grid grid-3">
+        {coreServices.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ServicesGrid current={path} />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Caddo Valley Calls Plyler's First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Your Neighbors Are Saying</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Caddo Valley, Arkadelphia, and Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Caddo Valley Residential and I-30 Commercial Property Tree Work</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Caddo Valley is mostly residential, but it's also home to one of the busiest commercial stretches in Clark
+        County. We handle both — and we've been doing it for over 24 years. Here's what that looks like.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Serving Caddo Valley and Clark County</h2>
+      <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">
+        Arkadelphia is home base — 5 minutes south of Caddo Valley. Our crews head out from there every morning and
+        cover a full 40-mile radius. Same county, same school district. No trip fee, no travel charge — the price is
+        based on the job, not the drive.
+      </p>
+      <MapEmbed src={maps[path]} title="Caddo Valley service area map" />
+      <div class="grid grid-3" style="margin-top:2.4rem">
+        {towns.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        We also serve: Okolona, Whelen Springs, Beirne, Antoine, Glen Rose, Lake Catherine, Magnet Cove, Bonnerdale,
+        Pearcy, Hot Springs Village, Mount Ida, Murfreesboro, and the surrounding Clark and Hot Spring County region.
+        Don't see your town? Give us a call at <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — if
+        you're nearby, we'll make it work.
+      </p>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Service Questions — Caddo Valley"
+    intro="Answers to the things Caddo Valley homeowners and property managers ask us most."
+  />
+
+  <CtaBand
+    title="Ready to Get That Tree Taken Care Of?"
+    text="We serve Caddo Valley from our home base in Arkadelphia — just 5 minutes south on Highway 7. Same county, same community. Call Robbie, tell him what's going on, and we'll have somebody at your property to give you an honest price. No charge for the estimate. No obligation to say yes. ⭐ 5.0 Stars · 70+ Google Reviews · 24+ Years in Arkadelphia · Serving Caddo Valley & Clark County · Licensed & Insured."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

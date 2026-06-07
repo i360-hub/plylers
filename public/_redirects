@@ -1,0 +1,15 @@
+# Cloudflare Pages redirects — replicate the live site's 301s exactly.
+# Format: <from>  <to>  <status>
+
+# --- Legacy service-area URLs -> current city hubs (live 301s) ---
+/service-areas/arkadelphia-ar          /tree-service-arkadelphia-ar   301
+/service-areas/hot-springs-ar          /tree-service-hot-springs-ar   301
+
+# --- Legacy /comparison/* slugs -> canonical blog posts (live 301s) ---
+/comparison/trim-vs-remove             /tree-trimming-vs-removal       301
+/comparison/stump-grinding-vs-removal  /stump-grinding-vs-removal      301
+
+# NOTE: host canonicalization (apex + http -> https://www) and trailing-slash
+# stripping are handled at the Cloudflare/DNS layer in production and by Pages'
+# default behavior. They are intentionally not duplicated here for the *.pages.dev
+# preview (which has no apex/www split).

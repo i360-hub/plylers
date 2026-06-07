@@ -1,0 +1,314 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Tree Trimming Arkadelphia AR | Plyler's Tree Service";
+const description =
+  "Tree trimming & pruning in Arkadelphia, AR since 2002. Proper branch-collar cuts on oaks, pines & pecans — no topping. Free written estimates, full cleanup, 5.0 stars.";
+const path = '/tree-trimming-arkadelphia-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Arkadelphia', path: '/tree-service-arkadelphia-ar' },
+  { name: 'Tree Trimming', path },
+];
+const faq = faqData['tree-trimming-arkadelphia-ar'] ?? [];
+
+// Tree trimming services we provide in Arkadelphia.
+const services = [
+  { h: 'Crown Cleaning', p: 'Removing dead, diseased, broken, and weakly attached branches throughout the canopy. The single most common job we do — keeps the tree healthy and stops dead limbs from coming down on your roof, car, or yard.' },
+  { h: 'Crown Thinning', p: 'Selectively removing live branches to reduce density. Lets more light reach your yard, reduces wind resistance during storms, and improves the tree’s structure long-term. Common on mature oaks across Arkadelphia.' },
+  { h: 'Crown Raising / Limbing Up', p: 'Removing the lowest branches to provide clearance over driveways, sidewalks, lawns, and roof lines. Big request for pines that have grown into the roof line on the east side and Country Club Drive area.' },
+  { h: 'Crown Reduction', p: 'Shortening overall height or spread when a tree has outgrown its space. Done with proper cuts to lateral branches — never by topping. Useful when a tree is too close to power lines or a structure but doesn’t need full removal.' },
+  { h: 'Roof & Structure Clearance', p: 'Pulling branches back away from roof lines, gutters, chimneys, siding, and overhangs. Stops shingle damage from rubbing branches and prevents critters from using your tree as a bridge into the attic.' },
+  { h: 'Storm Damage Trimming', p: 'After a Clark County storm — broken limbs, hanging branches, split crotches. We clean up the damage and make proper cuts so the tree can heal correctly. Same-day response for hazards.' },
+];
+
+// How we trim a tree in Arkadelphia.
+const process = [
+  { h: 'Free On-Site Assessment', p: 'Robbie walks the property with you. He looks at every tree, identifies the species, checks the health, and tells you what genuinely needs to be done versus what’s optional. You get a written price before any work starts.' },
+  { h: 'Plan the Cuts', p: 'We identify exactly which limbs come off and where the cuts go. Proper cuts at the branch collar — never flush, never stubs. For climbing work, we plan the rigging and tie-in points before anyone goes up.' },
+  { h: 'Make the Cuts', p: 'Climber goes up with ropes and saddle, or we use the bucket truck where access allows. Each limb gets cut and lowered safely. We work clean — no piles building up in the yard, no branches dropped on landscaping.' },
+  { h: 'Full Cleanup', p: 'Brush chipped, debris hauled off, sawdust raked, every piece picked up. When we leave, the only sign we were there is the tree looking better than when we showed up.' },
+];
+
+// Tree trimming across Arkadelphia neighborhoods.
+const neighborhoods = [
+  { h: '🎓 Henderson State & OBU Areas', p: 'Pine Street, 10th Street, Walnut, Caddo, Henderson Street — mature oaks and pecans on tight residential lots near Henderson State and Ouachita Baptist. We do a lot of crown cleaning here — decades of accumulated dead wood, plus clearance trimming where branches have grown into roof lines. Landlord properties especially tend to get the trim they’ve been overdue for.' },
+  { h: '🏘️ Country Club Drive & East Side', p: 'Big mature trees on bigger lots — Twin Rivers, Riverview, the streets off 9th. Homeowners here want their canopies thinned without losing the shade, want roof line clearance on 60-foot loblollies, and want major oak trims done right. This is climbing work and bucket truck work — exactly what we’re set up for.' },
+  { h: '🛣️ Caddo Valley & I-30 Corridor', p: 'Bigger rural lots, longer driveways, pine plantation behind the back fence. We handle driveway clearance trims that take a half mile of access work, plus crown work on the big shade trees closer to the house. Equipment access on rough driveways is no problem.' },
+  { h: '🌊 DeGray Lake & South Toward Gurdon', p: 'Lakefront cabins and rural acreage around DeGray Lake Resort State Park. Lakefront trims are often about restoring the lake view that’s been swallowed by 20 years of growth — selective limb work that opens up the sightline without compromising the trees. We’ve been doing this work on DeGray for 24 years.' },
+];
+
+// Why Arkadelphia calls Plyler's for tree trimming.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Reviews', p: 'A perfect Google rating from more than 70 customers across Clark County. Real trim jobs, real cleanup, real long-term tree health.' },
+  { h: '📍 Yard on Country Club Drive', p: 'Trucks, chippers, bucket truck, and climbing gear staged in Arkadelphia. When you call, the crew is already in town.' },
+  { h: '✂️ Proper Cuts — No Topping', p: 'Branch-collar cuts at the right angle, in the right place, at the right time of year for each species. The kind of trim work that keeps trees healthy for decades.' },
+  { h: '📋 Licensed and Insured', p: 'Full liability and workers’ comp on every job. We’ll show you proof before any climber goes up.' },
+  { h: '💬 Honest Recommendations', p: 'If a tree doesn’t need trimming, Robbie says so. We’d rather you call us in two years for the work that genuinely needs doing than oversell you now.' },
+  { h: '🧹 Complete Cleanup', p: 'Brush chipped, debris hauled, sawdust raked. Half the reviews we get mention cleanup specifically. That tells you how seriously we take it.' },
+];
+
+const testimonials = [
+  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
+  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
+  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Trimming in Arkadelphia, AR',
+    serviceType: 'Tree trimming & pruning',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Arkadelphia, Arkansas · Clark County"
+    title="Tree Trimming & Pruning in Arkadelphia, AR"
+    subtitle="Proper cuts that keep your trees healthy, your roof line clear, and your yard looking like it's cared for. Same Arkadelphia crew that's been trimming oaks, pines, and pecans across Clark County since 2002 — no topping, no hacking, no shortcuts."
+    image="/images/arkadelphia-ar-large-tree-risk-assessment-backyard-deck.webp"
+    imageAlt="Arborist assessing a large tree over a backyard deck in Arkadelphia, AR"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">The Arkadelphia Crew That Trims Trees the Right Way</h2>
+      <p>
+        Plyler's Tree Service is based right here in <a href="https://clarkcountyar.gov/" target="_blank" rel="noopener">Clark County</a>,
+        with our equipment yard on Country Club Drive in Arkadelphia. When you call about trimming, you talk to Robbie
+        Plyler — the owner. He walks the property, marks what needs to come off, gives you a written price, and the same
+        crew that gave the estimate shows up to do the work.
+      </p>
+      <p>
+        We don't farm trimming out to subcontractors. We don't send a salesman to one site and a different crew to
+        another. The person who quotes the job is the person who climbs the tree. That's been the model since 2002, and
+        it's why our trim work doesn't look like everyone else's.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Why Tree Trimming in Arkadelphia Takes Local Knowledge</h2>
+      <p>
+        Trimming isn't one job. A canopy thin on a 50-year-old water oak in the older neighborhoods near Henderson State
+        looks nothing like clearing pine limbs off a roof line on the east side, and neither one is the same as cleaning
+        up storm damage on a sweetgum out toward DeGray Lake. The right cut depends on the species, the season, the
+        tree's health, and what's around it.
+      </p>
+      <p>
+        Most of what we trim in Arkadelphia falls into a handful of species — water oaks and post oaks in the older
+        neighborhoods around Ouachita Baptist and Henderson State, loblolly pines off the east side and out toward
+        Bismarck, pecans across town, and sweetgums in nearly every yard. Each has its own rules. Oaks get pruned outside
+        April through July to avoid spreading oak wilt. Pines come up from the bottom carefully so they don't lose
+        stability. Sweetgums need lighter touch because of shallow roots. Pecans require timing around fruiting if you
+        want a crop the next year.
+      </p>
+      <p>
+        After 24 years of trimming trees in this town, we know the rules for every common species and we follow them.
+        For the full picture of what we do across town, see our
+        <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service overview</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Tree Trimming Services We Provide in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        "Trimming" covers a lot of ground. Here's what we actually do depending on what your tree needs.
+      </p>
+      <div class="grid grid-3">
+        {services.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        Wondering if your tree is too close? See our guide on
+        <a href="/is-my-tree-too-close-to-my-house-arkansas">trees too close to houses in Arkansas</a>. After a storm,
+        see <a href="/what-to-do-after-storm-tree-down-arkansas">what to do after a storm</a> or our
+        <a href="/emergency-storm-damage">emergency storm response page</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">⚠️ What We Don't Do: Topping</h2>
+      <p>
+        "Topping" is the practice of cutting the main vertical leaders off a tree to reduce its height — basically
+        lopping the top straight across. It's quick, it's cheap, and it's still being done by some tree services in
+        Arkansas. We don't do it, and we'll talk you out of it if you ask.
+      </p>
+      <p>
+        Here's why: topping doesn't actually keep the tree small. It triggers a panic response where the tree shoots out
+        dozens of fast-growing, weakly attached water sprouts that grow back faster than the original branches. Those
+        sprouts are structurally weaker, more likely to fail in storms, and they often kill the tree within 5 to 10
+        years.
+      </p>
+      <p>
+        If a tree is too tall for its location, the right answer is either proper crown reduction (selective cuts back to
+        lateral branches) or full removal and replacement with a species that fits the space. Not sure which makes sense?
+        Read our guide on <a href="/tree-trimming-vs-removal">tree trimming vs. removal</a> or our breakdown of
+        <a href="/when-to-remove-a-tree-arkadelphia">when to remove a tree in Arkadelphia</a>. We'll walk you through
+        your specific situation during the free estimate. No upsell, no scare tactics.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">How We Trim a Tree in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every tree is different. A pecan in an open yard takes 20 minutes. A 60-foot water oak between two houses on Pine
+        Street is a half-day job with ropes and a bucket truck. Here's how we work either one.
+      </p>
+      <div class="grid grid-2">
+        {process.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock current={path} />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Tree Trimming Across Arkadelphia Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different parts of town mean different trimming priorities. Here's what we see most across the neighborhoods we know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">How Much Does Tree Trimming Cost in Arkadelphia?</h2>
+      <p>
+        Trimming is priced by the job, not by the hour. The three things that move the price the most are the size of the
+        tree, how much needs to come off, and how easy it is to access — both for the crew and for the chipper.
+      </p>
+      <p>
+        A single small tree trimmed up off a driveway is a fraction of the cost of a full canopy thin on a 60-foot water
+        oak between two houses. A property with five or six trees getting maintained at the same time costs much less per
+        tree than coming back six separate times.
+      </p>
+      <p>
+        What stays the same: we give you the exact price in writing before any work starts. No hidden fees, no surprise
+        add-ons. If we quote $475, that's what you pay.
+      </p>
+      <p>
+        For an exact number on your trees, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>. The estimate is always free.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Arkadelphia Calls Plyler's for Tree Trimming</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Trimming is where good tree work shows. Cuts in the wrong place don't show up immediately — they show up two
+        years later when the tree starts dying back. Here's why people trust us with their trees.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What Arkadelphia Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real trim jobs across Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:2rem;color:var(--muted)">
+        <a href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <FaqSection
+    items={faq}
+    heading="Tree Trimming Questions — Arkadelphia"
+    intro="Answers to what Arkadelphia homeowners ask us most about trimming."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead">
+        Tree trimming is one piece of the work we do across Clark County. Start with our full
+        <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service hub</a> for the complete picture, or jump
+        straight to <a href="/tree-removal-arkadelphia-ar">Tree Removal</a>,
+        <a href="/stump-grinding-arkadelphia-ar">Stump Grinding</a>,
+        <a href="/dead-tree-removal-arkadelphia-ar">Dead Tree Removal</a>, or
+        <a href="/emergency-tree-service-arkadelphia-ar">24/7 Emergency Service</a>.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Need Your Trees Trimmed in Arkadelphia?"
+    text="We're right here in Arkadelphia — yard on Country Club Drive, trucks staged in town. Call Robbie, tell him what you're looking at, and we'll have somebody at your property to give you an honest written price. No charge for the estimate. No obligation to say yes."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

@@ -1,0 +1,384 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Oak Tree Removal Arkadelphia AR | Plyler's Tree";
+const description =
+  "Oak tree removal in Arkadelphia, AR since 2002. Water oak, post oak & hollow tree takedowns — oak wilt timing respected. Free estimates, 5.0 stars.";
+const path = '/oak-tree-removal-arkadelphia-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Arkadelphia', path: '/tree-service-arkadelphia-ar' },
+  { name: 'Oak Tree Removal', path },
+];
+const faq = faqData['oak-tree-removal-arkadelphia-ar'] ?? [];
+
+// Oak species we remove in Arkadelphia.
+const species = [
+  { h: '🌳 Water Oak', p: 'Quercus nigra — the most common oak we remove in Arkadelphia. Fast-growing red oak family, common in older neighborhoods and along streams.', life: 'Lifespan: Typically 60–100 years — short for an oak. Many in Arkadelphia neighborhoods are reaching end of life now.', rem: 'Removal challenges: Wood is moderately dense but limb attachments are weaker than other oaks. Cavity decay is common. They drop big limbs in storms — frequently called for emergency removal.' },
+  { h: '🌳 Post Oak', p: 'Quercus stellata — slow-growing white oak family, common on drier upland sites and older rural properties around Arkadelphia.', life: 'Lifespan: 200–300+ years. Post oaks live a long time and reach significant size before decline.', rem: 'Removal challenges: Very dense, heavy wood. Mature post oaks have massive root flares and trunks 3+ feet across. Slow grinding for the stumps. Heavy rigging required.' },
+  { h: '🌳 Pin Oak & Other Reds', p: 'Pin oak (Quercus palustris), willow oak (Quercus phellos), and Shumard oak (Quercus shumardii) — less common but present, especially in landscaped neighborhoods.', life: 'Lifespan: Varies — pin oak 80–120 years, Shumard 200+ years.', rem: 'Removal challenges: Pin oak struggles in alkaline soils and often declines early. Shumard oak gets very large and needs heavy equipment to remove. Each species has its own quirks.' },
+];
+
+// Why oak trees get removed.
+const reasons = [
+  { h: 'Dead or Dying', p: 'End-of-life decline is the most common reason. Water oaks especially reach lifespan in their 60s–80s, and many in the older neighborhoods around HSU and OBU are dying now. See our dead tree removal page for more.' },
+  { h: 'Cavity Decay / Hollow Trunk', p: 'Old oaks often have major internal cavities that look fine from outside. Once we identify cavity decay, the tree usually needs to come down — the structural integrity is compromised even if the canopy still looks healthy.' },
+  { h: 'Root Rot & Fungal Decline', p: 'Armillaria root rot, mushroom clusters at the base, conks on the trunk. Once decay fungi are established, oaks decline progressively over several years. Removal becomes a matter of when, not if.' },
+  { h: 'Hazardous Lean or Storm Damage', p: 'Oak limbs are heavy — failure means major damage. Trees with significant lean toward houses, large cracks in the trunk, or major storm-broken limbs often need full removal rather than corrective trimming.' },
+  { h: 'Construction or Landscape Project', p: 'Driveway expansion, addition to the house, pool installation, major landscape change. Sometimes the right oak is in the wrong place for what you want to do. We help you weigh whether removal really is necessary.' },
+  { h: 'Oak Wilt Infection', p: 'Confirmed oak wilt requires removal to prevent spread to other oaks on your property. Timing and wood disposal matter — see the oak wilt section above. We handle this work with proper protocols.' },
+];
+
+// Why oak removal is more complex.
+const complexity = [
+  { h: 'The wood is dense', p: 'A 24-inch oak limb weighs significantly more than a 24-inch pine limb. Rigging has to be sized for the weight. Drop zones have to be planned more carefully. Equipment runs harder. Everything is slower than pine work.' },
+  { h: 'Cavity decay is often invisible from the ground', p: 'A 100-year-old water oak may look completely solid from outside while the trunk is a shell two inches thick. Climbers learn this the hard way. We assess for hollow sections before any climber goes up, often by tapping the trunk and listening for the characteristic dull thump of decay.' },
+  { h: 'Branch attachments fail unpredictably', p: 'Water oaks especially are known for branches that "shed" — splitting off at the trunk for reasons that aren\'t obvious. During removal, we assume any limb might break before we cut it.' },
+  { h: 'The canopy is massive', p: 'A mature post oak can have a canopy 80 feet across. Bringing down that much wood near houses, landscaping, and fences requires methodical sectional rigging. There\'s no shortcut.' },
+  { h: 'Stumps are huge', p: 'Old oak stumps are 36–60 inches across with major root flares. Grinding takes much longer than equivalent pine. See our stump grinding page for what to expect.' },
+  { h: 'Cleanup volume is high', p: 'An oak generates significantly more brush and wood volume than a pine of the same height. Disposal time and cost are higher.' },
+];
+
+// How we remove an oak.
+const steps = [
+  { h: 'Assessment & Cavity Check', p: 'Robbie walks the tree, evaluates health, checks for cavity decay (by sounding the trunk and looking for visible signs), checks rigging points for soundness, and identifies what\'s around it. You get a written price the same day.' },
+  { h: 'Oak Wilt Timing Check', p: 'If you\'re outside the April–July restricted window, great — we schedule normally. If you\'re inside it, we discuss whether the removal can wait until fall or whether it has to happen now. For non-emergencies, we recommend waiting.' },
+  { h: 'Sectional Top-Down Removal', p: 'Climber or bucket operator works from the top. Rigging sized for hardwood weight. Each section lowered to a designated drop zone. The dense wood means we work methodically — no shortcuts on rigging.' },
+  { h: 'Full Cleanup & Optional Grinding', p: 'Oak is excellent firewood — we\'ll cut to length and stack if you want it kept. Otherwise it gets hauled off. Brush chipped, debris cleared, sawdust raked. Stump grinding is a natural add-on; oak stumps take longer than pine but we have the equipment.' },
+];
+
+// Neighborhood breakdowns.
+const neighborhoods = [
+  { h: '🎓 Henderson State & OBU Areas', p: 'Pine Street, 10th Street, Walnut, Caddo, Henderson Street — old neighborhoods around Henderson State and Ouachita Baptist are full of mature water oaks and post oaks planted decades before the houses around them. Many are at end of life now. Common calls: declining water oaks near rental properties, hollow trunks discovered after a limb dropped, full removal of oaks too close to foundations.' },
+  { h: '🏘️ Country Club Drive & East Side', p: "Twin Rivers, Riverview, the streets off 9th. Big mature oaks on larger lots. Often the original landscape trees from when the neighborhoods were built in the '60s and '70s. We do major oak work here — large removals between houses, careful rigging to protect mature landscaping, and stump grinding for spots where the homeowner wants to replant." },
+  { h: '🛣️ Caddo Valley & I-30 Corridor', p: "Rural acreage with mixed oak-hickory stands. Often we're removing one specific oak (storm damage, lean toward the house) while leaving the rest of the stand intact. Also lot-clearing work where mature oaks need to come down for construction." },
+  { h: '🌊 DeGray Lake & South Toward Gurdon', p: "Lakefront cabins around DeGray Lake Resort State Park often have mature oaks threatening structures. Lakefront oak removal is challenging — steep slopes, retaining walls to protect, tight access. We've been doing it for 24 years." },
+];
+
+// Why Arkadelphia calls Plyler's for oak removal.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Reviews', p: "Perfect Google rating from real Arkadelphia customers — including the kind of careful oak removals you can't fake reviews about." },
+  { h: '📍 Equipment for Heavy Hardwood', p: 'Bucket truck, rigging gear sized for oak weight, stump grinder that handles 48"+ stumps, chipper that doesn\'t choke on dense hardwood.' },
+  { h: '🌳 Thousands of Oaks Removed', p: "Water oaks, post oaks, pin oaks, willow oaks, the occasional white. Robbie has seen every species' failure mode in Clark County." },
+  { h: '📋 Licensed and Insured', p: "Full liability and workers' comp. Heavy hardwood removal carries real risk — never hire a tree company without proof of insurance." },
+  { h: '💬 Oak Wilt Knowledgeable', p: "We respect the April–July restriction, we know proper wood disposal protocols, and we'll tell you when an oak should wait until fall." },
+  { h: '🧹 Complete Cleanup', p: 'Oak generates a lot of debris. We chip everything, haul the trunk wood (or cut to firewood), and rake the spot clean. Your yard is finished.' },
+];
+
+const testimonials = [
+  'Called on a Monday, Robbie came out Tuesday morning. Had a huge oak removed by Wednesday afternoon. Fair price, clean yard, no hassle.',
+  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
+  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Oak Tree Removal in Arkadelphia, AR',
+    serviceType: 'Oak tree removal',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Arkadelphia, Arkansas · Clark County"
+    title="Oak Tree Removal in Arkadelphia, AR"
+    subtitle="The 80-year-old water oak with the hollow trunk. The post oak that's been dropping massive limbs every storm. The pin oak finally losing its battle with decline. Oaks define the canopy of old Arkadelphia — and when they need to come down, you want a crew that knows what they're doing."
+    image="/images/arkadelphia-ar-large-oak-overhanging-residential-home-sunset.webp"
+    imageAlt="Large oak overhanging a residential home at sunset in Arkadelphia, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Arkadelphia's oak removal specialists — since 2002.</p>
+      <p class="lead">
+        Plyler's Tree Service is based right here in
+        <a href="https://clarkcountyar.gov/" target="_blank" rel="noopener">Clark County</a>, with our equipment yard
+        on Country Club Drive in Arkadelphia. We've removed thousands of oaks in this town over 24 years — water oaks,
+        post oaks, pin oaks, the occasional white oak. The older neighborhoods around
+        <a href="https://www.hsu.edu/" target="_blank" rel="noopener">Henderson State</a> and
+        <a href="https://obu.edu/" target="_blank" rel="noopener">Ouachita Baptist</a> are full of mature oaks that
+        pre-date the houses, and when they reach end of life, we're the call. Oak removal is heavy hardwood work.
+        Dense wood, brittle limbs, often cavity decay you can't see from the ground. Our bucket truck, our rigging
+        gear, our crew — all built for this kind of work.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Oak Species We Remove in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Several oak species grow across Clark County, and each one behaves differently. Knowing what you have helps us
+        plan the removal — and helps you understand why the price is what it is.
+      </p>
+      <div class="grid grid-3">
+        {species.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p>{s.p}</p>
+            <p><strong>{s.life}</strong></p>
+            <p class="mb-0">{s.rem}</p>
+          </div>
+        ))}
+      </div>
+      <p class="measure" style="margin-top:1.6rem;color:var(--muted)">
+        White oak (Quercus alba) is uncommon in residential Arkadelphia but appears on some rural properties. We
+        handle all oak species. For the broader picture of what we do across town, see our
+        <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service overview</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">⚠️ Oak Wilt &amp; the April–July Pruning Rule</h2>
+      <p>
+        Oak wilt is a fungal disease that can kill mature oaks — especially red oaks like water oak, pin oak, and
+        Shumard oak — within a single growing season. It spreads two ways: through interconnected root systems between
+        neighboring oaks, and through beetles that carry the fungus to fresh cuts on healthy trees.
+      </p>
+      <p>
+        <strong>The critical timing rule:</strong> Don't prune or remove oaks between April and July if you can avoid
+        it. That's when the sap-feeding beetles that spread oak wilt are most active. A fresh cut on a healthy oak
+        during this window can attract beetles carrying the fungus from an infected tree nearby — turning a routine
+        pruning into a death sentence for your tree.
+      </p>
+      <p><strong>When oak removal can't wait:</strong></p>
+      <ul>
+        <li>Emergency removal — tree down, threatening structures, or actively hazardous. Risk of waiting outweighs oak wilt risk. We seal cuts immediately to minimize beetle attraction.</li>
+        <li>Tree is already dead or dying — removal during the restricted window is fine, but the wood must be disposed of properly (not chipped on-site and not left in a brush pile) to prevent fungal spread.</li>
+        <li>Tree is already infected — early removal can sometimes prevent root-graft spread to neighboring oaks. We coordinate with neighbors when adjacent oaks need to be addressed.</li>
+      </ul>
+      <p>
+        <strong>Best timing for non-emergency oak work: November through March.</strong> The tree is dormant,
+        sap-feeding beetles aren't active, and cuts heal cleanly. We schedule oak removals during this window whenever
+        the situation allows.
+      </p>
+      <p>
+        If you suspect oak wilt — sudden canopy die-off in summer, leaves wilting from the top down, brown
+        discoloration starting at leaf tips — call us. The
+        <a href="https://agriculture.arkansas.gov/forests/" target="_blank" rel="noopener">Arkansas Forestry Division</a>
+        tracks oak wilt and we can help confirm what you're seeing.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Oak Trees Get Removed</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Healthy mature oaks should generally be preserved — they're slow-growing, ecologically valuable, and add real
+        property value. We remove an oak only when there's a clear reason. Here are the ones we hear most.
+      </p>
+      <div class="grid grid-3">
+        {reasons.map((r) => (
+          <div class="card">
+            <h3>{r.h}</h3>
+            <p class="mb-0">{r.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Oak Removal Is More Complex Than Other Trees</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Oaks are heavy hardwoods. That changes almost everything about how the work is done.
+      </p>
+      <div class="grid grid-3">
+        {complexity.map((c) => (
+          <div class="card">
+            <h3>{c.h}</h3>
+            <p class="mb-0">{c.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">How We Remove an Oak Tree</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every oak is its own job. A 40-foot oak in an open backyard takes a half day. A 90-foot post oak between two
+        houses near campus is a full-day rigging job. Here's the general approach.
+      </p>
+      <div class="grid grid-2">
+        {steps.map((s, i) => (
+          <div class="card">
+            <h3>{i + 1}. {s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Signs Your Oak Needs to Come Down</h2>
+      <p>
+        Oaks decline slowly compared to pines — usually over several years. The signs build up over time. For broader
+        diagnostic guidance, see our <a href="/signs-tree-is-dying">signs a tree is dying</a> guide and
+        <a href="/when-to-remove-a-tree-arkadelphia">when to remove a tree in Arkadelphia</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Oak Removal Across Arkadelphia Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different parts of town have different oak populations. Here's what we see most across the neighborhoods we
+        know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Oak Removal Cost in Arkadelphia?</h2>
+      <p>
+        Oak removal typically costs more than pine removal of similar height — sometimes considerably more. The three
+        biggest factors:
+      </p>
+      <p>
+        <strong>Wood density and weight.</strong> Oak weighs roughly 50% more per cubic foot than pine. Rigging has to
+        handle the weight, disposal trucks fill up faster, and the whole job runs slower.
+      </p>
+      <p>
+        <strong>Tree size and canopy spread.</strong> Mature post oaks can have canopies 80 feet across with limbs 30+
+        feet long. Removing that much wood near structures takes time. Water oaks are usually smaller but still
+        substantial.
+      </p>
+      <p>
+        <strong>Stump size.</strong> Oak stumps run 30–60 inches across at the base, with deep root flares. Grinding
+        takes 3–4 times longer than equivalent pine stumps. If you're adding stump grinding to the removal, factor
+        that in.
+      </p>
+      <p>
+        What stays the same: we give you the exact price in writing before any work starts. The written quote is what
+        you pay. No surprises at the end.
+      </p>
+      <p>
+        For an exact number on your oak, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or fill out the estimate form. The estimate
+        is always free.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Arkadelphia Calls Plyler's for Oak Removal</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Heavy hardwood work is where experienced crews show their value. Here's why people trust us with oak removals.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Arkadelphia Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real oak removals across Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock
+    current={path}
+    heading="More Tree Services &amp; Resources in Arkadelphia"
+    intro="Oak removal is one piece of what we do across Clark County. Start with our full Arkadelphia tree service hub for the complete picture, or jump straight to the service that fits your job."
+  />
+
+  <FaqSection
+    items={faq}
+    heading="Oak Tree Removal Questions — Arkadelphia"
+    intro="Answers to what Arkadelphia homeowners ask us most about oak removal."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead mb-0">
+        📖 Helpful reading: <a href="/signs-tree-is-dying">Signs a Tree Is Dying</a> ·
+        <a href="/when-to-remove-a-tree-arkadelphia">When to Remove a Tree in Arkadelphia</a> ·
+        <a href="/is-my-tree-too-close-to-my-house-arkansas">Is My Tree Too Close to My House?</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead mb-0">
+        🌳 Back to our <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service hub</a> for the complete
+        picture of what we do across Clark County.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Get That Oak Down — Arkadelphia"
+    text="We're right here in Arkadelphia — yard on Country Club Drive, equipment built for hardwood work, crew local. Call Robbie, walk the property, get an honest written price. We'll handle the rest."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

@@ -1,0 +1,15 @@
+---
+import ServiceCard from './ServiceCard.astro';
+import links from '../data/links.json';
+const { heading = 'Our Tree Services', intro = 'Full-service tree care for homes and businesses across southwest Arkansas.', current = '' } = Astro.props;
+const items = links.services.filter((s) => s.href !== current);
+---
+<section class="section">
+  <div class="container">
+    {heading && <h2 class="center">{heading}</h2>}
+    {intro && <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">{intro}</p>}
+    <div class="grid grid-4">
+      {items.map((s) => <ServiceCard title={s.name} href={s.href} description={s.blurb} icon={s.icon} />)}
+    </div>
+  </div>
+</section>

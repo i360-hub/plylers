@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+import maps from '../data/maps.json';
+
+const title = "Tree Service Hot Springs AR | Plyler's Tree Service";
+const description =
+  "Hot Springs trusted tree service since 2002. Tree removal, trimming, stump grinding & 24/7 storm cleanup. 5.0 stars, 70+ reviews. Free estimates.";
+const path = '/tree-service-hot-springs-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Hot Springs', path },
+];
+const faq = faqData['tree-service-hot-springs-ar'] ?? [];
+
+// What we do — the five core service summaries from the live page.
+const coreServices = [
+  {
+    h: 'Tree Removal',
+    p: "Tall pines crowding your roof off Malvern Avenue, a dead oak leaning toward your garage near Central, or a hardwood that's outgrown the lot on a Lake Hamilton property — we bring them down safe and haul off every branch. Tight lots, wooded acreage, doesn't matter. We handle it.",
+  },
+  {
+    h: 'Tree Trimming',
+    p: 'Limbs scraping your roof off Park Avenue, branches hanging over the driveway, canopy blocking sunlight from your yard — we trim them back the right way. No topping, no hacking. Just proper cuts that keep the tree healthy and your property safe.',
+  },
+  {
+    h: 'Stump Grinding',
+    p: "That stump you've been mowing around for three years? We grind it 6 to 8 inches below ground and fill the hole. Flat enough to grow grass over or plant something new. We do multiple stumps in one trip and save you money.",
+  },
+  {
+    h: 'Emergency Storm Damage',
+    p: "Garland County catches its share of strong storms rolling through the Ouachitas. When a tree comes down on your house, blocks your road, or lands on a fence, call us any time — nights, weekends, holidays. We're just 30 minutes away and can be at your Hot Springs property fast.",
+  },
+  {
+    h: 'Tree Assessments',
+    p: "Not sure if a tree needs to come down or just needs some work? Robbie has spent 24 years looking at trees across this area — reading the lean, checking the trunk, spotting root damage and disease that most people walk right past. He'll walk your property and give you a straight answer on what's healthy and what's a problem.",
+  },
+];
+
+// Why Hot Springs calls first.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Google Reviews', p: 'A perfect rating from more than 70 homeowners who trusted us with their property. Not filtered, not fake — real people in Hot Springs, Garland County, and the surrounding area who picked up the phone and then took the time to say we did it right.' },
+  { h: '30 Minutes Away — In Hot Springs Every Week', p: "We're based in Arkadelphia, just 30 minutes down I-30 and Highway 7. Our crews are in Hot Springs multiple times a week — and there's never a trip fee or travel charge. The price is based on the job, not the drive." },
+  { h: '24 Years and Counting', p: "Robbie started this company in 2002. Fly-by-night outfits come through town every storm season and disappear a month later. We've been doing this for two decades and we're not going anywhere." },
+  { h: 'Licensed and Insured — Always', p: "Full liability and workers' comp on every job. If a branch nicks your gutter or a piece of equipment scratches your driveway, our insurance covers it. We'll show you proof before we ever start a saw." },
+  { h: 'Free Estimates — No Sales Pitch', p: "Robbie comes out, looks at the tree, and gives you an honest number in writing. If it doesn't need to come down, he'll tell you that. We don't push work you don't need just to fill a schedule." },
+  { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
+];
+
+// Neighborhood breakdowns.
+const neighborhoods = [
+  {
+    h: '🏛️ Downtown and Historic Districts',
+    p: "The neighborhoods just off Central Avenue and around the historic downtown — Quapaw, Whittington, Prospect — have mature white oaks, red oaks, and southern magnolias growing on properties that have been there a century or more. These trees grew up around the houses, not the other way around, and the canopy work takes real care. Tight lots, historic structures, mature root systems woven through old foundations. We've been doing this work in Hot Springs for over 24 years and we know how to handle it without damaging what makes these neighborhoods special.",
+  },
+  {
+    h: '🌳 Park Avenue and the West Mountain Slopes',
+    p: 'Up the slopes off Park Avenue and the streets climbing West Mountain, properties get steep fast. Shortleaf pines and white oaks tower over driveways cut into the hillside. When one of these comes down — or needs to — the work requires careful rope-and-rigging sectional cutting because there\'s nowhere for a tree to fall that isn\'t somebody\'s roof, retaining wall, or the road below. We bring the right equipment and the right approach for the terrain.',
+  },
+  {
+    h: '🏞️ Lake Hamilton and Lake Catherine Areas',
+    p: "Lakefront properties around Lake Hamilton and the Lake Catherine side bring their own challenges — trees growing right up to docks and boat houses, steep banks where roots are the only thing holding the soil in place, and canopy that needs trimming back from the water without dropping debris into the lake. We coordinate with homeowners on debris handling and access, and we've worked enough lakefront in this area to know what does and doesn't work.",
+  },
+  {
+    h: '🌲 The Ouachita Foothills North and West',
+    p: "Out toward the Ouachita National Forest — Mountain Pine, the Highway 270 corridor west, and the wooded areas north toward Jessieville — you're in the foothills proper. Mature pine plantation, hardwood ridges, and rural acreage where the nearest neighbor is a quarter mile away. We handle long-driveway access, storm-damaged pine stand clearing, and the kind of rural property work that suburban tree services aren't set up for.",
+  },
+];
+
+const testimonials = [
+  "Plyler's tree service removed several trees for us. The attention to detail and knowledge of tree removal was unmatched. They went above and beyond our expectations finishing the job ahead of schedule and right on budget. I have recommended them to several family and friends that they also ended up doing work for. Can't say enough good things about them. Highly recommend!!",
+  "Robbie did an amazing job trimming and cleaning up a beast of a tree in our front yard. He also helped remove several stumps (that would have otherwise taken a significant amount of manual labor) even though that wasn't part of why we originally contacted him. Very friendly and quick service.",
+  'These gentlemen completed outstanding work in an exceptional amount of time and conducted themselves with the highest level of professionalism. They truly transformed our backyard.',
+];
+
+// Towns within 40 miles.
+const towns = [
+  { h: 'Caddo Valley', p: 'Right next door — just a few minutes up I-30 from Arkadelphia.' },
+  { h: 'Bismarck', p: 'Close to home on Highway 7. Quick response every time.' },
+  { h: 'Gurdon', p: '15 minutes south on Highway 67.' },
+  { h: 'Malvern', p: '25 minutes northeast — big oaks and pecans in older neighborhoods.' },
+  { h: 'Hot Springs', p: 'Residential and commercial tree work in the Spa City.' },
+  { h: 'Hot Springs Village', p: 'Wooded lots, golf-course properties, and HOA-friendly tree care.' },
+  { h: 'Benton', p: 'Mature trees in fast-growing Saline County neighborhoods.' },
+  { h: 'Sheridan', p: 'Grant County — heavy pine coverage and established homes.' },
+  { h: 'Glenwood', p: 'Pike County — large pines and hardwoods on rural acreage.' },
+  { h: 'Prescott', p: 'Nevada County — storm cleanup and hazardous removals.' },
+  { h: 'Camden', p: 'Ouachita County — mature hardwoods and riverfront properties.' },
+  { h: 'Pearcy', p: 'Lake Hamilton area — wooded lakefront lots that need skilled care.' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Service in Hot Springs, AR',
+    serviceType: 'Tree removal, trimming, stump grinding & storm cleanup',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Hot Springs, Arkansas · Garland County"
+    title="Tree Service in Hot Springs, AR"
+    subtitle="The crew homeowners on Central Avenue, Park Avenue, and out past Lake Hamilton have trusted for over two decades. Tree removal, trimming, stump grinding, and same-day storm response — serving Hot Springs and all of Garland County."
+    image="/images/hot-springs-ar-arborist-climbing-aerial-tree-work.webp"
+    imageAlt="Arborist climbing for aerial tree work in Hot Springs, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Hot Springs' Go-To Tree Service for Over 24 Years</p>
+      <p class="lead">
+        Plyler's Tree Service has been taking care of trees in Hot Springs and Garland County for over two decades.
+        We know the mature oaks along Central Avenue, the tall pines in the neighborhoods off Park and Malvern Avenue,
+        and the heavy canopy on the wooded lots around Lake Hamilton and Lake Catherine. From the older homes near
+        downtown to the newer builds off Highway 7, we've handled tree work across every part of the Spa City.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Hot Springs' Go-To Tree Service for Over 24 Years</h2>
+      <p>
+        Hot Springs sits in the Ouachita Mountains surrounded by national forest, which means big trees, dense canopy,
+        and storm seasons that hit hard. When a storm drops a pine across your driveway at midnight or a dead oak starts
+        leaning toward your roof, you need somebody who can get there fast. Our crew is based just 30 minutes away in
+        Arkadelphia — no trip fee, no travel charge. We're in Hot Springs multiple times a week and often the same day
+        you call.
+      </p>
+      <p>
+        We carry a perfect 5.0-star rating on Google with more than 70 reviews from homeowners across the area. Every
+        estimate is free, every price is in writing before we start, and we clean up everything before we leave. That's
+        how we've done it since day one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What We Do in Hot Springs</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every service a homeowner or business in Garland County could need — all from one local crew.
+      </p>
+      <div class="grid grid-3">
+        {coreServices.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ServicesGrid current={path} />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Hot Springs Calls Plyler's First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Your Neighbors Are Saying</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Hot Springs and Garland County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Tree Work Across Hot Springs' Older Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Hot Springs has some of the oldest residential canopy in Arkansas. The trees here aren't just landscape —
+        they're century-old shade that's seen the city grow up around it. Here's what that looks like by neighborhood.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Serving Hot Springs and Every Town Within 40 Miles</h2>
+      <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">
+        Arkadelphia is home base. Our crews head out from here every morning and cover a full 40-mile radius —
+        including Hot Springs and the entire Spa City area. No trip fee, no travel charge — the price is based on the
+        job, not the drive.
+      </p>
+      <MapEmbed src={maps[path]} title="Hot Springs service area map" />
+      <div class="grid grid-3" style="margin-top:2.4rem">
+        {towns.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        We also serve: Amity, Bonnerdale, Lake Catherine, Donaldson, Kirby, Sparkman, Princeton, De Gray, Daleville,
+        Gum Springs, Poyen, Haskell, Traskwood, Leola, Thornton, Bluff City, and Chidester. Don't see your town? Give
+        us a call at <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — if you're nearby, we'll make
+        it work.
+      </p>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Service Questions — Hot Springs"
+    intro="Answers to the things Hot Springs homeowners ask us most."
+  />
+
+  <CtaBand
+    title="Ready to Get That Tree Taken Care Of?"
+    text="We serve Hot Springs from our home base in Arkadelphia — just a short drive down the road. Call Robbie, tell him what's going on, and we'll have somebody at your property to give you an honest price. No charge for the estimate. No obligation to say yes. ⭐ 5.0 Stars · 70+ Google Reviews · 24+ Years in Arkadelphia · Licensed & Insured."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

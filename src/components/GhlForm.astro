@@ -1,0 +1,29 @@
+---
+// Lead-capture form — verbatim GoHighLevel/LeadConnector embed (do NOT substitute).
+// Captured from the live site: a plain iframe to the GHL widget form.
+import business from '../data/business.json';
+const { minHeight = 1200, heading = 'Request Your Free Estimate', id = 'quote' } = Astro.props;
+const src = business.embeds.ghlFormSrc;
+const title = business.embeds.ghlFormTitle;
+---
+<section class="ghl-wrap" id={id} aria-labelledby={`${id}-h`}>
+  <div class="container">
+    {heading && <h2 id={`${id}-h`} class="center ghl-h">{heading}</h2>}
+    <div class="ghl-card">
+      <iframe
+        src={src}
+        style={`width:100%; min-height:${minHeight}px; border:none;`}
+        title={title}
+        loading="lazy"></iframe>
+    </div>
+    <p class="center ghl-alt">
+      Prefer to talk? Call <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — free estimates, no obligation.
+    </p>
+  </div>
+</section>
+<style>
+  .ghl-wrap { padding-block: var(--space); background: var(--bg-alt); }
+  .ghl-h { margin-bottom: 1.5rem; }
+  .ghl-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; max-width: 820px; margin-inline: auto; }
+  .ghl-alt { margin-top: 1rem; color: var(--muted); }
+</style>

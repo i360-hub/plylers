@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Testimonials from '../components/Testimonials.astro';
+import ReviewsWidget from '../components/ReviewsWidget.astro';
+import CtaBand from '../components/CtaBand.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, LOCALBUSINESS_ID, WEBSITE_ID, ORG_ID, SITE } from '../lib/schema';
+import business from '../data/business.json';
+
+const title = "Reviews | Plyler's Tree Service Arkadelphia AR";
+const description =
+  "70+ five-star Google reviews for Plyler's Tree Service. Real customers in Arkadelphia, Hot Springs & across Clark County, AR.";
+const path = '/reviews';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Reviews', path },
+];
+
+const schema = [
+  {
+    '@type': 'CollectionPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    publisher: { '@id': ORG_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Rated 5.0 on Google</p>
+      <h1>What Our Customers Say</h1>
+      <p class="lead">
+        {business.rating.count}+ five-star reviews on Google. Don't take our word for it — read theirs.
+      </p>
+    </div>
+  </section>
+
+  <Testimonials heading="What Our Customers Say" />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Our Google Reviews</h2>
+      <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">
+        Straight from Google — every review from real folks here in Clark County and across southwest Arkansas.
+      </p>
+      <ReviewsWidget />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Like What You See? Let's Talk About Your Trees."
+    text="Call Robbie for a free estimate. We'll come look at the job and give you an honest price."
+    href="#quote"
+    label="Get a Free Estimate"
+  />
+
+  <GhlForm heading="Get Your Free Estimate" />
+</BaseLayout>

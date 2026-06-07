@@ -1,0 +1,374 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Emergency Tree Service Arkadelphia AR | 24/7 | Plyler's";
+const description =
+  "24/7 emergency tree service in Arkadelphia, AR. Tree on your house? Crew already in town — most local emergencies on-site in 1-2 hours. Call now.";
+const path = '/emergency-tree-service-arkadelphia-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Arkadelphia', path: '/tree-service-arkadelphia-ar' },
+  { name: 'Emergency Tree Service', path },
+];
+const faq = faqData['emergency-tree-service-arkadelphia-ar'] ?? [];
+
+// Safety steps before touching a storm-damaged tree.
+const safetySteps = [
+  'Never approach a tree touching power lines. Even if the line looks intact, the ground around it can be energized. Call Entergy first, then us.',
+  'Stay out from under hanging limbs. "Widow makers" lodged in the canopy can drop without warning. Keep people and pets clear of the area.',
+  "Don't try to chainsaw a tree off your roof. The weight distribution is unpredictable. Cutting the wrong piece can cause the whole tree to shift and crush more of the structure.",
+  "Don't enter a room with a tree through the ceiling. The structural integrity is compromised. Stay out until a professional clears it.",
+  'Take photos before anything moves — for your insurance claim. Wide shots and close-ups of the damage. Multiple angles.',
+];
+
+// Emergency tree work we handle.
+const emergencyWork = [
+  {
+    h: 'Tree-on-House Removal',
+    p: 'The hardest emergency job in tree work — getting a tree off a structure without doing more damage than the tree already did. We rig from above, lift sections off carefully, and minimize the impact on what’s left of the roof and walls.',
+  },
+  {
+    h: 'Storm Cleanup & Removal',
+    p: 'After Clark County’s worst storms, properties can have 3, 5, 10 trees down across the yard. We bring the equipment, the crew, and the cleanup to handle the whole property in one push.',
+  },
+  {
+    h: 'Road & Driveway Clearance',
+    p: 'Tree blocking the only way out of your neighborhood or onto your property. We get on-site, cut the tree into manageable sections, and clear the path. Often we can get you driveable within an hour.',
+  },
+  {
+    h: 'Leaning Tree Stabilization or Removal',
+    p: 'A tree that’s actively leaning toward a structure can’t wait for "next week." We assess the lean, decide whether it can be stabilized or needs immediate removal, and get it down before it falls on its own.',
+  },
+  {
+    h: 'Hanging Limb & Widow-Maker Removal',
+    p: 'Broken limbs hung up in the canopy, partial breaks dangling 40 feet over your yard. We climb up, rig the piece, and bring it down controlled. The kind of job where doing it yourself ends in the ER.',
+  },
+  {
+    h: 'Post-Power-Line Cleanup',
+    p: 'Once Entergy de-energizes and clears the line, the tree still has to come off your property. We handle the cleanup after the utility crew is done — coordinating timing so you’re not waiting days for the next steps.',
+  },
+];
+
+// How we respond to emergency calls.
+const responseSteps = [
+  { h: 'Robbie Answers', p: `You call ${business.phoneDisplay}. Robbie picks up — day, night, weekend, holiday. He asks what’s down, where, and what’s threatened. Two-minute call to get the details.` },
+  { h: 'Dispatch & ETA', p: 'Robbie tells you straight whether the crew can be there in 30 minutes, 90 minutes, or first thing in the morning. No false promises, no "we’re on the way" stalling. Honest ETA, every time.' },
+  { h: 'On-Site Assessment', p: 'Crew arrives with the equipment likely needed — chainsaws, ropes, chipper, bucket truck if access allows. Quick walk-around, plan the cuts, get insurance-grade photos before any work starts.' },
+  { h: 'Make the Property Safe', p: 'First priority is removing the active hazard — tree off the roof, road cleared, hanging limb down. We can complete full cleanup the same visit or come back when it’s safe and convenient for you.' },
+];
+
+// Emergency response across neighborhoods.
+const neighborhoods = [
+  {
+    h: '🎓 Henderson State & OBU Areas',
+    p: 'Pine Street, 10th Street, Walnut, Caddo, Henderson Street — mature oaks and pecans near Henderson State and Ouachita Baptist drop big limbs in storms. Older homes mean older trees with hidden decay. Most-frequent calls: hanging limbs over rental properties, dead limbs falling on cars parked on the street, oak limbs through second-story windows.',
+  },
+  {
+    h: '🏘️ Country Club Drive & East Side',
+    p: 'Twin Rivers, Riverview, the streets off 9th. Big trees, big lots — when something fails here, it’s usually a 60-foot loblolly pine on the roof or a major oak limb across the back deck. Higher-value structures and landscaping, so cleanup precision matters as much as removal speed.',
+  },
+  {
+    h: '🛣️ Caddo Valley & I-30 Corridor',
+    p: 'Rural acreage, long driveways, pine plantation behind the back fence. Storm calls here often mean access issues — trees blocking the only way in or out. We get there with the right equipment for the terrain and clear the path before working on anything else.',
+  },
+  {
+    h: '🌊 DeGray Lake & South Toward Gurdon',
+    p: 'Lakefront cabins around DeGray Lake Resort State Park and rural properties south. Lakefront storm damage is its own challenge — steep slopes, trees down across docks, retaining walls and seawalls to protect during removal. We’ve been doing this work on DeGray for 24 years.',
+  },
+];
+
+// Why Arkadelphia calls Plyler's for emergencies.
+const whyUs = [
+  { h: '📞 Robbie Answers, Day or Night', p: 'Not a call center. Not an answering service. The owner picks up the phone — including at 2 a.m. on a holiday. Twenty-four years of taking those calls.' },
+  { h: '📍 Equipment in Arkadelphia', p: 'Trucks, chippers, climbing gear, bucket truck — all staged at our yard on Country Club Drive. We’re not waiting on rentals or driving in from Hot Springs.' },
+  { h: '🚨 Real Response Times', p: 'Most local Arkadelphia emergencies see crew on-site within 1–2 hours. Often faster during daytime hours. We tell you the honest ETA when you call, not what you want to hear.' },
+  { h: '📋 Insurance-Ready Documentation', p: 'Photos, itemized invoices, damage assessment — everything your homeowner’s insurance adjuster needs. We’ve worked with every major Arkansas insurer.' },
+  { h: '🛡️ Fully Licensed & Insured', p: 'Liability and workers’ comp on every emergency job. Critical when working at night, in storms, or on damaged structures where the risk is higher.' },
+  { h: '⭐ 5.0 Stars · 70+ Reviews', p: 'Perfect Google rating from real Clark County customers — including plenty of emergency calls. The reviews tell the story.' },
+];
+
+const testimonials = [
+  'A big pine fell on our fence during a storm. They were out the next morning. Professional, fast, and they even fixed the fence section. Can’t say enough good things.',
+  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
+  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Emergency Tree Service in Arkadelphia, AR',
+    serviceType: 'Emergency tree service',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Arkadelphia, Arkansas · 24/7 Emergency Response"
+    title="Emergency Tree Service in Arkadelphia, AR"
+    subtitle="Tree on the house? Limb across the driveway? Cracked trunk leaning toward the bedroom? Call now. Our crew is in Arkadelphia, our equipment is staged at our yard on Country Club Drive, and we answer the phone 24 hours a day — including nights, weekends, and holidays."
+    image="/images/arkadelphia-ar-storm-damage-uprooted-oak-tree-removal.webp"
+    imageAlt="Storm-damaged uprooted oak being removed during an emergency call in Arkadelphia, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Already in Arkadelphia — not driving in from Little Rock.</p>
+      <p class="lead">
+        When a tree comes down on your house at 2 a.m., the company that’s 90 minutes away can’t help you. Plyler’s
+        Tree Service is based right here in Clark County — yard on Country Club Drive in Arkadelphia, trucks and
+        chippers staged in town, owner Robbie Plyler answering the phone himself. We’ve been the emergency call for
+        Arkadelphia since 2002.
+      </p>
+      <p class="measure" style="color:var(--muted)">
+        When you call after-hours, you don’t get a voicemail and a callback in the morning. Robbie picks up. He
+        gathers the details, dispatches the crew, and most local emergencies have someone on-site within a couple of
+        hours — often faster.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">When to Call Emergency Tree Service in Arkadelphia</h2>
+      <p>
+        Not every fallen branch is an emergency, and not every concerning tree needs a 2 a.m. response. Here’s the
+        line — situations where you should call us right now, regardless of the hour. If you’re not sure whether your
+        situation qualifies as an emergency, call anyway —
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>. Robbie will tell you straight whether it
+        needs immediate response or can wait until morning. No charge for the conversation.
+      </p>
+      <h3>⚠️ Before You Do Anything: Stay Safe</h3>
+      <p>
+        A tree on your property after a storm is dangerous in ways that aren’t obvious. Do not try to handle it
+        yourself.
+      </p>
+      <ul class="checklist">
+        {safetySteps.map((s) => <li>{s}</li>)}
+      </ul>
+      <p>
+        For the full storm-aftermath checklist, see our guide on
+        <a href="/what-to-do-after-storm-tree-down-arkansas"> what to do after a storm tree down</a>. Then call us.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Emergency Tree Work We Handle in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Whatever the storm or accident left behind, our crew is set up to handle it.
+      </p>
+      <div class="grid grid-3">
+        {emergencyWork.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/storm-damage-cleanup-arkadelphia-ar">Full storm services →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-green">
+    <div class="container">
+      <h2 class="center">How We Respond to Emergency Calls</h2>
+      <p class="center" style="margin-bottom:2.4rem;color:#bcd3c4">
+        When you call about an emergency, here’s exactly what happens.
+      </p>
+      <ol class="steps">
+        {responseSteps.map((s, i) => (
+          <li class="step">
+            <span class="step-num">{i + 1}</span>
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Storm History in Arkadelphia & Clark County</h2>
+      <p>
+        Arkadelphia knows what bad weather can do. The town took a direct hit from an F4 tornado on March 1, 1997,
+        that damaged or destroyed much of the downtown. The 2025 storm season hit the courthouse clock tower. Ice
+        storms cycle through every few winters. This isn’t a town that’s never seen severe weather — and our
+        equipment, our experience, and our response protocol are built for what actually happens here.
+      </p>
+      <p>The storm seasons we plan around in Clark County:</p>
+      <ul>
+        <li><strong>Late March through early June</strong> — primary severe-weather season. Tornadoes, straight-line winds, and the kind of supercell thunderstorms that drop trees on houses. Our heaviest emergency call volume of the year.</li>
+        <li><strong>August through early October</strong> — hurricane remnants and the back end of summer storms. Less frequent but often saturated ground means trees uproot easier.</li>
+        <li><strong>December through February</strong> — ice storms. Loblolly pine tops snap, mature hardwood limbs fail, and entire trees come down under ice loading. Slow-moving emergencies that can stretch for days as ice continues to fall and refreeze.</li>
+      </ul>
+      <p>
+        We staff for these seasons. After major storm events, we run extended hours and add crew to keep up with the
+        call volume. For the broader picture of what we do across town, see our
+        <a href="/tree-service-arkadelphia-ar"> Arkadelphia tree service overview</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Emergency Response Across Arkadelphia Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different parts of town mean different emergency patterns. Here’s what we see most across the neighborhoods we
+        know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Does Emergency Tree Service Cost More?</h2>
+      <p>
+        Honest answer: usually yes, modestly. Emergency response means crews working after-hours, weekends, or
+        holidays, sometimes in rain or unsafe conditions, sometimes with overtime on the labor. That gets reflected
+        in the price.
+      </p>
+      <p>
+        What stays the same is how we price it: we tell you the number before any work starts. Even at 11 p.m. with a
+        tree on your roof, you get a verbal estimate before we start cutting — and as soon as conditions allow, that
+        gets confirmed in writing. We’re not the company that takes advantage of a panicked homeowner and surprises
+        you with a 5-figure invoice the next day.
+      </p>
+      <p>
+        What also stays the same: most emergency work is insurance-covered. If a tree fell on your house during a
+        storm, your homeowner’s policy almost certainly covers the cost of removing it and repairing the damage. We
+        provide itemized invoices and damage documentation that insurance adjusters accept without question. We’ve
+        done this for 24 years and we know what the paperwork needs to look like.
+      </p>
+      <p>
+        Call <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>. We’ll handle the tree first and the
+        paperwork second.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="⚡ Tree Emergency Right Now?"
+    text="Don't wait. Don't try to handle it yourself. Don't call a company that's 90 minutes away. We're in Arkadelphia, we're answering the phone, and we can be on-site fast."
+  />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Arkadelphia Calls Plyler's for Emergencies</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Lots of tree companies advertise "24/7 emergency response." Most of them mean "leave a voicemail and we’ll
+        call you back tomorrow." Here’s why we actually deliver on it.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Emergency Reviews from Arkadelphia Customers</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real emergencies across Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Emergency Tree Service Questions — Arkadelphia"
+    intro="Answers to what Arkadelphia homeowners ask us most during and after a tree emergency."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead">More Tree Services & Resources in Arkadelphia</p>
+      <p style="color:var(--muted)">
+        Emergency response is one piece of what we do across Clark County. Start with our full
+        <a href="/tree-service-arkadelphia-ar"> Arkadelphia tree service hub</a> for the complete picture, or jump
+        straight to:
+        <a href="/tree-removal-arkadelphia-ar">Tree Removal Arkadelphia</a> ·
+        <a href="/tree-trimming-arkadelphia-ar">Tree Trimming Arkadelphia</a> ·
+        <a href="/stump-grinding-arkadelphia-ar">Stump Grinding Arkadelphia</a> ·
+        <a href="/storm-damage-cleanup-arkadelphia-ar">Storm Damage Cleanup</a>
+      </p>
+      <p style="color:var(--muted)">
+        Helpful reading:
+        <a href="/what-to-do-after-storm-tree-down-arkansas">What to Do After a Storm Tree Down</a> ·
+        <a href="/when-to-remove-a-tree-arkadelphia">When to Remove a Tree in Arkadelphia</a> ·
+        <a href="/signs-tree-is-dying">Signs a Tree Is Dying</a> ·
+        <a href="/is-my-tree-too-close-to-my-house-arkansas">Is My Tree Too Close to My House?</a>
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Tree Down? Call Right Now."
+    text="We're in Arkadelphia. Robbie answers the phone. The crew can be on the way within minutes. Don't wait until morning — every hour a tree sits on your house, more damage happens."
+  />
+</BaseLayout>
+
+<style>
+  .steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.6rem; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--amber-500); color: var(--green-900); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .step h3 { color: #fff; margin: 0 0 0.4rem; }
+  .step p { color: #c9ddcf; }
+  .checklist { margin: 0 0 1.2rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

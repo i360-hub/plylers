@@ -1,0 +1,303 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Tree Removal Arkadelphia AR | Plyler's Tree Service";
+const description =
+  "Tree removal in Arkadelphia, AR since 2002. Safe sectional removal of oaks, pines & storm-damaged trees in Clark County. Free written estimates, full cleanup, 5.0 stars.";
+const path = '/tree-removal-arkadelphia-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Arkadelphia', path: '/tree-service-arkadelphia-ar' },
+  { name: 'Tree Removal', path },
+];
+const faq = faqData['tree-removal-arkadelphia-ar'] ?? [];
+
+// Trees we remove most in Arkadelphia.
+const trees = [
+  { h: 'Loblolly & Shortleaf Pines', p: "The dominant tree south of town and out toward Bismarck. Pines grow fast, get top-heavy, and snap in ice storms or after pine beetle damage. Often need to be sectioned down because they lean toward houses by the time they're mature." },
+  { h: 'Water Oaks & Post Oaks', p: 'Common in the older neighborhoods around HSU, OBU, and the east side. Heavy, brittle wood that drops big limbs in storms. We schedule oak removals outside April–July to avoid oak wilt risk where possible.' },
+  { h: 'Sweetgums', p: 'Shallow-rooted, common across Arkadelphia yards. First to go over in high wind. Removal is usually straightforward, but root systems take careful grinding afterward.' },
+  { h: 'Pecans & Hickories', p: 'Old pecans in the established neighborhoods are often the biggest trees on the property. Heavy, dense wood, and removals usually require crane assistance or sectional rigging because of size and proximity to homes.' },
+  { h: 'Cedars & Mixed Hardwoods', p: 'Scattered across older properties and acreage. Cedars handle ice well but get pushed over in saturated ground. Mixed hardwoods on rural lots toward Caddo Valley and Gurdon often need access work before removal can start.' },
+  { h: 'Storm-Damaged Trees', p: 'Any species with cracked trunks, split crotches, hanging limbs, or partial uprooting after a Clark County storm. These don’t wait — we respond same-day, often within hours.' },
+];
+
+// How we remove a tree.
+const steps = [
+  { h: 'Free On-Site Estimate', p: 'Robbie comes to your property, walks the tree, checks the surroundings, looks at access for the chipper and bucket truck, and gives you a written price the same day. No charge, no pressure.' },
+  { h: 'Plan the Removal', p: 'We decide whether the tree can be felled in one piece or needs to be taken down in sections. For trees near homes, garages, fences, or power lines, we plan the rigging — what gets roped, where it drops, who catches what.' },
+  { h: 'Bring It Down Safely', p: "Our crew works the tree from the top down or sectional, depending on the plan. Every piece comes down where we want it. Your house, landscaping, fence, and your neighbor's property all stay intact." },
+  { h: 'Full Cleanup', p: 'We chip the brush, haul off the logs, rake the sawdust, and pick up every piece. Half the reviews we get mention cleanup specifically — it tells you how seriously we take it. If you want firewood kept, just say so.' },
+];
+
+// Neighborhood breakdowns.
+const neighborhoods = [
+  { h: '🎓 Henderson State & OBU Areas', p: 'Pine Street, 10th Street, Walnut, Caddo, Henderson Street — mature trees on tight residential lots, lots of rental homes with deferred maintenance. We handle dead pine removals close to roof lines, oak limb-drop hazards, and full removals where decades-old trees have outgrown their spot. Landlords and property managers serving students at Henderson State and Ouachita Baptist, we work with you on scheduling between tenants.' },
+  { h: '🏘️ Country Club Drive & East Side', p: "Big mature trees on bigger lots — Twin Rivers, Riverview, the streets off 9th. Homes built in the '60s and '70s with trees that have reached their final stage. We get called for storm-cracked oaks, dead pines threatening roof lines, and major canopy work where the homeowner wants the trees down but the shade preserved on what's left." },
+  { h: '🛣️ Caddo Valley & I-30 Corridor', p: "North toward Caddo Valley, lots get bigger and more rural fast. Long driveways, wooded acreage, pine plantation behind the back fence. We're set up for it — equipment that handles rough access roads and large-scale removal where multiple trees come down in one trip." },
+  { h: '🌊 DeGray Lake & South Toward Gurdon', p: "Lakefront cabins, rural acreage, classic Clark County timber country around DeGray Lake Resort State Park. Lakefront removals take extra care — steep slopes, tight access between the cabin and the dock, retaining walls and seawalls to protect. We've been doing this work on DeGray for 24 years and know every angle." },
+];
+
+// Why Arkadelphia calls Plyler's for tree removal.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Reviews', p: 'A perfect Google rating from more than 70 customers across Clark County. Real people, real removals, real cleanup.' },
+  { h: '📍 Yard on Country Club Drive', p: "Trucks, chippers, and stump grinders staged here in Arkadelphia. When you call, we're already in town." },
+  { h: '🪓 24 Years of Removals', p: 'Robbie founded the company in 2002. Thousands of removals done in this town. We know what every species does when it comes down.' },
+  { h: '📋 Licensed and Insured', p: "Full liability and workers' comp on every removal. We'll show you proof before we start a saw. Never hire a tree company that can't." },
+  { h: '💬 Free Written Estimate', p: "Robbie comes out, walks the tree, gives you a price in writing. If the tree doesn't need to come down, he says so." },
+  { h: '🧹 Complete Cleanup', p: 'Brush chipped, logs hauled, sawdust raked, every piece picked up. Your yard looks better than when we got there.' },
+];
+
+const testimonials = [
+  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
+  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
+  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Removal in Arkadelphia, AR',
+    serviceType: 'Tree removal',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Arkadelphia, Arkansas · Clark County"
+    title="Tree Removal in Arkadelphia, AR"
+    subtitle="The crew that's been taking down trees in Arkadelphia since 2002. Big oaks over rooflines, dead pines leaning toward power lines, storm-cracked sweetgums in the backyard — we handle it safely, clean up everything, and stand behind the work."
+    image="/images/arkadelphia-ar-bucket-truck-dead-tree-removal-residential.webp"
+    imageAlt="Bucket truck removing a dead tree at a residential property in Arkadelphia, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Arkadelphia's tree removal crew — not a call center two states away.</p>
+      <p class="lead">
+        Plyler's Tree Service is based right here in
+        <a href="https://clarkcountyar.gov/" target="_blank" rel="noopener">Clark County</a>, with our equipment yard
+        on Country Club Drive in Arkadelphia. When you call about a tree, you talk to Robbie Plyler — the owner. He
+        comes out, looks at the tree, gives you a written price, and his crew does the work. That's been the model
+        since 2002. We're a Service Area Business serving Arkadelphia and a 40-mile radius. Our trucks, chippers,
+        bucket truck, and stump grinder are staged in town. When you need a tree down, we're already here.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Why Tree Removal in Arkadelphia Takes Local Knowledge</h2>
+      <p>
+        Arkadelphia sits where the Caddo and Ouachita rivers come together, with
+        <a href="https://www.arkansasstateparks.com/parks/degray-lake-resort-state-park" target="_blank" rel="noopener">DeGray Lake Resort State Park</a>
+        a few miles up the road and the Ouachita foothills rising to the west. That setting grows big trees — and
+        creates removal challenges most general tree services aren't ready for.
+      </p>
+      <p>
+        The older neighborhoods around
+        <a href="https://www.hsu.edu/" target="_blank" rel="noopener">Henderson State University</a> and
+        <a href="https://obu.edu/" target="_blank" rel="noopener">Ouachita Baptist University</a> are full of mature
+        water oaks, post oaks, and pecans planted decades before the houses around them were built. Many sit inches
+        from foundations, gutters, and power drops. The east side off Country Club Drive and Twin Rivers has 60-foot
+        loblolly pines leaning over rooflines after 50+ years of growth. Out toward Caddo Valley and DeGray Lake,
+        lakefront and acreage removals mean steep slopes, soft ground, and tight equipment access.
+      </p>
+      <p>
+        After 24 years of working in this town, we know which species fail which way in which conditions. A water oak
+        in Feaster Park doesn't come down like a loblolly off Highway 8, and a lakefront pine on DeGray takes
+        different rigging than a hardwood on a city lot. That's the difference between a clean removal and an
+        insurance claim. For the full picture of what we do across town, see our
+        <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service overview</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Trees We Remove Most in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Clark County's mix of bottomland hardwoods and upland pine means we see the same species across most
+        properties. Each one has its own removal challenges.
+      </p>
+      <div class="grid grid-3">
+        {trees.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Signs a Tree Needs to Come Down</h2>
+      <p>
+        Not every tree we look at needs to be removed. Robbie has walked off plenty of properties telling homeowners
+        their tree is fine. But these are the warning signs we take seriously in Arkadelphia — especially heading into
+        storm season.
+      </p>
+      <p>
+        Not sure what you're looking at? Robbie will come walk your property for free and give you a straight answer.
+        If the tree can stay, he'll say so.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">How We Remove a Tree in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every property is different. A pine in the middle of an acre lot in Caddo Valley is a one-cut job. A 70-foot
+        oak between a 1960s house on Pine Street and the neighbor's garage takes a full morning of rigging. Here's how
+        we work either one.
+      </p>
+      <div class="grid grid-2">
+        {steps.map((s, i) => (
+          <div class="card">
+            <h3>{i + 1}. {s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Tree Removal Across Arkadelphia Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different parts of town mean different removal challenges. Here's what we see most across the neighborhoods we
+        know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Tree Removal Cost in Arkadelphia?</h2>
+      <p>
+        The honest answer is that it depends on the tree and the property. The three things that move the price the
+        most are the size of the tree, how close it is to structures or power lines, and how easy it is to get our
+        equipment to it.
+      </p>
+      <p>
+        A small pine in an open backyard off Highway 8 is a fraction of the price of a 70-foot oak wedged between a
+        house on Pine Street and a detached garage. A lakefront removal on DeGray with steep slope access costs more
+        than a flat-lot removal in Feaster Park.
+      </p>
+      <p>
+        What stays the same: we give you the exact price in writing before any work starts. No hidden fees, no
+        surprise add-ons, no upcharges after the tree is half down. If the estimate is $850, that's what you pay.
+      </p>
+      <p>
+        For an exact number on your tree, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or fill out the estimate form. The estimate
+        itself is always free.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Arkadelphia Calls Plyler's for Tree Removal</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with billboards. We built it one tree at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Arkadelphia Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real removals across Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock
+    current={path}
+    heading="More Tree Services in Arkadelphia"
+    intro="Tree removal is one piece of the work we do across Clark County. Start with our full Arkadelphia tree service hub for the complete picture, or jump straight to the service that fits your job."
+  />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Removal Questions — Arkadelphia"
+    intro="Answers to what Arkadelphia homeowners ask us most about removals."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead mb-0">
+        🌳 Back to our <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service hub</a> for the complete
+        picture of what we do across Clark County.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Ready to Get That Tree Down?"
+    text="We're right here in Arkadelphia — yard on Country Club Drive, trucks staged in town. Call Robbie, tell him what's going on, and we'll have somebody at your property to give you an honest written price. No charge for the estimate. No obligation to say yes."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

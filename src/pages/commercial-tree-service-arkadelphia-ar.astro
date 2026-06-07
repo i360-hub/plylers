@@ -1,0 +1,396 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Commercial Tree Service Arkadelphia AR | Plyler's";
+const description =
+  "Commercial tree service in Arkadelphia, AR — HOAs, churches, rental properties, municipal contracts. Licensed, insured, contracted. Free written bids.";
+const path = '/commercial-tree-service-arkadelphia-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Arkadelphia', path: '/tree-service-arkadelphia-ar' },
+  { name: 'Commercial Tree Service', path },
+];
+const faq = faqData['commercial-tree-service-arkadelphia-ar'] ?? [];
+
+// Commercial properties we serve.
+const properties = [
+  {
+    h: 'HOAs & Property Management Companies',
+    p: 'Common areas, entrance landscaping, multi-property maintenance contracts. We coordinate with property managers, board members, and individual residents. Written annual maintenance plans available for scheduled trimming and inspection rounds.',
+  },
+  {
+    h: 'Churches & Religious Properties',
+    p: 'Mature trees on church grounds, cemetery oak care, parking lot canopies, and storm response when needed. We work around service schedules and special events. Many of our long-term church clients are on annual maintenance agreements.',
+  },
+  {
+    h: 'Apartments & Rental Properties',
+    p: 'Liability-focused tree work for multi-unit properties. Tenant complaint response, scheduled property inspections, hazard tree identification and removal. We carry the insurance your tenants and your portfolio require.',
+  },
+  {
+    h: 'Medical, Office & Retail Properties',
+    p: 'Front entrance landscaping, parking lot trees, screening hedges. Work scheduled around business hours — early mornings, weekends, or after-hours when needed to minimize disruption to patients, customers, or operations.',
+  },
+  {
+    h: 'Educational Institutions',
+    p: 'Campus tree care for schools and university properties. Storm response, hazard identification, scheduled maintenance, and emergency response. Familiar with the academic calendar and able to schedule major work during breaks.',
+  },
+  {
+    h: 'Municipal & Government Properties',
+    p: 'Public property tree work for city departments, parks, and ROW maintenance. Familiar with municipal bid processes, insurance and bonding requirements, and proper documentation. Available for emergency contracts after major weather events.',
+  },
+];
+
+// The five things commercial clients need.
+const fiveThings = [
+  { h: 'Proof of insurance', p: 'Current, with named insured certificates. Your property manager or COO needs a current certificate of insurance with their entity listed. We provide these on request, refreshed annually, no questions asked.' },
+  { h: 'Written contracts with itemized scope', p: 'Verbal estimates don’t fly with a board, accounts payable team, or insurance auditor. Every commercial job gets a written contract with scope, schedule, payment terms, and warranty language before work starts.' },
+  { h: 'Schedule reliability', p: 'When you say a crew will be there Tuesday morning, the crew is there Tuesday morning. Property managers and facility directors plan around tree work, and showing up two days late costs them — and us — credibility.' },
+  { h: 'Documented work completion', p: 'Before and after photos, completion sign-off, itemized invoices that match the contract. The kind of documentation an audit or board review can stand on.' },
+  { h: 'Single point of contact accountability', p: 'Robbie is your contact. Not a call center, not a different rep each visit, not a salesperson who hands off to crews you never see. One person who knows your property and answers his phone.' },
+];
+
+// Commercial services we provide.
+const services = [
+  {
+    h: 'Annual Maintenance Contracts',
+    p: 'Scheduled inspection rounds, routine trimming, and proactive hazard identification on a yearly cycle. Budget predictability for property managers, fewer surprise removals for ownership. Custom contract terms based on property size and tree inventory.',
+  },
+  {
+    h: 'Removal & Hazard Tree Work',
+    p: 'Dead trees, hazard trees, storm-damaged removals on commercial properties. The commercial version adds documentation and scheduling around your operations.',
+  },
+  {
+    h: 'Property-Wide Trimming',
+    p: 'Multi-tree pruning programs for entrance landscapes, parking canopies, screening hedges, and common areas. Sized for commercial scope rather than single-yard work.',
+  },
+  {
+    h: 'Storm Response Contracts',
+    p: 'Standing agreements for priority response after major weather events. When your property has 12 trees down at 6am, you don’t want to be calling around for bids — you want a contractor already on the books.',
+  },
+  {
+    h: 'Lot Clearing & Site Prep',
+    p: 'Pre-construction tree removal for commercial development. Bulk pine and hardwood removal on rural commercial acreage. Coordination with general contractors, surveyors, and inspectors on larger sites.',
+  },
+  {
+    h: 'Tree Risk Assessments & Inventories',
+    p: 'Walk-through assessments of all trees on a commercial property with documentation of condition, risk level, and recommended action. Useful for insurance, property transactions, and budget planning. Written report deliverable.',
+  },
+];
+
+// How we handle a commercial account.
+const steps = [
+  { h: 'Property Walk-Through', p: 'Robbie meets you on-site, walks the property, identifies the trees in scope, evaluates condition and access. For multi-property accounts, we do this for each location. For larger sites, we map out the inventory.' },
+  { h: 'Written Proposal', p: 'Itemized scope with line-item pricing, schedule, payment terms, and warranty language. Sent in writing for your review and any internal approvals. Revisions on request before contracting.' },
+  { h: 'Contract & Scheduling', p: 'Signed agreement, certificate of insurance to your entity, and confirmed schedule. We coordinate around your operations — early mornings, weekends, or off-hours as needed for retail, medical, or active commercial properties.' },
+  { h: 'Execution & Documentation', p: 'Work performed per contract scope. Before and after photos for property records. Completion walk-through with you or your designated rep. Itemized invoice matched to the contract. Done right the first time.' },
+];
+
+// Commercial sectors across Arkadelphia & Clark County.
+const sectors = [
+  {
+    h: '🎓 Education & Campus Properties',
+    p: 'Schools across Arkadelphia, properties around Henderson State and Ouachita Baptist, private schools, daycares. We schedule major work during breaks and minor work outside instructional hours.',
+  },
+  {
+    h: '🏘️ Multi-Family & Rental Properties',
+    p: 'Apartment complexes near campus, rental properties in the older neighborhoods, multi-property landlord portfolios. Tenant communication coordinated through your property management — we don’t show up unannounced.',
+  },
+  {
+    h: '🛣️ I-30 Corridor & Caddo Valley Commercial',
+    p: 'Office parks, retail strips, hospitality properties, and commercial real estate along I-30 and through Caddo Valley. After-hours scheduling available to minimize customer disruption.',
+  },
+  {
+    h: '⛪ Religious & Nonprofit Properties',
+    p: 'Churches across Clark County, cemetery oak care, nonprofit campuses. Long-term relationships with multiple congregations — we work around service schedules and respect the property’s role in the community.',
+  },
+  {
+    h: '🏛️ Municipal & Government Contracts',
+    p: 'The City of Arkadelphia, county facilities, and state-level contracts when bid opportunities arise. Familiar with municipal procurement processes and able to handle bonding/insurance requirements.',
+  },
+  {
+    h: '🌊 Resort & Hospitality (DeGray Lake Area)',
+    p: 'Commercial properties around DeGray Lake Resort State Park — hotels, cabin rental operations, and lake-area commercial. Lakefront access and steep-slope work, both routine for our crews.',
+  },
+];
+
+// Why property managers choose Plyler's.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Reviews', p: 'Perfect Google rating — including reviews from property managers, business owners, and institutional clients across Clark County.' },
+  { h: '📋 Fully Licensed and Insured', p: 'Current general liability, workers’ comp, and proper business documentation. Certificate of insurance with your entity named available on request.' },
+  { h: '📝 Written Contracts & Documentation', p: 'Scope, schedule, terms, and warranty in writing before any work starts. Itemized invoicing matched to the contract. Documentation suitable for audit and board review.' },
+  { h: '📍 Equipment Yard in Arkadelphia', p: 'Country Club Drive yard with bucket truck, chippers, stump grinder, and rigging — ready to roll. Fast response time on emergencies, predictable scheduling on planned work.' },
+  { h: '🤝 Single Point of Contact', p: 'Robbie handles every commercial account personally. Not a call center, not a rotating sales rep. One person who knows your property and answers his phone.' },
+  { h: '🪓 24+ Years Local', p: 'Founded 2002. Long-standing relationships with property managers, business owners, churches, and institutions across Clark County. We’re not going anywhere.' },
+];
+
+const testimonials = [
+  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
+  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
+  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Commercial Tree Service in Arkadelphia, AR',
+    serviceType: 'Commercial tree service',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Arkadelphia, Arkansas · Clark County"
+    title="Commercial Tree Service in Arkadelphia, AR"
+    subtitle="HOAs, churches, rental properties, businesses, and municipal contracts across Clark County. Licensed, insured, contracted, and accountable — the tree service Arkadelphia property managers, facility directors, and business owners rely on for jobs that need to be done right, on schedule, and on budget."
+    image="/images/malvern-ar-large-mature-oak-tree-assessment-commercial.webp"
+    imageAlt="Arborist assessing a large mature oak on a commercial property near Arkadelphia, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">The commercial tree contractor Arkadelphia property managers actually trust.</p>
+      <p class="lead">
+        Plyler’s Tree Service has handled commercial tree work across Clark County for over 24 years — from churches
+        off Pine Street to apartment complexes near Henderson State to commercial properties along the I-30 corridor.
+        We’re based right here in Arkadelphia, with our equipment yard on Country Club Drive, which means when a tenant
+        calls about a fallen limb at 7am, we’re an hour from arrival — not a day.
+      </p>
+      <p class="measure" style="color:var(--muted)">
+        Owner Robbie Plyler handles every commercial estimate personally. You get a real person who knows your
+        property, not a sales rep from out of town. And you get a written, itemized contract before any work starts —
+        no verbal handshakes, no surprise invoices. For the broader picture of what we do across town, see our
+        <a href="/tree-service-arkadelphia-ar"> Arkadelphia tree service overview</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Commercial Properties We Serve in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different property types have different tree care needs — and different decision-making processes. We work
+        with all of them.
+      </p>
+      <div class="grid grid-3">
+        {properties.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">What Makes Commercial Tree Work Different</h2>
+      <p>
+        Tree work for a homeowner and tree work for a property manager are two different jobs — even when the trees
+        look the same. Commercial accounts require things residential jobs don’t.
+      </p>
+      <h3>The Five Things Commercial Clients Need That Most Tree Services Don’t Deliver</h3>
+      <ol class="numbered">
+        {fiveThings.map((t) => (
+          <li>
+            <strong>{t.h}.</strong> {t.p}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Commercial Tree Services We Provide</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        The full residential service catalog applies to commercial properties, but with additional scope options
+        designed for property managers and facility directors.
+      </p>
+      <div class="grid grid-3">
+        {services.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        See our <a href="/tree-removal-arkadelphia-ar">tree removal</a> and
+        <a href="/dead-tree-removal-arkadelphia-ar"> dead tree removal</a> pages for the full removal process, our
+        <a href="/tree-trimming-arkadelphia-ar"> trimming page</a> for pruning details, and our
+        <a href="/emergency-tree-service-arkadelphia-ar"> emergency service</a> and
+        <a href="/storm-damage-cleanup-arkadelphia-ar"> storm cleanup</a> pages for storm response. For commercial bid
+        processes that require additional bonding or specialized insurance certificates, we work with you on what’s
+        needed.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-green">
+    <div class="container">
+      <h2 class="center">How We Handle a Commercial Account</h2>
+      <p class="center measure" style="margin-bottom:2.4rem;color:#bcd3c4">
+        From first call to completed contract. Here’s the process.
+      </p>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step">
+            <span class="step-num">{i + 1}</span>
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Commercial Sectors Across Arkadelphia & Clark County</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        The kinds of accounts we work with — and where they tend to be located.
+      </p>
+      <div class="grid grid-3">
+        {sectors.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Commercial Pricing & Contract Structures</h2>
+      <p>Three common ways we structure commercial work:</p>
+      <ul>
+        <li><strong>Project-based contracts.</strong> A defined scope with a fixed price — most common for removals, storm response, and one-time trimming work. You know exactly what you’re paying before work starts.</li>
+        <li><strong>Annual maintenance agreements.</strong> Scheduled rounds of property inspection, trimming, and hazard identification on a yearly cycle. Often the right structure for HOAs, churches, schools, and multi-property portfolios. Provides budget predictability and reduces the frequency of "surprise" emergency work.</li>
+        <li><strong>Priority response contracts.</strong> A standing agreement that puts you at the front of the line for emergency response after weather events. Common for property managers responsible for multiple buildings or for businesses where downtime from a fallen tree is expensive.</li>
+      </ul>
+      <p>
+        For pricing on any of these structures, schedule a property walk-through with Robbie. Commercial estimates are
+        always free and always written. Call <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or use
+        the contact form.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Managing a Property in Arkadelphia?"
+    text="Schedule a property walk-through. Get a written proposal. Add Plyler's to your approved vendor list. The kind of tree contractor that makes your job easier — not more complicated."
+  />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Arkadelphia Property Managers Choose Plyler's</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        The credentials, accountability, and execution that commercial accounts require.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What Arkadelphia Clients Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real Clark County customers — including the kinds of long-term relationships that built our
+        commercial work.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Commercial Tree Service Questions — Arkadelphia"
+    intro="Common questions from property managers, facility directors, and business owners across Clark County."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead">More Tree Services & Resources in Arkadelphia</p>
+      <p style="color:var(--muted)">
+        Commercial tree work draws from our full residential service catalog with added documentation. Start with our
+        <a href="/tree-service-arkadelphia-ar"> Arkadelphia tree service hub</a> for the complete picture, or jump
+        straight to:
+        <a href="/tree-removal-arkadelphia-ar">Tree Removal</a> ·
+        <a href="/tree-trimming-arkadelphia-ar">Tree Trimming</a> ·
+        <a href="/stump-grinding-arkadelphia-ar">Stump Grinding</a> ·
+        <a href="/emergency-tree-service-arkadelphia-ar">24/7 Emergency Service</a> ·
+        <a href="/storm-damage-cleanup-arkadelphia-ar">Storm Damage Cleanup</a>
+      </p>
+      <p style="color:var(--muted)">
+        Helpful reading:
+        <a href="/questions-to-ask-before-hiring-tree-service-arkansas">Questions to Ask Before Hiring</a> ·
+        <a href="/signs-tree-is-dying">Signs a Tree Is Dying</a> ·
+        <a href="/what-to-do-after-storm-tree-down-arkansas">What to Do After a Storm</a>
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Get Plyler's on Your Approved Vendor List"
+    text="Schedule a property walk-through with Robbie. Get a written proposal. Add a commercial tree contractor you can actually count on — for routine maintenance and for the day the storm hits."
+  />
+</BaseLayout>
+
+<style>
+  .steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.6rem; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--amber-500); color: var(--green-900); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .step h3 { color: #fff; margin: 0 0 0.4rem; }
+  .step p { color: #c9ddcf; }
+  .numbered { display: flex; flex-direction: column; gap: 0.9rem; padding-left: 1.2rem; }
+  .numbered li { color: var(--body); }
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

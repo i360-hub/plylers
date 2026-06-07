@@ -1,0 +1,437 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Lakefront Tree Service DeGray Lake | Plyler's Tree";
+const description =
+  "Lakefront tree service at DeGray Lake, AR. Steep slope removal, dock protection, photo updates for absentee owners. 24+ years on the lake. Free estimates.";
+const path = '/lakefront-tree-service-degray-lake-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Arkadelphia', path: '/tree-service-arkadelphia-ar' },
+  { name: 'Lakefront Tree Service — DeGray Lake', path },
+];
+const faq = faqData['lakefront-tree-service-degray-lake-ar'] ?? [];
+
+// DeGray Lake areas we serve.
+const areas = [
+  {
+    h: 'South Shore & Iron Mountain',
+    p: 'Lakefront properties off Highway 7 South toward Iron Mountain Marina, including the cabin clusters and larger residential properties. Steep approaches but generally good road access for bucket truck work.',
+  },
+  {
+    h: 'State Park & Resort Area',
+    p: 'Properties around DeGray Lake Resort State Park — lodges, cabin rentals, and adjacent private properties. Tight access in places, careful coordination on shared roads.',
+  },
+  {
+    h: 'North Shore & Bismarck',
+    p: 'The Bismarck side of the lake — properties along the north shore, marinas, and the residential developments. Generally easier road access; we work this area regularly.',
+  },
+  {
+    h: 'Dam & Caddo Valley Area',
+    p: 'Properties near the dam and toward Caddo Valley, including some of the older lake homes. Mix of pine and hardwood work, often involving steep-slope removals near the spillway.',
+  },
+];
+
+// What makes lakefront tree work different.
+const different = [
+  {
+    h: 'Steep Slopes',
+    p: 'Most lakefront lots slope significantly toward the water. Equipment can’t always reach the tree. Climbers have to manage footing on inclines. Sectional rigging has to account for pieces that want to roll downhill toward the lake or your dock.',
+  },
+  {
+    h: 'Narrow Lake Roads',
+    p: 'The roads to most DeGray properties are narrow with switchbacks, low-hanging branches, and limited turnarounds. Our bucket truck navigates a lot of them; some require climbing crew with rigging instead.',
+  },
+  {
+    h: 'Docks, Boathouses & Retaining Walls',
+    p: 'Things you don’t want a 200-pound limb landing on. Lakefront rigging has to be precise — drop zones often don’t exist between the tree, the structures, and the water. Every piece goes exactly where we want it.',
+  },
+  {
+    h: 'Shoreline & Water Concerns',
+    p: 'Brush and debris going into the lake is not acceptable. We work clean, with tarps and rigging to prevent any wood from entering the water. Cleanup standards are higher on lake properties than on inland lots.',
+  },
+  {
+    h: 'Septic Systems & Wells',
+    p: 'Lake-area properties are rural — most have private septic and wells. Equipment driving over septic field lines can cause real damage. We map utilities before any vehicle moves on the property.',
+  },
+  {
+    h: 'Wildlife & Habitat',
+    p: 'DeGray has eagles, herons, and protected species. We watch for active nests during raptor season and adjust work timing accordingly. If a snag (standing dead tree) is far from any target, we may recommend leaving it for the wildlife instead of removing it.',
+  },
+];
+
+// Tree species around DeGray Lake.
+const species = [
+  {
+    h: '🌲 Loblolly Pine',
+    p: 'The most common tree we remove around DeGray. The lake-area pine stands are vulnerable to pine beetles, lightning strikes (pines tall on hillsides attract them), and ice damage. Beetle-killed pines threatening cabins are a frequent call. See our pine tree removal page for full detail on pine work.',
+  },
+  {
+    h: '🌳 Water Oak & Post Oak',
+    p: 'Older lake properties often have mature oaks shading the cabin. Water oaks decline faster than post oaks but both can develop cavity decay invisible from the ground. Lakefront oaks dropping limbs onto roofs and docks is a major source of property damage. See our oak removal page for species-specific guidance.',
+  },
+  {
+    h: '🍂 Sweetgum & Hickory',
+    p: 'Mixed-species hardwood stands. Sweetgums are shallow-rooted and often blow down in lake-area storms. Hickories are dense, hard to remove, and frequently the priority when one is leaning over a structure.',
+  },
+  {
+    h: '🌿 Cedar & Cypress',
+    p: 'Eastern red cedar in the upland areas and bald cypress in some of the lake’s protected coves. Removal is occasional rather than routine, but we handle both species when needed.',
+  },
+];
+
+// How we work with absentee owners.
+const absentee = [
+  'Phone or email assessment to start. Send us photos of the tree you’re concerned about. Robbie can give you a preliminary read before driving out for the formal estimate.',
+  'Property access without you being present. Just tell us how to get on-site (gate codes, neighbor with key, hidden access). We’ll do the in-person assessment and send you a written quote with photos.',
+  'Work performed while you’re away. Once you approve the quote, we schedule the work, complete it, and send you photo documentation of the completed job. The next time you drive up to the cabin, the tree is gone.',
+  'Invoicing via email and credit card. No need to mail checks. We invoice digitally and accept card payment for your convenience.',
+  'Storm response on your behalf. If a tree comes down at your property and you’re 4 hours away, we can be on-site the same day to assess damage and tarp anything that needs protecting until you arrive or until insurance documentation is complete.',
+];
+
+// Lakefront services we provide.
+const services = [
+  {
+    h: 'Lakefront Tree Removal',
+    p: 'Sectional rigging on slopes, structures protected throughout, debris kept out of the water. Hazardous pines threatening cabins, dying oaks over boathouses, leaning hardwoods over docks.',
+  },
+  {
+    h: 'Lake View & Canopy Trimming',
+    p: 'Selective limb removal to open lake views without harming the tree. Crown reduction on canopy hardwoods. Clearance pruning over rooflines and decks. Always done with the long-term tree health in mind.',
+  },
+  {
+    h: 'Storm Response & Emergency Work',
+    p: 'Lake-area storms drop trees on cabins, boathouses, vehicles, and across access roads. We respond 24/7 — see our emergency service and storm damage cleanup for details.',
+  },
+  {
+    h: 'Stump Grinding',
+    p: 'Lakefront stump grinding is harder than flat-lot work — slope, soft soil near the waterline, and root systems that have spread into retaining walls. We have the equipment for it.',
+  },
+  {
+    h: 'Dead & Beetle-Killed Pine Removal',
+    p: 'Lake-area pine stands are especially vulnerable to Southern pine beetle outbreaks. A dead pine on a lake property is a higher-priority removal than the equivalent inland — proximity to structures is usually closer.',
+  },
+  {
+    h: 'Lot Clearing for Lake Construction',
+    p: 'Building a new cabin, expanding a deck, adding a boathouse? We handle selective tree removal for construction projects, working with your builder to clear only what’s needed while preserving the canopy that gives your property its lake-area character.',
+  },
+];
+
+// How a lakefront job works.
+const steps = [
+  { h: 'Initial Contact (Photos OK)', p: 'Call or email. If you’re out of town, send photos of the tree or the area. Robbie can give you a preliminary assessment before driving out to the lake, especially helpful when you can’t be on-site.' },
+  { h: 'On-Site Assessment', p: 'Robbie walks the property, evaluates the tree(s), checks access for equipment, identifies structures to protect, looks at slope and drop-zone options. Written estimate sent the same day. We can do this with or without you on-site.' },
+  { h: 'Approval & Scheduling', p: 'Sign off on the quote, we schedule the work. For absentee owners, we coordinate access details and confirm the timing. Crew arrives with the right equipment for the slope and access on your property.' },
+  { h: 'Execution & Photo Documentation', p: 'Tree(s) removed with proper sectional rigging. Debris kept clear of the water. Property cleaned thoroughly. Photos sent to you of the completed job — so even if you weren’t there, you see what was done.' },
+];
+
+// Why DeGray property owners call Plyler's.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Reviews', p: 'Perfect Google rating from real Clark County customers — including lake property owners who’d otherwise have to drive in from out of town to supervise.' },
+  { h: '🚤 24 Years on the Lake', p: 'We’ve been doing lakefront tree work around DeGray since 2002. Every road, every slope, every access challenge — we’ve seen them.' },
+  { h: '📍 Local Equipment Staging', p: 'Bucket truck, climbing gear, rigging, stump grinder — all staged in Arkadelphia, minutes from the lake. Fast response without the markup of an out-of-town contractor.' },
+  { h: '📸 Photo Updates for Absentee Owners', p: 'If you can’t be at the lake, we send before-and-after photos. You see exactly what was done without having to drive out.' },
+  { h: '📋 Licensed and Insured', p: 'Full liability and workers’ comp. Critical when working on properties with valuable structures and high replacement costs.' },
+  { h: '🧹 Lake-Standard Cleanup', p: 'No debris in the water, no woodchips on the dock, no track marks across your lawn. Lakefront cleanup standards are higher and we meet them.' },
+];
+
+const testimonials = [
+  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
+  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
+  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Lakefront Tree Service at DeGray Lake, AR',
+    serviceType: 'Lakefront tree service',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="DeGray Lake, Arkansas · Clark & Hot Spring Counties"
+    title="Lakefront Tree Service at DeGray Lake"
+    subtitle="The dead loblolly pine threatening your cabin. The water oak leaning over the boathouse. The hardwood limb that came down on your dock during the last storm. Lakefront tree work is its own discipline — steep slopes, tight access, and structures to protect. Our crew has been doing it around DeGray Lake for 24 years."
+    image="/images/arkadelphia-ar-large-oak-overhanging-residential-home-sunset.webp"
+    imageAlt="Large oak overhanging a lakefront home at sunset near DeGray Lake, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">The lakefront tree crew that knows DeGray.</p>
+      <p class="lead">
+        Plyler’s Tree Service is based in Arkadelphia, just minutes from DeGray Lake, with our equipment yard on
+        Country Club Drive. We’ve been working lakefront properties around DeGray Lake for over 24 years — the steep
+        approaches off Highway 7, the cabin clusters around the marina, the larger lakefront properties out toward Iron
+        Mountain and the dam. We know which roads our bucket truck can navigate and which require climbing crew with
+        rigging gear instead.
+      </p>
+      <p class="measure" style="color:var(--muted)">
+        Lakefront tree work isn’t just regular tree work on a lake property. It’s a different job — and it’s what we do
+        better than anyone else in the area. We serve the Arkadelphia side of the lake; for the broader picture see our
+        <a href="/tree-service-bismarck-ar"> Bismarck</a> and
+        <a href="/tree-service-caddo-valley-ar"> Caddo Valley</a> service pages.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">DeGray Lake Areas We Serve</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        DeGray Lake is large — 13,400 acres with 207 miles of shoreline across Clark and Hot Spring counties. Our crew
+        works the full lake, with concentrations in these areas.
+      </p>
+      <div class="grid grid-2">
+        {areas.map((a) => (
+          <div class="card">
+            <h3>{a.h}</h3>
+            <p class="mb-0">{a.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Makes Lakefront Tree Work Different</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        You can’t drop a 60-foot pine on a lakefront property the way you can on a flat suburban lot. Here’s what’s
+        actually different about working over the water and on the slopes that drop into it.
+      </p>
+      <div class="grid grid-3">
+        {different.map((d) => (
+          <div class="card">
+            <h3>{d.h}</h3>
+            <p class="mb-0">{d.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Tree Species Around DeGray Lake</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        The lake-area canopy is dominated by the same species we work with across Clark County, but the lake
+        environment changes how they behave — and how they fail.
+      </p>
+      <div class="grid grid-2">
+        {species.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        See our <a href="/pine-tree-removal-arkadelphia-ar">pine tree removal page</a> and
+        <a href="/oak-tree-removal-arkadelphia-ar"> oak removal page</a> for species-specific guidance.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">🏠 For Out-of-Town & Weekend Property Owners</h2>
+      <p>
+        A lot of DeGray Lake properties are second homes — owned by people who live in Little Rock, Hot Springs,
+        Texarkana, Dallas, Memphis, or further. You come up on weekends, holidays, summer. The trees don’t wait for
+        your schedule.
+      </p>
+      <p>Here’s how we work with absentee owners:</p>
+      <ul class="checklist">
+        {absentee.map((a) => <li>{a}</li>)}
+      </ul>
+      <p>
+        If you’re managing a property remotely, call us at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — we make it easy.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Lakefront Tree Services We Provide</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        The full residential service catalog, executed with lakefront-specific techniques and equipment.
+      </p>
+      <div class="grid grid-3">
+        {services.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        Related: <a href="/tree-removal-arkadelphia-ar">tree removal</a> ·
+        <a href="/tree-trimming-arkadelphia-ar"> trimming</a> ·
+        <a href="/emergency-tree-service-arkadelphia-ar"> emergency service</a> ·
+        <a href="/storm-damage-cleanup-arkadelphia-ar"> storm damage cleanup</a> ·
+        <a href="/stump-grinding-arkadelphia-ar"> stump grinding</a> ·
+        <a href="/dead-tree-removal-arkadelphia-ar"> dead tree removal</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-green">
+    <div class="container">
+      <h2 class="center">How a Lakefront Job Works</h2>
+      <p class="center measure" style="margin-bottom:2.4rem;color:#bcd3c4">
+        From your first call to the finished cleanup. Slightly different from inland work because of the property
+        dynamics.
+      </p>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step">
+            <span class="step-num">{i + 1}</span>
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Lakefront Tree Removal Cost</h2>
+      <p>
+        Lakefront removals typically cost more than equivalent inland work — and the reasons are mostly about the
+        property, not the tree itself.
+      </p>
+      <ul>
+        <li><strong>Access complexity.</strong> Narrow lake roads, steep approaches, and limited equipment positioning add time. Some jobs that would take 3 hours on a flat suburban lot take 5–6 hours on a lake property because the equipment can’t get close enough and we’re doing more climbing and rigging.</li>
+        <li><strong>Rigging precision.</strong> When the drop zone is between a cabin, a boathouse, a retaining wall, and the lake itself, every piece has to come down exactly where planned. That’s slower work than dropping pieces into an open yard.</li>
+        <li><strong>Cleanup standards.</strong> Brush and debris going into the lake is not acceptable. We tarp, contain, and haul rather than chipping in place when needed. Higher cleanup standards mean more time per job.</li>
+      </ul>
+      <p>
+        What stays the same: the price is in writing before work starts, and the written quote is what you pay. No
+        surprise invoices, no add-ons after the fact.
+      </p>
+      <p>
+        For an exact price on your DeGray property, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or send photos through the contact form.
+        Estimates are always free.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Tree Problem at Your DeGray Property?"
+    text="Whether you're full-time at the lake or 200 miles away — we make it easy. Send photos, get a written quote, approve the work, get photo documentation when it's done. The trees come down before they come down on their own."
+  />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why DeGray Property Owners Call Plyler's</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        The equipment, the experience, and the absentee-owner support that lakefront work actually requires.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What Lake Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real Clark County customers — including lakefront work over the years.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Lakefront Tree Service Questions — DeGray Lake"
+    intro="Common questions from DeGray Lake property owners."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead">More Tree Services & Resources</p>
+      <p style="color:var(--muted)">
+        Lakefront tree work is one part of what we do across Clark County. Start with our
+        <a href="/tree-service-arkadelphia-ar"> Arkadelphia tree service hub</a> for the complete picture, or browse:
+        <a href="/tree-service-bismarck-ar">Bismarck Tree Service</a> ·
+        <a href="/tree-service-caddo-valley-ar">Caddo Valley Tree Service</a> ·
+        <a href="/tree-removal-arkadelphia-ar">Tree Removal</a> ·
+        <a href="/pine-tree-removal-arkadelphia-ar">Pine Tree Removal</a> ·
+        <a href="/oak-tree-removal-arkadelphia-ar">Oak Tree Removal</a> ·
+        <a href="/emergency-tree-service-arkadelphia-ar">24/7 Emergency Service</a>
+      </p>
+      <p style="color:var(--muted)">
+        Helpful reading:
+        <a href="/signs-tree-is-dying">Signs a Tree Is Dying</a> ·
+        <a href="/is-my-tree-too-close-to-my-house-arkansas">Is My Tree Too Close to My House?</a> ·
+        <a href="/what-to-do-after-storm-tree-down-arkansas">What to Do After a Storm</a>
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Take Care of Your DeGray Property — Even From a Distance"
+    text="Call Robbie. Send photos. Get a written quote. Approve the work. See photos when it's done. The way lakefront tree service should work for property owners with lives to live."
+  />
+</BaseLayout>
+
+<style>
+  .steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.6rem; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--amber-500); color: var(--green-900); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .step h3 { color: #fff; margin: 0 0 0.4rem; }
+  .step p { color: #c9ddcf; }
+  .checklist { margin: 0 0 1.2rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

@@ -1,0 +1,257 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Tree Removal Services Arkansas | Plyler's Tree Service";
+const description =
+  "Tree removal services across Clark County, Arkansas — Arkadelphia, Bismarck, Caddo Valley, Hot Springs, Malvern. Locally owned since 2002.";
+const path = '/tree-removal';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Tree Removal', path },
+];
+const faq = faqData['tree-removal'] ?? [];
+
+// Signs a tree needs to come down.
+const signs = [
+  { h: 'The Tree Is Dead', p: 'No leaves in summer, bark falling off, branches snapping in light wind. A dead tree can fall without warning.' },
+  { h: 'It’s Leaning', p: 'If a tree is leaning more than it used to — especially toward your house, garage, or carport — it’s time to act.' },
+  { h: 'Cracks in the Trunk', p: 'A crack running down the trunk means the tree’s structure is failing. It can split apart in the next storm.' },
+  { h: 'Growing Into Power Lines', p: 'Trees growing into power lines can cause outages, fires, and serious injury. Don’t wait on these.' },
+  { h: 'Roots Causing Damage', p: 'Roots lifting up through your yard, cracking your driveway, or pushing into your foundation mean the tree is causing damage underground.' },
+  { h: 'Storm Damage', p: 'A tree with a broken top, split limbs, or hanging branches after a storm is dangerous. Call us right away.' },
+];
+
+// How we remove a tree.
+const steps = [
+  { h: 'Free On-Site Assessment', p: 'Robbie or a crew lead comes to your property, checks the tree, looks at what’s around it, and figures out the safest way to bring it down. You get an honest price on the spot — no surprises.' },
+  { h: 'A Plan for Your Tree', p: 'We decide whether the tree can be felled in one piece or if we need to take it apart in sections. For trees near houses, we rig ropes so every piece comes down exactly where we want it.' },
+  { h: 'Safe, Careful Removal', p: 'Our crew does the work. We cut, we lower, we chip. The whole time, we’re watching out for your house, your yard, your landscaping, and your neighbor’s stuff.' },
+  { h: 'Full Cleanup', p: 'Branches, brush, sawdust, wood chips — all of it. We haul it away unless you want to keep the firewood. When we leave, you wouldn’t know we were there except the tree is gone.' },
+];
+
+// Why folks call us first.
+const whyUs = [
+  { h: '24 Years of Doing This', p: 'Robbie Plyler started this company in 2002. Two decades of experience on every job.' },
+  { h: 'Licensed and Insured', p: 'Full liability coverage. If anything goes wrong, you’re protected. Period.' },
+  { h: 'Free Estimates, No Pressure', p: 'We come out, look at the job, and give you an honest price. No obligation.' },
+  { h: 'We Clean Up Everything', p: 'When we leave, your yard looks better than when we got there. Every time.' },
+  { h: '24/7 Emergency Calls', p: 'Storm at midnight? Big limb on your roof? Call us. We answer and we show up.' },
+  { h: 'Local People, Local Company', p: 'We live here. Our kids go to school here. We treat your property like it’s our own.' },
+];
+
+const testimonials = [
+  'Called on a Monday, Robbie came out Tuesday morning. Had a huge oak removed by Wednesday afternoon. Fair price, clean yard, no hassle.',
+  'A big pine fell on our fence during a storm. They were out the next morning. Professional, fast, and they even fixed the fence section. Can’t say enough good things.',
+  'Best tree service around. They trimmed six trees in our yard and ground two stumps in one day. Left the yard cleaner than they found it.',
+];
+
+const blogLinks = [
+  { h: 'When Should You Remove a Tree in Arkadelphia? A Homeowner’s Guide', href: '/when-to-remove-a-tree-arkadelphia' },
+  { h: '5 Questions to Ask Before Hiring a Tree Service in Arkansas', href: '/questions-to-ask-before-hiring-tree-service-arkansas' },
+  { h: 'What to Do After a Storm Knocks Down a Tree in Arkansas', href: '/what-to-do-after-storm-tree-down-arkansas' },
+  { h: 'Is My Tree Too Close to My House? What Arkansas Homeowners Should Know', href: '/is-my-tree-too-close-to-my-house-arkansas' },
+  { h: '5 Signs a Tree Is Dying and Needs to Come Down', href: '/signs-tree-is-dying' },
+  { h: 'When to Trim a Tree vs When to Remove It: How to Know the Difference', href: '/tree-trimming-vs-removal' },
+  { h: 'Stump Grinding vs Full Stump Removal: Which One Do You Actually Need?', href: '/stump-grinding-vs-removal' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Removal',
+    serviceType: 'Tree removal',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Clark County & Surrounding Areas"
+    title="Tree Removal Services in Clark County & Surrounding Areas"
+    subtitle="Safe, clean, professional tree removal backed by 24 years of experience. Fully licensed and insured."
+    image="/images/arkadelphia-ar-bucket-truck-dead-tree-removal-residential.webp"
+    imageAlt="Bucket truck removing a dead tree in a residential Arkadelphia, AR yard"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Arkadelphia’s Most Trusted Tree Removal Service</h2>
+      <p class="lead">
+        Plyler’s Tree Service has been removing trees in Arkadelphia and Clark County for over 24 years. Owner Robbie
+        Plyler runs every job himself. We’ve taken down thousands of trees — big oaks hanging over houses, dead pines
+        leaning toward power lines, storm-damaged trees blocking driveways. We handle it all. Our crew uses ropes,
+        rigging, and sectional cutting to bring trees down safely, even in tight spots between your house and your
+        neighbor’s fence. We’re fully licensed and insured, so if anything goes wrong, you’re covered. When the tree
+        is down, we clean up everything — branches, brush, sawdust, all of it. Your yard looks better than when we
+        got there. Every estimate is free, and we’ll tell you straight up what it’ll cost before we start. That’s why
+        we have a perfect 5.0-star rating on Google with more than 70 reviews.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">When Does a Tree Need to Come Down?</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Not every tree needs to be removed. But some trees become a danger to your family and your property. Here are
+        the signs we look for.
+      </p>
+      <div class="grid grid-3">
+        {signs.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2.4rem;color:var(--muted)">
+        If you’re not sure, call us. We’ll come look at it for free and tell you the truth — if the tree can stay,
+        we’ll say so. We don’t push work you don’t need.
+        <a href="/tree-trimming-vs-removal">Not sure if it needs trimming or full removal? Here’s how to tell →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-green">
+    <div class="container">
+      <h2 class="center">How We Remove a Tree</h2>
+      <p class="center measure" style="margin-bottom:2.4rem;color:#bcd3c4">
+        Every tree is different. A tree in the middle of a field is a simple job. A 70-foot oak between your house and
+        your neighbor’s shed takes a lot more planning. Here’s how we work.
+      </p>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step">
+            <span class="step-num">{i + 1}</span>
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="center measure" style="margin-top:2.4rem;color:#bcd3c4">
+        Once the tree is down, most folks add <a href="/stump-grinding">stump grinding</a> so there’s nothing left
+        behind. <a href="/stump-grinding-vs-removal">Not sure if you need grinding or full stump removal? Here’s the
+        difference →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Tree Removal Cost in Arkadelphia?</h2>
+      <p>
+        Every job is different, so there’s no one-size-fits-all price. The biggest things that affect the cost are the
+        size of the tree, how close it is to your house or power lines, and how easy it is for us to get our equipment
+        to it. A tree in an open backyard costs less than one squeezed between a house and a garage.
+      </p>
+      <p>
+        We always give you the exact price before we start — no hidden fees, no surprises. Call us or fill out the
+        form below for a free estimate.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Got a Tree That Needs to Come Down?"
+    text="Call Robbie. He’ll come look at it, give you a straight price, and get it done right."
+  />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Folks Around Here Call Us First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We show up, do the work right, and leave your yard clean.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Our Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock
+    heading="Tree Removal in Arkadelphia, AR"
+    intro="Right in Arkadelphia and need a tree gone? These pages cover the specific removals we handle most around Clark County — sectional takedowns on tight lots, oak and pine removals, and the dead trees most likely to fail in a storm."
+    current={path}
+    showDegray={false}
+  />
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Removal Questions"
+    intro="Answers to the things Clark County homeowners ask us most about tree removal."
+  />
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Read More From Our Blog</h2>
+      <ul class="blog-links">
+        {blogLinks.map((b) => (
+          <li><a href={b.href}>{b.h}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <GhlForm heading="Get Your Free Estimate" />
+</BaseLayout>
+
+<style>
+  .steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.6rem; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--amber-500); color: var(--green-900); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .step h3 { color: #fff; margin: 0 0 0.4rem; }
+  .step p { color: #c9ddcf; }
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+  .blog-links { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .blog-links a { font-weight: 600; }
+</style>

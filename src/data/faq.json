@@ -1,0 +1,646 @@
+{
+  "commercial-tree-service-arkadelphia-ar": [
+    {
+      "q": "Can you provide a certificate of insurance with our entity named?",
+      "a": "Yes. We carry current general liability and workers' compensation insurance and can issue a certificate of insurance with your entity named as additional insured or certificate holder. We refresh certificates annually or as your insurance requires."
+    },
+    {
+      "q": "Do you handle annual maintenance contracts?",
+      "a": "Yes. Annual maintenance contracts are common for HOAs, churches, schools, and multi-property landlords. The contract typically covers scheduled property inspection rounds, routine trimming and hazard identification, and a discount on additional work that comes out of those inspections."
+    },
+    {
+      "q": "Can you work around our business hours?",
+      "a": "Yes. For retail, medical, hospitality, or active commercial properties, we routinely schedule work during early mornings, weekends, or after business hours. We discuss scheduling preferences during the proposal phase and lock it into the contract."
+    },
+    {
+      "q": "How do you handle our bid process?",
+      "a": "Whatever your process requires. If you have a formal bid template, we fill it out properly. For municipal or institutional bid processes that require specific documentation, bonding, or insurance certificates, we work with your procurement team on what's needed."
+    },
+    {
+      "q": "Do you provide written contracts before starting work?",
+      "a": "Always. Every commercial job gets a written contract before work starts \u2014 scope, schedule, payment terms, and warranty language in writing. The contract is what you pay; the invoice itemizes against the contract."
+    },
+    {
+      "q": "What's the difference between commercial and residential tree work?",
+      "a": "The work itself is often similar \u2014 removal, trimming, stump grinding, storm response. What changes is the surrounding documentation: written contracts, certificates of insurance, scheduled access coordination, itemized invoicing, and completion documentation. Commercial accounts also tend to involve multiple trees and ongoing maintenance."
+    },
+    {
+      "q": "Are you familiar with municipal procurement requirements?",
+      "a": "Yes. We've handled work for municipal and institutional properties in Clark County for years. We understand the documentation, insurance, and process requirements that come with bonded contracts, public bid processes, and government procurement."
+    },
+    {
+      "q": "How quickly can you respond after a major storm?",
+      "a": "For clients with priority response contracts, you're at the front of our schedule when major storms hit Clark County. For other commercial clients, typically same-day or next-day response on storm calls, with priority for properties with active safety issues."
+    }
+  ],
+  "emergency-storm-damage": [
+    {
+      "q": "Do you really answer calls 24/7?",
+      "a": "Yes. Call (870) 245-7944 any time \u2014 2 in the morning, Sunday afternoon, Christmas Day. If a tree is on your house or blocking your driveway, we answer and we respond."
+    },
+    {
+      "q": "How fast can you get to my property?",
+      "a": "For a single emergency, usually within a few hours or the same day. After a big storm that hits a wide area, we triage by severity \u2014 trees on houses and blocked roads come first. Even after major storms, we get to most calls within 24 hours."
+    },
+    {
+      "q": "How much does emergency tree removal cost?",
+      "a": "It depends on the size of the tree and where it fell. Large limbs and hanging branches run $300 to $600. A tree across a driveway is $500 to $1,200. A tree on a house can be $1,000 to $2,500 or more because of the careful rigging involved. We tell you the price before we start, even in an emergency."
+    },
+    {
+      "q": "A tree fell on my house. What do I do first?",
+      "a": "Get everyone out of the house. Stay away from the damaged area. Call us at (870) 245-7944. Then call your insurance company and start a claim. Take photos from a safe distance. Do not try to remove the tree yourself."
+    },
+    {
+      "q": "Will my insurance cover it?",
+      "a": "Usually yes, if the tree hit a covered structure like your house, garage, fence, or shed. If it just fell in the yard and didn't hit anything, coverage depends on your policy. Call your insurance company right away. We provide photos, documentation, and an itemized invoice \u2014 everything your adjuster needs."
+    },
+    {
+      "q": "Can you remove a tree that's leaning on my house but hasn't fallen all the way?",
+      "a": "Yes. That's actually more dangerous than a tree that's already down because it can shift and fall further any time. Do not go under it. We use ropes, rigging, and controlled cuts to take it apart piece by piece without causing more damage to your home."
+    },
+    {
+      "q": "Do you clear blocked driveways and private roads?",
+      "a": "Yes. If a tree is blocking your way in or out, call us. We'll cut it up, haul it off, and clear the path so you can get through."
+    },
+    {
+      "q": "What if a tree fell on power lines?",
+      "a": "Stay far away. Do not touch the tree or anything near it \u2014 downed power lines can electrify the ground, the tree, and anything touching them. Call your power company first, then call us. We work with utility crews to remove trees from lines safely once the power is cut."
+    }
+  ],
+  "emergency-tree-service-arkadelphia-ar": [
+    {
+      "q": "Are you really available 24/7 for tree emergencies in Arkadelphia?",
+      "a": "Yes. Robbie Plyler answers the phone day, night, weekend, and holiday. If you call (870) 245-7944 at 3 a.m. during an ice storm, he picks up. The only exception is if he's already actively on another emergency call, in which case you'll get a callback within minutes. We don't use an answering service."
+    },
+    {
+      "q": "How fast can you respond to a tree emergency in Arkadelphia?",
+      "a": "For local Arkadelphia emergencies inside city limits or within a few miles, most calls see crew on-site within 1 to 2 hours. Often faster during daytime hours. Major storms slow response down because we're handling multiple properties simultaneously, but even then we triage by urgency: tree on a structure jumps the line over tree across a driveway."
+    },
+    {
+      "q": "Will my homeowner's insurance cover emergency tree removal?",
+      "a": "Almost always, if the tree fell on a structure such as a house, garage, carport, fence, or vehicle during a storm or accident. Your policy typically covers removal of the tree from the structure plus the resulting repair. If the tree fell in your yard without damaging anything, coverage gets murkier \u2014 some policies pay limited removal costs, many don't. We provide insurance-ready documentation regardless."
+    },
+    {
+      "q": "What if a tree falls on power lines in Arkadelphia?",
+      "a": "Call Entergy first at 1-800-368-3749. They de-energize the line before anyone can safely approach. Then call us to handle the tree removal once power is confirmed off. Do not approach the tree until Entergy clears it \u2014 even if the line looks intact, the ground around it can be energized."
+    },
+    {
+      "q": "Should I take photos before the tree service arrives?",
+      "a": "Yes, if it's safe to do so. Take photos from multiple angles \u2014 wide shots showing the whole scene, close-ups of the damage, and details of the tree itself. Your insurance claim will go faster with documentation. Do not enter damaged structures or approach trees touching power lines to get photos."
+    },
+    {
+      "q": "Do I need a permit for emergency tree removal in Arkadelphia?",
+      "a": "No. The City of Arkadelphia does not require permits for tree removal on private residential property, and emergency removals after storms or accidents are never permitted-restricted. If the tree is in a public right-of-way, the city handles that side; we handle yours."
+    },
+    {
+      "q": "Does emergency tree service cost more than standard service?",
+      "a": "Usually yes, modestly. Emergency response means crews working after-hours, weekends, or holidays, sometimes in rain or unsafe conditions, sometimes with overtime on the labor. We always provide a verbal estimate before any work starts, confirmed in writing as soon as conditions allow."
+    },
+    {
+      "q": "Can you tarp the roof after removing the tree?",
+      "a": "We focus on the tree work \u2014 getting the tree off the structure safely and clearing the immediate hazard. For tarping, weatherproofing, and structural repair, you'll want a roofer or restoration contractor. We can give you names of local Arkadelphia contractors we trust, and we coordinate timing so they can get on the roof as soon as we're done."
+    }
+  ],
+  "index": [
+    {
+      "q": "Do you come out for emergencies at night or on weekends?",
+      "a": "Yes. If a tree falls on your house, lands on your car, or blocks your road, call us right away \u2014 day or night, weekends and holidays included. We cover Arkadelphia and everywhere within 40 miles."
+    },
+    {
+      "q": "Is Plyler's Tree Service licensed and insured?",
+      "a": "Yes. Plyler's Tree Service carries full general liability insurance and Arkansas-compliant workers' compensation coverage. Proof of insurance is available before any job starts."
+    },
+    {
+      "q": "Do you clean up when you're done?",
+      "a": "Every time. We chip up the small stuff, haul off the big logs, and rake your yard before we leave. We don't consider the job done until your property looks clean."
+    },
+    {
+      "q": "How much does it cost to remove a tree in Arkadelphia, AR?",
+      "a": "Tree removal in Arkadelphia typically ranges from $200 for small trees in open yards up to $1,500 for large hardwoods close to structures. Pricing depends on tree size, location, access, and proximity to power lines. Plyler's Tree Service provides free written estimates before any work begins."
+    },
+    {
+      "q": "How soon can you come give me an estimate?",
+      "a": "Usually within a day or two. If it's an emergency and a tree is threatening your home, we come out right away."
+    },
+    {
+      "q": "When is the best time of year to remove a tree in Arkansas?",
+      "a": "Winter (December through February) is ideal because leaves are gone, the ground is firm for equipment, and visibility is better. However, dead, leaning, or storm-damaged trees should be removed any time of year to prevent property damage."
+    },
+    {
+      "q": "Can you take down a tree that's near power lines?",
+      "a": "Yes. Plyler's Tree Service uses bucket trucks and roped sectional cutting to remove trees piece by piece when they're close to power lines. If the tree is touching the wires, we coordinate with the power company to shut things off first so everyone stays safe."
+    },
+    {
+      "q": "Do I need a permit to remove a tree in Arkadelphia, AR?",
+      "a": "Generally no, not on your own private property. Permits may be needed if the tree is in a public right-of-way, a protected zone, or a city-designated historic district. Plyler's Tree Service can help determine whether your situation requires one during the free estimate."
+    },
+    {
+      "q": "What's the difference between tree trimming and tree removal?",
+      "a": "Tree trimming (pruning) cuts back select branches to keep the tree healthy and clear of roofs, driveways, or power lines \u2014 the tree stays. Tree removal takes the entire tree down, including the stump if requested. Plyler's Tree Service offers both and will recommend whichever your tree actually needs."
+    },
+    {
+      "q": "How long does it take to remove a tree?",
+      "a": "Most tree removals take 2 to 6 hours. A large hardwood close to a house or power lines can take a full day because it has to be taken down in sections using ropes and rigging. A time estimate is provided at the free in-person quote."
+    }
+  ],
+  "lakefront-tree-service-degray-lake-ar": [
+    {
+      "q": "Can you do an estimate without me being on-site at DeGray Lake?",
+      "a": "Yes. If you can't be at the property \u2014 and many DeGray owners can't on short notice \u2014 just tell us how to get on-site, and Robbie will do the in-person assessment alone. You'll get a written quote with photos by email the same day. This is a routine part of how we work with absentee owners."
+    },
+    {
+      "q": "How do you handle work without damaging my dock or boathouse?",
+      "a": "Precision rigging is the answer. When the drop zone is constrained by structures, we lower each piece exactly where we want it rather than letting branches fall freely. For especially tight spots, we use ground crew with ropes to guide pieces down."
+    },
+    {
+      "q": "Do you need a permit for lakefront tree work at DeGray?",
+      "a": "For trees on your private property, no \u2014 you don't need a permit. For trees in shoreline easements, near state park boundaries, or in shoreline preservation zones, there may be restrictions. We help identify any concerns during the estimate."
+    },
+    {
+      "q": "What if a tree comes down at my lake property when I'm out of town?",
+      "a": "Call us. We can respond same-day in most cases \u2014 assess damage, tarp anything that needs protecting from rain, photograph the situation for your insurance, and coordinate with you remotely on next steps. Many DeGray owners use us as their on-site representative when they can't be there immediately after a storm."
+    },
+    {
+      "q": "Can you help open up my lake view without harming the trees?",
+      "a": "Yes \u2014 this is called view pruning or selective canopy thinning. We remove specific limbs that block sight lines while preserving the tree's overall structure and health. Done properly, it can dramatically improve a lake view without leaving you with damaged or dying trees."
+    },
+    {
+      "q": "What about pine beetles around DeGray Lake?",
+      "a": "DeGray's surrounding loblolly stands are vulnerable to Southern pine beetle outbreaks. If you see browning crowns, popcorn-sized resin pitch tubes on the bark, or sawdust at the base of your pines, get assessment quickly \u2014 beetles spread fast between adjacent trees."
+    },
+    {
+      "q": "Do you accept credit cards and email invoicing?",
+      "a": "Yes. We invoice digitally and accept credit card payment, which makes it easy for absentee owners to settle up without mailing checks. Estimates and invoices come through email. Documentation suitable for tax records, insurance claims, or property management files is part of the standard process."
+    },
+    {
+      "q": "How does cost compare to inland tree work?",
+      "a": "Generally somewhat higher \u2014 lakefront work involves more access complexity, more rigging precision, and higher cleanup standards. A removal that costs X on a flat suburban lot might cost X plus 25-40% on a steep lakefront. The actual number depends on the specific tree, access, and structures involved."
+    }
+  ],
+  "oak-tree-removal-arkadelphia-ar": [
+    {
+      "q": "Can I have my oak removed during summer in Arkadelphia?",
+      "a": "For non-emergency removals, we recommend waiting until November through March when oak wilt isn't a transmission risk. The April\u2013July window is when sap-feeding beetles spread the oak wilt fungus to fresh cuts. Emergency removals we handle any time, sealing cuts immediately and disposing of wood properly to minimize risk."
+    },
+    {
+      "q": "How do I know what species of oak I have?",
+      "a": "Leaf shape is the easiest tell. Water oak leaves are smooth-edged, narrow at the base, and rounded at the tip. Post oak leaves are deeply lobed with the iconic cross-shaped pattern. Pin oak leaves are deeply lobed with sharp points. We can identify the species during the estimate."
+    },
+    {
+      "q": "What is oak wilt and how do I know if my tree has it?",
+      "a": "Oak wilt is a fungal disease that kills oaks, especially red oaks like water oak and pin oak. Symptoms include sudden summer canopy dieback, leaves wilting from the top down, and brown discoloration starting at leaf tips. Confirmed diagnosis usually requires lab testing of wood samples."
+    },
+    {
+      "q": "Is oak good firewood?",
+      "a": "Excellent. Oak is one of the best firewoods you can burn \u2014 high heat output, long-burning, low creosote, splits cleanly. We can cut to your preferred length and stack where you want it. Note: oak wood needs 6 to 12 months of seasoning before it burns well."
+    },
+    {
+      "q": "Why are oak stumps so much more expensive to grind than pine stumps?",
+      "a": "Oak wood is much denser than pine \u2014 typically 50% more dense by volume. That means more grinding time per cubic inch of stump. Mature oak stumps also have massive root flares spreading 8 to 12 feet from the trunk. Expect oak stump grinding to take 3 to 4 times longer than pine."
+    },
+    {
+      "q": "Can I save an old oak that's showing decline?",
+      "a": "Sometimes, depending on the cause and stage. Trees with minor branch dieback, no cavity decay, no root fungus, and only early signs of decline can sometimes be saved with corrective pruning, soil treatment, and reducing stress on the root zone. Trees with major hollow sections, advanced root rot, or oak wilt usually can't be saved."
+    },
+    {
+      "q": "My oak is too close to my house. Should I have it removed?",
+      "a": "Depends on the species, age, health, and how close. Healthy young oaks 20+ feet from a house are usually fine and add property value. Mature oaks with limbs hanging over the roof, root flare touching the foundation, or signs of decline are different \u2014 proximity plus decline equals risk."
+    },
+    {
+      "q": "Do I need a permit to remove an oak in Arkadelphia?",
+      "a": "No. The City of Arkadelphia does not require permits for tree removal on private residential property, including oaks. If the tree is in a public right-of-way or near a property line, you may want to verify with the city building department."
+    }
+  ],
+  "pine-tree-removal-arkadelphia-ar": [
+    {
+      "q": "How can I tell if my pine is loblolly or shortleaf?",
+      "a": "Count the needles per bundle and measure them. Loblolly has 3 needles per bundle, each 6 to 9 inches long. Shortleaf typically has 2 to 3 needles per bundle, each 3 to 5 inches long. Loblolly bark is usually in deep furrows with reddish-brown plates; shortleaf bark has flat plates often with small resin pockets."
+    },
+    {
+      "q": "Are my other pines in danger if one has beetles?",
+      "a": "Possibly. Southern pine beetles and Ips beetles can move from tree to tree quickly when populations are high. If you have a confirmed beetle-infested pine, inspect all other pines within 100 feet for pitch tubes, browning crowns, and sawdust at the base. Removing the infested tree promptly and disposing of the wood off-site helps prevent spread."
+    },
+    {
+      "q": "Can you remove a pine without damaging my landscaping?",
+      "a": "In most cases, yes. We use sectional rigging to lower pieces precisely where we want them rather than letting branches fall through landscape beds. Bucket truck access reduces ground impact. Plywood mats protect lawns from equipment tracks where needed."
+    },
+    {
+      "q": "How long does it take to remove a pine tree?",
+      "a": "Small pines under 40 feet in open areas: 90 minutes to 2 hours. Medium pines 40 to 60 feet with some access constraints: 3 to 4 hours. Tall pines over 70 feet near structures requiring full sectional rigging: half day to full day."
+    },
+    {
+      "q": "Is pine good firewood?",
+      "a": "It works but it's not ideal. Pine burns hot and fast, produces more creosote than hardwoods which can build up in chimneys, and doesn't hold heat as long as oak or hickory. Most homeowners ask us to haul it off and use hardwood firewood instead."
+    },
+    {
+      "q": "Should I grind the pine stump too?",
+      "a": "Usually yes, especially for beetle-killed pines \u2014 the stump can continue to host beetles for a season. Pine stumps grind faster than hardwood stumps because the wood is softer, so the cost per stump is usually lower than equivalent oak or pecan grinding."
+    },
+    {
+      "q": "Does pine removal cost more or less than hardwood removal?",
+      "a": "Usually less per tree of equivalent height, because pine wood is lighter and trunks are typically smaller in diameter than mature oaks or pecans. But tall pines near structures can match or exceed hardwood costs because of the sectional rigging required."
+    },
+    {
+      "q": "Do I need a permit to remove a pine in Arkadelphia?",
+      "a": "No. The City of Arkadelphia does not require permits for tree removal on private residential property. If the tree is in a public right-of-way or near a property line, you may want to verify. Pine plantation removal on rural acreage may have separate considerations if timber is being sold commercially."
+    }
+  ],
+  "service-areas": [
+    {
+      "q": "Do you charge extra to come outside Arkadelphia?",
+      "a": "No. There is no trip fee or travel charge for any town within our 40-mile radius. The price is based on the job itself \u2014 size of tree, difficulty, access \u2014 not the drive."
+    },
+    {
+      "q": "Which towns have a dedicated page on your site?",
+      "a": "Plyler's Tree Service has dedicated tree service pages for Arkadelphia, Caddo Valley, Gurdon, Amity, Bismarck, Malvern, Glenwood, and Hot Springs. Each page covers the specific tree species, terrain, and local landmarks for that area, plus FAQ about permits and storm season."
+    },
+    {
+      "q": "Do you work on lakefront properties \u2014 DeGray, Lake Greeson, Lake Catherine?",
+      "a": "Yes. Plyler's Tree Service handles cabin lots, lakefront homes, and shoreline tree work across DeGray Lake (south of Bismarck), Lake Greeson (around Glenwood and Daisy State Park), and Lake Catherine (south of Malvern). Steep banks, tight access, and trees growing right up to docks and decks are all part of regular lakefront work."
+    },
+    {
+      "q": "What about Hot Springs Village, Pearcy, and the other small communities?",
+      "a": "Plyler's Tree Service covers these smaller communities within the 40-mile radius. For most of them, the crew coordinates the work per job rather than maintaining a dedicated page. Call for a free estimate to schedule."
+    },
+    {
+      "q": "How fast can you get to my area?",
+      "a": "Standard estimates are scheduled within 1-2 business days. For emergencies (storm damage, tree on a structure, blocked road), Plyler's Tree Service responds the same day \u2014 often within an hour or two depending on distance. Towns closest to Arkadelphia (Caddo Valley, Gurdon, Amity, Bismarck) get the fastest response."
+    },
+    {
+      "q": "Will you travel farther than 40 miles?",
+      "a": "Plyler's Tree Service focuses on the 40-mile service area to keep response times fast and travel costs out of the bill. For larger jobs sometimes exceptions are made \u2014 call to talk through what makes sense."
+    }
+  ],
+  "storm-damage-cleanup-arkadelphia-ar": [
+    {
+      "q": "Are you really available 24/7 for tree emergencies in Arkadelphia?",
+      "a": "Yes. Robbie Plyler answers the phone day, night, weekend, and holiday. If you call (870) 245-7944 at 3 a.m. during an ice storm, he picks up. The only exception is if he's already actively on another emergency call, in which case you'll get a callback within minutes. We don't use an answering service."
+    },
+    {
+      "q": "How fast can you respond to a tree emergency in Arkadelphia?",
+      "a": "For local Arkadelphia emergencies inside city limits or within a few miles, most calls see crew on-site within 1 to 2 hours. Often faster during daytime hours. Major storms slow response down because we're handling multiple properties simultaneously, but even then we triage by urgency: tree on a structure jumps the line over tree across a driveway."
+    },
+    {
+      "q": "Will my homeowner's insurance cover emergency tree removal?",
+      "a": "Almost always, if the tree fell on a structure such as a house, garage, carport, fence, or vehicle during a storm or accident. Your policy typically covers removal of the tree from the structure plus the resulting repair. If the tree fell in your yard without damaging anything, coverage gets murkier \u2014 some policies pay limited removal costs, many don't. We provide insurance-ready documentation regardless."
+    },
+    {
+      "q": "What if a tree falls on power lines in Arkadelphia?",
+      "a": "Call Entergy first at 1-800-368-3749. They de-energize the line before anyone can safely approach. Then call us to handle the tree removal once power is confirmed off. Do not approach the tree until Entergy clears it \u2014 even if the line looks intact, the ground around it can be energized."
+    },
+    {
+      "q": "Should I take photos before the tree service arrives?",
+      "a": "Yes, if it's safe to do so. Take photos from multiple angles \u2014 wide shots showing the whole scene, close-ups of the damage, and details of the tree itself. Your insurance claim will go faster with documentation. Do not enter damaged structures or approach trees touching power lines to get photos."
+    },
+    {
+      "q": "Do I need a permit for emergency tree removal in Arkadelphia?",
+      "a": "No. The City of Arkadelphia does not require permits for tree removal on private residential property, and emergency removals after storms or accidents are never permitted-restricted. If the tree is in a public right-of-way, the city handles that side; we handle yours."
+    },
+    {
+      "q": "Does emergency tree service cost more than standard service?",
+      "a": "Usually yes, modestly. Emergency response means crews working after-hours, weekends, or holidays, sometimes in rain or unsafe conditions, sometimes with overtime on the labor. We always provide a verbal estimate before any work starts, confirmed in writing as soon as conditions allow."
+    },
+    {
+      "q": "Can you tarp the roof after removing the tree?",
+      "a": "We focus on the tree work \u2014 getting the tree off the structure safely and clearing the immediate hazard. For tarping, weatherproofing, and structural repair, you'll want a roofer or restoration contractor. We can give you names of local Arkadelphia contractors we trust, and we coordinate timing so they can get on the roof as soon as we're done."
+    }
+  ],
+  "stump-grinding": [
+    {
+      "q": "How much does stump grinding cost in Arkadelphia?",
+      "a": "Small stumps under 12 inches run $100 to $150. Medium stumps 12 to 24 inches cost $150 to $250. Large stumps over 24 inches can be $250 to $400 or more. We give discounts for multiple stumps in one visit. You get the exact price before we start \u2014 free estimate, no obligation."
+    },
+    {
+      "q": "What exactly is stump grinding?",
+      "a": "We use a machine with a spinning carbide wheel that chews the stump into small wood chips. We grind it 6 to 8 inches below ground level so nothing sticks up. The hole gets filled with the chips, and you can cover it with dirt and grow grass right over it."
+    },
+    {
+      "q": "Can I just leave the stump in my yard?",
+      "a": "You can, but it's not a great idea. Old stumps attract termites and carpenter ants. If the stump is near your house, those bugs can spread to your foundation. Stumps also trip people, get in the way of mowing, and make your yard look rough. Getting it ground now saves headaches later."
+    },
+    {
+      "q": "Will the roots keep growing after grinding?",
+      "a": "No. Once the stump is gone, the roots lose their energy source and slowly decay underground over the next few years. They won't send up new shoots or cause problems."
+    },
+    {
+      "q": "How long does stump grinding take?",
+      "a": "Most single stumps take 30 minutes to an hour. Large stumps or ones with big root flares take a little longer. If you have several stumps, we can usually knock them all out in half a day."
+    },
+    {
+      "q": "Can you grind a stump next to my house or fence?",
+      "a": "Yes. Our grinder fits through standard fence gates and works close to foundations, fences, driveways, and sidewalks. We're careful with the machine and protect surrounding surfaces. If it's in a really tight spot, we'll let you know upfront how we'll handle it."
+    },
+    {
+      "q": "What happens to the wood chips?",
+      "a": "We use them to fill the hole. If there are extras, you can spread them as mulch in your garden beds. If you don't want them, we haul them off. Your call."
+    },
+    {
+      "q": "Can I plant a new tree where the stump was?",
+      "a": "Yes, but give it a few months. After grinding, remove as many chips as you can, fill the hole with good topsoil, and let it settle. Then plant. Planting a few feet to the side of the old root ball is even better since there's more fresh soil to work with."
+    }
+  ],
+  "tree-removal-arkadelphia-ar": [
+    {
+      "q": "Do I need a permit to remove a tree in Arkadelphia?",
+      "a": "For most residential properties inside Arkadelphia city limits, no permit is required to remove a tree on your own land. If the tree sits near a public right-of-way or on a property line, check current requirements with the City of Arkadelphia building department at (870) 246-1818."
+    },
+    {
+      "q": "How fast can you remove a tree in Arkadelphia?",
+      "a": "For non-emergency removals, we usually schedule within a few days to a week depending on the season. Emergency removals get same-day or next-morning response. Since our yard is on Country Club Drive in Arkadelphia, we can often be at your property within a couple of hours."
+    },
+    {
+      "q": "Can you take down a tree that's right next to my house?",
+      "a": "Yes \u2014 that's the work we do most. We use ropes, rigging, and sectional cutting to bring the tree down piece by piece, lowering each section exactly where we want it. We've done this thousands of times in Arkadelphia."
+    },
+    {
+      "q": "Do you remove the stump too?",
+      "a": "Tree removal and stump grinding are separate services, but we can do both in the same visit. We grind 6 to 8 inches below ground level so you can fill the spot with topsoil and grow grass over it, or replant."
+    },
+    {
+      "q": "Will my homeowner's insurance cover tree removal in Arkadelphia?",
+      "a": "Sometimes. If a tree falls on a structure during a storm, most policies cover removal of the tree from the structure and the resulting repair. If a tree falls in your yard without damaging anything, that's usually on you. Preventative removal of a healthy tree is never covered."
+    },
+    {
+      "q": "Are you licensed and insured?",
+      "a": "Yes. We carry full general liability and workers' compensation. We'll show you proof of insurance before any work begins."
+    }
+  ],
+  "tree-removal": [
+    {
+      "q": "How much does tree removal cost in Arkadelphia?",
+      "a": "It depends on the size of the tree and how hard it is to get to. Small trees under 30 feet usually run $200 to $500. Medium trees (30 to 60 feet) cost $400 to $1,000. Large trees over 60 feet or trees close to a house or power line can run $800 to $1,500 or more. We give you the exact price before any work starts \u2014 always free, no obligation."
+    },
+    {
+      "q": "How do I know if my tree needs to be removed?",
+      "a": "Look for dead branches, bark falling off, a cracked or split trunk, the tree leaning more than normal, mushrooms growing at the base, or roots pushing up through the ground. If a tree is close to your house and shows any of these signs, give us a call. We'll come look at it for free and tell you the truth."
+    },
+    {
+      "q": "Do you remove the stump too?",
+      "a": "Tree removal and stump grinding are separate services, but we can do both at the same time. Most folks add stump grinding because leftover stumps attract termites, get in the way of mowing, and just look bad. We grind them below ground level so you can fill it in and grow grass over it."
+    },
+    {
+      "q": "Are you insured?",
+      "a": "Yes. We carry full liability insurance. If something goes wrong during a removal \u2014 a branch hits a fence, equipment nicks a driveway \u2014 our insurance covers it. Never hire a tree company that can't show you proof of insurance."
+    },
+    {
+      "q": "How long does it take to remove a tree?",
+      "a": "Most jobs take half a day or less. A small tree in an open yard can be down and cleaned up in a couple hours. A large tree close to a house takes longer because we cut it in sections and lower each piece with ropes. We'll tell you how long it'll take when we come out for the estimate."
+    },
+    {
+      "q": "Can you take down a tree that's close to my house?",
+      "a": "That's actually what we do best. We use ropes, rigging, and sectional cutting to bring trees down piece by piece in tight spots. Robbie has been doing this for 24 years and has safely removed thousands of trees next to houses, garages, sheds, fences, and power lines."
+    },
+    {
+      "q": "Do I need a permit to remove a tree in Arkadelphia?",
+      "a": "Usually not. Arkadelphia doesn't require a permit for removing a tree on your own residential property. If the tree is near a public road or you have HOA rules, there might be restrictions. We can help you figure that out when we come for the estimate."
+    },
+    {
+      "q": "What happens to the wood after the tree is down?",
+      "a": "We haul away all branches and brush. If the trunk wood is good \u2014 like oak or pecan \u2014 you're welcome to keep it for firewood. If you don't want it, we take it with us. Your yard is clean when we leave."
+    }
+  ],
+  "tree-service-amity-ar": [
+    {
+      "q": "Do I need a permit to remove a tree on my property in Amity, AR?",
+      "a": "For trees on private residential property inside Amity city limits, a permit is generally not required for removal. The only exceptions are trees in the public right-of-way along city streets or trees on properties under specific easements. Amity City Hall at (870) 342-5822 can answer questions about anything in the right-of-way. For rural properties outside city limits, no permit is required. At the free estimate, Plyler's Tree Service will help determine whether anything applies to your situation."
+    },
+    {
+      "q": "How fast can Plyler's Tree Service get to Amity from Arkadelphia?",
+      "a": "About 20 minutes by way of Highway 8. Plyler's Tree Service crews are in the Amity and Caddo River area multiple times per week for scheduled jobs, and for emergencies can usually be on-site within an hour. There is no trip fee or travel charge \u2014 the price is based on the job, not the drive."
+    },
+    {
+      "q": "When is storm season worst around Amity, and do you handle emergency calls?",
+      "a": "Northwestern Clark County catches its heaviest storms from late March through early June, with another rough stretch in October and November. Ice storms hit hardest between December and February. Amity sits in the Ouachita foothills, where storms funnel down out of the mountains and dump on the valley fast. Plyler's Tree Service answers emergency calls 24 hours a day, 7 days a week, including nights, weekends, and holidays. When a tree comes down on a home in Amity, the crew is on the way."
+    },
+    {
+      "q": "Do you work on rural acreage and Caddo River properties around Amity?",
+      "a": "Yes. A lot of the land around Amity is rural acreage \u2014 wooded lots along the Caddo River, properties backing up to the Ouachita National Forest, and hillside builds around Joplin Mountain. Plyler's Tree Service handles long-driveway access, hazardous trees on steep slopes, riverbank cleanup, and large hardwood removals where equipment access is tight. When a property is too narrow for a bucket truck or too wooded for direct lifting, the crew uses ropes and rigging to take trees apart in sections."
+    },
+    {
+      "q": "What types of trees are most common in Amity, and do you work on all of them?",
+      "a": "Amity sits at the edge of the Ouachita National Forest with a heavy pine and hardwood mix. Shortleaf and loblolly pines dominate hillsides and rural lots \u2014 they grow tall, lean toward houses, and snap in ice storms. Post oak, white oak, and hickory fill in older in-town properties and Caddo River bottoms. Sweetgums show up on cleared land and along fence lines. Each species has its own challenges \u2014 pines drop limbs in wind and topple roots in saturated soil, oaks get heavy and split at the crotch, hickories hold dead branches that fall without warning. Plyler's Tree Service has handled all of them across this area for over 24 years."
+    }
+  ],
+  "tree-service-arkadelphia-ar": [
+    {
+      "q": "Do I need a permit to remove a tree on my property in Arkadelphia, AR?",
+      "a": "For most residential properties inside Arkadelphia city limits, no permit is required to remove a tree on your own land. If the tree is near a public road or sits on a property line, check with the Arkadelphia city building department at (870) 246-1818 before starting. At the free estimate, Plyler's Tree Service will help you determine whether anything applies to your situation."
+    },
+    {
+      "q": "Will the city of Arkadelphia pick up tree debris from a removal?",
+      "a": "Arkadelphia's sanitation department picks up small limbs under 10 feet but does not pick up trunks, logs, or tree-removal spoils. That means after a tree removal, someone has to haul the debris. Plyler's Tree Service includes full cleanup on every job \u2014 chipping the brush, hauling off the wood, and leaving the yard clean."
+    },
+    {
+      "q": "When is storm season worst in Clark County, Arkansas, and do you handle emergency calls?",
+      "a": "Clark County sees the heaviest storms from late March through early June, and ice storms can hit between December and February. Arkadelphia took a direct hit from an F4 tornado in 1997 and has dealt with serious storms since. Plyler's Tree Service answers emergency calls 24 hours a day, 7 days a week, and can usually be on-site within a couple of hours when a tree comes down on a home or blocks a road in Arkadelphia."
+    },
+    {
+      "q": "Do you work with landlords who rent property near Henderson State or Ouachita Baptist University?",
+      "a": "Yes. Many rental homes around Henderson State University and Ouachita Baptist University sit on older lots with mature trees that haven't been touched in years. Plyler's Tree Service works with landlords and property managers to trim overgrowth, remove dead trees, and grind stumps between tenants \u2014 including handling the whole job while the owner is off-site, with photo documentation on completion."
+    },
+    {
+      "q": "What types of trees are most common in Arkadelphia, and do you work on all of them?",
+      "a": "Arkadelphia sits at the edge of the Ouachita Mountains, so the tree mix is varied. Older neighborhoods in town have large water oaks, post oaks, and pecans. Loblolly pines are common, especially on the south side and out toward Bismarck. Sweetgums, hickories, and occasional cedars fill in the rest. Each species has its own challenges \u2014 oaks get heavy and drop big limbs in storms, pines grow fast and lean toward houses, sweetgums have shallow roots that come up in high wind. Plyler's Tree Service has handled all of them thousands of times across Clark County."
+    }
+  ],
+  "tree-service-bismarck-ar": [
+    {
+      "q": "Do I need a permit to remove a tree on my property in Bismarck, AR?",
+      "a": "Bismarck is unincorporated, so there are no city tree permits to worry about. For rural residential property in this part of Hot Spring County, no permit is required for tree removal. The one exception is property on the DeGray Lake shoreline within the federal Corps of Engineers boundary, where shoreline tree work has specific rules. The Corps of Engineers DeGray Lake office at (870) 246-5501 can answer shoreline questions. At the free estimate, Plyler's Tree Service will help determine whether anything applies to your situation."
+    },
+    {
+      "q": "How fast can Plyler's Tree Service get to Bismarck from Arkadelphia?",
+      "a": "About 20 minutes by way of Highway 7. Plyler's Tree Service crews are in Bismarck and the DeGray Lake area multiple times per week for scheduled jobs, and for emergencies can usually be on-site within an hour. There is no trip fee or travel charge \u2014 the price is based on the job, not the drive."
+    },
+    {
+      "q": "Do you work on DeGray Lake cabin lots?",
+      "a": "Yes. DeGray Lake cabin lot work is a specialty \u2014 steep banks, tight cabin lots, trees growing right up to the dock or deck, and water-line trees that fail in surprising ways. Plyler's Tree Service ropes down sections rather than felling whole trees when access is tight, coordinates with the cabin owner on debris staging, and never drops anything into the lake."
+    },
+    {
+      "q": "I'm a seasonal owner and not on-site most of the year \u2014 can you handle the work without me there?",
+      "a": "Yes. Many DeGray cabin owners are seasonal \u2014 living in Little Rock, Hot Springs, or out of state. Plyler's Tree Service can walk the property, send photos and a written estimate, and schedule the work for whenever fits \u2014 including when the owner is not on-site. Storm damage in winter does not have to wait until summer."
+    },
+    {
+      "q": "What tree species are most common in Bismarck, and what are the biggest hazards?",
+      "a": "Shortleaf and loblolly pine dominate the Bismarck area both on upland properties and on the cabin lots ringing DeGray Lake. Pines grow tall, get top-heavy, and snap in ice storms or topple when wet ground gives way after heavy rain. Post oak and white oak fill in rural properties, with older oaks splitting at the crotch where two main trunks fork. Down at the lake, water oak, willow oak, and sweetgum grow right to the bank and fail differently than upland trees because lake-level fluctuation compromises root systems over time. Plyler's Tree Service has handled all of them across this area for over 24 years."
+    }
+  ],
+  "tree-service-caddo-valley-ar": [
+    {
+      "q": "Do I need a permit to remove a tree on my property in Caddo Valley, AR?",
+      "a": "For trees on private residential property inside Caddo Valley city limits, a permit is generally not required for removal. The only exceptions are trees in the public right-of-way along city streets or trees on properties under specific easements. The Caddo Valley City Hall at (870) 246-2386 can answer questions about anything in the right-of-way. For commercial properties along the I-30 corridor, no city permit is required for tree removal, though Plyler's Tree Service coordinates with property managers on access and timing. At the free estimate, the team will help determine whether anything applies to the situation."
+    },
+    {
+      "q": "How fast can Plyler's Tree Service get to Caddo Valley from Arkadelphia?",
+      "a": "About 5 minutes by way of Highway 7. Caddo Valley is essentially next door \u2014 same county, same school district. Plyler's Tree Service trucks pass through Caddo Valley on the way to nearly every job, and for emergencies the crew can usually be on-site within 30 minutes. There is no trip fee or travel charge \u2014 the price is based on the job, not the drive."
+    },
+    {
+      "q": "Do you handle commercial tree maintenance for I-30 corridor properties in Caddo Valley?",
+      "a": "Yes. Plyler's Tree Service has been doing commercial tree work along the Caddo Valley I-30 corridor for over 24 years, including hotels, restaurants, retail, and gas stations. Commercial work is different from residential \u2014 signage visibility, parking lot canopy clearance, off-hours scheduling, and coordination with property managers. The crew can do one-time work or set up ongoing maintenance schedules for property managers who want regular trimming and storm-prep work."
+    },
+    {
+      "q": "Do you work on Caddo River frontage properties around Caddo Valley?",
+      "a": "Yes. The Caddo River runs through and around Caddo Valley, and the riverfront properties grow a different tree mix than upland lots \u2014 water oak, willow oak, sycamore, and the occasional cypress that root in saturated soil. These trees show damage years after a flood event and can fail in surprising ways. Plyler's Tree Service walks the property, reads what is actually going on with the trunks and root systems, and recommends the work that makes sense."
+    },
+    {
+      "q": "What tree species are most common in Caddo Valley, and what are the biggest hazards?",
+      "a": "Shortleaf and loblolly pine dominate Caddo Valley in both residential neighborhoods and the commercial corridor. Pines grow tall, get top-heavy, and snap in ice storms or topple when wet ground gives way after heavy rain. Post oak and white oak fill in older properties \u2014 the biggest hazard with oaks is crotch splits where two main trunks fork from a single base. Sweetgum and hickory along property lines drop heavy limbs without warning. Down by the Caddo River, water oak, willow oak, and sycamore grow right to the bank. Plyler's Tree Service has handled all of them across this area for over 24 years."
+    }
+  ],
+  "tree-service-glenwood-ar": [
+    {
+      "q": "Do I need a permit to remove a tree on my property in Glenwood, AR?",
+      "a": "For trees on private residential property inside Glenwood city limits, a permit is generally not required for removal. The only exceptions are trees in the public right-of-way along city streets or trees on properties under specific easements. Glenwood City Hall at (870) 356-3398 can answer questions about anything in the right-of-way. For rural properties outside city limits, no permit is required. At the free estimate, Plyler's Tree Service will help determine whether anything applies to your situation."
+    },
+    {
+      "q": "How fast can Plyler's Tree Service get to Glenwood from Arkadelphia?",
+      "a": "About 30 minutes by way of Highway 8. Plyler's Tree Service crews are in the Glenwood, Pike County, and Lake Greeson area multiple times per week for scheduled jobs, and for emergencies can usually be on-site within an hour. There is no trip fee or travel charge \u2014 the price is based on the job, not the drive."
+    },
+    {
+      "q": "When is storm season worst around Glenwood, and do you handle emergency calls?",
+      "a": "Pike County catches its heaviest storms from late March through early June, with another rough stretch in October and November. Ice storms hit hardest between December and February. Glenwood sits at the gateway to the Ouachita Mountains, where storms funnel down out of the high country and dump on the valley fast. Plyler's Tree Service answers emergency calls 24 hours a day, 7 days a week, including nights, weekends, and holidays. When a tree comes down on a home in Glenwood, the crew is on the way."
+    },
+    {
+      "q": "Do you work on Lake Greeson cabins and Caddo River properties around Glenwood?",
+      "a": "Yes. A lot of the land around Glenwood is recreational acreage \u2014 cabin lots above Lake Greeson, wooded properties along the Caddo River, and rural builds backing up to the Ouachita National Forest. Plyler's Tree Service handles long-driveway access, hazardous trees on steep slopes above the water, riverbank and lakeshore cleanup, and large hardwood removals where equipment access is tight. When a cabin lot is too narrow for a bucket truck or the slope is too steep for direct lifting, the crew uses ropes and rigging to take trees apart in sections."
+    },
+    {
+      "q": "What types of trees are most common in Glenwood, and do you work on all of them?",
+      "a": "Glenwood sits at the edge of the Ouachita National Forest with a heavy pine and hardwood mix. Shortleaf and loblolly pines dominate hillsides and rural lots \u2014 they grow tall, lean toward houses, and snap in ice storms. Post oak, white oak, and hickory fill in older in-town properties and Caddo River bottoms. Sweetgums show up on cleared land and along fence lines. Each species has its own challenges \u2014 pines drop limbs in wind and topple roots in saturated soil, oaks get heavy and split at the crotch, hickories hold dead branches that fall without warning. Plyler's Tree Service has handled all of them across this area for over 24 years."
+    }
+  ],
+  "tree-service-gurdon-ar": [
+    {
+      "q": "Do I need a permit to remove a tree on my property in Gurdon, AR?",
+      "a": "For trees on private residential property inside Gurdon city limits, a permit is generally not required for removal. The only exceptions are trees in the public right-of-way along city streets or trees on properties under specific easements. Gurdon City Hall at (870) 353-4341 can answer questions about anything in the right-of-way. For rural properties outside city limits in south Clark County, no permit is required. At the free estimate, Plyler's Tree Service will help determine whether anything applies to your situation."
+    },
+    {
+      "q": "How fast can Plyler's Tree Service get to Gurdon from Arkadelphia?",
+      "a": "About 15 minutes by way of Highway 67. Plyler's Tree Service is in the same county \u2014 Clark County \u2014 as Gurdon, with crews in Gurdon and south Clark County multiple times per week for scheduled jobs. For emergencies, the crew can usually be on-site within an hour. There is no trip fee or travel charge \u2014 the price is based on the job, not the drive."
+    },
+    {
+      "q": "Do you handle tree work near the Union Pacific rail line in Gurdon?",
+      "a": "Yes, with extra care for the rail corridor. Plyler's Tree Service has worked many older Gurdon properties that back up to the rail line. The crew never drops anything onto the right-of-way, plans fall direction with the homeowner before starting, and uses rope-and-rigging sectional cutting on any tree close to the tracks rather than felling whole trees toward the line."
+    },
+    {
+      "q": "Do you work on rural acreage and timber properties around Gurdon?",
+      "a": "Yes. South Clark County is heavy timber country \u2014 pine plantations, hardwood bottoms, and long-driveway rural acreage typical of south-central Arkansas. Plyler's Tree Service handles equipment access on long rural driveways, storm-damaged section clearing within pine stands, and fence-line and driveway clearing for properties out toward Beirne, Whelen Springs, and the Ouachita River bottoms."
+    },
+    {
+      "q": "What tree species are most common in Gurdon, and what are the biggest hazards?",
+      "a": "Shortleaf and loblolly pine dominate Gurdon both in town and out in the timber country. They grow tall, get top-heavy, and snap in ice storms or topple when wet ground gives way after heavy rain. Post oak and white oak fill in older neighborhoods near Joslyn and Pine Street \u2014 the biggest hazard with the oaks is crotch splits where two main trunks fork from a single base. Sweetgums drop heavy limbs along fence lines, and hickories hold dead branches that fall in calm weather. Plyler's Tree Service has handled all of them across Gurdon for over 24 years."
+    }
+  ],
+  "tree-service-hot-springs-ar": [
+    {
+      "q": "Do I need a permit to remove a tree on my property in Hot Springs, AR?",
+      "a": "Hot Springs has an urban forestry program, so it depends on where the tree is located. On private residential property, a permit is generally not required for removal. However, trees in the public right-of-way or in certain historic or protected zones may need approval from the city. The Hot Springs Parks and Recreation Department handles urban forestry questions at (501) 321-6854. At the free estimate, Plyler's Tree Service will help you determine whether anything applies to your situation."
+    },
+    {
+      "q": "How fast can Plyler's Tree Service get to Hot Springs from Arkadelphia?",
+      "a": "About 30 minutes by way of Highway 7. Plyler's Tree Service crews are in Hot Springs multiple times per week for scheduled jobs, and for emergencies can usually be on-site within a couple of hours. There is no trip fee or travel charge \u2014 the price is based on the job, not the drive."
+    },
+    {
+      "q": "When is storm season worst in Garland County, and do you handle emergency calls in Hot Springs?",
+      "a": "Garland County sees the heaviest storms from late March through early June, and ice storms can hit between December and February. Hot Springs sits in the Ouachita Mountains where storms funnel through the valleys and hit hard. Plyler's Tree Service answers emergency calls 24 hours a day, 7 days a week, including nights, weekends, and holidays. When a tree comes down on a home or blocks a road in Hot Springs, the crew is on the way."
+    },
+    {
+      "q": "Do you work on lakefront properties around Lake Hamilton and Lake Catherine?",
+      "a": "Yes. Many lots around Lake Hamilton and Lake Catherine are heavily wooded with trees growing close to docks, retaining walls, and the house itself. Plyler's Tree Service handles removals on steep slopes, canopy trim-back from rooflines, and deadwood clearing to prevent debris falling into the water or onto neighboring property. When equipment access is tight, the crew uses ropes and rigging to take trees apart in sections."
+    },
+    {
+      "q": "What types of trees are most common in Hot Springs, and do you work on all of them?",
+      "a": "Hot Springs sits in the Ouachita Mountains with a heavy mix of hardwoods and pines. Shortleaf and loblolly pines are common on hillsides and around the lakes. Older neighborhoods near downtown have large white oaks, red oaks, and pecans. Sweetgums and hickories fill in the rest. Each species has its own challenges \u2014 oaks drop big limbs in storms, pines grow fast and lean toward houses, and on steep lakefront lots root systems get compromised by erosion. Plyler's Tree Service has handled all of them across this area for over 24 years."
+    }
+  ],
+  "tree-service-malvern-ar": [
+    {
+      "q": "Do I need a permit to remove a tree on my property in Malvern, AR?",
+      "a": "For trees on private residential property inside Malvern city limits, a permit is generally not required for removal. The only exceptions are trees in the public right-of-way, trees in historic districts, or trees on properties under specific easements. City of Malvern at (501) 332-3303 can answer questions about anything in the right-of-way. For rural properties outside city limits in Hot Spring County, no permit is required. At the free estimate, Plyler's Tree Service will help determine whether anything applies to your situation."
+    },
+    {
+      "q": "How fast can Plyler's Tree Service get to Malvern from Arkadelphia?",
+      "a": "About 25 minutes by way of I-30. Plyler's Tree Service crews are in Malvern, Hot Spring County, and the Lake Catherine area multiple times per week for scheduled jobs, and for emergencies can usually be on-site within an hour. There is no trip fee or travel charge \u2014 the price is based on the job, not the drive."
+    },
+    {
+      "q": "When is storm season worst around Malvern, and do you handle emergency calls?",
+      "a": "Hot Spring County catches its heaviest storms from late March through early June, with another rough stretch in October and November. Ice storms hit hardest between December and February. Malvern sits along the Ouachita River where storm systems funnel in off the mountains. Mature pecan and oak trees in older neighborhoods take heavy damage when straight-line winds move through. Plyler's Tree Service answers emergency calls 24 hours a day, 7 days a week, including nights, weekends, and holidays. When a tree comes down on a home in Malvern, the crew is on the way."
+    },
+    {
+      "q": "Do you work on lakefront properties around Lake Catherine?",
+      "a": "Yes. Many lots around Lake Catherine and Lake Catherine State Park are heavily wooded with trees growing close to docks, retaining walls, and the house itself. Plyler's Tree Service handles removals on steep slopes, canopy trim-back from rooflines, and deadwood clearing to prevent debris falling into the water or onto neighboring property. When equipment access is tight on lakefront lots, the crew uses ropes and rigging to take trees apart in sections."
+    },
+    {
+      "q": "What types of trees are most common in Malvern, and do you work on all of them?",
+      "a": "Malvern has a big mix of mature hardwoods and pines. Older neighborhoods near Main Street and Page Avenue have enormous white oaks, red oaks, and pecans \u2014 pecans drop heavy limbs in storms, and oaks split at the crotch as they age. Hillsides and rural lots are heavy in shortleaf and loblolly pine that grow tall, lean toward houses, and snap in ice storms. Sweetgums and hickories fill in along the edges, and hickories in particular hold dead branches that fall without warning. Plyler's Tree Service has handled all of them across this area for over 24 years."
+    }
+  ],
+  "tree-trimming-arkadelphia-ar": [
+    {
+      "q": "When is the best time to trim trees in Arkadelphia?",
+      "a": "For most trees, late winter \u2014 January and February \u2014 is ideal because the tree is dormant, you can see the structure clearly without leaves, and the cuts heal before the spring growth flush. Oaks specifically should NOT be pruned April through July because that's when the beetles that spread oak wilt are most active. Dead and broken limbs can be removed any time."
+    },
+    {
+      "q": "Do I need a permit to trim a tree in Arkadelphia?",
+      "a": "For trees on your own residential property, no. The City of Arkadelphia does not require permits for trimming on private land. If branches extend over a public right-of-way or you're working near a property line, you may want to check with the city building department at (870) 246-1818."
+    },
+    {
+      "q": "Will trimming hurt my tree?",
+      "a": "Done properly, trimming improves tree health by removing dead and diseased wood, improving structure, and reducing storm-vulnerable weight. Done improperly, it can harm or kill the tree. The two biggest mistakes are topping and over-pruning. The standard guideline is to remove no more than 25% of the live canopy in a single year. We never violate that rule, and we never top."
+    },
+    {
+      "q": "How often should I trim my trees?",
+      "a": "Young trees benefit from structural pruning every 2 to 3 years to develop good branch architecture. Mature shade trees usually need maintenance trimming every 3 to 5 years for dead wood removal, light thinning, and clearance work. Trees over critical structures may need more frequent attention."
+    },
+    {
+      "q": "Can you trim trees that are near power lines?",
+      "a": "For the lines that go from the pole to your house (your service drop), yes \u2014 we can trim those carefully. For the utility-owned lines along the street, the power company handles that. If a tree on your property is touching utility lines, call Entergy first \u2014 they will usually come trim it for free."
+    },
+    {
+      "q": "What's the difference between tree trimming and pruning?",
+      "a": "In everyday conversation the words are used interchangeably. Technically, pruning refers to selective cuts made for tree health and structure \u2014 removing dead, diseased, crossing, or weakly attached branches. Trimming usually refers to cuts made for aesthetic or clearance reasons such as shaping, lifting the canopy, or opening sightlines. Most jobs include some of both."
+    },
+    {
+      "q": "Will my homeowner's insurance cover tree trimming in Arkadelphia?",
+      "a": "Usually no \u2014 routine trimming is considered maintenance, which homeowner's policies don't cover. The exception is when trimming is part of storm damage repair, such as removing broken limbs after a storm. In that case, your policy may cover it as part of the claim."
+    },
+    {
+      "q": "Do you work with landlords on rental properties near Henderson State and OBU?",
+      "a": "Yes, all the time. The rental homes around Henderson State University and Ouachita Baptist University often have decades of deferred maintenance on the trees. We work with landlords and property managers to schedule trim work between tenants, can meet you at the property or handle the whole job while you're off-site, and send photos when it's done."
+    }
+  ],
+  "tree-trimming": [
+    {
+      "q": "How much does tree trimming cost in Arkadelphia?",
+      "a": "Small trees run $150 to $250. Medium trees are $250 to $450. Large oaks and tall pines can cost $400 to $700 or more. If you've got several trees, we usually do a package price. We give you the exact number before we start \u2014 free estimate, no obligation."
+    },
+    {
+      "q": "What's the difference between trimming and pruning?",
+      "a": "Most people use them the same way, and that's fine. Trimming usually means cutting back overgrowth to shape the tree. Pruning is more targeted \u2014 removing specific dead, diseased, or crossing branches to keep the tree healthy. We do both as part of every job."
+    },
+    {
+      "q": "How often should I have my trees trimmed?",
+      "a": "Most trees do well every 2 to 3 years. Fast growers like pines and sweetgums may need it every year. Fruit trees should be pruned annually. If branches are over your roof or touching your house right now, don't wait \u2014 give us a call."
+    },
+    {
+      "q": "When is the best time of year to trim trees?",
+      "a": "Late fall through early spring is ideal because the trees are dormant and heal faster. But dead branches, storm damage, and safety hazards should be dealt with any time of year. We work year-round."
+    },
+    {
+      "q": "Will trimming hurt my tree?",
+      "a": "Not when it's done right. Proper trimming helps a tree by removing dead weight, improving airflow, and letting more sunlight reach the inner branches. Bad trimming \u2014 like topping \u2014 can damage or kill a tree. We never top trees."
+    },
+    {
+      "q": "Can you trim branches away from my house or power lines?",
+      "a": "Yes. Clearance trimming is one of our most common jobs. We cut branches back from roofs, siding, gutters, and power lines. This protects your home during storms and reduces fire risk from branches touching electrical lines."
+    },
+    {
+      "q": "Do you clean up after trimming?",
+      "a": "Every time. We cut the branches, chip the brush, and haul everything away. Your yard is clean when we leave \u2014 no piles of limbs, no sawdust, no mess. Cleanup is included in the price."
+    },
+    {
+      "q": "Can trimming save a tree that looks rough?",
+      "a": "Sometimes. If the trunk and main limbs are solid but there's a lot of deadwood, a good trim can bring it back. We remove the dead branches, thin the canopy, and let the healthy parts grow. If it's too far gone, we'll be honest and recommend removal instead."
+    }
+  ]
+}

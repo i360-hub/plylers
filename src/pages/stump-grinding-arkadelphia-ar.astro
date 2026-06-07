@@ -1,0 +1,328 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+
+const title = "Stump Grinding Arkadelphia AR | Plyler's Tree Service";
+const description =
+  "Stump grinding in Arkadelphia, AR since 2002. We grind stumps 6-8 inches below grade — single stumps or multiple at a discount. Free written estimates, full cleanup, 5.0 stars.";
+const path = '/stump-grinding-arkadelphia-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Arkadelphia', path: '/tree-service-arkadelphia-ar' },
+  { name: 'Stump Grinding', path },
+];
+
+// Stump grinding jobs we handle in Arkadelphia.
+const jobs = [
+  { h: 'Fresh Stumps After Removal', p: 'You just had a tree taken down — by us or somebody else — and now you’ve got a stump. We grind it 6 to 8 inches below grade so you can fill and plant or sod over the spot. Same-visit grinding if we did the removal.' },
+  { h: 'Old Stumps You’ve Lived With Too Long', p: 'That oak stump you’ve been mowing around since 2018? Gone in an afternoon. Most older stumps are easier than fresh ones because the wood is partially decayed. We get them out and the yard looks finished.' },
+  { h: 'Multiple Stumps in One Visit', p: 'Three stumps from a landscape project, five from a property cleanup, fifteen from a lot clearing — we knock them out in one trip and the per-stump cost drops considerably. Tell us how many when you call.' },
+  { h: 'Big Hardwood Stumps', p: 'Old water oaks, post oaks, pecans — the kind of stumps that are 30 inches across with major root flare. Our grinder handles them. Smaller homeowner-rental grinders usually can’t.' },
+  { h: 'Pine Stumps', p: 'Loblolly and shortleaf pine stumps are common across Arkadelphia properties south of town and out toward Bismarck. Pine wood is softer than hardwood and grinds faster — usually a cheaper job per stump.' },
+  { h: 'Pre-Construction or Landscape Prep', p: 'Putting in a fence, pouring a slab, building a shed, redoing the landscape? Stumps have to go before any of that happens. We coordinate the grinding around your project timeline.' },
+];
+
+// If you leave it vs. if you grind it.
+const leaveStump = [
+  'You’ll mow around it for years',
+  'Hardwood stumps (oak, pecan, hickory) take 7–10+ years to fully rot',
+  'Termites and carpenter ants love decaying stumps — and your house is nearby',
+  'Stumps sprout suckers that keep growing back',
+  'You can’t replant or landscape that spot',
+  'It always looks like there used to be a tree there',
+];
+const grindStump = [
+  'Flat ground you can mow over in days',
+  'No insect attractant, no rot issue',
+  'No more suckers and sprouts',
+  'You can grass over it, plant a new tree, or build over it',
+  'The yard actually looks finished',
+  'One-time cost — done with it forever',
+];
+
+// How stump grinding works.
+const process = [
+  { h: 'Free On-Site Quote', p: 'Robbie comes out, measures the stump, checks how close it is to fences, structures, and underground utilities, and gives you a written price. For multiple stumps, we walk the property together and price the lot.' },
+  { h: 'Call 811 / Locate Utilities', p: 'For stumps near houses or where buried lines might be present, we make sure utilities are marked before grinding. Hitting a buried gas line with a grinder is the kind of mistake fly-by-night outfits make. We don’t. If your stump is near a public right-of-way, the City of Arkadelphia can confirm property-line setbacks.' },
+  { h: 'Grind 6–8 Inches Below Grade', p: 'The grinder chews the stump and visible root flare down to 6 to 8 inches below ground level. That’s deep enough to plant grass, lay sod, run a sprinkler line, or replant a smaller tree.' },
+  { h: 'Fill & Clean Up', p: 'We backfill the hole with the wood chips from the grinding (free, included), or haul the chips off if you want clean fill — your call. Sawdust raked, perimeter swept, everything picked up.' },
+];
+
+// Stump grinding across Arkadelphia neighborhoods.
+const neighborhoods = [
+  { h: '🎓 Henderson State & OBU Areas', p: 'Pine Street, 10th Street, Walnut, Caddo, Henderson Street — older neighborhoods around Henderson State and Ouachita Baptist with big mature trees mean big mature stumps when they come down. Lots of oak and pecan stumps. Landlords on these streets often grind multiple stumps at once between tenants.' },
+  { h: '🏘️ Country Club Drive & East Side', p: 'Twin Rivers, Riverview, the streets off 9th. Mature properties on bigger lots — when a 60-year-old oak comes down, you’re left with a stump 36 inches across. Our grinder handles them. Smaller competitors farm these out or pass on the job.' },
+  { h: '🛣️ Caddo Valley & I-30 Corridor', p: 'Bigger rural lots, often multiple stumps from old fence lines, clearing projects, or storm cleanup. We knock out groups of pine stumps efficiently — sometimes 10+ in a single visit. The per-stump cost drops the more there are.' },
+  { h: '🌊 DeGray Lake & South Toward Gurdon', p: 'Lakefront cabins around DeGray Lake Resort State Park and rural acreage south. Lakefront stump grinding takes care — steep slopes, soft ground, often working close to docks and retaining walls. We’ve done it on DeGray for 24 years.' },
+];
+
+// Why Arkadelphia calls Plyler's for stump grinding.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Reviews', p: 'Perfect Google rating from more than 70 Clark County customers. Real stumps, real cleanup, real follow-through.' },
+  { h: '📍 Grinder Staged in Arkadelphia', p: 'Our stump grinder lives at the yard on Country Club Drive. We’re not waiting on rental equipment or driving in from out of town.' },
+  { h: '🪓 24 Years of Grinding', p: 'Robbie started this company in 2002. Thousands of stumps ground in this town. We know every species, every soil type, every neighborhood.' },
+  { h: '📋 Licensed and Insured', p: 'Full liability and workers’ comp on every job. If the grinder kicks a rock into a fence or scratches a driveway, our insurance covers it. We’ll show proof.' },
+  { h: '💬 Honest Pricing', p: 'Written quote before any work. No surprise charges when the bill comes. If you’ve got multiple stumps, we tell you up front what the volume discount looks like.' },
+  { h: '🧹 Complete Cleanup', p: 'Hole backfilled with chips (free), sawdust raked, perimeter swept. Half the reviews we get mention cleanup specifically — it tells you how seriously we take it.' },
+];
+
+const testimonials = [
+  'Best tree service around. They trimmed six trees in our yard and ground two stumps in one day. Left the yard cleaner than they found it.',
+  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
+  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
+];
+
+// FRESH FAQ — generated for this thin page in the local, plainspoken Plyler's voice.
+const faq = [
+  {
+    q: 'How deep do you grind a stump in Arkadelphia?',
+    a: 'Standard is 6 to 8 inches below ground level, which is plenty for laying sod, seeding grass, putting in a flower bed, replanting a smaller tree, or running a sprinkler line. If you’re pouring a slab, building over the spot, or doing deep landscaping like a paver patio, we can grind 12 inches or more — that takes longer and costs more, so we only do it when the job calls for it.',
+  },
+  {
+    q: 'Do I need a permit to grind a stump in Arkadelphia?',
+    a: 'For a stump on your own residential property, no. The City of Arkadelphia doesn’t require a permit to grind stumps on private land. The one thing we always do near houses is make sure underground utilities are located first — hitting a buried gas or electric line with a grinder is a serious mistake, and we don’t make it. If the stump sits near a public right-of-way or property line, the city can confirm setbacks.',
+  },
+  {
+    q: 'What happens to the roots after you grind the stump?',
+    a: 'Most of them stay in the ground. Grinding takes out the stump and the visible root flare down to grade, but the deeper root system stays underground and rots away naturally over the next few years. That’s no problem for grass, planting, or normal yard use. If you’re doing major excavation, we can grind out extra root paths, but that’s a custom add-on rather than the standard job.',
+  },
+  {
+    q: 'Why are oak and pecan stumps more expensive to grind than pine?',
+    a: 'Density and root flare. Oak, pecan, and hickory are much harder, denser woods than loblolly or shortleaf pine, so the grinder works through them slower — more time means more cost. Mature hardwood stumps also spread a big root flare 30 to 36 inches across or more. A pine stump that size might grind in 10 minutes; a hardwood stump can take three to four times as long.',
+  },
+  {
+    q: 'Can you grind several stumps in one trip, and is it cheaper?',
+    a: 'Yes, and it’s a lot cheaper per stump. One stump alone carries the highest per-stump price because we’re hauling the grinder out for a single job. Two stumps drops the rate, and five or more drops it considerably since we’re already on-site with the equipment running. If you’ve got a fence line, a cleared lot, or a few stumps scattered around the yard, tell Robbie the count when you call and he’ll price the whole lot.',
+  },
+  {
+    q: 'Do you clean up the wood chips and fill the hole?',
+    a: 'Yes. Grinding leaves a pile of wood chips and a depression where the stump was. We backfill the hole with those chips at no charge, or haul them off and leave it ready for clean fill if you’d rather — your call. Either way the sawdust gets raked and the perimeter swept before we leave. Half our reviews mention the cleanup, which tells you how seriously we take it.',
+  },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Stump Grinding in Arkadelphia, AR',
+    serviceType: 'Stump grinding',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Arkadelphia, Arkansas · Clark County"
+    title="Stump Grinding in Arkadelphia, AR"
+    subtitle="That stump you've been mowing around for three years? We grind it 6 to 8 inches below ground level, fill the hole, and leave you with flat ground you can grass over or replant. Multiple stumps in one trip save you money. Arkadelphia's local crew since 2002."
+    image="/images/malvern-ar-stump-grinding-land-clearing-skid-steer.webp"
+    imageAlt="Stump grinding and land clearing with a skid steer near Arkadelphia, AR"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Stump Grinder Staged in Arkadelphia — Ready to Roll</h2>
+      <p>
+        Plyler's Tree Service is based right here in <a href="https://clarkcountyar.gov/" target="_blank" rel="noopener">Clark County</a>,
+        with our equipment yard on Country Club Drive in Arkadelphia. Our stump grinder lives at the yard, fueled up and
+        ready to go. When you call about a stump, you talk to Robbie Plyler — the owner. He gives you a price, his crew
+        shows up with the grinder, and the stump is gone the same day.
+      </p>
+      <p>
+        We're not a national chain that subcontracts the grinding to whoever's available. The same Arkadelphia crew that
+        quoted the job runs the grinder. Since 2002.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Why Grind the Stump After a Tree Comes Down?</h2>
+      <p>
+        Tree removal is one job. Stump grinding is a separate service — and most Arkadelphia homeowners go back and forth
+        on whether it's worth the extra cost. Here's the honest breakdown.
+      </p>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        <div class="card">
+          <h3>If You Leave the Stump</h3>
+          <ul class="mb-0">
+            {leaveStump.map((x) => <li>{x}</li>)}
+          </ul>
+        </div>
+        <div class="card">
+          <h3>If You Grind It Down</h3>
+          <ul class="mb-0">
+            {grindStump.map((x) => <li>{x}</li>)}
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top:2rem">
+        Not sure which makes sense for your situation? Read our quick comparison of
+        <a href="/stump-grinding-vs-removal">stump grinding vs. removal</a>, or call Robbie and he'll walk you through it.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Stump Grinding Jobs We Handle in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Stumps come in every size and situation. We've ground every one of them across Clark County over 24 years.
+      </p>
+      <div class="grid grid-3">
+        {jobs.map((j) => (
+          <div class="card">
+            <h3>{j.h}</h3>
+            <p class="mb-0">{j.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">How Stump Grinding Works</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        A lot of people aren't sure what stump grinding actually involves. Here's exactly what we do.
+      </p>
+      <div class="grid grid-2">
+        {process.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock current={path} />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Stump Grinding Across Arkadelphia Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        What we grind varies by part of town. Here's what we see most across the neighborhoods we know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        For the full picture of what we do across town, see our
+        <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service overview</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">How Much Does Stump Grinding Cost in Arkadelphia?</h2>
+      <p>Stump grinding is priced by the stump, with size and accessibility as the main drivers. Three things move the price:</p>
+      <ul>
+        <li><strong>Stump diameter.</strong> We measure across the widest point at ground level, including the root flare. A 12-inch pine stump grinds in 10 minutes. A 36-inch oak stump takes an hour. Bigger = more grinding time = higher cost.</li>
+        <li><strong>Accessibility.</strong> A stump in an open backyard with gate access is straightforward. A stump tucked behind a fence with no gate, on a slope, or surrounded by landscaping takes more work to get the grinder in and out. We don't damage your fence, your sprinklers, or your beds getting to it.</li>
+        <li><strong>How many stumps total.</strong> One stump alone is the highest per-stump price. Two stumps is much less per stump. Five or more, the price drops considerably because we're already on-site with the equipment running.</li>
+      </ul>
+      <p>What stays the same: we give you the exact price in writing before any grinding starts. Quote is what you pay.</p>
+      <p>
+        For an exact number on your stump or stumps, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>. The estimate is always free.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Arkadelphia Calls Plyler's for Stump Grinding</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Stump grinding looks simple from the outside — push a grinder up to the stump and go. The reality is closer to
+        operating heavy machinery in tight spots near houses, fences, gas lines, and irrigation. Here's why people trust
+        us with it.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What Arkadelphia Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:2rem;color:var(--muted)">
+        <a href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <FaqSection
+    items={faq}
+    heading="Stump Grinding Questions — Arkadelphia"
+    intro="Answers to what Arkadelphia homeowners ask us most about grinding."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead">
+        Stump grinding is one piece of the work we do across Clark County. Start with our full
+        <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service hub</a> for the complete picture, or jump
+        straight to <a href="/tree-removal-arkadelphia-ar">Tree Removal</a>,
+        <a href="/tree-trimming-arkadelphia-ar">Tree Trimming</a>,
+        <a href="/dead-tree-removal-arkadelphia-ar">Dead Tree Removal</a>, or
+        <a href="/emergency-tree-service-arkadelphia-ar">24/7 Emergency Service</a>.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Get That Stump Gone — Arkadelphia"
+    text="We're right here in Arkadelphia — yard on Country Club Drive, stump grinder ready to roll. Call Robbie, tell him about the stump, and we'll have somebody at your property to give you an honest written price. Multiple stumps? Tell him — the price drops fast when we can do them together. No charge for the estimate. No obligation to say yes."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, LOCALBUSINESS_ID, WEBSITE_ID, ORG_ID, SITE } from '../lib/schema';
+import business from '../data/business.json';
+
+const title = "Contact Us | Plyler's Tree Service | (870) 245-7944";
+const description =
+  "Call or email Plyler's Tree Service. Mon–Fri 7–6, Sat 7–2. 24/7 emergency response. Free estimates. Arkadelphia, AR and a 40-mile radius.";
+const path = "/contact";
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path }];
+
+const faq = [
+  {
+    q: 'What are your hours?',
+    a: 'We’re open Monday through Friday from 7:00 AM to 6:00 PM and Saturday from 7:00 AM to 2:00 PM. We’re closed on Sunday for regular work — but for storm emergencies, we answer the phone around the clock, every day of the year.',
+  },
+  {
+    q: 'Do you really answer 24/7 for emergencies?',
+    a: 'Yes. If a tree falls on your house, lands on your car, or blocks your driveway, call us right away — day or night, weekends and holidays included. Robbie or one of the crew picks up, and we get on the way.',
+  },
+  {
+    q: 'How do I get a free estimate?',
+    a: 'Call or text us, or fill out the form on this page and tell us what’s going on with your tree. Robbie or one of his guys comes out, looks at the job, and gives you an honest price in writing — free, with no obligation.',
+  },
+  {
+    q: 'How fast will you get back to me?',
+    a: 'Usually the same day. We answer calls and texts 24/7 for emergencies, and we check email daily and respond within 24 hours. For non-emergency estimates, we can typically be out to look at the job within a day or two.',
+  },
+  {
+    q: 'What areas do you cover?',
+    a: 'We’re based in Arkadelphia and serve a 40-mile radius across Clark, Garland, Hot Spring, Pike, and Montgomery counties — including Hot Springs, Malvern, Gurdon, Glenwood, Bismarck, Caddo Valley, and Amity. There’s no trip fee for any town inside that radius.',
+  },
+];
+
+const schema = [
+  {
+    '@type': 'ContactPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+    publisher: { '@id': ORG_ID },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Contact Plyler's Tree Service</p>
+      <h1>Get in Touch</h1>
+      <p class="lead">
+        Call us, text us, or fill out the form. We'll get back to you fast — usually the same day.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="card">
+          <h2>Call or Text</h2>
+          <p class="contact-line">
+            <a class="contact-phone" href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>
+          </p>
+          <p class="mb-0">Call or text. We answer 24/7 for emergencies.</p>
+        </div>
+
+        <div class="card">
+          <h2>Email</h2>
+          <p class="contact-line">
+            <a href={`mailto:${business.email}`}>{business.email}</a>
+          </p>
+          <p class="mb-0">We check email daily and respond within 24 hours.</p>
+        </div>
+
+        <div class="card">
+          <h2>Where We Are</h2>
+          <p class="contact-line">{business.address.locality}, {business.address.region} {business.address.postalCode}</p>
+          <p class="mb-0">
+            Serving a 40-mile radius including Hot Springs, Malvern, Gurdon, Glenwood, and more — across Clark,
+            Garland, Hot Spring, Pike, and Montgomery counties.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Hours</h2>
+          <ul class="hours">
+            {business.hours.map((h) => <li>{h.label}</li>)}
+            <li>Sunday: Closed</li>
+          </ul>
+          <p class="emergency mb-0">⚡ 24/7 emergency response — call anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure center">
+      <h2>Request a Free Estimate</h2>
+      <p class="lead">
+        Fill out the form below and we'll get back to you — usually the same day. For emergencies, call
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> any time, day or night.
+      </p>
+    </div>
+  </section>
+
+  <FaqSection
+    items={faq}
+    heading="Contacting Plyler's Tree Service — Common Questions"
+    intro="Hours, emergencies, estimates, and where we work."
+  />
+
+  <GhlForm heading="Request Your Free Estimate" />
+</BaseLayout>
+
+<style>
+  .contact-grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .contact-grid .card h2 { font-size: 1.25rem; margin-bottom: 0.6rem; }
+  .contact-line { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .contact-phone { font-size: 1.45rem; font-weight: 800; color: var(--green-700); }
+  .hours { list-style: none; margin: 0 0 0.8rem; padding: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+  .hours li { color: var(--body); font-weight: 600; }
+  .emergency { color: var(--green-700); font-weight: 700; }
+</style>

@@ -1,0 +1,19 @@
+---
+// Google Maps embed — verbatim iframe lifted from the live site (per-page center).
+const { src, title = 'Service area map', height = 360 } = Astro.props;
+---
+<div class="map-embed" style={`--map-h:${height}px`}>
+  <iframe
+    src={src}
+    title={title}
+    width="100%"
+    height={height}
+    style="border:0;"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+<style>
+  .map-embed { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .map-embed iframe { display: block; height: var(--map-h); }
+</style>

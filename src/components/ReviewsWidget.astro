@@ -1,0 +1,13 @@
+---
+// GHL reputation reviews widget — verbatim embed lifted from the live /reviews page.
+import business from '../data/business.json';
+const src = business.embeds.reviewsWidgetSrc;
+---
+<div class="reviews-widget">
+  <iframe class="lc_reviews_widget" src={src} frameborder="0" scrolling="no" style="min-width: 100%; width: 100%;" title="Customer reviews for Plyler's Tree Service"></iframe>
+</div>
+<script is:inline src="https://reputationhub.site/reputation/assets/review-widget.js" defer></script>
+<style>
+  .reviews-widget { min-height: 600px; }
+  .reviews-widget iframe { width: 100%; min-height: 600px; }
+</style>

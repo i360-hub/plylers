@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import Testimonials from '../components/Testimonials.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import GhlForm from '../components/GhlForm.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import maps from '../data/maps.json';
+import { faqPage, service, LOCALBUSINESS_ID, WEBSITE_ID, ORG_ID, SITE } from '../lib/schema';
+import faqData from '../data/faq.json';
+import business from '../data/business.json';
+
+const faq = faqData.index;
+const title = "Plyler's Tree Service | Arkadelphia & SW Arkansas Tree Removal";
+const description =
+  "Arkadelphia's trusted tree service for 24+ years. Tree removal, trimming, stump grinding & 24/7 emergency storm cleanup across Clark County and a 40-mile radius. Free estimates.";
+
+const whyUs = [
+  { h: '24 Years of Doing This', p: "Robbie started this company over two decades ago. There isn't a tree in Clark County we haven't seen before." },
+  { h: 'Licensed and Insured', p: "We carry full liability and workers' comp. If anything goes wrong on your property, you're covered. Period." },
+  { h: 'Free Estimates, No Pressure', p: 'We come look at the job, give you an honest price in writing, and let you decide. No pushy sales talk.' },
+  { h: 'We Clean Up Everything', p: 'We chip the brush, haul off the wood, and rake your yard before we leave. You won’t know we were there — except the tree is gone.' },
+  { h: '24/7 Emergency Calls', p: "Storms don't wait, and neither do we. Call any time — nights, weekends, holidays. We'll be there." },
+  { h: 'Local People, Local Company', p: 'We live here. Our kids go to school here. We treat your yard like it’s in our own neighborhood — because it is.' },
+];
+const steps = [
+  { h: 'Give Us a Call', p: 'Call or fill out the form below. Tell us what’s going on with your tree. For emergencies, we pick up 24/7.' },
+  { h: 'We Come Take a Look', p: 'Robbie or one of our guys comes out, looks at the tree, and gives you an honest price in writing. No cost, no obligation.' },
+  { h: 'We Do the Work', p: 'We show up on time with the right equipment — bucket trucks, ropes, chippers, whatever the job needs. Safe, fast, done right.' },
+  { h: 'Clean Yard, Happy Customer', p: 'We chip the brush, haul off the big stuff, and rake your yard clean. Then we walk the property with you to make sure you’re happy.' },
+];
+const galleryShots = [
+  { src: '/images/arkadelphia-ar-bucket-truck-dead-tree-removal-residential.webp', alt: 'Bucket truck removing a dead tree in a residential Arkadelphia yard' },
+  { src: '/images/arkadelphia-ar-arborist-rope-climb-tall-tree-removal.webp', alt: 'Arborist rope-climbing a tall tree during removal in Arkadelphia, AR' },
+  { src: '/images/arkadelphia-ar-storm-damage-uprooted-oak-tree-removal.webp', alt: 'Storm-damaged uprooted oak being removed in Arkadelphia, AR' },
+  { src: '/images/arkadelphia-ar-pine-forest-cleared-after-tree-removal.webp', alt: 'Cleared lot after pine tree removal near Arkadelphia, AR' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}/#webpage`,
+    url: `${SITE}/`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    publisher: { '@id': ORG_ID },
+  },
+  service({
+    name: 'Tree Service',
+    serviceType: 'Tree removal, trimming, stump grinding & storm cleanup',
+    description,
+    path: '/',
+  }),
+  faqPage(faq),
+  {
+    '@type': 'HowTo',
+    name: 'How to get tree work done with Plyler’s Tree Service',
+    step: steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.h, text: s.p })),
+  },
+];
+---
+<BaseLayout title={title} description={description} path="/" schema={schema} preloadImage="/images/arkadelphia-ar-large-oak-overhanging-residential-home-sunset.webp">
+  <Hero
+    eyebrow="Arkadelphia & Southwest Arkansas"
+    title="Southwest Arkansas's Most Trusted Tree Service for Over 24 Years"
+    subtitle="Tree removal, trimming, stump grinding, and 24/7 emergency storm cleanup. Locally owned by Robbie Plyler. Licensed and insured."
+    image="/images/arkadelphia-ar-large-oak-overhanging-residential-home-sunset.webp"
+    imageAlt="Large oak overhanging a residential home at sunset in Arkadelphia, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Southwest Arkansas's Top-Rated Tree Service</p>
+      <p class="lead">
+        Plyler's Tree Service is owned and run by Robbie Plyler — a local who's been taking care of trees for
+        families and businesses across this corner of Arkansas for over 24 years. We have a perfect 5.0-star rating
+        on Google with more than 70 reviews. Our crew handles tree removal, trimming, stump grinding, and storm
+        damage cleanup throughout Amity, Glenwood, Arkadelphia, Caddo Valley, Bismarck, Mount Ida, Hot Springs, and
+        surrounding towns — a 40-mile service area covering Clark, Garland, Hot Spring, Pike, and Montgomery counties.
+        We're fully licensed and insured. Every estimate is free, and we always clean up before we leave.
+      </p>
+    </div>
+  </section>
+
+  <ServicesGrid heading="What We Do" intro="Big jobs, small jobs, and everything in between." />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Folks Around Here Call Us First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">We show up, do the work right, and leave your yard clean.</p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Testimonials />
+
+  <section class="section section-green">
+    <div class="container">
+      <h2 class="center">How It Works</h2>
+      <p class="center" style="margin-bottom:2.4rem;color:#bcd3c4">Four simple steps from your first call to a clean yard.</p>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step">
+            <span class="step-num">{i + 1}</span>
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Our Crew at Work</h2>
+      <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">A few snapshots from recent jobs around the area.</p>
+      <div class="gallery-grid">
+        {galleryShots.map((g) => <img src={g.src} alt={g.alt} width="640" height="480" loading="lazy" decoding="async" />)}
+      </div>
+      <p class="center" style="margin-top:1.5rem"><a class="btn btn-green" href="/gallery">See more of our work →</a></p>
+    </div>
+  </section>
+
+  <AreasBlock
+    heading="We Come to You"
+    intro="We're based in Arkadelphia and run jobs across southwest Arkansas — up to 40 miles out. Serving Clark, Garland, Hot Spring, Pike, and Montgomery counties. Don't see your town? Give us a call — if you're nearby, we'll make it work."
+  />
+
+  <section class="section">
+    <div class="container">
+      <MapEmbed src={maps['/']} title="Plyler's Tree Service area — Clark County and surrounding southwest Arkansas" height={420} />
+    </div>
+  </section>
+
+  <FaqSection items={faq} />
+
+  <GhlForm heading="Get Your Free Estimate" />
+</BaseLayout>
+
+<style>
+  .steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.6rem; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--amber-500); color: var(--green-900); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .step h3 { color: #fff; margin: 0 0 0.4rem; }
+  .step p { color: #c9ddcf; }
+  .gallery-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .gallery-grid img { border-radius: var(--radius); width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; box-shadow: var(--shadow); }
+</style>

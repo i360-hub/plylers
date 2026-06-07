@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, LOCALBUSINESS_ID, WEBSITE_ID, ORG_ID, SITE } from '../lib/schema';
+
+const title = "Photos | Plyler's Tree Service Arkadelphia AR";
+const description =
+  "Before & after photos from tree removal, trimming, stump grinding & storm cleanup jobs in Arkadelphia, Hot Springs, Malvern & Clark County, AR.";
+const path = '/gallery';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Photos', path },
+];
+
+// Real job photos from public/images — each alt is descriptive and location-specific.
+const photos = [
+  {
+    src: '/images/arkadelphia-ar-storm-damage-uprooted-oak-tree-removal.webp',
+    alt: 'Storm-damaged uprooted oak removed in Arkadelphia, AR',
+    caption: 'Storm cleanup in Arkadelphia — cleared by next afternoon',
+  },
+  {
+    src: '/images/arkadelphia-ar-large-tree-risk-assessment-backyard-deck.webp',
+    alt: 'Large tree next to a backyard deck assessed for removal in Arkadelphia, AR',
+    caption: 'Big tree next to the deck — took it apart piece by piece',
+  },
+  {
+    src: '/images/malvern-ar-stump-grinding-land-clearing-skid-steer.webp',
+    alt: 'Skid steer grinding stumps on a cleared lot in Malvern, AR',
+    caption: 'Grinding stumps on a lot we cleared that week',
+  },
+  {
+    src: '/images/arkadelphia-ar-bucket-truck-dead-tree-removal-residential.webp',
+    alt: 'Bucket truck removing a 60-foot tree near power lines in a residential Arkadelphia, AR yard',
+    caption: '60-footer near power lines — bucket truck job',
+  },
+  {
+    src: '/images/arkadelphia-ar-large-oak-overhanging-residential-home-sunset.webp',
+    alt: 'Large oak hanging over a home before removal in Arkadelphia, AR',
+    caption: 'Before — big oak hanging over the house',
+  },
+  {
+    src: '/images/arkadelphia-ar-pine-forest-cleared-after-tree-removal.webp',
+    alt: 'Clean cleared lot after tree removal in Arkadelphia, AR',
+    caption: 'After — clean lot, ready to go',
+  },
+  {
+    src: '/images/hot-springs-ar-residential-tree-removal-wood-chip-cleanup.webp',
+    alt: 'Driveway cleared and brush hauled off after tree removal in Hot Springs, AR',
+    caption: 'Driveway cleared, brush hauled, yard raked',
+  },
+  {
+    src: '/images/arkadelphia-ar-hazardous-leaning-pine-tree-before-removal.webp',
+    alt: 'Hazardous leaning pine before removal in Arkadelphia, AR',
+    caption: 'Leaning pine — got it down before it fell',
+  },
+  {
+    src: '/images/glenwood-ar-large-tree-felling-chainsaw-professional.webp',
+    alt: 'Tall roadside pines being felled by a professional crew in Glenwood, AR',
+    caption: 'Tall pines along the road — one storm away',
+  },
+  {
+    src: '/images/hot-springs-ar-arborist-climbing-aerial-tree-work.webp',
+    alt: 'Arborist climbing high into the canopy for aerial tree work in Hot Springs, AR',
+    caption: 'Up in the canopy — one limb at a time',
+  },
+  {
+    src: '/images/glenwood-ar-arborist-harness-high-canopy-branch-removal.webp',
+    alt: 'Arborist in a harness removing high canopy branches in Glenwood, AR',
+    caption: 'Trimmed branches back 15 feet from the roof',
+  },
+  {
+    src: '/images/malvern-ar-large-mature-oak-tree-assessment-commercial.webp',
+    alt: 'Large mature oak assessed and thinned on a commercial property in Malvern, AR',
+    caption: 'Deadwood cleaned out, crown thinned',
+  },
+  {
+    src: '/images/arkadelphia-ar-arborist-rope-climb-tall-tree-removal.webp',
+    alt: 'Arborist rope-climbing a tall tree during removal in Arkadelphia, AR',
+    caption: 'Tall removal handled with ropes and rigging',
+  },
+  {
+    src: '/images/malvern-ar-tree-removal-crew-residential-yard-cleanup.webp',
+    alt: 'Crew clearing brush and cleaning up a residential yard in Malvern, AR',
+    caption: 'Skid steer on a clearing job south of town',
+  },
+  {
+    src: '/images/hot-springs-ar-gated-property-entrance-stump-removal.webp',
+    alt: 'Stump removal at a gated property entrance in Hot Springs, AR',
+    caption: 'Stump ground out at a gated property entrance',
+  },
+  {
+    src: '/images/arkadelphia-ar-tree-removal-residential-neighborhood-cleanup.webp',
+    alt: 'Tree removal and yard cleanup in a residential Arkadelphia, AR neighborhood',
+    caption: 'Trimmed so the homeowner could sleep at night',
+  },
+];
+
+// Gallery had no FAQ on the live site — fresh, locally-voiced Q&A.
+const faq = [
+  {
+    q: 'Are these real photos from your own jobs?',
+    a: "Every one of them. These are real trees we took down, trimmed, or ground out for real folks around Arkadelphia, Hot Springs, Malvern, and the rest of Clark County. No stock photos, no borrowed pictures — just our crew at work.",
+  },
+  {
+    q: 'Do you have before-and-after photos?',
+    a: "We do. A lot of these show the job start to finish — the big oak hanging over the house, then the clean lot once we hauled everything off. When folks ask, we'll send before-and-after shots of jobs like theirs so they know what to expect.",
+  },
+  {
+    q: 'What kind of work do these photos show?',
+    a: "A little of everything we do — tree removal, storm cleanup, stump grinding, trimming branches back off rooflines, bucket truck work near power lines, and rope-and-rigging removals in tight spots. If you've got a tree job, chances are good we've done one like it.",
+  },
+  {
+    q: 'Can you do work like this on my property?',
+    a: "Almost certainly. We handle jobs this size and bigger every week across southwest Arkansas. Call Robbie for a free estimate — we'll come look at your tree, tell you what it'll take, and give you an honest price in writing.",
+  },
+  {
+    q: 'Do you clean up the way these photos show?',
+    a: "Every time. We chip the brush, haul off the wood, and rake the yard before we leave. The clean lots and tidy yards you see here aren't staged — that's just how we leave a job.",
+  },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    publisher: { '@id': ORG_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  {
+    '@type': 'ImageGallery',
+    '@id': `${SITE}${path}#gallery`,
+    url: `${SITE}${path}`,
+    name: 'Our Work',
+    isPartOf: { '@id': `${SITE}${path}#webpage` },
+    image: photos.map((p) => ({
+      '@type': 'ImageObject',
+      contentUrl: `${SITE}${p.src}`,
+      caption: p.caption,
+    })),
+  },
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Real Jobs, Real Photos</p>
+      <h1>Our Work</h1>
+      <p class="lead">
+        Real photos from real jobs around Arkadelphia, Hot Springs, Malvern, and Clark County.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="gallery-grid">
+        {photos.map((p) => (
+          <figure class="gallery-item">
+            <img
+              src={p.src}
+              alt={p.alt}
+              width="640"
+              height="480"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>{p.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FaqSection
+    items={faq}
+    heading="Gallery Questions"
+    intro="A few things folks ask about the photos and the work behind them."
+  />
+
+  <CtaBand
+    title="Like What You See? Let's Talk About Your Trees."
+    text="Call Robbie for a free estimate. We'll come look at the job and give you an honest price."
+    href="#quote"
+    label="Get a Free Estimate"
+  />
+
+  <GhlForm heading="Get Your Free Estimate" />
+</BaseLayout>
+
+<style>
+  .gallery-grid {
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  .gallery-item {
+    margin: 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+  }
+  .gallery-item figcaption {
+    padding: 0.9rem 1.1rem;
+    color: var(--body);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+</style>

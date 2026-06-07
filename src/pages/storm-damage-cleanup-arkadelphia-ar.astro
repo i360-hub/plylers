@@ -1,0 +1,429 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Storm Damage Cleanup Arkadelphia AR | Plyler's Tree";
+const description =
+  "Storm damage cleanup in Arkadelphia, AR since 2002. Downed trees, debris hauling, insurance-ready documentation. Local crew — not storm chasers.";
+const path = '/storm-damage-cleanup-arkadelphia-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Arkadelphia', path: '/tree-service-arkadelphia-ar' },
+  { name: 'Storm Damage Cleanup', path },
+];
+const faq = faqData['storm-damage-cleanup-arkadelphia-ar'] ?? [];
+
+// What storm cleanup covers.
+const cleanupCovers = [
+  {
+    h: 'Downed Tree Removal',
+    p: 'Whole trees on the ground — uprooted, snapped, leaning beyond saving. We section them up, haul off the wood (or cut to firewood length if you want it kept), and grind the stump if you add that service.',
+  },
+  {
+    h: 'Hanging Limb & Widow-Maker Removal',
+    p: 'Broken limbs lodged 30 feet up in the canopy, partial breaks dangling, large branches hung up but not fully down. These don’t drop on a schedule — they drop when somebody walks under them. We climb up and rig them down safely.',
+  },
+  {
+    h: 'Damaged Tree Assessment & Trimming',
+    p: 'Tree survived the storm but has broken limbs, split crotches, or torn bark. We assess whether it’s salvageable, do corrective pruning if so, and tell you straight if it needs to come down instead.',
+  },
+  {
+    h: 'Brush & Debris Hauling',
+    p: 'Branches, twigs, brush piles, leaf litter — everything the storm scattered across your property. We chip it on-site or haul it off depending on what makes sense. Arkadelphia sanitation won’t take large debris from tree damage; we will.',
+  },
+  {
+    h: 'Multi-Tree Property Cleanup',
+    p: 'Big storms drop 3, 5, 10 trees on a single property. Rural lots toward Caddo Valley get hit especially hard. We bring the equipment and crew to handle the whole property in one push — saves you money vs. piecemeal work.',
+  },
+  {
+    h: 'Stump Grinding After Storm Removal',
+    p: 'Once the downed trees are off your property, the stumps remain. We grind them 6 to 8 inches below grade so you can replant or sod the spot.',
+  },
+];
+
+// Documentation checklist for insurance.
+const insuranceDocs = [
+  'Take wide photos showing the whole property and the damage in context',
+  'Close-up photos of each damaged tree, broken limb, and impact point',
+  'Photos of any damage to structures, fences, vehicles, or landscaping',
+  'Note the date and time the damage occurred',
+  'Keep all receipts and invoices from cleanup work',
+  'Don’t sign anything from a roving contractor offering "we’ll handle the insurance for you"',
+];
+
+// How storm cleanup works.
+const steps = [
+  { h: 'Free On-Site Assessment', p: 'Robbie walks the property with you. Identifies every damaged tree, every hanging limb, every debris pile. Documents what’s salvageable and what’s not. You get a written, itemized price the same day — insurance adjusters love itemized.' },
+  { h: 'Prioritize the Work', p: 'We tackle hazards first — hanging limbs, leaning trees, anything that could fall and hurt someone. Then full removals, then trimming, then debris. You don’t pay extra for the safety-first sequencing; it’s how we do it on every cleanup.' },
+  { h: 'Equipment Onsite', p: 'Bucket truck, chipper, chainsaws, climbing gear, stump grinder if needed. Big-storm cleanup gets the full equipment list. Rural acreage or tight-access urban lots — we bring what fits the job.' },
+  { h: 'Complete Property Cleanup', p: 'Brush chipped, logs hauled off (or cut to firewood if you want it), sawdust raked, sticks picked up. Your yard looks like a yard again — not like a tree just came down across it.' },
+];
+
+// Storm cleanup across neighborhoods.
+const neighborhoods = [
+  {
+    h: '🎓 Henderson State & OBU Areas',
+    p: 'Pine Street, 10th Street, Walnut, Caddo, Henderson Street — mature trees around Henderson State and Ouachita Baptist drop big limbs in storms. Older homes mean older trees with hidden decay. We see lots of limb-on-roof damage, broken-off oak branches across cars parked on the street, and full removals where the storm finished off a tree that was already declining.',
+  },
+  {
+    h: '🏘️ Country Club Drive & East Side',
+    p: 'Twin Rivers, Riverview, the streets off 9th. Big trees, big lots — when storms hit here, it’s typically multiple major limbs across landscaping, full pine failures threatening rooflines, and oak damage that requires careful removal to protect the rest of the canopy.',
+  },
+  {
+    h: '🛣️ Caddo Valley & I-30 Corridor',
+    p: 'Rural acreage, pine plantation, long driveways. Storm cleanup here means multi-tree damage across larger properties. Often 5 to 10 trees down at once, plus brush and debris across acres. We bring equipment scaled for the property size and clear methodically.',
+  },
+  {
+    h: '🌊 DeGray Lake & South Toward Gurdon',
+    p: 'Lakefront cabins around DeGray Lake Resort State Park and rural properties south toward Gurdon. Lakefront storm damage is its own challenge — trees down across docks, retaining walls compromised, steep slopes for cleanup. We’ve been doing this lakefront work for 24 years and know the access constraints.',
+  },
+];
+
+// Why Arkadelphia calls Plyler's for storm cleanup.
+const whyUs = [
+  { h: '📍 Local Since 2002', p: 'Twenty-four years of Clark County storm work. We’re not a "storm chaser" rolling in from Texas after the news. We live here.' },
+  { h: '⭐ 5.0 Stars · 70+ Reviews', p: 'Perfect Google rating from real Arkadelphia customers — including plenty of storm cleanup work. Read the reviews before you hire anyone after a storm.' },
+  { h: '📋 Insurance-Ready Documentation', p: 'Photos, itemized estimates, dated invoices, damage cause notes. Everything your adjuster needs. Every Arkansas insurer accepts our paperwork.' },
+  { h: '🛡️ Licensed & Insured', p: 'Full liability and workers’ comp on every job. We’ll show you proof before any equipment turns on.' },
+  { h: '🧹 Complete Cleanup', p: 'Brush chipped, logs hauled, debris removed, sawdust raked. Your yard is a yard again, not a war zone. Half our reviews mention cleanup specifically.' },
+  { h: '💬 Honest Recommendations', p: 'If a damaged tree can be saved with corrective trimming, we tell you that. If it has to come down, we tell you that too. No upsells.' },
+];
+
+const testimonials = [
+  'A big pine fell on our fence during a storm. They were out the next morning. Professional, fast, and they even fixed the fence section. Can’t say enough good things.',
+  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
+  'Best tree service around. They trimmed six trees in our yard and ground two stumps in one day. Left the yard cleaner than they found it.',
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Storm Damage Cleanup in Arkadelphia, AR',
+    serviceType: 'Storm damage cleanup',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Arkadelphia, Arkansas · Clark County"
+    title="Storm Damage Cleanup in Arkadelphia, AR"
+    subtitle="The storm has passed. Your yard looks like a war zone — downed trees, broken branches, debris everywhere. We're the Arkadelphia crew that comes in and puts it back together. Tree removal, brush hauling, full property cleanup since 2002."
+    image="/images/arkadelphia-ar-storm-damage-uprooted-oak-tree-removal.webp"
+    imageAlt="Storm-damaged uprooted oak being cleaned up in Arkadelphia, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Arkadelphia's storm cleanup crew — we live here too.</p>
+      <p class="lead">
+        When a major storm rolls through Clark County, every tree service in central Arkansas gets overwhelmed.
+        Out-of-area companies show up, charge inflated rates, and disappear once the work dries up. We’re different.
+        Plyler’s Tree Service is based right here in Arkadelphia, yard on Country Club Drive, and we’ve been the local
+        cleanup call since 2002.
+      </p>
+      <p class="measure" style="color:var(--muted)">
+        That means we’re already in town when the storm hits, we know which roads will be blocked first, and we don’t
+        disappear when the next county over has a bigger payday. Robbie Plyler answers the phone, walks your property,
+        and the same crew that gave the estimate does the work.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Storm Cleanup vs. Emergency Response — Which Do You Need?</h2>
+      <p>
+        Both involve storm-damaged trees, but they’re different services with different urgency levels. Read this
+        section first so you call us about the right thing.
+      </p>
+      <div class="grid grid-2" style="margin:1.5rem 0">
+        <div class="card">
+          <h3>🚨 Emergency Response</h3>
+          <p class="mb-0">
+            A tree is on your house right now, blocking your only way out, or actively threatening someone’s safety.
+            This can’t wait — we dispatch 24/7. See our
+            <a href="/emergency-tree-service-arkadelphia-ar">24/7 emergency tree service</a>.
+          </p>
+        </div>
+        <div class="card">
+          <h3>🧹 Storm Cleanup</h3>
+          <p class="mb-0">
+            The immediate danger has passed, but your property is covered in downed trees, hanging limbs, and debris
+            that need to be removed and hauled off. That’s this page.
+          </p>
+        </div>
+      </div>
+      <p>
+        Not sure which describes your situation? Call
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> and we’ll tell you straight. For the
+        broader picture of what we do across town, see our
+        <a href="/tree-service-arkadelphia-ar"> Arkadelphia tree service overview</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Storm Damage Cleanup Covers in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        "Cleanup" is broader than it sounds. A typical post-storm property in Clark County needs several things done
+        before it looks like a yard again.
+      </p>
+      <div class="grid grid-3">
+        {cleanupCovers.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">📋 Before You Touch Anything: Document for Insurance</h2>
+      <p>
+        If you’re planning to file a homeowner’s claim — and most major storm damage warrants it — document
+        everything <strong>before any cleanup happens</strong>. Once trees are sectioned and debris is hauled off, the
+        evidence is gone.
+      </p>
+      <ul class="checklist">
+        {insuranceDocs.map((d) => <li>{d}</li>)}
+      </ul>
+      <p>
+        For the full storm-aftermath checklist, see our guide on
+        <a href="/what-to-do-after-storm-tree-down-arkansas"> what to do after a storm tree down in Arkansas</a>.
+        When you call us, we provide insurance-ready itemized invoices and damage documentation — every Arkansas
+        homeowner’s insurer accepts our paperwork.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-green">
+    <div class="container">
+      <h2 class="center">How Storm Cleanup Works</h2>
+      <p class="center measure" style="margin-bottom:2.4rem;color:#bcd3c4">
+        Every storm-damaged property is different. A single oak down in the backyard is a half-day job. A property
+        with five trees down, hanging limbs across the canopy, and a quarter-acre of debris is a multi-day project.
+        Here’s how we work either one.
+      </p>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step">
+            <span class="step-num">{i + 1}</span>
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Why Arkadelphia Storms Cause So Much Tree Damage</h2>
+      <p>
+        Arkadelphia sits at the edge of the Ouachita Mountains in a band of central Arkansas that takes some of the
+        state’s most intense severe-weather activity. The combination of dense forest cover, mature trees in
+        residential areas, and frequent severe storms means our crews stay busy.
+      </p>
+      <p>
+        The 1997 F4 tornado that hit downtown Arkadelphia was the most destructive event in the town’s history, but it
+        wasn’t an isolated incident. Clark County deals with severe weather almost every spring — late March through
+        early June is peak season — and ice storms cycle through every few winters. The 2025 storm season did major
+        damage including ripping clock faces off the courthouse tower. Our equipment, our experience, and our response
+        protocols are built for what actually happens here.
+      </p>
+      <p>
+        Most-affected tree species in Clark County storms: loblolly pines (top snap and full failure in ice), water
+        oaks (limb drop in wind), sweetgums (shallow roots that uproot in saturated ground), and old pecans (heavy
+        limbs failing at attachment points). Each one fails differently and gets cleaned up differently.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Storm Cleanup Across Arkadelphia Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different parts of town mean different storm damage patterns. Here’s what we see most across the neighborhoods
+        we know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Working with Your Homeowner's Insurance</h2>
+      <p>
+        Most major storm cleanup work is at least partially covered by homeowner’s insurance. Here’s what’s typically
+        covered and how we help you through the process.
+      </p>
+      <p>
+        <strong>What’s usually covered:</strong> Removal of trees that fell on a structure (house, garage, carport,
+        fence, vehicle). Removal of trees blocking driveways or access. Damage to landscaping and the structure
+        itself. Costs to clear the property of debris that resulted from the storm event.
+      </p>
+      <p>
+        <strong>What’s usually NOT covered:</strong> Removal of trees that fell in your yard without damaging
+        anything. Removal of trees that were already declining before the storm. Routine pruning or maintenance you’d
+        been putting off. Preventative removal of trees you’ve been worried about.
+      </p>
+      <p>
+        <strong>What we provide for your claim:</strong> Itemized written estimate, dated photos of damage taken at
+        assessment, itemized invoice on completion, damage cause documentation when requested by adjusters. Every
+        Arkansas insurer we’ve worked with accepts our paperwork — we’ve been doing this for 24 years.
+      </p>
+      <p>
+        <strong>Don’t sign with the wrong contractor.</strong> After major storms, out-of-area "storm chaser"
+        companies show up offering to handle everything including your insurance claim. Many disappear with
+        deductibles and partial work done. We’re local, we have a verifiable history in Arkadelphia, and we don’t ask
+        you to sign over your insurance check.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">How Much Does Storm Cleanup Cost in Arkadelphia?</h2>
+      <p>Storm cleanup is priced by the scope, not by the hour. Three things move the price:</p>
+      <ul>
+        <li><strong>Total tree work involved.</strong> One tree removed and chipped is a different bill than five trees plus a half-acre of debris. We quote each removal separately so the invoice is itemized for your insurance.</li>
+        <li><strong>Brush and debris volume.</strong> Light debris (sticks, small branches, leaves) chips and hauls quickly. Major debris (large limbs, full trunks) takes more equipment time. We can quote chipping-only or full haul-off depending on whether you want to keep firewood.</li>
+        <li><strong>Access and complexity.</strong> Trees down in an open yard with truck access are straightforward. Trees down in tight residential lots, on slopes, or where damage to remaining structures must be avoided take more rigging time.</li>
+      </ul>
+      <p>
+        What stays the same: we give you the exact price in writing before any cleanup starts. No surprise charges.
+        The estimate is what you pay. For insurance-covered work, we coordinate documentation so you can submit the
+        claim seamlessly.
+      </p>
+      <p>
+        For an exact number on your property, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or fill out the estimate form. The estimate
+        is always free.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Storm Wrecked Your Yard?"
+    text="Call Robbie. He'll walk the property, give you a written itemized price, and his crew will put it back together. Insurance-ready documentation included."
+  />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Arkadelphia Calls Plyler's for Storm Cleanup</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        After major storms, lots of tree services show up in Arkadelphia. Here’s why locals keep calling us when the
+        dust settles.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Storm Cleanup Reviews from Arkadelphia Customers</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real storm cleanup jobs across Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Storm Cleanup Questions — Arkadelphia"
+    intro="Answers to what Arkadelphia homeowners ask us most about storm cleanup."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead">More Tree Services & Resources in Arkadelphia</p>
+      <p style="color:var(--muted)">
+        Storm cleanup is one piece of what we do across Clark County. Start with our full
+        <a href="/tree-service-arkadelphia-ar"> Arkadelphia tree service hub</a> for the complete picture, or jump
+        straight to:
+        <a href="/emergency-tree-service-arkadelphia-ar">24/7 Emergency Tree Service</a> ·
+        <a href="/tree-removal-arkadelphia-ar">Tree Removal Arkadelphia</a> ·
+        <a href="/tree-trimming-arkadelphia-ar">Tree Trimming Arkadelphia</a> ·
+        <a href="/stump-grinding-arkadelphia-ar">Stump Grinding Arkadelphia</a>
+      </p>
+      <p style="color:var(--muted)">
+        Helpful reading:
+        <a href="/what-to-do-after-storm-tree-down-arkansas">What to Do After a Storm Tree Down</a> ·
+        <a href="/when-to-remove-a-tree-arkadelphia">When to Remove a Tree in Arkadelphia</a> ·
+        <a href="/signs-tree-is-dying">Signs a Tree Is Dying</a> ·
+        <a href="/questions-to-ask-before-hiring-tree-service-arkansas">Questions to Ask Before Hiring</a>
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Get Your Property Cleaned Up — Arkadelphia"
+    text="We're right here in Arkadelphia — yard on Country Club Drive, equipment ready, crew local. Call Robbie, walk the property, get a written itemized price. We'll handle the rest. Insurance-ready paperwork included."
+  />
+</BaseLayout>
+
+<style>
+  .steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.6rem; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--amber-500); color: var(--green-900); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .step h3 { color: #fff; margin: 0 0 0.4rem; }
+  .step p { color: #c9ddcf; }
+  .checklist { margin: 0 0 1.2rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

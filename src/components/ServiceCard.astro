@@ -1,0 +1,22 @@
+---
+export interface Props { title: string; href: string; description: string; icon?: string; }
+const { title, href, description, icon = '🌳' } = Astro.props;
+---
+<a class="service-card" href={href}>
+  <span class="service-icon" aria-hidden="true">{icon}</span>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <span class="service-link">Learn more →</span>
+</a>
+<style>
+  .service-card {
+    display: flex; flex-direction: column; gap: 0.4rem; background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); color: var(--body);
+    transition: transform .15s ease, box-shadow .15s ease; height: 100%;
+  }
+  .service-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); text-decoration: none; }
+  .service-icon { font-size: 1.9rem; }
+  .service-card h3 { margin: 0.2rem 0 0; }
+  .service-card p { margin: 0; font-size: 0.97rem; }
+  .service-link { margin-top: auto; color: var(--green-700); font-weight: 700; font-size: 0.95rem; }
+</style>

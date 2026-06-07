@@ -1,0 +1,280 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+import maps from '../data/maps.json';
+
+const title = "Bismarck Tree Service | DeGray Lake, AR | Plyler's";
+const description =
+  "Bismarck, AR tree service. Removal, trimming, stump grinding, 24/7 storm cleanup across Hot Spring County & DeGray Lake. 20 min from Arkadelphia. 5.0 stars.";
+const path = '/tree-service-bismarck-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Bismarck', path },
+];
+const faq = faqData['tree-service-bismarck-ar'] ?? [];
+
+// What we do — the five core service summaries from the live page.
+const coreServices = [
+  {
+    h: 'Tree Removal',
+    p: "A storm-cracked pine leaning toward a Highway 7 home, a dead oak threatening a cabin on DeGray Lake, or a hardwood that's outgrown a rural lot off Highway 84 — we bring them down safe and haul off every branch. In-town lots, lakefront cabin sites, long-driveway rural acreage — doesn't matter. We handle it.",
+  },
+  {
+    h: 'Tree Trimming',
+    p: 'Pine branches scraping the roof of a lakefront cabin, oak limbs hanging over a driveway off Highway 7, sweetgum canopy blocking sunlight from the yard — we trim them back the right way. No topping, no hacking. Just proper cuts that keep the tree healthy and your property safe.',
+  },
+  {
+    h: 'Stump Grinding',
+    p: "That pine stump you've been mowing around for three years? We grind it 6 to 8 inches below ground and fill the hole. Flat enough to grow grass over or plant something new. We do multiple stumps in one trip and save you money.",
+  },
+  {
+    h: 'Emergency Storm Damage',
+    p: 'When a storm drops a tree on your house, blocks Highway 7, or takes out a power line at 2 a.m., call us any time — nights, weekends, holidays. Our crew is just 20 minutes south in Arkadelphia and can be on the way fast.',
+  },
+  {
+    h: 'Tree Assessments',
+    p: "Not sure if a tree needs to come down or just needs some work? Robbie has spent 24 years looking at trees across this area — reading the lean, checking the trunk, spotting root damage and disease that most people walk right past. He'll walk your property and give you a straight answer on what's healthy and what's a problem.",
+  },
+];
+
+// Why Bismarck calls first.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Google Reviews', p: 'A perfect rating from more than 70 homeowners who trusted us with their property. Not filtered, not fake — real people in Bismarck, DeGray Lake, and across the surrounding counties who picked up the phone and then took the time to say we did it right.' },
+  { h: '20 Minutes Up Highway 7 — In Bismarck Every Week', p: "We're based in Arkadelphia, just 20 minutes south of Bismarck on Highway 7. Our crews are in Bismarck and the DeGray Lake area multiple times a week — and there's never a trip fee or travel charge. The price is based on the job, not the drive." },
+  { h: '24 Years and Counting', p: "Robbie started this company in 2002. Fly-by-night outfits come through town every storm season and disappear a month later. We've been doing this for two decades and we're not going anywhere." },
+  { h: 'Licensed and Insured — Always', p: "Full liability and workers' comp on every job. If a branch nicks your gutter or a piece of equipment scratches your driveway, our insurance covers it. We'll show you proof before we ever start a saw." },
+  { h: 'Free Estimates — No Sales Pitch', p: "Robbie comes out, looks at the tree, and gives you an honest number in writing. If it doesn't need to come down, he'll tell you that. We don't push work you don't need just to fill a schedule." },
+  { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
+];
+
+// Lakefront / property breakdowns.
+const neighborhoods = [
+  {
+    h: '🛥️ DeGray Lake Cabin Lots',
+    p: "The cabin lots along DeGray's south shore — Edgewood, Iron Mountain Marina, Caddo Drive, and the wooded coves running back toward Highway 7 — have some of the tightest tree work in our entire service area. Steep banks dropping to the water, trees growing right up to the deck and dock, and equipment access that's often just a one-lane cut through the woods. We rope down sections rather than felling whole trees, coordinate with the cabin owner on debris staging, and don't drop anything into the lake.",
+  },
+  {
+    h: '🏕️ Seasonal Owners and Remote Coordination',
+    p: "A lot of DeGray cabin owners are seasonal — they're in Little Rock or Hot Springs or out of state most of the year. We're set up to handle that. We can walk the property, send photos and a written estimate, and schedule the work for when you're not there. Storm damage that happens in February doesn't have to wait until summer. We've been the eyes-on-the-ground for plenty of out-of-town property owners over 24 years.",
+  },
+  {
+    h: '🌊 Water-Line and Bank Trees',
+    p: "Trees growing right at the water line — willow oak, sweetgum, water oak, the occasional cypress — fail differently than upland trees. Roots compromised by lake-level fluctuation, banks undermined after a wet winter, sudden lean from soil that just lets go. The damage often doesn't show until the tree is already moving. We know what to look for, and we know how to take a leaning bank tree apart in sections without compromising the shoreline or dropping anything where it'll wash into the lake.",
+  },
+  {
+    h: '🌲 Bismarck Town and Highway 7 Properties',
+    p: 'Off the lake, Bismarck proper is rural-residential — homes along Highway 7 through town, properties off Highway 84, and the country roads heading east toward Donaldson. Mature shortleaf pine, post oak, hickory, and sweetgum dominate. Storms roll down out of the Ouachitas and hit this area hard, and we get called for storm cleanup across Bismarck more than just about any other Hot Spring County town. Same county as our home base — we know it well.',
+  },
+];
+
+const testimonials = [
+  'Did a great job keeping a big pine off my shop. Excellent.',
+  "Plyler's Tree Service come got a tree off my roof. The way it looked I figured it would mess up a lot but thanks to them they got it off no problems. They are very good at what they do. I would refer them to anyone.",
+  'Had storm damage with a tree on our roof. Robbie immediately came out and got it taken care of. Excellent work.',
+];
+
+// Towns in the service area.
+const towns = [
+  { h: 'Arkadelphia', p: 'Home base — Clark County seat, 20 minutes south on Highway 7.' },
+  { h: 'DeGray Lake', p: 'Cabin lots, lakefront properties, and the State Park.' },
+  { h: 'Donaldson', p: 'Hot Spring County — east of Bismarck, rural homes and acreage.' },
+  { h: 'Friendship', p: 'Hot Spring County — between Bismarck and Malvern.' },
+  { h: 'Glen Rose', p: 'Hot Spring County — rural properties north of Malvern.' },
+  { h: 'Malvern', p: 'Hot Spring County seat — 20 minutes east on Highway 84.' },
+  { h: 'Caddo Valley', p: 'North Clark County — I-30 corridor, between Bismarck and Arkadelphia.' },
+  { h: 'Bonnerdale', p: 'Garland County — west toward Hot Springs Village.' },
+  { h: 'Hot Springs', p: 'Garland County — 25 minutes north for residential and commercial work.' },
+  { h: 'Hot Springs Village', p: 'Garland County — wooded HOA lots and golf-course properties.' },
+  { h: 'Amity', p: 'West Clark County — Caddo River area.' },
+  { h: 'Gurdon', p: 'South Clark County on Highway 67 — established homes and acreage.' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Service in Bismarck, AR',
+    serviceType: 'Tree removal, trimming, stump grinding & storm cleanup',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Bismarck, Arkansas · Hot Spring County"
+    title="Tree Service in Bismarck, AR"
+    subtitle="The crew Bismarck homeowners and DeGray Lake cabin owners have trusted for over two decades. Tree removal, trimming, stump grinding, and same-day storm response — serving Bismarck and Hot Spring County from our Arkadelphia base, just 20 minutes south on Highway 7."
+    image="/images/glenwood-ar-large-tree-felling-chainsaw-professional.webp"
+    imageAlt="Professional felling a large tree with a chainsaw near Bismarck and DeGray Lake, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Bismarck's Tree Service Crew for Over 24 Years</p>
+      <p class="lead">
+        Plyler's Tree Service has been working in Bismarck since 2002. We know the homes along Highway 7 through town,
+        the wooded properties out toward Lake DeGray, the rural acreage off Highway 84, and the cabin lots scattered
+        along the south shore of DeGray Lake State Park. From in-town removals to long-driveway lakefront work, we've
+        handled tree jobs across every part of this area.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Bismarck's Tree Service Crew for Over 24 Years</h2>
+      <p>
+        Bismarck sits where the Ouachita foothills start to ease down into the timber country south of DeGray Lake — a
+        mix of mature pine, hardwood ridges, and lakefront cabin lots that don't look like any other terrain in our
+        service area. Storms roll in off the lake and the mountains beyond, and the canopy on a lot of these properties
+        has been growing tall since long before the houses showed up. When a pine comes down across Highway 7 at
+        midnight, or a dead oak threatens a cabin on the lake, you need somebody who knows the area. Our crew is based
+        20 minutes south in Arkadelphia and runs jobs up Highway 7 to Bismarck multiple times a week — no trip fee, no
+        travel charge.
+      </p>
+      <p>
+        We carry a perfect 5.0-star rating on Google with more than 70 reviews from homeowners across the area. Every
+        estimate is free, every price is in writing before we start, and we clean up everything before we leave. That's
+        how we've done it since day one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What We Do in Bismarck</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every service a homeowner or cabin owner in Hot Spring County could need — all from one local crew.
+      </p>
+      <div class="grid grid-3">
+        {coreServices.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ServicesGrid current={path} />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Bismarck Calls Plyler's First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Your Neighbors Are Saying</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Bismarck, DeGray Lake, and Hot Spring County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">DeGray Lake Cabin Lots and Recreational Property Tree Work</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Bismarck is the southern gateway to DeGray Lake — and lakefront tree work is its own specialty. Steep banks,
+        tight cabin lots, water-line trees that fail in surprising ways. Here's what makes the work different out here.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Serving Bismarck and the DeGray Lake Area</h2>
+      <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">
+        Arkadelphia is home base. Our crews head out from here every morning and cover a full 40-mile radius —
+        including Bismarck, DeGray Lake, and the rest of Hot Spring County, just 20 minutes north on Highway 7. No trip
+        fee, no travel charge — the price is based on the job, not the drive.
+      </p>
+      <MapEmbed src={maps[path]} title="Bismarck service area map" />
+      <div class="grid grid-3" style="margin-top:2.4rem">
+        {towns.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        We also serve: Lake Catherine, Magnet Cove, Perla, Lonsdale, Pearcy, Mountain Pine, Glenwood, Mount Ida,
+        Murfreesboro, and the surrounding south-central Arkansas region. Don't see your town? Give us a call at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — if you're nearby, we'll make it work.
+      </p>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Service Questions — Bismarck"
+    intro="Answers to the things Bismarck homeowners and DeGray Lake property owners ask us most."
+  />
+
+  <CtaBand
+    title="Ready to Get That Tree Taken Care Of?"
+    text="We serve Bismarck from our home base in Arkadelphia — just 20 minutes south on Highway 7. Call Robbie, tell him what's going on, and we'll have somebody at your property to give you an honest price. No charge for the estimate. No obligation to say yes. ⭐ 5.0 Stars · 70+ Google Reviews · 24+ Years in Arkadelphia · Serving Bismarck & Hot Spring County · Licensed & Insured."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

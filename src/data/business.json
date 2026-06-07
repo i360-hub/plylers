@@ -1,0 +1,39 @@
+{
+  "name": "Plyler's Tree Service",
+  "legalName": "Plyler's Tree Service",
+  "url": "https://www.plylerstreeservice.com",
+  "email": "info@plylerstreeservice.com",
+  "phoneDisplay": "(870) 245-7944",
+  "phoneHref": "+18702457944",
+  "phoneSchema": "+1-870-245-7944",
+  "address": {
+    "locality": "Arkadelphia",
+    "region": "AR",
+    "postalCode": "71923",
+    "country": "US"
+  },
+  "geo": { "lat": 34.1209, "lng": -93.0538 },
+  "priceRange": "$$",
+  "founded": "2002",
+  "owner": "Robbie Plyler",
+  "yearsExperience": "24+",
+  "hours": [
+    { "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "18:00", "label": "Mon–Fri: 7:00 AM – 6:00 PM" },
+    { "days": ["Saturday"], "opens": "07:00", "closes": "14:00", "label": "Sat: 7:00 AM – 2:00 PM" }
+  ],
+  "hoursNote": "24/7 emergency response",
+  "rating": { "value": "5.0", "count": "70" },
+  "social": {
+    "facebook": "https://www.facebook.com/p/Plylers-Tree-Service-100093509250624/",
+    "googleMaps": "https://www.google.com/maps/place/Plylers+Tree+Service",
+    "bbb": "https://www.bbb.org/us/ar/arkadelphia/profile/tree-service/plylers-tree-service-0935-90410363",
+    "yelp": "https://www.yelp.com/biz/plyler-s-tree-service-arkadelphia"
+  },
+  "embeds": {
+    "ghlFormId": "4GbeOTv0UeNs4bE2JDAe",
+    "ghlFormSrc": "https://api.leadconnectorhq.com/widget/form/4GbeOTv0UeNs4bE2JDAe",
+    "ghlFormTitle": "Plylers Landing Page Contact Form",
+    "reviewsWidgetSrc": "https://reputationhub.site/reputation/widgets/review_widget/gmgznEWM6sm6aqWPghSP",
+    "ga4Id": "G-911S3HC2CY"
+  }
+}

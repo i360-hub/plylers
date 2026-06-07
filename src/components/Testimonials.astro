@@ -1,0 +1,31 @@
+---
+import testimonials from '../data/testimonials.json';
+import business from '../data/business.json';
+const { heading = 'What Your Neighbors Are Saying', intro = 'Real reviews from real people right here in Clark County.', alt = false } = Astro.props;
+---
+<section class={`testi section ${alt ? 'section-alt' : ''}`}>
+  <div class="container">
+    <h2 class="center">{heading}</h2>
+    <p class="center lead measure testi-intro">{intro}</p>
+    <div class="grid grid-3">
+      {testimonials.map((t) => (
+        <figure class="testi-card">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>{t.text}</blockquote>
+          <figcaption>— {t.author}, {t.location}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="center testi-cta">
+      <a class="btn btn-green" href="/reviews">Read all {business.rating.count}+ Google reviews →</a>
+    </p>
+  </div>
+</section>
+<style>
+  .testi-intro { margin-bottom: 2rem; color: var(--muted); }
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+  .testi-card figcaption { margin-top: auto; color: var(--muted); font-size: 0.9rem; font-weight: 600; }
+  .testi-cta { margin-top: 2rem; }
+</style>

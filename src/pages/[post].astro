@@ -1,0 +1,124 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, SITE, ORG_ID, WEBSITE_ID, LOCALBUSINESS_ID } from '../lib/schema';
+
+// Blog POSTS render at ROOT-level slugs (e.g. /signs-tree-is-dying), NOT under /blog/.
+// The /blog page (blog.astro) is only the index. Preserve these exact slugs.
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { post: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, description, pubDate, updatedDate, heroImage, heroAlt, author } = post.data;
+
+const path = `/${post.id}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Blog', path: '/blog' },
+  { name: title, path },
+];
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+const pubDisplay = dateFmt.format(pubDate);
+const pubISO = pubDate.toISOString();
+const modISO = (updatedDate ?? pubDate).toISOString();
+const imageAbs = heroImage.startsWith('http') ? heroImage : `${SITE}${heroImage}`;
+
+const schema = [
+  {
+    '@type': 'BlogPosting',
+    '@id': `${SITE}${path}#blogposting`,
+    headline: title,
+    description,
+    datePublished: pubISO,
+    dateModified: modISO,
+    image: imageAbs,
+    author: { '@type': 'Person', name: author },
+    publisher: { '@id': ORG_ID },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}${path}` },
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    url: `${SITE}${path}`,
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+];
+---
+<BaseLayout
+  title={title}
+  description={description}
+  path={path}
+  ogType="article"
+  ogImage={heroImage}
+  schema={schema}
+>
+  <Breadcrumbs items={crumbs} />
+
+  <article class="post">
+    <div class="container post-inner">
+      <header class="post-header">
+        <h1>{title}</h1>
+        <p class="byline">
+          By {author} <span aria-hidden="true">·</span>
+          <time datetime={pubISO}>{pubDisplay}</time>
+        </p>
+      </header>
+
+      <img
+        class="hero"
+        src={heroImage}
+        alt={heroAlt}
+        width="1200"
+        height="675"
+        loading="eager"
+        decoding="async"
+      />
+
+      <div class="post-body">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .post { padding-block: clamp(2rem, 5vw, 3.5rem); }
+  .post-inner { display: flex; flex-direction: column; }
+  .post-header { max-width: 760px; margin: 0 auto; }
+  .post-header h1 { margin: 0 0 0.6rem; line-height: 1.15; }
+  .byline { color: var(--muted); font-size: 0.95rem; margin: 0 0 1.6rem; }
+  .byline time { white-space: nowrap; }
+  .hero {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+  }
+  .post-body { max-width: 760px; margin: 0 auto; font-size: 1.05rem; line-height: 1.75; }
+  .post-body :global(h2) { margin-top: 2.4rem; margin-bottom: 0.8rem; font-size: 1.5rem; line-height: 1.25; }
+  .post-body :global(h3) { margin-top: 1.8rem; margin-bottom: 0.6rem; font-size: 1.2rem; }
+  .post-body :global(p) { margin: 0 0 1.2rem; }
+  .post-body :global(ul),
+  .post-body :global(ol) { margin: 0 0 1.2rem; padding-left: 1.4rem; }
+  .post-body :global(li) { margin-bottom: 0.5rem; }
+  .post-body :global(a) { color: var(--green-700); text-decoration: underline; text-underline-offset: 2px; }
+  .post-body :global(a:hover) { color: var(--green-800); }
+  .post-body :global(strong) { color: var(--ink); font-weight: 700; }
+</style>

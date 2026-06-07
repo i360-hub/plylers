@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Testimonials from '../components/Testimonials.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, service, LOCALBUSINESS_ID, WEBSITE_ID, ORG_ID, SITE } from '../lib/schema';
+import business from '../data/business.json';
+
+const title = "About Plyler's Tree Service | Arkadelphia AR";
+const description =
+  "Meet Robbie Plyler — owner since 2002. 24+ years of tree service in Arkadelphia & Clark County. 5.0 stars, 70+ Google reviews. Licensed & insured.";
+const path = "/about";
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path }];
+
+const values = [
+  { h: '24 Years of Doing This', p: "Robbie Plyler started this company in 2002. Two decades of experience on every job." },
+  { h: 'Licensed and Insured', p: "Full liability coverage. If anything goes wrong, you're protected. Period." },
+  { h: 'Free Estimates, No Pressure', p: 'We come out, look at the job, and give you an honest price. No obligation.' },
+  { h: 'We Clean Up Everything', p: 'When we leave, your yard looks better than when we got there. Every time.' },
+  { h: '24/7 Emergency Calls', p: 'Storm at midnight? Big limb on your roof? Call us. We answer and we show up.' },
+  { h: 'Local People, Local Company', p: "We live here. Our kids go to school here. We treat your property like it's our own." },
+];
+
+const byTheNumbers = [
+  { n: '24+', l: 'Years in Business' },
+  { n: '5.0', l: 'Google Rating' },
+  { n: `${business.rating.count}+`, l: 'Five-Star Reviews' },
+  { n: '40 mi', l: 'Service Radius' },
+];
+
+const faq = [
+  {
+    q: 'How long has Plyler’s Tree Service been in business?',
+    a: 'Since 2002. Robbie Plyler started the company right here in Arkadelphia and has been running it for over 24 years. In that time the crew has removed thousands of trees, trimmed countless more, and ground out more stumps than Robbie can count across Clark County and the surrounding area.',
+  },
+  {
+    q: 'Are you licensed and insured?',
+    a: 'Yes. We carry full general liability and Arkansas-compliant workers’ compensation coverage. If anything goes wrong on your property, you’re protected. We’ll show you proof of insurance before any work begins — never hire a tree company that can’t.',
+  },
+  {
+    q: 'What areas do you serve?',
+    a: 'We’re based in Arkadelphia and work within a 40-mile radius covering Clark, Garland, Hot Spring, Pike, and Montgomery counties — including Hot Springs, Malvern, Gurdon, Glenwood, Bismarck, Caddo Valley, Amity, and the towns in between. There’s no trip fee for any town inside that radius; the price is based on the job, not the drive.',
+  },
+  {
+    q: 'What kind of tree work do you do?',
+    a: 'Four things, and we do them well: tree removal, tree trimming and pruning, stump grinding, and emergency storm damage cleanup. We work on residential homes, rental properties, churches, businesses, and rural land — anything that involves a tree within 40 miles of Arkadelphia.',
+  },
+  {
+    q: 'What makes Plyler’s different from a bigger company?',
+    a: 'We’re not a franchise and we’re not a call center. When you call, you’re talking to Robbie or one of his guys. Robbie still runs every job himself, answers his own phone, and gives you a straight price in writing — no sales pitch, no surprise charges, no upselling. The price we quote is the price you pay.',
+  },
+  {
+    q: 'Do you clean up after the job?',
+    a: 'Every time. We chip the brush, haul off the wood, and rake the yard before we leave. When we’re done, you wouldn’t know we were there — except the problem tree is gone.',
+  },
+];
+
+const schema = [
+  {
+    '@type': 'AboutPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+    publisher: { '@id': ORG_ID },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <section class="section">
+    <div class="container">
+      <div class="about-hero">
+        <div>
+          <p class="eyebrow">About Plyler's Tree Service</p>
+          <h1>Locally Owned by Robbie Plyler Since 2002</h1>
+          <p class="lead">
+            Twenty-four years of honest work and clean yards. Locally owned by Robbie Plyler right here in
+            Arkadelphia, Arkansas.
+          </p>
+        </div>
+        <img
+          src="/images/arkadelphia-ar-arborist-rope-climb-tall-tree-removal.webp"
+          alt="Arborist rope-climbing a tall tree during removal in Arkadelphia, AR"
+          width="640"
+          height="480"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2>Meet Robbie Plyler</h2>
+      <p>
+        Robbie Plyler started Plyler's Tree Service in 2002 right here in Arkadelphia, Arkansas. He grew up in
+        Clark County, knows every back road in the area, and has been climbing and cutting trees since he was a
+        young man. What started as one guy with a truck and a chainsaw has grown into one of the most trusted tree
+        services in southern Arkansas — but the approach hasn't changed. Robbie still runs every job himself. He
+        answers his own phone. He shows up to your property, looks at the tree, and tells you exactly what it'll
+        cost. No sales pitch, no runaround.
+      </p>
+      <p>
+        Over the past 24 years, Robbie and his crew have removed thousands of trees, trimmed countless more, and
+        ground out more stumps than he can count. They've pulled trees off houses after tornadoes, cleared
+        driveways at midnight after ice storms, and helped families get their property back to normal when they
+        didn't know who else to call. That kind of work builds a reputation — and it's why Plyler's Tree Service
+        has a perfect 5.0-star rating on Google with more than {business.rating.count} reviews.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2>How We Do Business</h2>
+      <p>
+        <strong>We show up when we say we will.</strong> If we say we'll be there Tuesday morning, we're there
+        Tuesday morning. Your time matters and we don't waste it.
+      </p>
+      <p>
+        <strong>We give you a fair, honest price.</strong> You get the real number before we start. No hidden fees,
+        no surprise charges, no upselling. The price we quote is the price you pay.
+      </p>
+      <p>
+        <strong>We tell you the truth about your tree.</strong> If a tree can be saved with a trim, we'll tell you
+        that. If it needs to come down, we'll tell you that too. We're straight with you either way.
+      </p>
+      <p>
+        <strong>We treat your yard like our own.</strong> Because we do live here. When we leave your property, you
+        wouldn't know we were there — except the problem tree is gone.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-green">
+    <div class="container">
+      <h2 class="center">Plyler's Tree Service by the Numbers</h2>
+      <div class="numbers">
+        {byTheNumbers.map((b) => (
+          <div class="num-card">
+            <span class="num">{b.n}</span>
+            <span class="num-label">{b.l}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2>What We Do</h2>
+      <p>
+        We handle four things and we do them well:
+        <a href="/tree-removal">tree removal</a>, <a href="/tree-trimming">tree trimming and pruning</a>,
+        <a href="/stump-grinding">stump grinding</a>, and
+        <a href="/emergency-storm-damage">emergency storm damage cleanup</a>. We work on residential homes, rental
+        properties, churches, businesses, and rural land. If it involves a tree in Clark County or anywhere within
+        40 miles of Arkadelphia, we can take care of it.
+      </p>
+
+      <h2>Where We Work</h2>
+      <p>
+        Arkadelphia, Hot Springs, Hot Springs Village, Malvern, Gurdon, Glenwood, Bismarck, Caddo Valley, Prescott,
+        Camden, Amity, and everywhere in between. If you're in Clark County or a neighboring county — Garland, Hot
+        Spring, Pike, or Montgomery — give us a call.
+      </p>
+      <blockquote class="owner-quote">
+        "I've been doing this my whole adult life. I'm not a franchise. I'm not a call center. When you call Plyler's
+        Tree Service, you're talking to me or one of my guys. We treat every yard like it's our own because we live
+        right here in the same town you do."
+        <cite>— Robbie Plyler, Owner</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Folks Around Here Call Us First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">We show up, do the work right, and leave your yard clean.</p>
+      <div class="grid grid-3">
+        {values.map((v) => (
+          <div class="card">
+            <h3>{v.h}</h3>
+            <p class="mb-0">{v.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Testimonials />
+
+  <FaqSection
+    items={faq}
+    heading="About Plyler's Tree Service — Common Questions"
+    intro="A few things folks ask us before they call."
+  />
+
+  <CtaBand
+    title="Ready to Get That Tree Taken Care Of?"
+    text="Call Robbie. He'll come look at it, give you a straight price, and get it done right."
+  />
+
+  <GhlForm heading="Get Your Free Estimate" />
+</BaseLayout>
+
+<style>
+  .about-hero { display: grid; gap: 2rem; grid-template-columns: 1.1fr 0.9fr; align-items: center; }
+  .about-hero h1 { margin: 0.3rem 0 0.8rem; }
+  .about-hero img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow); aspect-ratio: 4/3; }
+  @media (max-width: 760px) { .about-hero { grid-template-columns: 1fr; } }
+  .numbers { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-top: 1.5rem; }
+  .num-card { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.6rem 1rem; text-align: center; }
+  .num { font-size: 2.2rem; font-weight: 800; color: var(--amber-500); line-height: 1; }
+  .num-label { color: #c9ddcf; font-weight: 600; font-size: 0.95rem; }
+  .owner-quote { margin: 2rem 0 0; padding: 1.4rem 1.6rem; border-left: 4px solid var(--green-600); background: var(--bg-alt); border-radius: var(--radius); font-size: 1.05rem; font-style: italic; color: var(--body); }
+  .owner-quote cite { display: block; margin-top: 0.8rem; font-style: normal; font-weight: 700; color: var(--ink); font-size: 0.95rem; }
+</style>

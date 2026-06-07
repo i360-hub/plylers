@@ -1,0 +1,11 @@
+# robots.txt — Plyler's Tree Service
+# Production-ready. NOTE: on the *.pages.dev staging preview, indexing is additionally
+# blocked via the X-Robots-Tag: noindex header in public/_headers (remove at cutover).
+
+User-agent: *
+Allow: /
+
+# Be explicit that nothing is off-limits to search crawlers
+Disallow:
+
+Sitemap: https://www.plylerstreeservice.com/sitemap-index.xml

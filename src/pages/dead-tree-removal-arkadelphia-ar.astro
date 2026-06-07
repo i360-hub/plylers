@@ -1,0 +1,379 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+
+const title = "Dead Tree Removal Arkadelphia AR | Plyler's Tree Service";
+const description =
+  "Dead tree removal in Arkadelphia, AR since 2002. Safe takedown of brittle oaks, pines & hollow pecans before they fall. Free estimates, 5.0 stars.";
+const path = '/dead-tree-removal-arkadelphia-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Arkadelphia', path: '/tree-service-arkadelphia-ar' },
+  { name: 'Dead Tree Removal', path },
+];
+
+// Dead tree removals we handle in Arkadelphia.
+const removals = [
+  { h: 'Dead Loblolly Pines', p: 'The most common dead-tree call we get. Pine beetle damage, drought stress, lightning strikes. Dead pines are especially dangerous because they lose internal strength fast and fail without warning — usually toward whatever’s downwind.' },
+  { h: 'Dying Water & Post Oaks', p: 'Common in the older neighborhoods around HSU and OBU. Oak decline can take years — partial canopy dieback, hollow trunk, mushroom growth at the base. By the time you notice, the wood is often already brittle.' },
+  { h: 'Hollow Pecans', p: 'Old pecans across Arkadelphia neighborhoods. The trees can stand for years with major internal cavities — looking fine from outside while the trunk is essentially a shell. Storm winds eventually finish them off.' },
+  { h: 'Dead Sweetgums', p: 'Shallow-rooted, often the first species to die during drought years. Usually the call is "this sweetgum lost half its canopy last summer and the rest didn’t come back this spring." Straightforward removal, but the brittle wood requires care.' },
+  { h: 'Lightning-Strike Trees', p: 'Visible damage strip from crown to root flare, sometimes with bark blasted away. May survive the strike but often dies over the next year. We assess whether removal is needed now or whether you can wait and watch.' },
+  { h: 'Dead Trees Leaning Toward Structures', p: 'The priority calls. A dead tree leaning toward a house, garage, or fence is a question of when, not if. Section-by-section removal with rigging to protect what’s behind it. Most-requested service after major storm seasons.' },
+];
+
+// What's killing trees in Arkadelphia.
+const causes = [
+  { h: 'Pine Beetle Infestation', p: 'Southern pine beetles cycle through Arkansas every several years and can wipe out loblolly stands. Look for popcorn-sized resin tubes (pitch tubes) on the bark and sawdust at the base. Once heavily infested, a pine can die in weeks.' },
+  { h: 'Drought Stress', p: 'Arkansas summers run hot. Multiple drought years in a row weaken trees, especially shallow-rooted species like sweetgum. Even after rain returns, the tree may be too far gone to recover.' },
+  { h: 'Construction Damage', p: 'Roots cut during driveway work, soil compaction from heavy equipment, grade changes that bury or expose the root flare — most "sudden" tree deaths trace back to construction work 3 to 7 years earlier.' },
+  { h: 'Old Age', p: 'Different species have different lifespans. Loblolly pines maybe 100 years, water oaks 150, post oaks 300+, pecans 200+. Many of the trees in older Arkadelphia neighborhoods around Henderson State and Ouachita Baptist are nearing the end of their natural lifespan and showing it.' },
+  { h: 'Lightning, Wind, Ice', p: 'Storm events that don’t kill a tree outright often damage the cambium layer in ways that take years to show. The tree limps along, then dies suddenly several seasons later.' },
+  { h: 'Root Disease & Decay Fungi', p: 'Armillaria root rot, oak wilt (uncommon but present), and various wood-decay fungi can kill trees from the ground up. Visible mushrooms or conks usually mean the disease is advanced.' },
+];
+
+// How we remove a dead tree safely.
+const process = [
+  { h: 'Hazard Assessment', p: 'Robbie walks the tree, evaluates how dead it actually is, checks structural integrity, and identifies hollow sections and decay zones. Some "dead" trees are partially salvageable; some look fine but are critically compromised. We tell you straight what we find.' },
+  { h: 'Plan for Brittleness', p: 'Different approach than live tree removal. We assume branches won’t hold weight, anchor points may fail, and pieces will break unpredictably. Rigging plans are built around containment, not just direction.' },
+  { h: 'Bucket Truck or Ground Drop When Possible', p: 'If access allows, we use the bucket truck or fell the tree from the ground rather than sending a climber up a structurally compromised tree. Safer for everyone. Climbing a dead tree happens only when the situation absolutely requires it.' },
+  { h: 'Full Cleanup & Optional Grinding', p: 'Brush chipped, wood hauled (or cut for firewood if you want it kept — though dead-tree wood is often punky), debris cleared. Stump grinding is a natural add-on.' },
+];
+
+// Dead tree patterns across Arkadelphia neighborhoods.
+const neighborhoods = [
+  { h: '🎓 Henderson State & OBU Areas', p: 'Pine Street, 10th Street, Walnut, Caddo, Henderson Street — old neighborhoods around Henderson State and Ouachita Baptist with mature trees nearing the end of their lifespan. We see dying water oaks, hollow pecans, and old declining shade trees. Rental properties especially often have dead trees that have been ignored for years.' },
+  { h: '🏘️ Country Club Drive & East Side', p: 'Twin Rivers, Riverview, the streets off 9th. Big mature trees on larger lots. Common calls: dead loblolly pines threatening rooflines, dying canopy oaks near homes, mature pecans with cavity decay. Often higher-value structures mean urgent priority removal.' },
+  { h: '🛣️ Caddo Valley & I-30 Corridor', p: 'Rural acreage with pine plantations and mixed hardwood stands. Pine beetle outbreaks hit these areas hardest — sometimes multiple dead loblollies clustered together. We do volume work in these situations, knocking out several dead trees in one visit.' },
+  { h: '🌊 DeGray Lake & South Toward Gurdon', p: 'Lakefront properties around DeGray Lake Resort State Park often have dead pines threatening cabins, docks, and retaining walls. Lakefront dead-tree removal requires extra care with the steep slopes and tight access — exactly the work we’ve been doing on DeGray for 24 years.' },
+];
+
+// Why Arkadelphia calls Plyler's for dead tree removal.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Reviews', p: 'Perfect Google rating from real Arkadelphia customers — including plenty of dead-tree removals over the years.' },
+  { h: '📍 Equipment Staged in Arkadelphia', p: 'Bucket truck, chippers, rigging gear, stump grinder — all at our yard on Country Club Drive. Already here when you need us.' },
+  { h: '🪓 24 Years of Dead-Tree Work', p: 'Thousands of dead trees removed in this town. Robbie has seen every failure mode in every species — and brought every one of them down safely.' },
+  { h: '📋 Licensed and Insured', p: 'Full liability and workers’ comp — critical on dead-tree jobs where risk is higher. We’ll show you proof before any saw turns on.' },
+  { h: '💬 Honest Assessments', p: 'If a tree isn’t actually dead and can be saved, we tell you that. If it’s worse than it looks and needs urgent removal, we tell you that too. No upsells, no scare tactics.' },
+  { h: '🧹 Complete Cleanup', p: 'Brush chipped, wood hauled, sawdust raked. Even the messiest dead-tree job leaves your yard looking better than when we got there.' },
+];
+
+const testimonials = [
+  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
+  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
+  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
+];
+
+// FRESH FAQ — generated for this thin page in the local, plainspoken Plyler's voice.
+const faq = [
+  {
+    q: 'Do I need a permit to remove a dead tree in Arkadelphia?',
+    a: 'For a dead tree on your own residential property, no. The City of Arkadelphia does not require a permit to remove trees on private land. If the dead tree sits in a public right-of-way, hangs over a road, or is right on a property line, it’s worth a quick call to the city building department before we start. We handle that conversation for you when it comes up.',
+  },
+  {
+    q: 'How do I know if my tree is actually dead or just stressed?',
+    a: 'A few tells: no leaves in summer, bark sloughing off in sheets, brittle twigs that snap instead of bending, mushrooms or conks at the base, and woodpecker activity drilling for insects. Some trees are only partly dead and can be saved with pruning. That’s why we come look in person before recommending removal — sometimes the tree has more life in it than it appears, and sometimes it’s worse than it looks from the ground.',
+  },
+  {
+    q: 'Why does dead tree removal cost more than removing a live tree?',
+    a: 'Three reasons. The brittle wood is unpredictable — branches snap early and pieces fall where you don’t expect, so we spend more time on rigging and safety planning. We often can’t safely climb a dead tree, which means using the bucket truck or felling whole. And dead, punky wood is harder to chip and sometimes has to be hauled in larger pieces. You get the exact price in writing before we start, and even at the higher end it’s fair for the risk involved.',
+  },
+  {
+    q: 'How urgent is it to take down a dead tree on my Arkadelphia property?',
+    a: 'It depends on what the tree could hit. If it’s leaning toward a house, garage, fence, driveway, or power line — or it’s taller than its distance from a structure — get it down soon, because a dead tree comes down on its own schedule and ours is usually faster. A dead tree out on open acreage where it can fall harmlessly can often wait. When you’re unsure, the assessment is free and Robbie will tell you straight which category yours falls in.',
+  },
+  {
+    q: 'What kinds of dead trees do you see most around Clark County?',
+    a: 'Dead loblolly pines top the list — pine beetles, drought, and lightning take them out fast, and they fail without much warning. After that it’s declining water and post oaks in the older neighborhoods near Henderson State and OBU, hollow pecans that look solid until a storm finds the cavity, and shallow-rooted sweetgums that die off in dry years. After 24 years here, we know how each species fails and plan the takedown around it.',
+  },
+  {
+    q: 'Will you clean up everything, including the dead wood?',
+    a: 'Yes. We chip the brush, haul the wood, and rake the sawdust so the spot is clean when we leave. Dead-tree wood is often punky and doesn’t make great firewood, but if you want it cut and kept we’ll do that. Stump grinding is an easy add-on if you’d rather not be left with a stump where the dead tree stood.',
+  },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Dead Tree Removal in Arkadelphia, AR',
+    serviceType: 'Dead & hazardous tree removal',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Arkadelphia, Arkansas · Clark County"
+    title="Dead Tree Removal in Arkadelphia, AR"
+    subtitle="That oak in your backyard with no leaves this summer. The pine leaning toward the carport. The pecan that's been dropping branches every storm. Dead and dying trees don't wait — they come down on their own schedule. Our Arkadelphia crew handles them safely before they fall on your house."
+    image="/images/arkadelphia-ar-hazardous-leaning-pine-tree-before-removal.webp"
+    imageAlt="Hazardous leaning dead pine tree in Arkadelphia, AR before removal"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">The Arkadelphia Crew That Takes Down Dead Trees Safely</h2>
+      <p>
+        Plyler's Tree Service is based right here in <a href="https://clarkcountyar.gov/" target="_blank" rel="noopener">Clark County</a>,
+        with our equipment yard on Country Club Drive in Arkadelphia. Owner Robbie Plyler has been assessing and removing
+        dead trees in this town for over 24 years — water oaks, loblolly pines, pecans, sweetgums, all of them. He knows
+        what dies, why it dies, and how to bring it down without taking your house with it.
+      </p>
+      <p>
+        Dead tree removal is the riskiest work in this industry. The wood is brittle, the structure is compromised, and
+        what looks solid from the ground may be hollow at the trunk. That's why you want a crew that's done it thousands
+        of times — not the cheapest bid from a guy with a chainsaw.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">How to Tell if a Tree Is Dead or Dying</h2>
+      <p>
+        Most homeowners can spot an obvious dead tree — no leaves in summer, bark falling off in sheets. The harder calls
+        are trees that are partially dead, declining, or look fine from the ground but are failing internally.
+      </p>
+      <p>
+        If you're spotting any of these, the tree needs assessment. For more detail on diagnosis, see our guide on
+        <a href="/signs-tree-is-dying">signs a tree is dying</a>. Then call us for a free in-person look.
+      </p>
+      <h3>⚠️ Why Dead Trees Are Especially Dangerous to Remove</h3>
+      <p>
+        Live tree removal is hard work but predictable — green wood is strong, the structure is intact, branches do what
+        you expect when they're cut. Dead tree removal is a different animal entirely.
+      </p>
+      <ul>
+        <li><strong>Dead wood is brittle.</strong> A branch you'd swear could hold your weight snaps off when a saw touches it. The whole tree can react unpredictably when a single piece is cut.</li>
+        <li><strong>The internal structure may be compromised.</strong> A tree that looks solid from outside can be hollow, partially rotted, or held together by what's left of the bark. We've seen trunks that crumbled when the saw went in.</li>
+        <li><strong>Falling pieces don't fall where you expect.</strong> Dead wood doesn't behave like green wood when it hits the ground or other branches. Bounce, kickback, secondary failures — all more likely.</li>
+        <li><strong>Climbing a dead tree is uniquely hazardous.</strong> Climbers can't trust the limbs to hold weight. Anchor points may fail. This is the work that gets even experienced climbers killed.</li>
+      </ul>
+      <p>
+        This isn't fearmongering — it's why dead tree removal costs what it costs and why we recommend it never be a DIY
+        job. Our 24 years of doing this work and our liability insurance exist exactly for these situations.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Dead Tree Removals We Handle in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every dead tree is its own job, but they fall into recognizable categories. Here's what we see most across Clark County properties.
+      </p>
+      <div class="grid grid-3">
+        {removals.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What's Killing Trees in Arkadelphia?</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        After 24 years of assessing dying trees across Clark County, we see the same handful of culprits over and over.
+        Knowing what's killing your tree helps you decide whether neighboring trees are at risk too.
+      </p>
+      <div class="grid grid-3">
+        {causes.map((c) => (
+          <div class="card">
+            <h3>{c.h}</h3>
+            <p class="mb-0">{c.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        For the broader picture of what we do across town, see our
+        <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service overview</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">How We Remove a Dead Tree Safely</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        The process is different from removing a live tree. Here's how it works.
+      </p>
+      <div class="grid grid-2">
+        {process.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        Stump grinding is a natural add-on — see our <a href="/stump-grinding-arkadelphia-ar">stump grinding page</a> for details.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">When Should You Remove a Dead Tree?</h2>
+      <p>Not every dead tree is an emergency, but most need handling sooner than later. Here's how to prioritize.</p>
+      <h3>Remove immediately if:</h3>
+      <ul>
+        <li>The tree is leaning toward a house, garage, fence, or anything you care about</li>
+        <li>The tree is taller than its distance from a structure (if it falls, it hits the building)</li>
+        <li>You see new cracks, fresh bark loss, or movement in the root plate</li>
+        <li>Branches have already started dropping</li>
+        <li>The tree is near power lines or a driveway</li>
+      </ul>
+      <h3>Schedule removal within a few months if:</h3>
+      <ul>
+        <li>The tree is dead but in an open area where it can fall harmlessly</li>
+        <li>It's dead but small enough that failure isn't catastrophic</li>
+        <li>You're planning landscaping work in that area anyway</li>
+        <li>Other dead trees nearby — combine the visit</li>
+      </ul>
+      <h3>Watch and reassess if:</h3>
+      <ul>
+        <li>The tree shows some decline but still has significant live canopy</li>
+        <li>It's on rural acreage well away from any target</li>
+        <li>It's a wildlife snag (standing dead tree useful for birds and small mammals) far from any structure</li>
+      </ul>
+      <p>
+        If you're not sure which category your tree falls in, the assessment is free. Call
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> and Robbie will come look. For the broader
+        decision framework, see <a href="/when-to-remove-a-tree-arkadelphia">when to remove a tree in Arkadelphia</a> and
+        <a href="/is-my-tree-too-close-to-my-house-arkansas">is my tree too close to my house</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Dead Tree Patterns Across Arkadelphia Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different parts of town show different dead-tree patterns. Here's what we see most across the neighborhoods we know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">How Much Does Dead Tree Removal Cost in Arkadelphia?</h2>
+      <p>Dead tree removal usually costs more than equivalent live tree removal — sometimes considerably more. There are three reasons:</p>
+      <ul>
+        <li><strong>Risk premium.</strong> Brittle wood, unpredictable failures, and compromised climbing structure mean more time spent on safety planning, more rigging, and slower execution. We don't take shortcuts on dead-tree jobs because shortcuts on dead trees are how people get hurt.</li>
+        <li><strong>Disposal differences.</strong> Live tree wood is good firewood and chips cleanly. Dead-tree wood is often punky (partially rotted) and harder to chip — sometimes it has to be hauled in larger pieces. More truck time, more disposal cost.</li>
+        <li><strong>Access and rigging complexity.</strong> Many dead trees can't be climbed, which means using the bucket truck (when access allows) or felling whole when it's safe to do so. If neither works cleanly, every section has to be roped down piece by piece — labor-intensive.</li>
+      </ul>
+      <p>
+        What stays the same: we give you the exact price in writing before any work starts. The estimate is what you pay.
+        Even at the higher end of pricing, our quotes are reasonable for the risk involved — we're not gouging, we're
+        charging fairly for skilled high-risk work.
+      </p>
+      <p>
+        For an exact number on your dead tree, call Robbie at <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>.
+        The estimate is always free.
+      </p>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock current={path} />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Arkadelphia Calls Plyler's for Dead Tree Removal</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Dead tree work is where shortcuts get people hurt. Here's why locals trust us with the hardest removals.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What Arkadelphia Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real dead-tree removals across Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:2rem;color:var(--muted)">
+        <a href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <FaqSection
+    items={faq}
+    heading="Dead Tree Removal Questions — Arkadelphia"
+    intro="Answers to what Arkadelphia homeowners ask us most about dead and dying trees."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead">
+        Dead tree removal is one piece of what we do across Clark County. Start with our full
+        <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service hub</a> for the complete picture, or jump
+        straight to <a href="/tree-removal-arkadelphia-ar">Tree Removal</a>,
+        <a href="/stump-grinding-arkadelphia-ar">Stump Grinding</a>,
+        <a href="/emergency-tree-service-arkadelphia-ar">24/7 Emergency Service</a>, or
+        <a href="/storm-damage-cleanup-arkadelphia-ar">Storm Damage Cleanup</a>.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Get That Dead Tree Down Before It Comes Down on Its Own"
+    text="We're right here in Arkadelphia — yard on Country Club Drive, equipment staged, crew local. Call Robbie, walk the property, get an honest written price. We'll handle the rest before the next storm does. ⭐ 5.0 Stars · 70+ Google Reviews · 24+ Years in Arkadelphia · Licensed & Insured."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

@@ -1,0 +1,324 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+import maps from '../data/maps.json';
+
+const title = "Tree Service Arkadelphia AR | Plyler's Tree Service";
+const description =
+  "Arkadelphia's trusted tree service since 2002. Tree removal, trimming, stump grinding & 24/7 storm cleanup. 5.0 stars, 70+ reviews. Free estimates.";
+const path = '/tree-service-arkadelphia-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Arkadelphia', path },
+];
+const faq = faqData['tree-service-arkadelphia-ar'] ?? [];
+
+// What we do — the five core service summaries from the live page.
+const coreServices = [
+  {
+    h: 'Tree Removal',
+    p: "Big oaks near the older homes off Main Street, dead pines leaning toward a carport, or a sweetgum that's outgrown the yard — we bring them down safe and haul off every branch. Tight lots, open acreage, doesn't matter. We handle it.",
+  },
+  {
+    h: 'Tree Trimming',
+    p: 'Limbs scraping your roof on 10th Street, branches hanging over the driveway, canopy blocking sunlight from your yard — we trim them back the right way. No topping, no hacking. Just proper cuts that keep the tree healthy and your property safe.',
+  },
+  {
+    h: 'Stump Grinding',
+    p: "That stump you've been mowing around for three years? We grind it 6 to 8 inches below ground and fill the hole. Flat enough to grow grass over or plant something new. We do multiple stumps in one trip and save you money.",
+  },
+  {
+    h: 'Emergency Storm Damage',
+    p: 'Clark County catches its share of strong storms. When a tree comes down on your house, blocks your road, or lands on a fence, call us any time — nights, weekends, holidays. Since we’re already in Arkadelphia, we can be at your property fast.',
+  },
+  {
+    h: 'Tree Assessments',
+    p: 'Not sure if a tree needs to come down or just needs some work? Robbie has spent 24 years looking at trees in this area — reading the lean, checking the trunk, spotting root damage and disease that most people walk right past. He’ll walk your property and give you a straight answer on what’s healthy and what’s a problem.',
+  },
+];
+
+// Why Arkadelphia calls first.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Google Reviews', p: 'A perfect rating from more than 70 homeowners who trusted us with their property. Not filtered, not fake — real people in Clark County and the surrounding area who picked up the phone and then took the time to say we did it right.' },
+  { h: '📍 Yard on Country Club Dr', p: "Trucks, chippers, and stump grinders are staged at our yard on Country Club Drive in Arkadelphia. Crews dispatch from here every morning. When you call, we're not driving in from somewhere else — we're already in town." },
+  { h: '24 Years and Counting', p: "Robbie started this company in 2002. Fly-by-night outfits come through town every storm season and disappear a month later. We've been here for two decades and we're not going anywhere." },
+  { h: 'Licensed and Insured — Always', p: "Full liability and workers' comp on every job. If a branch nicks your gutter or a piece of equipment scratches your driveway, our insurance covers it. We'll show you proof before we ever start a saw." },
+  { h: 'Free Estimates — No Sales Pitch', p: "Robbie comes out, looks at the tree, and gives you an honest number in writing. If it doesn't need to come down, he'll tell you that. We don't push work you don't need just to fill a schedule." },
+  { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
+];
+
+// Neighborhood breakdowns.
+const neighborhoods = [
+  {
+    h: '🎓 Henderson State and OBU Areas',
+    p: 'The neighborhoods around Henderson State University and Ouachita Baptist — Pine Street, 10th Street, Walnut, Caddo, Henderson Street — are full of mature pecans, white oaks, and shortleaf pines that pre-date most of the houses. Rental properties on these streets get neglected; the trees show it. Storm damage, hidden trunk decay, root issues from old sidewalks and curbing — we see it constantly. If you own or manage a property near campus, we’ve probably done work on your block.',
+  },
+  {
+    h: '🏘️ Country Club Drive and the East Side',
+    p: 'The established neighborhoods east of Highway 7 — Country Club Drive, Twin Rivers, Riverview, the streets off 9th — have big mature trees on bigger lots. A lot of these homes were built in the ’60s and ’70s and the trees have grown into their final stage of life. We get called out here for storm-cracked oaks, dead pines near roof lines, and major canopy work on properties where the homeowner wants the trees thinned without losing the shade.',
+  },
+  {
+    h: '🛣️ Caddo Valley and the I-30 Corridor',
+    p: "North of town toward Caddo Valley and along the I-30 corridor, properties get bigger and more rural fast. Long driveways, wooded acreage, pine plantation behind the back fence. We're set up for it — equipment access on rough driveways, storm-damaged section clearing in pine stands, and fence-line work where the timber goes back further than most people realize. If you're on the Caddo Valley side, we know your terrain.",
+  },
+  {
+    h: '🌊 DeGray Lake and South Toward Gurdon',
+    p: "Out toward DeGray Lake and south along Highway 67 toward Gurdon, you're in classic Clark County timber country — rural lots, lakefront cabins, and acreage where the trees have been growing tall since long before the houses showed up. We handle the lakefront work on DeGray, the long-haul rural removals south of town, and everything in between. Lakefront work especially takes extra care — steep slopes, tight equipment access, and trees growing right up to the dock or retaining wall. We've been doing it for 24 years.",
+  },
+];
+
+// Detailed service breakdown.
+const detailServices = [
+  { h: 'Tree Removal in Arkadelphia', p: 'Sectional takedowns of big water oaks, post oaks, and storm-leaning pines on tight lots near OBU and the older homes off Main Street — every branch hauled off.' },
+  { h: 'Oak Tree Removal', p: "Water oak, post oak, and hollow-trunk oaks removed with oak-wilt timing respected, so we don't spread disease to the healthy trees still standing in your yard." },
+  { h: 'Pine Tree Removal', p: 'Loblolly pines leaning after a storm or gone brittle from beetle kill — brought down safely before they reach a roof or a power line.' },
+  { h: 'Dead & Hazardous Tree Removal', p: 'Standing dead trees fail first when the wind picks up. We spot the warning signs and take them down before they turn into a liability on your property.' },
+  { h: 'Tree Trimming & Pruning', p: 'Proper structural cuts — never topping — to clear roofs and driveways, lift canopies off power lines, and keep your trees healthy for the long haul.' },
+  { h: 'Stump Grinding', p: "Stumps ground 6–8 inches below grade so you can replant or re-sod clean, with multi-stump pricing when you're clearing a whole yard." },
+  { h: 'Emergency Tree Service', p: 'Tree on the house or blocking the drive? We dispatch 24/7 across Arkadelphia and document everything you need for the insurance claim.' },
+  { h: 'Storm Damage Cleanup', p: 'After the wind passes, we clear downed limbs and hazard trees fast and hand you written documentation for your insurer — no guesswork.' },
+  { h: 'Commercial Tree Service', p: 'Contracted tree care for Arkadelphia HOAs, churches, rental properties, and municipal lots — licensed, insured, and done on schedule.' },
+];
+
+// Towns within 40 miles.
+const towns = [
+  { h: 'Caddo Valley', p: 'Right next door — just a few minutes up I-30.' },
+  { h: 'Bismarck', p: 'Close to home on Highway 7. Quick response every time.' },
+  { h: 'Gurdon', p: '15 minutes south on Highway 67.' },
+  { h: 'Malvern', p: '25 minutes northeast — big oaks and pecans in older neighborhoods.' },
+  { h: 'Hot Springs', p: 'Residential and commercial tree work in the Spa City.' },
+  { h: 'Hot Springs Village', p: 'Wooded lots, golf-course properties, and HOA-friendly tree care.' },
+  { h: 'Benton', p: 'Mature trees in fast-growing Saline County neighborhoods.' },
+  { h: 'Sheridan', p: 'Grant County — heavy pine coverage and established homes.' },
+  { h: 'Glenwood', p: 'Pike County — large pines and hardwoods on rural acreage.' },
+  { h: 'Prescott', p: 'Nevada County — storm cleanup and hazardous removals.' },
+  { h: 'Camden', p: 'Ouachita County — mature hardwoods and riverfront properties.' },
+  { h: 'Pearcy', p: 'Lake Hamilton area — wooded lakefront lots that need skilled care.' },
+];
+
+const testimonials = [
+  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
+  "I've known Mr. Plyler for over 10 years. He's a good man and he does a great job.",
+  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Service in Arkadelphia, AR',
+    serviceType: 'Tree removal, trimming, stump grinding & storm cleanup',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Arkadelphia, Arkansas · Clark County"
+    title="Tree Service in Arkadelphia, AR"
+    subtitle="The crew your neighbors on Henderson Street, Pine Street, and out past DeGray Lake have called for over two decades. Tree removal, trimming, stump grinding, and same-day storm response — right here in Arkadelphia where we live and work."
+    image="/images/arkadelphia-ar-large-oak-overhanging-residential-home-sunset.webp"
+    imageAlt="Large oak overhanging a residential home at sunset in Arkadelphia, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Plyler's Tree Service is an Arkadelphia operation — period.</p>
+      <p class="lead">
+        We're a Service Area Business based in Clark County, with our equipment yard on Country Club Drive in
+        Arkadelphia. No corporate headquarters two states away. No franchise system. No out-of-town call center
+        routing leads. Robbie Plyler answers the phone. Robbie quotes the job. Robbie shows up. That's been the
+        model since 2002, and it's not changing.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Arkadelphia's Home-Base Tree Service Since 2002</h2>
+      <p>
+        This is where it all started. Robbie Plyler grew up in Clark County, built his first crew right here in
+        Arkadelphia, and has been taking care of trees in this town for over 24 years. We know the big oaks along
+        Main Street, the tall pines behind the neighborhoods off Highway 8, and the hardwoods on the older
+        properties near Ouachita Baptist and Henderson State. We've worked yards in Feaster Park, off 10th Street,
+        out toward Caddo Valley, and everywhere in between.
+      </p>
+      <p>
+        Arkadelphia sits right where the Caddo and Ouachita rivers come together, with DeGray Lake just a few miles
+        up the road. That means big trees, heavy canopy cover, and storm seasons that don't go easy on anyone's
+        yard. When ice snaps a limb over your roof at 2 a.m. or a dead pine starts leaning toward your carport, you
+        want somebody close — not a company driving in from Little Rock. We're already here.
+      </p>
+      <p>
+        We carry a perfect 5.0-star rating on Google with more than 70 reviews from people right here in Clark
+        County and the surrounding area. Every estimate is free, every price is in writing before we start, and we
+        clean up everything before we leave. That's how we've done it since day one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What We Do in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every service a homeowner or business in Clark County could need — all from one local crew.
+      </p>
+      <div class="grid grid-3">
+        {coreServices.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Our Arkadelphia Tree Services in Detail</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        A closer look at each job we do around Arkadelphia — what's involved, the trees we see most in Clark County,
+        and what to expect.
+      </p>
+      <div class="grid grid-3">
+        {detailServices.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock current={path} />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Arkadelphia Calls Plyler's First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Your Neighbors Are Saying</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Arkadelphia and Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Tree Service Across Arkadelphia Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Arkadelphia is home. We've worked tree jobs on nearly every street in this town over 24 years. Here's what
+        we see most across the neighborhoods we know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Serving Arkadelphia and Every Town Within 40 Miles</h2>
+      <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">
+        Arkadelphia is home base. Our crews head out from here every morning and cover a full 40-mile radius. No
+        trip fee, no travel charge — the price is based on the job, not the drive.
+      </p>
+      <MapEmbed src={maps[path]} title="Arkadelphia service area map" />
+      <div class="grid grid-3" style="margin-top:2.4rem">
+        {towns.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        We also serve: Amity, Bonnerdale, Lake Catherine, Donaldson, Kirby, Sparkman, Princeton, De Gray, Daleville,
+        Gum Springs, Poyen, Haskell, Traskwood, Leola, Thornton, Bluff City, and Chidester. Don't see your town?
+        Give us a call at <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — if you're nearby, we'll
+        make it work.
+      </p>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Service Questions — Arkadelphia"
+    intro="Answers to the things Arkadelphia homeowners ask us most."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead mb-0">
+        📖 Related:
+        <a href="/when-to-remove-a-tree-arkadelphia">When Should You Remove a Tree in Arkadelphia? A Homeowner's Guide</a>
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Ready to Get That Tree Taken Care Of?"
+    text="We're right here in Arkadelphia — not driving in from out of town. Call Robbie, tell him what's going on, and we'll have somebody at your property to give you an honest price. No charge for the estimate. No obligation to say yes. ⭐ 5.0 Stars · 70+ Google Reviews · 24+ Years in Arkadelphia · Licensed & Insured."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

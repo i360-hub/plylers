@@ -1,0 +1,43 @@
+---
+// Renders an on-page FAQ (accordion). Pair with faqPage() schema in the page's <BaseLayout schema>.
+export interface Props {
+  items: { q: string; a: string }[];
+  heading?: string;
+  intro?: string;
+  id?: string;
+}
+const { items, heading = 'Common Questions', intro = 'Quick answers to the things people ask us most.', id = 'faq' } = Astro.props;
+---
+{items?.length > 0 && (
+  <section class="faq section section-alt" id={id} aria-labelledby={`${id}-h`}>
+    <div class="container measure">
+      <h2 id={`${id}-h`} class="center">{heading}</h2>
+      {intro && <p class="center lead faq-intro">{intro}</p>}
+      <div class="faq-list">
+        {items.map((item, i) => (
+          <details class="faq-item" open={i === 0}>
+            <summary>{item.q}</summary>
+            <div class="faq-answer"><p>{item.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+<style>
+  .faq-intro { margin-bottom: 2rem; color: var(--muted); }
+  .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .faq-item { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .faq-item summary {
+    cursor: pointer; padding: 1.1rem 1.3rem; font-weight: 700; color: var(--ink); font-size: 1.05rem;
+    list-style: none; position: relative; padding-right: 2.8rem;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: "+"; position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%);
+    font-size: 1.5rem; font-weight: 400; color: var(--green-600); transition: transform .2s;
+  }
+  .faq-item[open] summary::after { content: "−"; }
+  .faq-answer { padding: 0 1.3rem 1.2rem; }
+  .faq-answer p { margin: 0; color: var(--body); }
+</style>

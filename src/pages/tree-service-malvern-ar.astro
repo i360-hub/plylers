@@ -1,0 +1,236 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+import maps from '../data/maps.json';
+
+const title = "Malvern Tree Service | Hot Spring County | Plyler's";
+const description =
+  "Malvern, AR tree service. Removal, trimming, stump grinding, 24/7 storm cleanup across Hot Spring County & Lake Catherine. 5.0 stars, 70+ reviews.";
+const path = '/tree-service-malvern-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Malvern', path },
+];
+const faq = faqData['tree-service-malvern-ar'] ?? [];
+
+// What we do — the five core service summaries from the live page.
+const coreServices = [
+  {
+    h: 'Tree Removal',
+    p: "A storm-cracked pecan leaning over the porch on Page Avenue, a dead oak threatening the garage off Highway 270, or a giant pine that's outgrown a lakefront lot on Lake Catherine — we bring them down safe and haul off every branch. In-town tight lots, rural acreage, lakefront property — doesn't matter. We handle it.",
+  },
+  {
+    h: 'Tree Trimming',
+    p: 'Limbs scraping the roof on Main Street, branches hanging over the driveway, canopy shading out your lawn — we trim them back the right way. No topping, no hacking. Just proper cuts that keep the tree healthy and your property safe.',
+  },
+  {
+    h: 'Stump Grinding',
+    p: "That stump you've been mowing around for three years? We grind it 6 to 8 inches below ground and fill the hole. Flat enough to grow grass over or plant something new. We do multiple stumps in one trip and save you money.",
+  },
+  {
+    h: 'Emergency Storm Damage',
+    p: 'When a storm drops a tree on your house, blocks Highway 67, or takes out a fence at 2 a.m., call us any time — nights, weekends, holidays. Our crew is just 25 minutes west in Arkadelphia and can be on the way fast.',
+  },
+  {
+    h: 'Tree Assessments',
+    p: "Not sure if a tree needs to come down or just needs some work? Robbie has spent 24 years looking at trees across this area — reading the lean, checking the trunk, spotting root damage and disease that most people walk right past. He'll walk your property and give you a straight answer on what's healthy and what's a problem.",
+  },
+];
+
+// Why Malvern calls first.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Google Reviews', p: 'A perfect rating from more than 70 homeowners who trusted us with their property. Not filtered, not fake — real people in Malvern, Lake Catherine, Rockport, and across the surrounding counties who picked up the phone and then took the time to say we did it right.' },
+  { h: '25 Minutes Up I-30 — In Malvern Every Week', p: "We're based in Arkadelphia, just 25 minutes west of Malvern on I-30. Our crews are in Malvern and the Lake Catherine area multiple times a week — and there's never a trip fee or travel charge. The price is based on the job, not the drive." },
+  { h: '24 Years and Counting', p: "Robbie started this company in 2002. Fly-by-night outfits come through town every storm season and disappear a month later. We've been doing this for two decades and we're not going anywhere." },
+  { h: 'Licensed and Insured — Always', p: "Full liability and workers' comp on every job. If a branch nicks your gutter or a piece of equipment scratches your driveway, our insurance covers it. We'll show you proof before we ever start a saw." },
+  { h: 'Free Estimates — No Sales Pitch', p: "Robbie comes out, looks at the tree, and gives you an honest number in writing. If it doesn't need to come down, he'll tell you that. We don't push work you don't need just to fill a schedule." },
+  { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
+];
+
+const testimonials = [
+  "Plyler's Tree Service has been a lifesaver and a house saver for us! When a huge tree fell on my parents' house they showed up the next morning and stayed for 14 hours until they had the tree completely off the house. They will always have my business.",
+  'So impressed by the professional, quality work of this service. They were on time, efficient and cleaned everything up and hauled it off. Would definitely use them again and recommend them. Had a tree fall on my house during a storm and they were right over to help and make life normal again! Great People!!',
+  "Great experience. Got a large tree down from over a carport and cleaned up in a day. Didn't leave a mess and no further trimming necessary.",
+];
+
+// Towns within the service area.
+const towns = [
+  { h: 'Rockport', p: 'Just south of Malvern off I-30 — quick run, Hot Spring County neighbor.' },
+  { h: 'Lake Catherine', p: 'Hot Spring County — wooded lakefront lots and Lake Catherine State Park area.' },
+  { h: 'Magnet Cove', p: 'East Hot Spring County — rural acreage and established homes.' },
+  { h: 'Bismarck', p: 'DeGray Lake area — close run between Malvern and Arkadelphia.' },
+  { h: 'Donaldson', p: 'Hot Spring County — rural homes and long-driveway acreage.' },
+  { h: 'Friendship', p: 'Hot Spring County — between Malvern and Bismarck, mature trees.' },
+  { h: 'Hot Springs', p: 'Garland County — 20 minutes northwest, residential and commercial work.' },
+  { h: 'Hot Springs Village', p: 'Garland County — wooded HOA lots and golf-course properties.' },
+  { h: 'Arkadelphia', p: 'Home base — Clark County seat, 25 minutes west on I-30.' },
+  { h: 'Caddo Valley', p: 'Clark County — Highway 7 corridor between Malvern and Arkadelphia.' },
+  { h: 'Glen Rose', p: 'North of Malvern — rural Hot Spring County properties.' },
+  { h: 'Gurdon', p: 'South Clark County on Highway 67 — established homes and acreage.' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Service in Malvern, AR',
+    serviceType: 'Tree removal, trimming, stump grinding & storm cleanup',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Malvern, Arkansas · Hot Spring County"
+    title="Tree Service in Malvern, AR"
+    subtitle="The crew Malvern, Rockport, and Lake Catherine homeowners have trusted for over two decades. Tree removal, trimming, stump grinding, and same-day storm response — serving Malvern and Hot Spring County from our Arkadelphia base."
+    image="/images/malvern-ar-large-mature-oak-tree-assessment-commercial.webp"
+    imageAlt="Large mature oak tree assessment on a commercial property in Malvern, AR"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Malvern's Go-To Tree Service for Over 24 Years</h2>
+      <p>
+        Plyler's Tree Service has been taking care of trees in Malvern and Hot Spring County for over two decades. We
+        know the older homes along Main Street and Page Avenue, the mature oaks and pecans in the established
+        neighborhoods off Highway 67, the wooded properties around Lake Catherine, and the rural acreage out toward
+        Rockport and Magnet Cove. From in-town removals near downtown Malvern to long-driveway jobs deep in the
+        county, we've handled tree work across every part of this area.
+      </p>
+      <p>
+        Malvern sits along the Ouachita River, where the foothills meet the flatter timber country of south-central
+        Arkansas. That means a heavy mix of old-growth oaks and pecans in town, towering pines on the surrounding
+        hillsides, and storms that roll in fast off the Ouachitas. When a tree comes down on Main Street at midnight
+        or a dead pine leans toward your house near Lake Catherine, you need somebody who knows the area. Our crew is
+        based about 25 minutes west in Arkadelphia and runs jobs up I-30 to Malvern multiple times a week — no trip
+        fee, no travel charge.
+      </p>
+      <p>
+        We carry a perfect 5.0-star rating on Google with more than 70 reviews from homeowners across the area. Every
+        estimate is free, every price is in writing before we start, and we clean up everything before we leave.
+        That's how we've done it since day one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What We Do in Malvern</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every service a homeowner or property owner in Hot Spring County could need — all from one local crew.
+      </p>
+      <div class="grid grid-3">
+        {coreServices.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ServicesGrid current={path} />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Malvern Calls Plyler's First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Your Neighbors Are Saying</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Malvern, Lake Catherine, and Hot Spring County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Serving Malvern and Hot Spring County</h2>
+      <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">
+        Arkadelphia is home base. Our crews head out from here every morning and cover a full 40-mile radius —
+        including Malvern, Lake Catherine, Rockport, and the rest of Hot Spring County, just 25 minutes east on I-30.
+        No trip fee, no travel charge — the price is based on the job, not the drive.
+      </p>
+      <MapEmbed src={maps[path]} title="Malvern service area map" />
+      <div class="grid grid-3" style="margin-top:2.4rem">
+        {towns.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        We also serve: Perla, Lonsdale, Butterfield, Social Hill, Bonnerdale, Pearcy, Haskell, Traskwood, Poyen,
+        Leola, and Bismarck. Don't see your town? Give us a call at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — if you're nearby, we'll make it work.
+      </p>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Service Questions — Malvern"
+    intro="Answers to the things Malvern homeowners ask us most."
+  />
+
+  <CtaBand
+    title="Ready to Get That Tree Taken Care Of?"
+    text="We serve Malvern from our home base in Arkadelphia — just 25 minutes west on I-30. Call Robbie, tell him what's going on, and we'll have somebody at your property to give you an honest price. No charge for the estimate. No obligation to say yes. ⭐ 5.0 Stars · 70+ Google Reviews · 24+ Years in Arkadelphia · Serving Malvern & Hot Spring County · Licensed & Insured."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

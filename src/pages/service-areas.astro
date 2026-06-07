@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+import areas from '../data/areas.json';
+
+const title = "Tree Service Areas | SW Arkansas | Plyler's Tree Service";
+const description =
+  'Tree service across Clark, Hot Spring, Garland, Pike & Montgomery counties. Arkadelphia, Hot Springs, Malvern, Glenwood, Amity, Gurdon, Bismarck & more.';
+const path = '/service-areas';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path },
+];
+const faq = faqData['service-areas'] ?? [];
+
+// Map hub slug -> short description for the county groupings (from live copy).
+const hubBlurb = {
+  '/tree-service-arkadelphia-ar': 'Our home base since 2002. Clark County seat.',
+  '/tree-service-caddo-valley-ar': '5 minutes north — residential and I-30 commercial corridor.',
+  '/tree-service-gurdon-ar': '15 minutes south — Highway 67 corridor and timber country.',
+  '/tree-service-amity-ar': '20 minutes west on Highway 8 — Caddo River country.',
+  '/tree-service-bismarck-ar': '20 minutes north — DeGray Lake and cabin lot specialty.',
+  '/tree-service-malvern-ar': '25 minutes east — Hot Spring County seat, mature oaks and pecans.',
+  '/tree-service-glenwood-ar': '30 minutes west on Highway 8 — Lake Greeson cabin lots.',
+  '/tree-service-hot-springs-ar': '35 minutes north — historic neighborhoods and lakefront properties.',
+};
+const hub = (city) => areas.hubs.find((h) => h.city === city);
+
+// County groupings, each with the hub towns that have dedicated pages.
+const counties = [
+  {
+    name: 'Clark County',
+    intro: 'Our home county. Same crew, same county roads, same response times.',
+    towns: ['Arkadelphia', 'Caddo Valley', 'Gurdon', 'Amity'],
+  },
+  {
+    name: 'Hot Spring County',
+    intro: 'East and northeast of Arkadelphia — established homes, DeGray Lake, Lake Catherine.',
+    towns: ['Bismarck', 'Malvern'],
+  },
+  {
+    name: 'Pike County',
+    intro: 'West, toward Lake Greeson and the Ouachita National Forest gateway.',
+    towns: ['Glenwood'],
+  },
+  {
+    name: 'Garland County',
+    intro: 'North toward Hot Springs, the lakes, and the Ouachita foothills.',
+    towns: ['Hot Springs'],
+  },
+];
+
+// Towns served, sourced from areas.json (cities) minus the hub cities listed above.
+const hubCities = new Set(areas.hubs.map((h) => h.city));
+const alsoServe = areas.cities.filter((c) => !hubCities.has(c));
+
+const schema = [
+  {
+    '@type': 'CollectionPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Southwest Arkansas · A 40-Mile Radius"
+    title="Areas We Serve"
+    subtitle="Tree removal, trimming, stump grinding, and 24/7 storm cleanup from our Arkadelphia base — dedicated coverage in Arkadelphia, Caddo Valley, Gurdon, Bismarck, Amity, Malvern, Glenwood, and Hot Springs across a full 40-mile radius of southwest Arkansas."
+    image="/images/hot-springs-ar-arborist-climbing-aerial-tree-work.webp"
+    imageAlt="Arborist climbing for aerial tree work in southwest Arkansas"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Proudly Serving a 40-Mile Radius of Arkadelphia</p>
+      <p class="lead">
+        Plyler's Tree Service has been the name Arkadelphia and Clark County have trusted for over 24 years. Today
+        our crews cover a full 40-mile radius across five counties — Clark, Hot Spring, Garland, Pike, and
+        Montgomery — with dedicated service pages for the towns we work most. No travel charge, no trip fee. The
+        price is based on the job, not the drive.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Towns &amp; Counties We Serve</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Five counties across our 40-mile working radius from Arkadelphia. Tap a town for its dedicated tree service
+        page.
+      </p>
+      {counties.map((c) => (
+        <div class="county">
+          <h3>{c.name}</h3>
+          <p class="county-intro">{c.intro}</p>
+          <div class="grid grid-2">
+            {c.towns.map((town) => {
+              const h = hub(town);
+              return (
+                <a class="town-card" href={h ? h.slug : path}>
+                  <h4>{town}</h4>
+                  {h && hubBlurb[h.slug] && <p>{hubBlurb[h.slug]}</p>}
+                  <span class="town-link">View {town} tree service →</span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">We Also Serve</h2>
+      <p class="center lead" style="margin-bottom:1.8rem;color:var(--muted)">
+        Smaller communities within our 40-mile radius. Don't see your town? Give us a call at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — if you're nearby, we'll make it work.
+      </p>
+      <ul class="serve-list">
+        {alsoServe.map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <AreasBlock
+    heading="Tree Service by Town"
+    intro="Each hub below has its own page covering local tree species, terrain, landmarks, and storm-season FAQ."
+  />
+
+  <FaqSection
+    items={faq}
+    heading="Service Area Questions"
+    intro="Common questions about coverage, travel charges, and how fast we can get to you."
+  />
+
+  <CtaBand
+    title="In Our Service Area? Let's Talk."
+    text="Free estimates — no pressure, no obligation. Call Robbie or fill out the form."
+  />
+</BaseLayout>
+
+<style>
+  .county { margin-bottom: 2.6rem; }
+  .county:last-of-type { margin-bottom: 0; }
+  .county > h3 { margin-bottom: 0.3rem; }
+  .county-intro { color: var(--muted); margin-bottom: 1.2rem; }
+  .town-card { display: flex; flex-direction: column; gap: 0.35rem; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.3rem; box-shadow: var(--shadow); color: var(--body); transition: transform .15s, box-shadow .15s; }
+  .town-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); text-decoration: none; }
+  .town-card h4 { margin: 0; font-size: 1.12rem; color: var(--ink); }
+  .town-card p { margin: 0; font-size: 0.93rem; }
+  .town-link { margin-top: auto; color: var(--green-700); font-weight: 700; font-size: 0.9rem; }
+  .serve-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+  .serve-list li { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 0.5rem 1rem; font-weight: 600; color: var(--green-800); box-shadow: var(--shadow); font-size: 0.92rem; }
+</style>

@@ -1,0 +1,98 @@
+---
+import business from '../data/business.json';
+
+const year = 2026;
+const services = [
+  { name: 'Tree Removal', href: '/tree-removal' },
+  { name: 'Tree Trimming & Pruning', href: '/tree-trimming' },
+  { name: 'Stump Grinding', href: '/stump-grinding' },
+  { name: 'Emergency Storm Damage', href: '/emergency-storm-damage' },
+];
+const company = [
+  { name: 'About Us', href: '/about' },
+  { name: 'Reviews', href: '/reviews' },
+  { name: 'Service Areas', href: '/service-areas' },
+  { name: 'Gallery', href: '/gallery' },
+  { name: 'Tree Care Articles', href: '/blog' },
+  { name: 'Contact', href: '/contact' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="/images/plylers-tree-service-logo.png" width="210" height="54" alt={`${business.name} logo`} class="footer-logo" />
+      <p>
+        Locally owned and operated by {business.owner}. Arkadelphia-based since {business.founded}.
+        Tree removal, trimming, stump grinding, and 24/7 emergency storm cleanup. Licensed, insured,
+        and every estimate is free.
+      </p>
+      <p class="footer-rating">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span>{business.rating.value} · {business.rating.count}+ Reviews on Google</span>
+      </p>
+      <div class="footer-social">
+        <a href={business.social.facebook} rel="noopener" target="_blank">Facebook</a>
+        <a href={business.social.googleMaps} rel="noopener" target="_blank">Google</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h2 class="footer-h">Services</h2>
+      <ul>{services.map((s) => <li><a href={s.href}>{s.name}</a></li>)}</ul>
+    </div>
+
+    <div class="footer-col">
+      <h2 class="footer-h">Company</h2>
+      <ul>{company.map((c) => <li><a href={c.href}>{c.name}</a></li>)}</ul>
+    </div>
+
+    <div class="footer-col">
+      <h2 class="footer-h">Contact</h2>
+      <ul class="footer-contact">
+        <li><a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a></li>
+        <li><a href={`mailto:${business.email}`}>{business.email}</a></li>
+        <li>{business.address.locality}, {business.address.region} {business.address.postalCode}</li>
+        <li class="text-muted">Service Area Business · Serving Clark County and a 40-mile radius</li>
+        {business.hours.map((h) => <li>{h.label}</li>)}
+        <li class="footer-emergency">{business.hoursNote}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <div class="container footer-bar-inner">
+      <span>© {year} {business.name}. All rights reserved.</span>
+      <span>Arkadelphia &amp; Southwest Arkansas</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--green-900); color: #c4d6cb; margin-top: 2rem; }
+  .footer-grid {
+    display: grid; gap: 2rem; padding-block: 3.5rem 2.5rem;
+    grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+  }
+  .footer-logo { height: 54px; width: auto; background: #fff; padding: 8px 12px; border-radius: 10px; margin-bottom: 1rem; }
+  .footer-brand p { font-size: 0.95rem; line-height: 1.6; }
+  .footer-rating { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; color: #fff; }
+  .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .footer-social { display: flex; gap: 1rem; margin-top: 0.5rem; }
+  .footer-social a { color: #fff; font-weight: 600; }
+  .footer-h { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber-500); margin: 0 0 0.9rem; font-weight: 700; }
+  .footer-col ul { list-style: none; margin: 0; padding: 0; }
+  .footer-col li { margin-bottom: 0.55rem; font-size: 0.95rem; }
+  .footer-col a { color: #c4d6cb; }
+  .footer-col a:hover { color: #fff; }
+  .footer-contact .footer-emergency { color: var(--amber-500); font-weight: 700; }
+  .site-footer .text-muted { color: #9fb4a6; } /* a11y: readable muted on dark green */
+  .footer-bar { border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.85rem; color: #9fb4a6; }
+  .footer-bar-inner { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.1rem; flex-wrap: wrap; }
+  @media (max-width: 860px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 520px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>

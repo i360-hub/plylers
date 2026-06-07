@@ -1,0 +1,29 @@
+---
+import business from '../data/business.json';
+const {
+  title = 'Need a tree handled? Get a free estimate today.',
+  text = 'Same-week estimates across Clark County and a 40-mile radius. Storm emergency? We answer 24/7.',
+  href = '/contact',
+  label = 'Get a Free Estimate',
+} = Astro.props;
+---
+<section class="cta-band">
+  <div class="container cta-inner">
+    <div>
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-primary btn-lg" href={href}>{label}</a>
+      <a class="btn btn-ghost btn-lg" href={`tel:${business.phoneHref}`}>Call {business.phoneDisplay}</a>
+    </div>
+  </div>
+</section>
+<style>
+  .cta-band { background: var(--green-800); color: #e7f0ea; padding-block: clamp(2.5rem, 5vw, 3.5rem); }
+  .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .cta-band h2 { color: #fff; margin-bottom: 0.4rem; }
+  .cta-band p { margin: 0; color: #cfe0d6; max-width: 560px; }
+  .cta-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  @media (max-width: 640px) { .cta-actions { width: 100%; } .cta-actions .btn { flex: 1; justify-content: center; } }
+</style>

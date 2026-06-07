@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { pageGraph, SITE } from '../lib/schema';
+import business from '../data/business.json';
+
+export interface Props {
+  title: string;
+  description: string;
+  /** Canonical path, e.g. "/about". Defaults to current route. */
+  path?: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  robots?: string;
+  /** LCP image to preload (hero), e.g. "/images/foo.webp". */
+  preloadImage?: string;
+  /** Page-level JSON-LD nodes merged into the global @graph. */
+  schema?: object[];
+}
+
+const {
+  title,
+  description,
+  path,
+  ogType = 'website',
+  ogImage = '/images/plylers-tree-service-logo.png',
+  robots = 'index, follow, max-image-preview:large',
+  preloadImage,
+  schema = [],
+} = Astro.props;
+
+// Canonical: production www host, no trailing slash, mirrors live conventions.
+const rawPath = path ?? Astro.url.pathname;
+const cleanPath = rawPath === '/' ? '/' : rawPath.replace(/\/+$/, '');
+const canonical = `${SITE}${cleanPath}`;
+const ogImageAbs = ogImage.startsWith('http') ? ogImage : `${SITE}${ogImage}`;
+const jsonld = pageGraph(schema);
+const GA = business.embeds.ga4Id;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={robots} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageAbs} />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbs} />
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/images/favicon.png" />
+    <meta name="theme-color" content="#14361f" />
+
+    <!-- Perf: preconnect to embed origins (forms/reviews load on demand) -->
+    <link rel="preconnect" href="https://api.leadconnectorhq.com" />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+
+    <!-- Global structured data (@graph) -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />
+
+    <!-- GA4 — loaded after first interaction or idle so it never competes with LCP -->
+    <script is:inline define:vars={{ GA }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      let gaLoaded = false;
+      function loadGA() {
+        if (gaLoaded) return; gaLoaded = true;
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA;
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', GA);
+      }
+      ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach((e) =>
+        window.addEventListener(e, loadGA, { once: true, passive: true }));
+      if ('requestIdleCallback' in window) requestIdleCallback(loadGA, { timeout: 5000 });
+      else window.addEventListener('load', () => setTimeout(loadGA, 3000));
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

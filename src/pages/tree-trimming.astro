@@ -1,0 +1,242 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Tree Trimming Services Arkansas | Plyler's Tree Service";
+const description =
+  "Tree trimming and pruning across Clark County, AR — proper branch-collar cuts, no topping. Arkadelphia, Bismarck, Caddo Valley, Hot Springs.";
+const path = '/tree-trimming';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Tree Trimming', path },
+];
+const faq = faqData['tree-trimming'] ?? [];
+
+// Signs trees need trimming.
+const signs = [
+  { h: 'Limbs Over Your House', p: 'Limbs hanging over your house scrape shingles, clog gutters, and can crash through the roof in a storm.' },
+  { h: 'Dead Branches', p: 'Dead limbs fall without warning. They’re a danger to anyone walking underneath and to anything parked below.' },
+  { h: 'Overgrown, Thick Canopy', p: 'When a tree gets so thick that light can’t get through, the inner branches die off and the tree becomes weak. Thinning it out lets air and sunlight in.' },
+  { h: 'Branches Near Power Lines', p: 'Tree limbs touching or growing toward power lines can cause outages and fires. Get them trimmed before there’s a problem.' },
+  { h: 'Crossing or Rubbing Branches', p: 'When two branches rub together, they wear through the bark and create an open wound. That’s an invitation for disease and insects.' },
+  { h: 'It’s Been a While', p: 'If you can’t remember the last time your trees were trimmed, they’re overdue. Regular trimming every 2 to 3 years keeps trees healthy and safe.' },
+];
+
+// Types of trimming.
+const types = [
+  { h: 'Canopy Thinning', p: 'We selectively remove branches throughout the canopy to let more light and air through. This reduces weight on heavy limbs and makes the tree more wind-resistant.' },
+  { h: 'Canopy Lifting', p: 'We remove the lower branches so you can walk, mow, or park underneath. Great for trees along driveways, sidewalks, and near the house.' },
+  { h: 'Deadwood Removal', p: 'We climb up and cut out every dead branch in the tree. This is the single most important thing you can do to protect your family and your property.' },
+  { h: 'Clearance Trimming', p: 'We cut branches back from your roof, siding, gutters, power lines, and any other structure they’re touching or growing toward.' },
+  { h: 'Structural & Shape Pruning', p: 'We shape the tree so it looks balanced and natural — not hacked up. A well-shaped tree looks better and adds value to your property.' },
+];
+
+// Why folks call us first.
+const whyUs = [
+  { h: '24 Years of Doing This', p: 'Robbie Plyler started this company in 2002. Two decades of experience on every job.' },
+  { h: 'Licensed and Insured', p: 'Full liability coverage. If anything goes wrong, you’re protected. Period.' },
+  { h: 'Free Estimates, No Pressure', p: 'We come out, look at the job, and give you an honest price. No obligation.' },
+  { h: 'We Clean Up Everything', p: 'When we leave, your yard looks better than when we got there. Every time.' },
+  { h: '24/7 Emergency Calls', p: 'Storm at midnight? Big limb on your roof? Call us. We answer and we show up.' },
+  { h: 'Local People, Local Company', p: 'We live here. Our kids go to school here. We treat your property like it’s our own.' },
+];
+
+const testimonials = [
+  'Called on a Monday, Robbie came out Tuesday morning. Had a huge oak removed by Wednesday afternoon. Fair price, clean yard, no hassle.',
+  'A big pine fell on our fence during a storm. They were out the next morning. Professional, fast, and they even fixed the fence section. Can’t say enough good things.',
+  'Best tree service around. They trimmed six trees in our yard and ground two stumps in one day. Left the yard cleaner than they found it.',
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Trimming & Pruning',
+    serviceType: 'Tree trimming and pruning',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Clark County & Surrounding Areas"
+    title="Tree Trimming & Pruning Services in Clark County & Surrounding Areas"
+    subtitle="Expert trimming that keeps your trees healthy, your home safe, and your property looking sharp."
+    image="/images/glenwood-ar-arborist-harness-high-canopy-branch-removal.webp"
+    imageAlt="Arborist in a harness removing high canopy branches during a tree trimming job near Glenwood, AR"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Arkadelphia’s Go-To Crew for Tree Trimming</h2>
+      <p class="lead">
+        Plyler’s Tree Service has been trimming and pruning trees in Arkadelphia and Clark County for over 24 years.
+        Owner Robbie Plyler knows the trees around here — the big oaks, the tall pines, the pecans, the sweetgums —
+        and he knows how to trim them the right way without hurting them. We trim branches away from houses, clear
+        limbs off roofs, thin out overgrown canopies, and remove deadwood that could fall in the next storm. We never
+        top trees. We follow proper cutting techniques that keep your trees healthy and looking good for years. Every
+        job includes full cleanup — we chip the brush, haul it off, and leave your yard cleaner than we found it.
+        Licensed, insured, and every estimate is free. That’s why we have a perfect 5.0-star rating on Google with
+        more than 70 reviews.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">When Do Your Trees Need Trimming?</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Trees don’t always make it obvious when they need attention. Here are the signs we see most often.
+      </p>
+      <div class="grid grid-3">
+        {signs.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2.4rem;color:var(--muted)">
+        Not sure if your trees need work? Call us. We’ll come look at them for free and tell you what we’d
+        recommend — and what can wait.
+        <a href="/tree-trimming-vs-removal">Learn how to tell if a tree needs trimming or full removal →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Kind of Trimming Do You Need?</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different trees need different cuts. Here’s the trimming work we do most around Clark County.
+      </p>
+      <div class="grid grid-3">
+        {types.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">How Much Does Tree Trimming Cost in Arkadelphia?</h2>
+      <p>
+        The price depends on the size of the tree, how many you need trimmed, and how much work each one needs. If you
+        have several trees, we often do a package price that saves you money.
+      </p>
+      <p>
+        We always give you the exact number before we start — no hidden fees. Call us or fill out the form below for a
+        free estimate.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">We Never Top Trees — Here’s Why</h2>
+      <p>
+        Topping is when someone cuts all the main branches back to stubs. It’s the worst thing you can do to a tree.
+        It looks terrible, weakens the tree, and makes it grow back thicker and more dangerous than before. The new
+        growth comes in as thin, weak sprouts that break easily in storms. A topped tree also gets stressed and is
+        more likely to get sick and die. Some companies still do it because it’s fast and easy. We don’t. We trim
+        trees the right way — selective cuts that keep the natural shape and actually make the tree stronger. It takes
+        more skill and more time, but your trees will be healthier and safer for it.
+      </p>
+      <p class="center" style="margin-top:1.6rem">
+        Not sure if your tree needs trimming or should come down instead?
+        <a href="/tree-trimming-vs-removal">Read our guide on when to trim vs when to remove a tree →</a>
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Trees Looking Overgrown or Rough?"
+    text="Call Robbie. He’ll come take a look, tell you what they need, and give you an honest price."
+  />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Folks Around Here Call Us First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We show up, do the work right, and leave your yard clean.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What Our Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure center">
+      <h2>Tree Trimming in Arkadelphia, AR</h2>
+      <p class="lead mb-0">
+        Structural pruning, canopy lifts, and roof and power-line clearance for Arkadelphia homes and yards — proper
+        cuts, never topping. Visit our
+        <a href="/tree-trimming-arkadelphia-ar">Arkadelphia trimming page</a> for what to expect.
+      </p>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Trimming Questions"
+    intro="Answers to the things Clark County homeowners ask us most about tree trimming."
+  />
+
+  <GhlForm heading="Get Your Free Estimate" />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

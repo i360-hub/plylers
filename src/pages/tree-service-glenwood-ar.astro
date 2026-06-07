@@ -1,0 +1,275 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+import maps from '../data/maps.json';
+
+const title = "Glenwood Tree Service | Pike County, AR | Plyler's";
+const description =
+  "Glenwood, AR tree service. Removal, trimming, stump grinding, 24/7 storm cleanup across Pike County & Lake Greeson area. 5.0 stars, 70+ reviews.";
+const path = '/tree-service-glenwood-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Glenwood', path },
+];
+const faq = faqData['tree-service-glenwood-ar'] ?? [];
+
+// What we do — the five core service summaries from the live page.
+const coreServices = [
+  {
+    h: 'Tree Removal',
+    p: "Tall pines crowding a house off Highway 70, a dead oak leaning toward the barn out toward Rosboro, or a hardwood that's outgrown a Lake Greeson cabin lot — we bring them down safe and haul off every branch. Rural acreage, tight in-town lots, wooded lakefront and riverfront property — doesn't matter. We handle it.",
+  },
+  {
+    h: 'Tree Trimming',
+    p: 'Limbs scraping the roof off Broadway, branches hanging over the driveway, canopy blocking sunlight from your yard — we trim them back the right way. No topping, no hacking. Just proper cuts that keep the tree healthy and your property safe.',
+  },
+  {
+    h: 'Stump Grinding',
+    p: "That stump you've been mowing around for three years? We grind it 6 to 8 inches below ground and fill the hole. Flat enough to grow grass over or plant something new. We do multiple stumps in one trip and save you money.",
+  },
+  {
+    h: 'Emergency Storm Damage',
+    p: 'When a storm rolls down out of the Ouachitas and drops a tree on your house, blocks Highway 70, or takes out a fence at 2 a.m., call us any time — nights, weekends, holidays. Our crew is just 30 minutes south in Arkadelphia and can be on the way fast.',
+  },
+  {
+    h: 'Tree Assessments',
+    p: "Not sure if a tree needs to come down or just needs some work? Robbie has spent 24 years looking at trees across this area — reading the lean, checking the trunk, spotting root damage and disease that most people walk right past. He'll walk your property and give you a straight answer on what's healthy and what's a problem.",
+  },
+];
+
+// Why Glenwood calls first.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Google Reviews', p: 'A perfect rating from more than 70 homeowners who trusted us with their property. Not filtered, not fake — real people in Glenwood, Amity, the Caddo River area, and across the surrounding counties who picked up the phone and then took the time to say we did it right.' },
+  { h: '30 Minutes Down Highway 8 — In Glenwood Every Week', p: "We're based in Arkadelphia, just 30 minutes south of Glenwood on Highway 8. Our crews are in Glenwood and the Lake Greeson area multiple times a week — and there's never a trip fee or travel charge. The price is based on the job, not the drive." },
+  { h: '24 Years and Counting', p: "Robbie started this company in 2002. Fly-by-night outfits come through town every storm season and disappear a month later. We've been doing this for two decades and we're not going anywhere." },
+  { h: 'Licensed and Insured — Always', p: "Full liability and workers' comp on every job. If a branch nicks your gutter or a piece of equipment scratches your driveway, our insurance covers it. We'll show you proof before we ever start a saw." },
+  { h: 'Free Estimates — No Sales Pitch', p: "Robbie comes out, looks at the tree, and gives you an honest number in writing. If it doesn't need to come down, he'll tell you that. We don't push work you don't need just to fill a schedule." },
+  { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
+];
+
+const testimonials = [
+  "Robby and his crew have taken down many trees for me over the years! They do an excellent job!! He was even willing to bring his bucket truck over to help us get the kids' drone out of a tree once! Stand up guy!",
+  'Robbie and Billy were so great!! I called them needing help with 2 dead trees on my dad’s property. They happen to be in the area and came out that afternoon and laid them down between the house and the fence no problem!! My dad and I both HIGHLY recommend these guys!!',
+  'These guys are amazing! Very hard workers very efficient very safe as well. They impressed us very much!! Cut a huge tree over my home! Would definitely recommend!!',
+];
+
+// Lake Greeson and Pike County recreational-property breakdowns.
+const character = [
+  {
+    h: '🛥️ Lake Greeson Cabin Lots',
+    p: "The cabin lots around Lake Greeson — Self Creek, Kirby Landing, Daisy State Park area, the wooded shoreline running up toward Star of the West — have some of the trickiest tree work in our entire service area. Steep banks dropping down to the water, trees growing right up to the cabin and the dock, equipment access that's often just a one-lane gravel cut through the woods. We rope down sections rather than felling whole trees, we coordinate with the cabin owner on debris staging, and we don't drop anything into the lake.",
+  },
+  {
+    h: '🚣 Caddo River Property Work',
+    p: 'The Caddo River runs right through Glenwood and continues up into the mountains. Riverfront and near-river properties grow a different tree mix than the surrounding uplands — bald cypress, water oak, sycamore, and willow oak that root in soil that stays wet. These trees show damage years after a flood event and they fail in surprising ways. We’ve seen it. We know what to look for, and we know how to handle the removal without compromising the riverbank or dropping debris into the water.',
+  },
+  {
+    h: '🌲 Daisy State Park and the National Forest Edge',
+    p: 'Properties out toward Daisy State Park and the southern boundary of the Ouachita National Forest are in heavy timber country — mature shortleaf pine, dense hardwood, and rural acreage where storms do real damage when they roll down out of the mountains. Ice storms hit this area especially hard. We handle the storm-damaged section clearing, the dangerous lean removals after a system rolls through, and the long-haul rural work that property owners out this way actually need.',
+  },
+  {
+    h: '🏘️ Downtown Glenwood and Older In-Town Lots',
+    p: "The streets around downtown Glenwood — Broadway, Highway 70 through town, the residential areas off the main highways — have mature pecans, white oaks, and the kind of in-town pine that's been growing alongside the houses for 50+ years. Tight lots, close-set structures, power lines and outbuildings to work around. The work takes patience and the right approach, and we've been doing it long enough to know which old trees on which streets are next in line for attention.",
+  },
+];
+
+// Towns within the service area.
+const towns = [
+  { h: 'Amity', p: '7 miles down Highway 8 — Clark County neighbor and quick response every time.' },
+  { h: 'Caddo Gap', p: 'Montgomery County — rural acreage and wooded Caddo River lots.' },
+  { h: 'Norman', p: 'Up Highway 8 into Montgomery County — heavy pine country.' },
+  { h: 'Murfreesboro', p: 'Pike County seat — Crater of Diamonds and Lake Greeson area work.' },
+  { h: 'Mount Ida', p: 'Montgomery County seat — Lake Ouachita area and forest properties.' },
+  { h: 'Daisy', p: 'Daisy State Park and Lake Greeson shoreline properties.' },
+  { h: 'Kirby', p: 'Pike County — rural acreage and Lake Greeson access.' },
+  { h: 'Rosboro', p: 'Between Glenwood and Amity — Centerpoint school area.' },
+  { h: 'Caddo Valley', p: 'Down Highway 27 toward I-30 — quick run from Glenwood.' },
+  { h: 'Arkadelphia', p: 'Home base — Clark County seat, 30 minutes south on Highway 8.' },
+  { h: 'Bonnerdale', p: 'Garland County — wooded properties between Glenwood and Hot Springs.' },
+  { h: 'Hot Springs', p: 'Garland County — residential and commercial tree work in the Spa City.' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Service in Glenwood, AR',
+    serviceType: 'Tree removal, trimming, stump grinding & storm cleanup',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Glenwood, Arkansas · Pike County"
+    title="Tree Service in Glenwood, AR"
+    subtitle="The crew Glenwood, Amity, and Lake Greeson homeowners have trusted for over two decades. Tree removal, trimming, stump grinding, and same-day storm response — serving Glenwood and the Pike County area from our Arkadelphia base."
+    image="/images/glenwood-ar-large-tree-felling-chainsaw-professional.webp"
+    imageAlt="Professional large tree felling with a chainsaw in Glenwood, AR"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Glenwood's Go-To Tree Service for Over 24 Years</h2>
+      <p>
+        Plyler's Tree Service has been taking care of trees in Glenwood and the Caddo River valley for over two
+        decades. We know the older homes along Highway 70 and Broadway, the wooded acreage out past Centerpoint, the
+        riverfront lots down the Caddo, and the recreational properties around Lake Greeson and the Daisy State Park
+        area. From in-town removals near downtown Glenwood to long-driveway jobs deep in Pike County, we've handled
+        tree work across every part of this area.
+      </p>
+      <p>
+        Glenwood sits in the Ouachita foothills where the Caddo River meets the gateway to Lake Greeson and the
+        Ouachita National Forest. That means big mature pines, dense hardwood canopy, and storms that hit hard when a
+        system rolls down out of the mountains. When a tree comes down across Highway 70 at midnight or a dead pine
+        leans toward your roof out near the Centerpoint school complex, you need somebody who knows the area. Our crew
+        is based about 30 minutes south in Arkadelphia and runs jobs up Highway 8 to Glenwood multiple times a week —
+        no trip fee, no travel charge.
+      </p>
+      <p>
+        We carry a perfect 5.0-star rating on Google with more than 70 reviews from homeowners across the area. Every
+        estimate is free, every price is in writing before we start, and we clean up everything before we leave.
+        That's how we've done it since day one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What We Do in Glenwood</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every service a homeowner or property owner in Pike County could need — all from one local crew.
+      </p>
+      <div class="grid grid-3">
+        {coreServices.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ServicesGrid current={path} />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Glenwood Calls Plyler's First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Your Neighbors Are Saying</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Glenwood, the Lake Greeson area, and Pike County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Lake Greeson Cabin Lots and Pike County Recreational Properties</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Glenwood is the gateway to some of the best recreational property in Arkansas. Lake Greeson, the Caddo River,
+        and the southern edge of the Ouachita National Forest are all right here. The tree work on these properties
+        takes specific gear and a specific approach — here's what that looks like.
+      </p>
+      <div class="grid grid-2">
+        {character.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Serving Glenwood and Pike County</h2>
+      <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">
+        Arkadelphia is home base. Our crews head out from here every morning and cover a full 40-mile radius —
+        including Glenwood, Amity, the Lake Greeson area, and the rest of Pike County, just 30 minutes up Highway 8.
+        No trip fee, no travel charge — the price is based on the job, not the drive.
+      </p>
+      <MapEmbed src={maps[path]} title="Glenwood service area map" />
+      <div class="grid grid-3" style="margin-top:2.4rem">
+        {towns.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        We also serve: Delight, Antoine, Okolona, Alpine, Bismarck, Donaldson, Pearcy, Lake Catherine, Lake Hamilton,
+        Hot Springs Village, Malvern, Gurdon, Prescott, Sparkman, and Bluff City. Don't see your town? Give us a call
+        at <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — if you're nearby, we'll make it work.
+      </p>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Service Questions — Glenwood"
+    intro="Answers to the things Glenwood homeowners ask us most."
+  />
+
+  <CtaBand
+    title="Ready to Get That Tree Taken Care Of?"
+    text="We serve Glenwood from our home base in Arkadelphia — just 30 minutes down Highway 8. Call Robbie, tell him what's going on, and we'll have somebody at your property to give you an honest price. No charge for the estimate. No obligation to say yes. ⭐ 5.0 Stars · 70+ Google Reviews · 24+ Years in Arkadelphia · Serving Glenwood & Pike County · Licensed & Insured."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

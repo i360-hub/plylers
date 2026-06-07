@@ -1,0 +1,41 @@
+---
+// Internal-linking block: the Arkadelphia service cluster (preserves hub -> 9 children links).
+import links from '../data/links.json';
+const {
+  heading = 'Arkadelphia Tree Services',
+  intro = 'Specialized tree work for Arkadelphia and Clark County — pick the service that fits your job.',
+  current = '',          // href of the current page, to skip self-link
+  showDegray = true,
+} = Astro.props;
+const items = links.arkadelphiaCluster.filter((i) => i.href !== current);
+---
+<section class="ark-block section">
+  <div class="container">
+    <h2 class="center">{heading}</h2>
+    <p class="center lead measure ark-intro">{intro}</p>
+    <div class="grid grid-3">
+      {items.map((i) => (
+        <a class="ark-card" href={i.href}>
+          <h3>{i.name}</h3>
+          <p>{i.blurb}</p>
+          <span class="ark-link">View service →</span>
+        </a>
+      ))}
+    </div>
+    {showDegray && links.degray.href !== current && (
+      <a class="ark-degray" href={links.degray.href}>
+        <strong>{links.degray.name}</strong> — {links.degray.blurb} <span aria-hidden="true">→</span>
+      </a>
+    )}
+  </div>
+</section>
+<style>
+  .ark-intro { margin-bottom: 2rem; color: var(--muted); }
+  .ark-card { display: flex; flex-direction: column; gap: 0.35rem; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.3rem; box-shadow: var(--shadow); color: var(--body); transition: transform .15s, box-shadow .15s; }
+  .ark-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); text-decoration: none; }
+  .ark-card h3 { margin: 0; font-size: 1.12rem; }
+  .ark-card p { margin: 0; font-size: 0.93rem; }
+  .ark-link { margin-top: auto; color: var(--green-700); font-weight: 700; font-size: 0.9rem; }
+  .ark-degray { display: block; margin-top: 1.5rem; padding: 1.1rem 1.3rem; background: var(--green-50); border: 1px solid var(--green-100); border-radius: var(--radius); color: var(--green-800); font-size: 1rem; }
+  .ark-degray:hover { background: var(--green-100); text-decoration: none; }
+</style>

@@ -1,0 +1,28 @@
+---
+// Internal-linking block: the 8 city hubs.
+import areas from '../data/areas.json';
+const {
+  heading = 'Areas We Serve',
+  intro = 'Based in Arkadelphia and serving a 40-mile radius across southwest Arkansas.',
+  current = '',
+} = Astro.props;
+const hubs = areas.hubs.filter((h) => h.slug !== current);
+---
+<section class="areas-block section section-alt">
+  <div class="container">
+    <h2 class="center">{heading}</h2>
+    <p class="center lead measure areas-intro">{intro}</p>
+    <div class="areas-grid">
+      {hubs.map((h) => <a class="area-pill" href={h.slug}>Tree Service in {h.city}</a>)}
+      <a class="area-pill area-all" href="/service-areas">All Service Areas →</a>
+    </div>
+  </div>
+</section>
+<style>
+  .areas-intro { margin-bottom: 1.8rem; color: var(--muted); }
+  .areas-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; }
+  .area-pill { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 0.6rem 1.1rem; font-weight: 600; color: var(--green-800); box-shadow: var(--shadow); font-size: 0.95rem; }
+  .area-pill:hover { background: var(--green-600); color: #fff; text-decoration: none; }
+  .area-all { background: var(--green-700); color: #fff; }
+  .area-all:hover { background: var(--green-800); }
+</style>

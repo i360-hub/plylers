@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "24/7 Emergency Storm Tree Service Arkansas | Plyler's";
+const description =
+  "24/7 emergency tree response across Clark County, AR — Arkadelphia, Bismarck, Caddo Valley. Trees on houses, blocked roads, downed limbs.";
+const path = '/emergency-storm-damage';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Emergency Storm Damage', path },
+];
+const faq = faqData['emergency-storm-damage'] ?? [];
+
+// When to call for emergency tree service.
+const whenToCall = [
+  { h: 'Tree on Your Roof', p: 'Get everyone out and call us immediately. A tree on a roof can shift at any time and cause the structure to collapse. Do not go back inside until it’s removed.' },
+  { h: 'Tree on Your Car', p: 'Don’t try to move it. The tree can shift and cause more damage or hurt someone. We’ll lift it off safely and cut it up without making things worse.' },
+  { h: 'Blocked Driveway or Road', p: 'If a tree is blocking your only way in or out, that’s an emergency. We’ll get it cut up and cleared so you can get through.' },
+  { h: 'Tree on Power Lines', p: 'Stay far away. Do not touch the tree or anything it’s touching. Call your power company first, then call us. We work with utility crews to remove trees from lines safely.' },
+  { h: 'Hanging or Cracked Limb', p: 'A big limb that cracked but didn’t fall all the way is called a widow-maker for a reason. Stay out from under it and call us to bring it down safely.' },
+  { h: 'Storm-Leaning Tree', p: 'If a storm pushed a tree into a lean and it’s now pointing at your house, garage, or shed, it can go the rest of the way in the next gust of wind. Don’t wait.' },
+];
+
+// What to do when a tree falls on your house — HowTo steps.
+const steps = [
+  { h: 'Get Out of the House', p: 'Leave the house immediately. Don’t go into the room where the tree came through. The roof could be compromised and the tree could shift.' },
+  { h: 'Call Us — We Answer 24/7', p: `Call ${business.phoneDisplay}. We answer 24/7. Tell us what happened, where the tree is, and whether anyone is hurt. We’ll get a crew headed your way.` },
+  { h: 'Call Your Insurance Company', p: 'Start a claim as soon as possible. Take photos of the damage from a safe distance — your phone is fine. Your adjuster will need these.' },
+  { h: 'We Remove the Tree Safely', p: 'Our crew carefully removes the tree from your home using ropes and rigging to prevent further damage. We work with your insurance adjuster and provide photos and documentation.' },
+  { h: 'We Clean Everything Up', p: 'Tree, branches, debris — all of it gets cut up, hauled away, and cleaned up. We leave your property as safe and clean as possible so repairs can begin.' },
+];
+
+// Why folks call us first.
+const whyUs = [
+  { h: '24 Years of Doing This', p: 'Robbie Plyler started this company in 2002. Two decades of experience on every job.' },
+  { h: 'Licensed and Insured', p: 'Full liability coverage. If anything goes wrong, you’re protected. Period.' },
+  { h: 'Free Estimates, No Pressure', p: 'We come out, look at the job, and give you an honest price. No obligation.' },
+  { h: 'We Clean Up Everything', p: 'When we leave, your yard looks better than when we got there. Every time.' },
+  { h: '24/7 Emergency Calls', p: 'Storm at midnight? Big limb on your roof? Call us. We answer and we show up.' },
+  { h: 'Local People, Local Company', p: 'We live here. Our kids go to school here. We treat your property like it’s our own.' },
+];
+
+const testimonials = [
+  'Called on a Monday, Robbie came out Tuesday morning. Had a huge oak removed by Wednesday afternoon. Fair price, clean yard, no hassle.',
+  'A big pine fell on our fence during a storm. They were out the next morning. Professional, fast, and they even fixed the fence section. Can’t say enough good things.',
+  'Best tree service around. They trimmed six trees in our yard and ground two stumps in one day. Left the yard cleaner than they found it.',
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Emergency Storm Damage Cleanup',
+    serviceType: 'Emergency storm damage tree response',
+    description,
+    path,
+  }),
+  {
+    '@type': 'HowTo',
+    name: 'What to Do When a Tree Falls on Your House',
+    description:
+      'Steps to take after a storm drops a tree on your home in Clark County, Arkansas — stay safe, document the damage, and get the tree removed.',
+    step: steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.h, text: s.p })),
+  },
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="24/7 Emergency Response · Clark County"
+    title="24/7 Emergency Storm Damage Cleanup"
+    subtitle="Tree on your house? Blocking your road? Call now — we answer day and night, 7 days a week."
+    image="/images/arkadelphia-ar-storm-damage-uprooted-oak-tree-removal.webp"
+    imageAlt="Storm-damaged uprooted oak being removed after a storm in Arkadelphia, AR"
+    primaryCta={{ label: `Call Now — ${business.phoneDisplay}`, href: `tel:${business.phoneHref}` }}
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Arkadelphia's 24/7 Emergency Tree Service</h2>
+      <p>
+        When a storm knocks a tree onto your house at 2 in the morning, you need someone who answers the phone.
+        Plyler's Tree Service has been handling storm emergencies in Arkadelphia and Clark County for over 24 years.
+        Owner Robbie Plyler lives right here and responds to emergency calls 24 hours a day, 7 days a week — nights,
+        weekends, holidays, it doesn’t matter. We remove fallen trees from roofs, clear blocked driveways, cut up
+        downed limbs, and clean up storm debris. We work with your insurance company and provide the photos and
+        documentation your adjuster needs. Fully licensed and insured. We’ve helped hundreds of families in
+        Arkadelphia, Hot Springs, Malvern, Gurdon, and the surrounding area get their property safe again after the
+        worst storms Arkansas can throw at them. That’s why we have a perfect 5.0-star rating on Google with more
+        than {business.rating.count} reviews.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">When to Call for Emergency Tree Service</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Not every fallen branch is an emergency. But these situations are — and they need professional help right
+        away.
+      </p>
+      <div class="grid grid-3">
+        {whenToCall.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-green">
+    <div class="container">
+      <h2 class="center">A Tree Just Fell on Your House — Here's What to Do</h2>
+      <p class="center" style="margin-bottom:2.4rem;color:#bcd3c4">
+        Five steps to stay safe, protect your claim, and get the tree off your home.
+      </p>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step">
+            <span class="step-num">{i + 1}</span>
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Emergency Tree Removal Cost?</h2>
+      <p>
+        Every storm situation is different — the size of the tree, where it landed, what it’s touching, and how
+        dangerous it is to remove all affect the price. Even in an emergency, we tell you the cost before we start.
+        No one needs a surprise bill on top of storm damage.
+      </p>
+      <p>
+        If your homeowner’s insurance covers it — and it usually does when a tree hits a structure — we provide the
+        paperwork and photos your adjuster needs to process the claim.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Will Insurance Cover Emergency Tree Removal?</h2>
+      <p>
+        In most cases, yes — if the tree hit a covered structure like your house, garage, fence, or shed. Your
+        homeowner’s policy typically covers the cost of removing the tree and repairing the damage. If a tree falls
+        in your yard but doesn’t hit anything, coverage depends on your specific policy. Some policies cover it, some
+        don’t.
+      </p>
+      <p>
+        Here’s what we recommend: call your insurance company as soon as the tree falls. Take photos from a safe
+        distance. Then call us. We’ll remove the tree, document the work, and give you everything your adjuster needs
+        — itemized invoice, before and after photos, description of the damage. We’ve done this hundreds of times and
+        know exactly what insurance companies want to see.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Folks Around Here Call Us First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We show up, do the work right, and leave your yard clean.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Our Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Arkadelphia and Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Emergency & Storm Tree Service in Arkadelphia, AR</h2>
+      <p>Dealing with a tree emergency in Arkadelphia? Go straight to the local pages:</p>
+      <ul>
+        <li>
+          <a href="/emergency-tree-service-arkadelphia-ar">Emergency Tree Service in Arkadelphia</a> — 24/7 dispatch
+          when a tree’s on the house or blocking the drive, with insurance documentation.
+        </li>
+        <li>
+          <a href="/storm-damage-cleanup-arkadelphia-ar">Storm Damage Cleanup in Arkadelphia</a> — fast cleanup of
+          downed limbs and hazard trees after a storm, documented for your insurer.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Emergency Tree Service Questions"
+    intro="Quick answers to the things folks ask us most when a tree comes down."
+  />
+
+  <GhlForm heading="Get Your Free Estimate" />
+</BaseLayout>
+
+<style>
+  .steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.6rem; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--amber-500); color: var(--green-900); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .step h3 { color: #fff; margin: 0 0 0.4rem; }
+  .step p { color: #c9ddcf; }
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

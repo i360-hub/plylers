@@ -1,0 +1,242 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Stump Grinding Services Arkansas | Plyler's Tree Service";
+const description =
+  "Stump grinding services across Clark County, AR — 6-8 inches below grade. Arkadelphia, Bismarck, Caddo Valley, Hot Springs, Malvern.";
+const path = '/stump-grinding';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Stump Grinding', path },
+];
+const faq = faqData['stump-grinding'] ?? [];
+
+// Why you shouldn't leave the stump.
+const leaveItReasons = [
+  { h: 'Termite Magnet', p: 'Rotting wood is a termite buffet. If that stump is anywhere near your house, those termites will find their way to your foundation, siding, or deck.' },
+  { h: 'Trip Hazard', p: "Kids running through the yard, guests walking to the back door, you mowing in the dark — stumps catch people off guard. One bad trip and someone's hurt." },
+  { h: 'In the Way of Mowing', p: 'You have to mow around it every single time. Hit it with a mower blade and you’ll damage the mower or send a chunk of wood flying.' },
+  { h: 'New Sprouts Keep Coming', p: 'Some stumps keep sending up new growth. You cut it back, it comes back again. Grinding the stump kills the root system and stops it for good.' },
+  { h: 'Makes Your Yard Look Rough', p: 'An old stump in the front yard makes the whole property look neglected. If you’re thinking about selling, it’s one of the first things buyers notice.' },
+  { h: 'Wasted Space', p: 'That stump is sitting where you could put a garden, a fire pit, a swing set, or just have a clean flat yard. Grind it out and you get that space back.' },
+];
+
+// How we grind a stump.
+const steps = [
+  { h: 'We Size It Up', p: 'We check the stump size, what’s around it, and whether our grinder can get to it. You get an exact price on the spot — no guessing, no surprises.' },
+  { h: 'We Protect the Area', p: 'We clear any rocks or debris around the stump and set up barriers to catch flying chips. If the stump is near a fence, driveway, or flower bed, we protect those surfaces.' },
+  { h: 'We Grind It Down', p: 'Our grinder chews the stump and the root flare down 6 to 8 inches below ground level. The spinning carbide wheel turns the whole thing into a pile of fine wood chips.' },
+  { h: 'We Fill and Clean Up', p: 'We pack the hole with the wood chips, rake the area smooth, and clean up any mess. You can top it off with dirt and plant grass right over it. When we leave, it looks like the stump was never there.' },
+];
+
+// Why folks call us first.
+const whyUs = [
+  { h: '24 Years of Doing This', p: 'Robbie Plyler started this company in 2002. Two decades of experience on every job.' },
+  { h: 'Licensed and Insured', p: 'Full liability coverage. If anything goes wrong, you’re protected. Period.' },
+  { h: 'Free Estimates, No Pressure', p: 'We come out, look at the job, and give you an honest price. No obligation.' },
+  { h: 'We Clean Up Everything', p: 'When we leave, your yard looks better than when we got there. Every time.' },
+  { h: '24/7 Emergency Calls', p: 'Storm at midnight? Big limb on your roof? Call us. We answer and we show up.' },
+  { h: 'Local People, Local Company', p: 'We live here. Our kids go to school here. We treat your property like it’s our own.' },
+];
+
+const testimonials = [
+  'Called on a Monday, Robbie came out Tuesday morning. Had a huge oak removed by Wednesday afternoon. Fair price, clean yard, no hassle.',
+  'A big pine fell on our fence during a storm. They were out the next morning. Professional, fast, and they even fixed the fence section. Can’t say enough good things.',
+  'Best tree service around. They trimmed six trees in our yard and ground two stumps in one day. Left the yard cleaner than they found it.',
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Stump Grinding',
+    serviceType: 'Stump grinding',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Clark County & Surrounding Areas"
+    title="Stump Grinding Services in Clark County & Surrounding Areas"
+    subtitle="We grind it below ground level, fill the hole, and leave your yard clean. Like the stump was never there."
+    image="/images/malvern-ar-stump-grinding-land-clearing-skid-steer.webp"
+    imageAlt="Skid steer stump grinding and land clearing job near Malvern, AR"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Arkadelphia's Stump Grinding Experts</h2>
+      <p>
+        Plyler's Tree Service has been grinding stumps in Arkadelphia and Clark County for over 24 years. After a
+        tree comes down — whether we took it down or someone else did — that leftover stump is a problem. It
+        attracts termites. It gets in the way of mowing. Kids trip on it. It just sits there looking bad. Our stump
+        grinder chews it down 6 to 8 inches below ground level, fills the hole with the wood chips, and you’d never
+        know a tree was there. We can grind stumps right next to fences, driveways, foundations, and sidewalks
+        without damaging anything. Got a yard full of old stumps? We do multiple stumps in one visit and give you a
+        better price. Every estimate is free. Licensed, insured, and backed by a perfect 5.0-star rating on Google
+        with more than {business.rating.count} reviews.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why You Shouldn't Leave That Stump in Your Yard</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        A lot of folks figure the stump will just rot away on its own. It will — in about 10 to 15 years. In the
+        meantime, here’s what it’s doing.
+      </p>
+      <div class="grid grid-3">
+        {leaveItReasons.map((r) => (
+          <div class="card">
+            <h3>{r.h}</h3>
+            <p class="mb-0">{r.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-green">
+    <div class="container">
+      <h2 class="center">How We Grind a Stump</h2>
+      <p class="center" style="margin-bottom:2.4rem;color:#bcd3c4">
+        Four steps from an ugly stump to a clean, flat yard.
+      </p>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step">
+            <span class="step-num">{i + 1}</span>
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Stump Grinding Cost in Arkadelphia?</h2>
+      <p>
+        Stump grinding is priced by the size of the stump — measured across the widest part. Got multiple stumps?
+        Most people do. We give a discount when you bundle several stumps into one visit — it saves us setup time and
+        saves you money.
+      </p>
+      <p>
+        We always tell you the exact price before we start. Call us at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or fill out the form below for a free
+        estimate.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Stump Grinding vs. Stump Removal — What's the Difference?</h2>
+      <p>
+        Stump grinding and stump removal are two different things. Grinding is what most people need. We use a
+        machine to chew the stump down below ground level and fill the hole. The roots stay in the ground and decay
+        naturally over a few years. It’s fast, affordable, and leaves your yard looking clean.
+      </p>
+      <p>
+        Full stump removal means digging out the entire root ball. That’s a much bigger job — it tears up a large
+        area of your yard and costs a lot more. It’s really only needed if you’re pouring a foundation or building
+        something directly on that spot. For 95% of homeowners, grinding is the right call. We’ll tell you which one
+        makes sense when we come out for the estimate.
+      </p>
+      <p class="mb-0">
+        Want the full breakdown?
+        <a href="/stump-grinding-vs-removal">Read our complete guide to stump grinding vs full stump removal →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Folks Around Here Call Us First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We show up, do the work right, and leave your yard clean.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Our Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Arkadelphia and Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Stump Grinding in Arkadelphia, AR</h2>
+      <p class="mb-0">
+        Stumps ground 6–8 inches below grade so you can replant or re-sod clean, with multi-stump pricing when
+        you’re clearing a whole Arkadelphia yard. See our local
+        <a href="/stump-grinding-arkadelphia-ar">stump grinding page</a> for details and pricing.
+      </p>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Stump Grinding Questions"
+    intro="Quick answers to the things folks ask us most about stump grinding."
+  />
+
+  <GhlForm heading="Get Your Free Estimate" />
+</BaseLayout>
+
+<style>
+  .steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.6rem; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--amber-500); color: var(--green-900); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .step h3 { color: #fff; margin: 0 0 0.4rem; }
+  .step p { color: #c9ddcf; }
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

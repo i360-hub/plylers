@@ -1,0 +1,39 @@
+{
+  "_comment": "Trimmed realistic served set (was ~30 cities live). Used for schema areaServed and on-page area lists. Hubs have dedicated pages.",
+  "counties": [
+    "Clark County, Arkansas",
+    "Garland County, Arkansas",
+    "Hot Spring County, Arkansas",
+    "Pike County, Arkansas",
+    "Montgomery County, Arkansas"
+  ],
+  "countyNames": ["Clark", "Garland", "Hot Spring", "Pike", "Montgomery"],
+  "hubs": [
+    { "city": "Arkadelphia", "slug": "/tree-service-arkadelphia-ar" },
+    { "city": "Hot Springs", "slug": "/tree-service-hot-springs-ar" },
+    { "city": "Caddo Valley", "slug": "/tree-service-caddo-valley-ar" },
+    { "city": "Bismarck", "slug": "/tree-service-bismarck-ar" },
+    { "city": "Gurdon", "slug": "/tree-service-gurdon-ar" },
+    { "city": "Malvern", "slug": "/tree-service-malvern-ar" },
+    { "city": "Glenwood", "slug": "/tree-service-glenwood-ar" },
+    { "city": "Amity", "slug": "/tree-service-amity-ar" }
+  ],
+  "cities": [
+    "Arkadelphia",
+    "Caddo Valley",
+    "Gurdon",
+    "Gum Springs",
+    "Bismarck",
+    "De Gray",
+    "Malvern",
+    "Rockwell",
+    "Donaldson",
+    "Hot Springs",
+    "Pearcy",
+    "Bonnerdale",
+    "Amity",
+    "Glenwood",
+    "Kirby",
+    "Mount Ida"
+  ]
+}

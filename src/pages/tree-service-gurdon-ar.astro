@@ -1,0 +1,276 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+import maps from '../data/maps.json';
+
+const title = "Gurdon Tree Service | Clark County, AR | Plyler's";
+const description =
+  "Gurdon, AR tree service. Removal, trimming, stump grinding, 24/7 storm cleanup across south Clark County. Same county as Arkadelphia. 5.0 stars, 70+ reviews.";
+const path = '/tree-service-gurdon-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Gurdon', path },
+];
+const faq = faqData['tree-service-gurdon-ar'] ?? [];
+
+// What we do — the five core service summaries from the live page.
+const coreServices = [
+  {
+    h: 'Tree Removal',
+    p: "A century-old shortleaf pine leaning toward a Pine Street home, a dead post oak threatening the barn out toward Beirne, or a storm-cracked sweetgum hanging over the rail line on Joslyn — we bring them down safe and haul off every branch. Old-town tight lots, rural timberland, riverbottom acreage — doesn't matter. We handle it.",
+  },
+  {
+    h: 'Tree Trimming',
+    p: 'Pine branches hanging over a metal roof, oak limbs scraping the gutters on Sixth Street, sweetgum canopy blocking sunlight from the yard — we trim them back the right way. No topping, no hacking. Just proper cuts that keep the tree healthy and your property safe.',
+  },
+  {
+    h: 'Stump Grinding',
+    p: "That pine stump you've been mowing around for three years? We grind it 6 to 8 inches below ground and fill the hole. Flat enough to grow grass over or plant something new. We do multiple stumps in one trip and save you money.",
+  },
+  {
+    h: 'Emergency Storm Damage',
+    p: 'When a storm drops a tree on your house, blocks Highway 67, or takes out a power line at 2 a.m., call us any time — nights, weekends, holidays. Our crew is just 15 minutes north in Arkadelphia and can be on the way fast.',
+  },
+  {
+    h: 'Tree Assessments',
+    p: "Not sure if a tree needs to come down or just needs some work? Robbie has spent 24 years looking at trees across this area — reading the lean, checking the trunk, spotting root damage and disease that most people walk right past. He'll walk your property and give you a straight answer on what's healthy and what's a problem.",
+  },
+];
+
+// Why Gurdon calls first.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Google Reviews', p: 'A perfect rating from more than 70 homeowners who trusted us with their property. Not filtered, not fake — real people in Gurdon, Beirne, and across south Clark County who picked up the phone and then took the time to say we did it right.' },
+  { h: '15 Minutes Down Highway 67 — Same County', p: "We're based in Arkadelphia, the Clark County seat, just 15 minutes north of Gurdon on Highway 67. Same county, same county roads, same response times as if we were in town. There's never a trip fee or travel charge." },
+  { h: '24 Years and Counting', p: "Robbie started this company in 2002. We've worked Gurdon yards for over two decades — long enough to know which old pines on which street are the next to come down. Fly-by-night outfits come through every storm and disappear; we don't go anywhere." },
+  { h: 'Licensed and Insured — Always', p: "Full liability and workers' comp on every job. If a branch nicks your gutter or a piece of equipment scratches your driveway, our insurance covers it. We'll show you proof before we ever start a saw." },
+  { h: 'Free Estimates — No Sales Pitch', p: "Robbie comes out, looks at the tree, and gives you an honest number in writing. If it doesn't need to come down, he'll tell you that. We don't push work you don't need just to fill a schedule." },
+  { h: 'Your Yard — Cleaner Than We Found It', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every last piece. Half the reviews people leave mention the cleanup. That tells you how seriously we take it.' },
+];
+
+const testimonials = [
+  "Excellent Service & Rates!! Severe storm passed through and created some very dangerous tree problems for us. Plyler's Tree Service came out and cut the trees down and removed them, leaving my yard as though nothing ever happened! The work they performed was excellent, by far they had the best rates in the area and the crew was hard working and friendly! I highly recommend Plyler's Tree Service!!!",
+  'Robbie does great work! He is very efficient and friendly! He does great work in a timely manner. He does difficult jobs as well! Very dependable!',
+  "I had some trees removed close to a power line, house, and at the edge of the driveway. Did an amazing job. I wouldn't ever think about hiring anyone else. He was also the cheapest and had the equipment to get it all done. Clean up and everything. Thanks for the awesome job.",
+];
+
+// Railroad and timber town breakdowns.
+const character = [
+  {
+    h: '🌲 Trees Older Than Most Houses',
+    p: "Gurdon's old neighborhoods along Joslyn, Pine Street, and Main are lined with shortleaf pines and post oaks that pre-date the houses they shade. Some of these trees were standing when the Missouri Pacific line first came through. They're beautiful and they're a hazard — root systems compromised by decades of pavement, trunk decay from old wounds, canopy weight that the original soil can't anchor in saturated conditions. We've taken down our share of them over 24 years, and we know how to read which ones are still safe and which ones are quietly waiting for the next ice storm.",
+  },
+  {
+    h: '🚂 The Rail Corridor',
+    p: "The Union Pacific (formerly Missouri Pacific) line runs straight through the middle of Gurdon, and a lot of older homes back right up to it. Tree work near an active rail corridor takes extra care — we don't drop anything on the right-of-way, we coordinate with the homeowner on which direction limbs need to fall, and we rope down sections rather than felling whole trees when there's any risk to the line. If your property borders the tracks, we'll talk through the plan before we ever fire up a saw.",
+  },
+  {
+    h: '🌳 Timber Country Acreage',
+    p: 'South Clark County is timber country — heavy pine plantations, hardwood bottoms, and long-driveway rural acreage where the nearest neighbor might be a quarter mile off. We know how to get equipment back into those properties, how to handle the storm-damaged section of a pine stand without disturbing the rest, and how to clear a fence line or driveway without leaving you a mess to deal with after. If you’ve got acreage out toward Beirne, Whelen Springs, or the Ouachita River bottoms, we’ve been there.',
+  },
+  {
+    h: '👻 The Gurdon Light Trees',
+    p: "Locals know the story. The “Gurdon Light” has been spooking folks along the old rail line south of town for over a century — there's even a section of woods out there everybody knows by name. We haven't seen the light ourselves, but we've worked plenty of trees along that stretch of the tracks and through the timber country south of town. Whatever's haunting Gurdon, it hasn't kept us from getting the job done.",
+  },
+];
+
+// Towns within the service area.
+const towns = [
+  { h: 'Arkadelphia', p: 'Home base — Clark County seat, 15 minutes north on Highway 67.' },
+  { h: 'Beirne', p: 'South Clark County — rural acreage and timber country just south of Gurdon.' },
+  { h: 'Whelen Springs', p: 'South Clark County — wooded rural properties on Highway 51.' },
+  { h: 'Curtis', p: 'Clark County — between Arkadelphia and Gurdon along Highway 67.' },
+  { h: 'Okolona', p: 'Clark County — rural acreage west of Gurdon.' },
+  { h: 'Prescott', p: 'Nevada County seat — 20 minutes south on Highway 67.' },
+  { h: 'Amity', p: 'West Clark County — Caddo River area.' },
+  { h: 'Caddo Valley', p: 'North Clark County — I-30 corridor, 20 minutes north.' },
+  { h: 'Hollywood', p: 'Rural Clark County — east of Gurdon, mature timber country.' },
+  { h: 'Antoine', p: 'Pike County — 25 minutes west, rural wooded acreage.' },
+  { h: 'Delight', p: 'Pike County — rural Highway 26 corridor.' },
+  { h: 'Bluff City', p: 'Nevada County — rural timber acreage south of Gurdon.' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Service in Gurdon, AR',
+    serviceType: 'Tree removal, trimming, stump grinding & storm cleanup',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Gurdon, Arkansas · Clark County"
+    title="Tree Service in Gurdon, AR"
+    subtitle="The crew Gurdon, Beirne, and south Clark County homeowners have trusted for over two decades. Tree removal, trimming, stump grinding, and same-day storm response — serving Gurdon from our Arkadelphia base, just 15 minutes up Highway 67."
+    image="/images/arkadelphia-ar-hazardous-leaning-pine-tree-before-removal.webp"
+    imageAlt="Hazardous leaning pine tree before removal in Clark County, AR"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Gurdon's Tree Service Crew for Over 24 Years</h2>
+      <p>
+        Plyler's Tree Service has been working in Gurdon since 2002. We know the old downtown around Main Street and
+        Joslyn, the established homes along Highway 67 and Pine Street, the wooded properties out toward Beirne and
+        Whelen Springs, and the rural acreage south of town toward the Ouachita River bottoms. From in-town removals
+        on Sixth Street to long-driveway jobs out in the timber country, we've handled tree work in every part of
+        this area.
+      </p>
+      <p>
+        Gurdon is a Clark County railroad town — the old Missouri Pacific (now Union Pacific) line runs right through
+        the middle of it, and the timber industry has shaped this corner of Arkansas for over a century. That means a
+        heavy mix of old-growth pines, mature hardwoods in town, and lots of trees that have been growing tall and
+        crooked since before most of us were born. When one of those big shortleaf pines comes down on Joslyn Street
+        at midnight, or a dead post oak threatens a house out on Hickory Grove Road, you need somebody who knows the
+        terrain. Our crew is based 15 minutes north in Arkadelphia and runs jobs down Highway 67 to Gurdon multiple
+        times a week — no trip fee, no travel charge.
+      </p>
+      <p>
+        We carry a perfect 5.0-star rating on Google with more than 70 reviews from homeowners across the area. Every
+        estimate is free, every price is in writing before we start, and we clean up everything before we leave.
+        That's how we've done it since day one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What We Do in Gurdon</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every service a homeowner or property owner in south Clark County could need — all from one local crew.
+      </p>
+      <div class="grid grid-3">
+        {coreServices.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ServicesGrid current={path} />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Gurdon Calls Plyler's First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Your Neighbors Are Saying</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real customers across Gurdon and south Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Tree Work in a Railroad and Timber Town</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Gurdon isn't just any small town — it's a 150-year-old railroad and timber town with the kind of mature
+        canopy you don't see in newer Arkansas communities. Here's what that means for tree work.
+      </p>
+      <div class="grid grid-2">
+        {character.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Serving Gurdon and South Clark County</h2>
+      <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">
+        Arkadelphia is home base. Our crews head out from here every morning and cover a full 40-mile radius —
+        including Gurdon, Beirne, Whelen Springs, and the rest of south Clark County, just 15 minutes down Highway 67.
+        Same county, no trip fees, no travel charges.
+      </p>
+      <MapEmbed src={maps[path]} title="Gurdon service area map" />
+      <div class="grid grid-3" style="margin-top:2.4rem">
+        {towns.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2rem;color:var(--muted)">
+        We also serve: Sparkman, Camden, Donaldson, Bismarck, Glenwood, Hot Springs, Hot Springs Village, Malvern,
+        Murfreesboro, Mount Ida, Kirby, Daisy, and the surrounding south Arkansas timber country. Don't see your town?
+        Give us a call at <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — if you're nearby, we'll
+        make it work.
+      </p>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Service Questions — Gurdon"
+    intro="Answers to the things Gurdon homeowners ask us most."
+  />
+
+  <CtaBand
+    title="Ready to Get That Tree Taken Care Of?"
+    text="We serve Gurdon from our home base in Arkadelphia — same county, just 15 minutes north on Highway 67. Call Robbie, tell him what's going on, and we'll have somebody at your property to give you an honest price. No charge for the estimate. No obligation to say yes. ⭐ 5.0 Stars · 70+ Google Reviews · 24+ Years in Arkadelphia · Serving Gurdon & Clark County · Licensed & Insured."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>

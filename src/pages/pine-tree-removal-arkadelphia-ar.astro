@@ -1,0 +1,377 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Pine Tree Removal Arkadelphia AR | Plyler's Tree";
+const description =
+  "Pine tree removal in Arkadelphia, AR since 2002. Safe takedown of loblolly & shortleaf pines — beetle damage, lean, storm tops. Free estimates, 5.0 stars.";
+const path = '/pine-tree-removal-arkadelphia-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Arkadelphia', path: '/tree-service-arkadelphia-ar' },
+  { name: 'Pine Tree Removal', path },
+];
+const faq = faqData['pine-tree-removal-arkadelphia-ar'] ?? [];
+
+// Pine species we remove in Arkadelphia.
+const species = [
+  { h: '🌲 Loblolly Pine', p: 'Pinus taeda — the workhorse of Arkansas timber country and by far the most common pine on Arkadelphia properties.', id: 'Identification: Fast-growing, can reach 90–110 feet at maturity. Needles in bundles of three, 6–9 inches long. Reddish-brown bark in deep furrows on mature trees. Often planted in plantation rows on rural acreage.', rem: 'Common removal reasons: Lean toward structures (loblollies grow fast and often outgrow their planting spot), pine beetle damage, ice storm top snap, lightning strikes, and routine end-of-life removal on plantation stands.' },
+  { h: '🌲 Shortleaf Pine', p: 'Pinus echinata — slower-growing native pine, more common in the Ouachita foothills west of Arkadelphia and on older rural properties.', id: 'Identification: Slower growth, typically 80–100 feet at maturity. Shorter needles (3–5 inches) in bundles of two or three. Plate-like bark with resin pockets. More common in mixed-species stands than plantations.', rem: 'Common removal reasons: Old age (shortleaf can live 200+ years and often outlives its location), beetle damage, storm-related top failure, removal during property development. Slower-grown wood is denser and the removal job slightly different from loblolly.' },
+];
+
+// Why pine trees get removed.
+const reasons = [
+  { h: 'Leaning Toward a Structure', p: 'Loblollies grow fast — sometimes 3 feet per year — and what started as a small pine near the house is now a 60-foot tree leaning over the roof. Most common pine removal call we get on the east side and Country Club Drive areas.' },
+  { h: 'Pine Beetle Damage', p: 'Southern pine beetle and Ips beetle outbreaks kill loblollies fast. Once a pine shows browning needles and pitch tubes on the bark, removal is usually the only option — and you want it down before beetles spread to neighboring pines. See section below for more detail.' },
+  { h: 'Dead or Dying', p: 'Brown needles in summer, no new growth, bark sloughing off. A dead pine loses structural integrity fast — sometimes failing within months. We remove dead pines as a high priority, especially when they\'re near anything. See our dead tree removal page for details.' },
+  { h: 'Ice Storm Damage', p: 'Loblollies have a habit of snapping the top 30 feet off during ice events. The remaining trunk is structurally compromised and usually has to come down. Common after Clark County ice events.' },
+  { h: 'Lightning Strike', p: 'Tall pines attract lightning more than surrounding hardwoods. A pine with visible strike damage may survive or may decline over the next year. We assess and remove if needed.' },
+  { h: 'Construction or Landscape Project', p: 'Clearing pines for a new driveway, expanded yard, pool, addition, or shed. Common on properties out toward Caddo Valley where buyers are clearing pines to expand the usable yard around the house.' },
+];
+
+// Why pine removal takes specialized skill.
+const skill = [
+  { h: "They're tall", p: 'A mature loblolly is 80–100 feet — significantly taller than most hardwoods on residential lots. That puts the cuts higher in the air, the rigging plan more complex, and the impact zone larger if anything goes wrong.' },
+  { h: "They're top-heavy", p: "Pine canopy concentrates weight at the top of a tall, often slender trunk. When the top comes down, momentum is high. Sectional rigging is almost always required for pines near structures — you can't safely fell most residential pines whole." },
+  { h: 'The wood is softer than hardwood', p: 'Loblolly is much less dense than oak. That sounds like an advantage — easier to cut — but it also means anchor points and lifting points hold weight differently. Climbers and riggers adjust for the species.' },
+  { h: 'Crown failures are common', p: 'Pines, especially dead or beetle-damaged ones, often have weakened tops that can drop unexpectedly during removal. We plan removals assuming the top might fail before we get to it.' },
+  { h: 'Resin matters', p: 'Pine sap gums up chainsaws, fouls climbing gear, and stains driveways. We come prepared. The first-time pine removal contractor learns the hard way.' },
+];
+
+// How we remove a pine.
+const steps = [
+  { h: 'On-Site Assessment', p: 'Robbie comes out, measures the tree, evaluates lean, checks for beetle damage or decline, identifies what\'s around it (structures, power lines, landscaping, fences), and gives you a written price the same day. Free, no obligation.' },
+  { h: 'Choose Approach', p: 'Whole-tree felling if the pine is in an open area with clear drop zone. Sectional removal with bucket truck or climber if it\'s near anything that matters. Most residential pines in Arkadelphia get sectional treatment — the lots are tight and the trees are tall.' },
+  { h: 'Top-Down Sectional Removal', p: 'Climber or bucket operator works from the top. Cut the top section, lower it with rigging. Cut the next section, lower it. Repeat until the trunk is short enough to fell safely. Every piece comes down where we want it.' },
+  { h: 'Full Cleanup & Optional Grinding', p: 'Brush chipped, trunk wood hauled or cut to firewood length (note: pine isn\'t great firewood but it works), needles raked, resin spots cleaned. Stump grinding is a natural add-on — see our stump grinding page for details.' },
+];
+
+// Neighborhood breakdowns.
+const neighborhoods = [
+  { h: '🎓 Henderson State & OBU Areas', p: 'Pine Street, 10th Street, Walnut, Caddo, Henderson Street — older neighborhoods around Henderson State and Ouachita Baptist have a mix of mature shortleaf and loblolly pines that were planted decades ago. Tight lots mean sectional rigging is almost always required.' },
+  { h: '🏘️ Country Club Drive & East Side', p: 'Twin Rivers, Riverview, the streets off 9th. Big loblolly pines on bigger lots — many planted 40-60 years ago and now towering 80+ feet over roof lines. We see lots of "leaning toward the house" removals here, plus beetle-damaged pines.' },
+  { h: '🛣️ Caddo Valley & I-30 Corridor', p: 'Rural acreage with significant pine plantation stands. We handle pine beetle response work, storm cleanup involving multiple downed pines, and lot clearing for properties expanding the usable yard. Volume pine removal happens here.' },
+  { h: '🌊 DeGray Lake & South Toward Gurdon', p: "Lakefront cabins around DeGray Lake Resort State Park with pines threatening cabins, docks, and retaining walls. Lakefront pine work is its own challenge — steep slopes, tight access, careful drop planning. We've been doing it for 24 years." },
+];
+
+// Why Arkadelphia calls Plyler's for pine removal.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Reviews', p: 'Perfect Google rating from real Arkadelphia customers — pine removals included. The reviews tell the story.' },
+  { h: '📍 Equipment Built for Pine Work', p: 'Bucket truck for tall trees, climbing gear for tight lots, rigging built for sectional pine work, chipper sized for pine brush volume.' },
+  { h: '🌲 Thousands of Pines Removed', p: "Loblolly is the most common species we work with. Twenty-four years of pine removal in Clark County — we've seen every failure mode." },
+  { h: '📋 Licensed and Insured', p: "Full liability and workers' comp. Tall tree work demands real coverage — never hire a tree company that can't show you proof." },
+  { h: '💬 Honest Assessment', p: 'If your pine doesn\'t actually need to come down, we tell you. If beetle damage is fixable with selective removal of just one tree, we tell you that too. No upsells.' },
+  { h: '🧹 Complete Cleanup', p: 'Pine needles, brush, sap, resin spots — all of it. We come prepared. Your yard looks like a yard, not a logging site.' },
+];
+
+const testimonials = [
+  "A big pine fell on our fence during a storm. They were out the next morning. Professional, fast, and they even fixed the fence section. Can't say enough good things.",
+  'Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.',
+  'Robbie knows what he is doing and is the only person I trust to cut my trees. He has cut over 50 trees for me and always done an excellent job. I highly recommend him.',
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Pine Tree Removal in Arkadelphia, AR',
+    serviceType: 'Pine tree removal',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Arkadelphia, Arkansas · Clark County"
+    title="Pine Tree Removal in Arkadelphia, AR"
+    subtitle="That 60-foot loblolly leaning toward your roof. The beetle-killed pine browning out in your back yard. The 80-year-old shortleaf finally letting go in storm season. Pines are the dominant tree across Clark County — and our Arkadelphia crew takes down more of them every year than any other species."
+    image="/images/arkadelphia-ar-hazardous-leaning-pine-tree-before-removal.webp"
+    imageAlt="Hazardous leaning pine tree before removal in Arkadelphia, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Arkadelphia's pine removal crew — since 2002.</p>
+      <p class="lead">
+        Plyler's Tree Service is based right here in
+        <a href="https://clarkcountyar.gov/" target="_blank" rel="noopener">Clark County</a>, with our equipment yard
+        on Country Club Drive in Arkadelphia. We've removed pines in nearly every neighborhood in this town and most
+        of the rural acreage between here and Caddo Valley. Loblolly, shortleaf, occasionally a longleaf — we know how
+        each one fails, where it'll go when it comes down, and how to bring it down safely. Pine removal is its own
+        discipline. Tall, top-heavy trees with sectional rigging requirements that most generalist tree services
+        aren't set up for. Our bucket truck, our climbers, our rigging gear — all built for the pine work that defines
+        Clark County tree care.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Pine Species We Remove in Arkadelphia</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Two species dominate the pine landscape across Clark County. They look similar at a glance, but they grow
+        differently, fail differently, and remove differently.
+      </p>
+      <div class="grid grid-2">
+        {species.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p>{s.p}</p>
+            <p><strong>{s.id}</strong></p>
+            <p class="mb-0">{s.rem}</p>
+          </div>
+        ))}
+      </div>
+      <p class="measure" style="margin-top:1.6rem;color:var(--muted)">
+        Other pine species occasionally appear in Arkadelphia — longleaf, slash, white pine — but loblolly and
+        shortleaf account for the vast majority of pine removals we do. For the broader picture of what we do across
+        town, see our <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service overview</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Pine Trees Get Removed</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        People rarely remove healthy, well-placed pines. There's almost always a reason — and we hear the same ones
+        over and over.
+      </p>
+      <div class="grid grid-3">
+        {reasons.map((r) => (
+          <div class="card">
+            <h3>{r.h}</h3>
+            <p class="mb-0">{r.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">🐛 Pine Beetles in Clark County — What to Watch For</h2>
+      <p>
+        Southern pine beetle (SPB) and Ips engraver beetles are the biggest insect threat to loblolly pines in
+        Arkansas. When populations are high, they can kill mature pines in 2 to 4 weeks and spread to neighboring
+        trees rapidly.
+      </p>
+      <p><strong>What to look for:</strong></p>
+      <ul>
+        <li>Pitch tubes — popcorn-sized clumps of resin on the bark where beetles bored in. Usually visible on the lower trunk first.</li>
+        <li>Browning crown — needles turn yellow, then red, then brown. Once you can see crown discoloration from the ground, the tree is likely past saving.</li>
+        <li>Sawdust at the base — fine reddish-brown sawdust accumulating in bark crevices and around the root flare.</li>
+        <li>S-shaped galleries under the bark — if you peel off a piece of bark, you'll see winding tunnels chewed into the wood. Diagnostic for beetle damage.</li>
+      </ul>
+      <p>
+        <strong>What to do:</strong> If you have a confirmed infested pine, get it removed and the wood disposed of
+        properly — not chipped on-site where remaining beetles can fly to other trees. Inspect other pines on your
+        property within 100 feet of the infested tree. The
+        <a href="https://agriculture.arkansas.gov/forests/" target="_blank" rel="noopener">Arkansas Department of Agriculture Forestry Division</a>
+        tracks beetle outbreaks and can confirm activity levels in Clark County.
+      </p>
+      <p>
+        If you suspect beetle damage on any of your pines, call us —
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>. Fast removal of infested trees is the best
+        way to protect the rest of your stand.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Pine Removal Takes Specialized Skill</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Pines are different from hardwoods in ways that matter when you're taking one down.
+      </p>
+      <div class="grid grid-3">
+        {skill.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">How We Remove a Pine Tree</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every pine is its own job. A 30-foot pine in an open backyard takes 90 minutes. A 90-foot loblolly leaning
+        over a roof is a half-day job with bucket truck, rigging, and a careful sectional plan. Here's how we work
+        either one.
+      </p>
+      <div class="grid grid-2">
+        {steps.map((s, i) => (
+          <div class="card">
+            <h3>{i + 1}. {s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Signs Your Pine Needs to Come Down</h2>
+      <p>
+        Most pine removals happen because the homeowner noticed something specific. For broader diagnostic guidance,
+        see our <a href="/signs-tree-is-dying">signs a tree is dying</a> guide and
+        <a href="/when-to-remove-a-tree-arkadelphia">when to remove a tree in Arkadelphia</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Pine Removal Across Arkadelphia Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different parts of town show different pine removal patterns. Here's what we see most across the neighborhoods
+        we know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Pine Removal Cost in Arkadelphia?</h2>
+      <p>Pine removal is priced by the job. Three factors move the price most:</p>
+      <p>
+        <strong>Tree height and access.</strong> A 30-foot pine in an open backyard is a fraction of the cost of an
+        80-foot pine wedged between a house and a power line. Bucket truck access can lower the cost; tight-lot
+        climber work raises it.
+      </p>
+      <p>
+        <strong>Condition of the tree.</strong> Healthy pines being removed for planning reasons (driveway expansion,
+        view clearing) are predictable jobs. Dead pines, beetle-damaged trees, or storm-broken pines take more
+        rigging time because the wood is unpredictable.
+      </p>
+      <p>
+        <strong>Cleanup scope.</strong> Pine produces a lot of brush relative to trunk wood, and pine needles take
+        effort to rake up. Full property cleanup vs. dropping logs in place for you to handle yourself changes the
+        price significantly.
+      </p>
+      <p>
+        Pine removal is often less expensive per tree than hardwood removal of equivalent size, because the wood is
+        lighter and the trunk diameter is usually smaller. But tall pines near structures can cost more than expected
+        because of the rigging required.
+      </p>
+      <p>
+        For an exact number on your pine, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or fill out the estimate form. The estimate
+        is always free, and the written quote is what you pay.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Arkadelphia Calls Plyler's for Pine Removal</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Pine is what we remove most. Here's why locals trust us with it.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Arkadelphia Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real pine removals across Clark County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <ArkadelphiaServicesBlock
+    current={path}
+    heading="More Tree Services &amp; Resources in Arkadelphia"
+    intro="Pine removal is one piece of what we do across Clark County. Start with our full Arkadelphia tree service hub for the complete picture, or jump straight to the service that fits your job."
+  />
+
+  <FaqSection
+    items={faq}
+    heading="Pine Tree Removal Questions — Arkadelphia"
+    intro="Answers to what Arkadelphia homeowners ask us most about pine removal."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead mb-0">
+        📖 Helpful reading: <a href="/signs-tree-is-dying">Signs a Tree Is Dying</a> ·
+        <a href="/when-to-remove-a-tree-arkadelphia">When to Remove a Tree in Arkadelphia</a> ·
+        <a href="/is-my-tree-too-close-to-my-house-arkansas">Is My Tree Too Close to My House?</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead mb-0">
+        🌲 Back to our <a href="/tree-service-arkadelphia-ar">Arkadelphia tree service hub</a> for the complete
+        picture of what we do across Clark County.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Get That Pine Down — Arkadelphia"
+    text="We're right here in Arkadelphia — yard on Country Club Drive, equipment built for pine work, crew local. Call Robbie, walk the property, get an honest written price. We'll handle the rest."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>
