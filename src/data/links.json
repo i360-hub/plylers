@@ -1,10 +1,22 @@
 {
   "_comment": "Central link registry to preserve the internal-link structure. Edit here once.",
   "services": [
-    { "name": "Tree Removal", "href": "/tree-removal", "icon": "tree", "blurb": "Safe sectional removal of hazardous, dead, and storm-damaged trees." },
-    { "name": "Tree Trimming & Pruning", "href": "/tree-trimming", "icon": "scissors", "blurb": "Proper branch-collar cuts that protect tree health — no topping." },
-    { "name": "Stump Grinding", "href": "/stump-grinding", "icon": "stump", "blurb": "Ground 6–8 inches below grade so you can replant, build, or mow." },
-    { "name": "Emergency Storm Damage", "href": "/emergency-storm-damage", "icon": "storm", "blurb": "24/7 response when a tree is on your house, car, or blocking the road." }
+    { "name": "Tree Removal", "href": "/tree-removal", "icon": "tree", "linkLabel": "More About Tree Removal →",
+      "image": "/images/arkadelphia-ar-tree-removal-residential-neighborhood-cleanup.webp",
+      "imageAlt": "Residential tree removal and neighborhood cleanup in Arkadelphia, AR",
+      "blurb": "Dead trees, leaning trees, trees too close to your house — we take them down safe and clean up every bit of it." },
+    { "name": "Tree Trimming & Pruning", "href": "/tree-trimming", "icon": "scissors", "linkLabel": "More About Trimming →",
+      "image": "/images/arkadelphia-ar-tree-trimming-before-after-transformation.webp",
+      "imageAlt": "Tree trimming and pruning before-and-after in Arkadelphia, AR",
+      "blurb": "We cut back branches that hang over your roof, block your driveway, or rub against power lines. Keeps your trees healthy, too." },
+    { "name": "Stump Grinding", "href": "/stump-grinding", "icon": "stump", "linkLabel": "More About Stump Grinding →",
+      "image": "/images/malvern-ar-stump-grinding-land-clearing-skid-steer.webp",
+      "imageAlt": "Skid-steer stump grinding and land clearing in Malvern, AR",
+      "blurb": "That old stump in your yard? We grind it down below the ground so you can mow right over it or plant something new." },
+    { "name": "Emergency Storm Damage", "href": "/emergency-storm-damage", "icon": "storm", "linkLabel": "More About Storm Work →",
+      "image": "/images/arkadelphia-ar-storm-damage-uprooted-oak-tree-removal.webp",
+      "imageAlt": "Storm-damaged uprooted oak removal in Arkadelphia, AR",
+      "blurb": "Tree on your house? Blocking your road? We come out day or night, 7 days a week. Call us and we're on the way." }
   ],
   "arkadelphiaCluster": [
     { "name": "Tree Removal in Arkadelphia", "href": "/tree-removal-arkadelphia-ar", "blurb": "Sectional takedowns of oaks, pines & storm-damaged trees." },

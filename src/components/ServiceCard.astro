@@ -1,45 +1,53 @@
 ---
-export interface Props { title: string; href: string; description: string; icon?: string; }
-const { title, href, description, icon = 'tree' } = Astro.props;
+export interface Props {
+  title: string; href: string; description: string;
+  icon?: string; image?: string; imageAlt?: string; linkLabel?: string;
+}
+const { title, href, description, icon = 'tree', image, imageAlt = '', linkLabel = 'Learn more →' } = Astro.props;
 
-// Inline SVG line-icons (currentColor). `icon` is a key; unknown keys fall back to text (emoji).
+// Fallback inline SVG line-icons (used only when no photo is provided).
 const ICONS: Record<string, string> = {
-  // full leafy tree — tree removal
   tree: `<circle cx="12" cy="8.5" r="5.5"/><path d="M12 14v8"/><path d="M12 18l-3-2.5M12 19.5l3-2.5"/>`,
-  // pruning shears / scissors — tree trimming
   scissors: `<circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="18" r="2.6"/><line x1="20" y1="4" x2="8.5" y2="15.5"/><line x1="14.5" y1="14.5" x2="20" y2="20"/><line x1="8.5" y1="8.5" x2="12" y2="12"/>`,
-  // tree stump with rings and roots — stump grinding
   stump: `<ellipse cx="12" cy="8" rx="7.5" ry="3"/><ellipse cx="12" cy="8" rx="3.6" ry="1.3"/><path d="M4.5 8v6.4c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3V8"/><path d="M9 16.9l-1.3 2.6M15 16.9l1.3 2.6"/>`,
-  // storm cloud + lightning — emergency storm damage
   storm: `<path d="M19 16.9A5 5 0 0 0 18 7h-1.26a8 8 0 1 0-11.62 9"/><polyline points="13 11 9 17 15 17 11 23"/>`,
 };
 const svg = ICONS[icon];
 ---
-<a class="service-card" href={href}>
-  <span class="service-icon" aria-hidden="true">
-    {svg
-      ? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={svg} />
-      : <span class="service-emoji">{icon}</span>}
-  </span>
-  <h3>{title}</h3>
-  <p>{description}</p>
-  <span class="service-link">Learn more →</span>
+<a class={`service-card ${image ? 'has-photo' : ''}`} href={href}>
+  {image ? (
+    <img class="service-photo" src={image} alt={imageAlt} width="640" height="400" loading="lazy" decoding="async" />
+  ) : (
+    <span class="service-icon" aria-hidden="true">
+      {svg
+        ? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={svg} />
+        : <span class="service-emoji">{icon}</span>}
+    </span>
+  )}
+  <div class="service-body">
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <span class="service-link">{linkLabel}</span>
+  </div>
 </a>
 <style>
   .service-card {
-    display: flex; flex-direction: column; gap: 0.4rem; background: #fff; border: 1px solid var(--line);
-    border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); color: var(--body);
-    transition: transform .15s ease, box-shadow .15s ease; height: 100%;
+    display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-lg); box-shadow: var(--shadow); color: var(--body);
+    transition: transform .15s ease, box-shadow .15s ease; height: 100%; overflow: hidden;
   }
   .service-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); text-decoration: none; }
+  .service-photo { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+  .service-body { display: flex; flex-direction: column; gap: 0.4rem; padding: 1.4rem 1.5rem 1.5rem; flex: 1; }
+  .service-card:not(.has-photo) .service-body { padding-top: 0; }
   .service-icon {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 52px; height: 52px; border-radius: 14px; margin-bottom: 0.4rem;
+    width: 52px; height: 52px; border-radius: 14px; margin: 1.6rem 1.5rem 0;
     background: var(--green-50); color: var(--green-600); border: 1px solid var(--green-100);
   }
   .service-icon svg { width: 28px; height: 28px; }
   .service-emoji { font-size: 1.7rem; }
-  .service-card h3 { margin: 0.2rem 0 0; }
-  .service-card p { margin: 0; font-size: 0.97rem; }
-  .service-link { margin-top: auto; color: var(--green-700); font-weight: 700; font-size: 0.95rem; }
+  .service-card h3 { margin: 0; }
+  .service-card p { margin: 0; font-size: 0.97rem; text-align: left; }
+  .service-link { margin-top: auto; padding-top: 0.4rem; color: var(--green-700); font-weight: 700; font-size: 0.95rem; }
 </style>
