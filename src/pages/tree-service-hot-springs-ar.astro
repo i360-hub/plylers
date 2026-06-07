@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import GhlForm from '../components/GhlForm.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Hero from '../components/Hero.astro';
-import MapEmbed from '../components/MapEmbed.astro';
+import MapFacade from '../components/MapFacade.astro';
 import ServicesGrid from '../components/ServicesGrid.astro';
 import HotSpringsServicesBlock from '../components/HotSpringsServicesBlock.astro';
 import AreasBlock from '../components/AreasBlock.astro';
@@ -228,7 +228,7 @@ const schema = [
         including Hot Springs and the entire Spa City area. No trip fee, no travel charge — the price is based on the
         job, not the drive.
       </p>
-      <MapEmbed src={maps[path]} title="Hot Springs service area map" />
+      <MapFacade src={maps[path]} city="Hot Springs, AR" height={380} />
       <div class="grid grid-3" style="margin-top:2.4rem">
         {towns.map((t) => (
           <div class="card">
