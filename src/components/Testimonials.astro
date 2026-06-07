@@ -12,7 +12,17 @@ const { heading = 'What Your Neighbors Are Saying', intro = 'Real reviews from r
         <figure class="testi-card">
           <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
           <blockquote>{t.text}</blockquote>
-          <figcaption>— {t.author}, {t.location}</figcaption>
+          <figcaption class="testi-author">
+            <span class="g-avatar" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16">
+                <path fill="#4285F4" d="M23.04 12.26c0-.81-.07-1.59-.2-2.34H12v4.43h6.19a5.3 5.3 0 0 1-2.3 3.48v2.9h3.72c2.18-2 3.43-4.96 3.43-8.47z"/>
+                <path fill="#34A853" d="M12 24c3.12 0 5.73-1.03 7.64-2.8l-3.72-2.9c-1.03.69-2.35 1.1-3.92 1.1-3.01 0-5.56-2.03-6.47-4.76H1.69v2.99A11.99 11.99 0 0 0 12 24z"/>
+                <path fill="#FBBC05" d="M5.53 14.64a7.2 7.2 0 0 1 0-4.6V7.05H1.69a12 12 0 0 0 0 10.58l3.84-2.99z"/>
+                <path fill="#EA4335" d="M12 4.74c1.7 0 3.22.58 4.42 1.72l3.3-3.3C17.73 1.2 15.12 0 12 0 7.36 0 3.36 2.66 1.69 6.55l3.84 2.99C6.44 6.81 8.99 4.74 12 4.74z"/>
+              </svg>
+            </span>
+            <span class="testi-name"><strong>{t.author}</strong> — {t.location}</span>
+          </figcaption>
         </figure>
       ))}
     </div>
@@ -26,6 +36,8 @@ const { heading = 'What Your Neighbors Are Saying', intro = 'Real reviews from r
   .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
   .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
   .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
-  .testi-card figcaption { margin-top: auto; color: var(--muted); font-size: 0.9rem; font-weight: 600; }
+  .testi-author { margin-top: auto; display: flex; align-items: center; gap: 0.6rem; color: var(--body); font-size: 0.92rem; }
+  .testi-author .testi-name strong { color: var(--ink); }
+  .g-avatar { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); flex: none; }
   .testi-cta { margin-top: 2rem; }
 </style>
