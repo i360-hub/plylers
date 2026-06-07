@@ -113,7 +113,8 @@
       "Bash(node scripts/gen-static-maps.mjs)",
       "Bash(curl -s -o /dev/null \"https://plylers-tree-service-staging.pages.dev/tree-service-arkadelphia-ar\")",
       "Bash(npx --yes lighthouse@12 \"https://plylers-tree-service-staging.pages.dev/tree-service-arkadelphia-ar\" --only-categories=performance --form-factor=mobile --screenEmulation.mobile --throttling-method=simulate --quiet --chrome-flags=\"--headless=new --no-sandbox\" --output=json --output-path=/tmp/lhmap.json)",
-      "Bash(node -e \"const r=require\\('/tmp/lhmap.json'\\);const a=r.audits;console.log\\('Arkadelphia hub \\(now static map\\): perf',Math.round\\(r.categories.performance.score*100\\),'| LCP',a['largest-contentful-paint'].displayValue,'| CLS',a['cumulative-layout-shift'].displayValue\\);\")"
+      "Bash(node -e \"const r=require\\('/tmp/lhmap.json'\\);const a=r.audits;console.log\\('Arkadelphia hub \\(now static map\\): perf',Math.round\\(r.categories.performance.score*100\\),'| LCP',a['largest-contentful-paint'].displayValue,'| CLS',a['cumulative-layout-shift'].displayValue\\);\")",
+      "Bash(grep -n \"mailto:\\\\${business.email}\\\\|business.email\" src/components/Footer.astro src/pages/contact.astro)"
     ]
   }
 }

@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import GhlForm from '../components/GhlForm.astro';
+import EmailLink from '../components/EmailLink.astro';
 import { breadcrumb, faqPage, LOCALBUSINESS_ID, WEBSITE_ID, ORG_ID, SITE } from '../lib/schema';
 import business from '../data/business.json';
 
@@ -78,7 +79,7 @@ const schema = [
         <div class="card">
           <h2>Email</h2>
           <p class="contact-line">
-            <a href={`mailto:${business.email}`}>{business.email}</a>
+            <EmailLink />
           </p>
           <p class="mb-0">We check email daily and respond within 24 hours.</p>
         </div>

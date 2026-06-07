@@ -1,5 +1,6 @@
 ---
 import business from '../data/business.json';
+import EmailLink from './EmailLink.astro';
 
 const year = 2026;
 const services = [
@@ -51,7 +52,7 @@ const company = [
       <p class="footer-h">Contact</p>
       <ul class="footer-contact">
         <li><a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a></li>
-        <li><a href={`mailto:${business.email}`}>{business.email}</a></li>
+        <li><EmailLink /></li>
         <li>{business.address.locality}, {business.address.region} {business.address.postalCode}</li>
         <li class="text-muted">Service Area Business · Serving Clark County and a 40-mile radius</li>
         {business.hours.map((h) => <li>{h.label}</li>)}

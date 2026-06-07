@@ -1,0 +1,20 @@
+---
+// Scraper-resistant email link. The address is base64-encoded at build time and
+// assembled into a mailto: link by JS on the client — so the HTML source contains
+// NO "@", no "mailto:", and no plaintext address for harvesters to regex.
+// JS-off fallback: the link points at /contact (the form) and reads "Email us".
+import business from '../data/business.json';
+interface Props { text?: string; class?: string; }
+const { text, class: cls = '' } = Astro.props;
+// base64, then reversed — so the data attribute isn't a directly-decodable token.
+const enc = Buffer.from(business.email, 'utf8').toString('base64').split('').reverse().join('');
+---
+<a class:list={['email-link', cls]} data-e={enc} href="/contact" rel="nofollow">{text ?? 'Email us'}</a>
+<script>
+  for (const a of document.querySelectorAll<HTMLAnchorElement>('a.email-link[data-e]')) {
+    const addr = atob((a.dataset.e || '').split('').reverse().join(''));
+    a.href = ['mail', 'to', ':'].join('') + addr;
+    if (a.dataset.keepLabel === undefined) a.textContent = addr;
+    a.removeAttribute('data-e');
+  }
+</script>

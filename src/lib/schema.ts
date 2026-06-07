@@ -55,7 +55,6 @@ export function globalGraph() {
     '@id': ORG_ID,
     name: business.name,
     url: `${SITE}/`,
-    email: business.email,
     telephone: business.phoneSchema,
     image: `${SITE}/images/plylers-tree-service-logo.png`,
     logo: {
@@ -70,7 +69,6 @@ export function globalGraph() {
     '@id': LOCALBUSINESS_ID,
     name: business.name,
     url: `${SITE}/`,
-    email: business.email,
     telephone: business.phoneSchema,
     priceRange: business.priceRange,
     image: `${SITE}/images/plylers-tree-service-logo.png`,
