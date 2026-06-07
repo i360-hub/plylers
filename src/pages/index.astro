@@ -7,6 +7,7 @@ import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import GhlForm from '../components/GhlForm.astro';
 import MapEmbed from '../components/MapEmbed.astro';
+import EmergencyBanner from '../components/EmergencyBanner.astro';
 import maps from '../data/maps.json';
 import { faqPage, service, LOCALBUSINESS_ID, WEBSITE_ID, ORG_ID, SITE } from '../lib/schema';
 import faqData from '../data/faq.json';
@@ -72,6 +73,8 @@ const schema = [
     imageAlt="Mature oak tree canopy — Plyler's Tree Service, southwest Arkansas"
     trustBadges={true}
   />
+
+  <EmergencyBanner />
 
   <section class="section">
     <div class="container measure">
