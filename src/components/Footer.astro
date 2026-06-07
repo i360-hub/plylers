@@ -38,17 +38,17 @@ const company = [
     </div>
 
     <div class="footer-col">
-      <h2 class="footer-h">Services</h2>
+      <p class="footer-h">Services</p>
       <ul>{services.map((s) => <li><a href={s.href}>{s.name}</a></li>)}</ul>
     </div>
 
     <div class="footer-col">
-      <h2 class="footer-h">Company</h2>
+      <p class="footer-h">Company</p>
       <ul>{company.map((c) => <li><a href={c.href}>{c.name}</a></li>)}</ul>
     </div>
 
     <div class="footer-col">
-      <h2 class="footer-h">Contact</h2>
+      <p class="footer-h">Contact</p>
       <ul class="footer-contact">
         <li><a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a></li>
         <li><a href={`mailto:${business.email}`}>{business.email}</a></li>

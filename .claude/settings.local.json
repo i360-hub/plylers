@@ -95,7 +95,9 @@
       "Bash(awk '{print \"final hero-home.webp:\", $5, \"bytes\"}')",
       "Bash(git -c user.name=\"Claude Code\" -c user.email=\"noreply@anthropic.com\" commit -q -F -)",
       "Bash(git -c 'user.name=Claude Code' -c user.email=noreply@anthropic.com commit -q -m 'Fix duplicate phone CTA in emergency-storm-damage hero *)",
-      "Bash(git -c 'user.name=Claude Code' -c user.email=noreply@anthropic.com commit -q -m 'Replace service-card emoji icons with SVG line-icons \\(real stump graphic\\) *)"
+      "Bash(git -c 'user.name=Claude Code' -c user.email=noreply@anthropic.com commit -q -m 'Replace service-card emoji icons with SVG line-icons \\(real stump graphic\\) *)",
+      "Bash(curl -s -o /dev/null -w \"  home: %{http_code}\\\\n\" --max-time 5 http://localhost:4321/)",
+      "Bash(xargs -I{} sh -c 'echo {}')"
     ]
   }
 }
