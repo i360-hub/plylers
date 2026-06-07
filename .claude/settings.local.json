@@ -89,7 +89,11 @@
       "Bash(node -e 'const r=require\\(\"/tmp/lh-live2.json\"\\);const a=r.audits;console.log\\(\"LIVE home perf:\",Math.round\\(r.categories.performance.score*100\\),\"| LCP:\",a[\"largest-contentful-paint\"].displayValue,\"| CLS:\",a[\"cumulative-layout-shift\"].displayValue,\"| TBT:\",a[\"total-blocking-time\"].displayValue\\);')",
       "Bash(git add *)",
       "Bash(git -c 'user.name=Claude Code' -c user.email=noreply@anthropic.com commit -q -m ' *)",
-      "Bash(git -c user.name=\"Claude Code\" -c user.email=\"noreply@anthropic.com\" commit -q -F /tmp/commitmsg.txt)"
+      "Bash(git -c user.name=\"Claude Code\" -c user.email=\"noreply@anthropic.com\" commit -q -F /tmp/commitmsg.txt)",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_screenshot",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__resize_page",
+      "Bash(awk '{print \"final hero-home.webp:\", $5, \"bytes\"}')",
+      "Bash(git -c user.name=\"Claude Code\" -c user.email=\"noreply@anthropic.com\" commit -q -F -)"
     ]
   }
 }
