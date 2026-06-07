@@ -19,13 +19,21 @@ const description =
   "Arkadelphia's trusted tree service for 24+ years. Tree removal, trimming, stump grinding & 24/7 emergency storm cleanup across Clark County and a 40-mile radius. Free estimates.";
 
 const whyUs = [
-  { h: '24 Years of Doing This', p: "Robbie started this company over two decades ago. There isn't a tree in Clark County we haven't seen before." },
-  { h: 'Licensed and Insured', p: "We carry full liability and workers' comp. If anything goes wrong on your property, you're covered. Period." },
-  { h: 'Free Estimates, No Pressure', p: 'We come look at the job, give you an honest price in writing, and let you decide. No pushy sales talk.' },
-  { h: 'We Clean Up Everything', p: 'We chip the brush, haul off the wood, and rake your yard before we leave. You won’t know we were there — except the tree is gone.' },
-  { h: '24/7 Emergency Calls', p: "Storms don't wait, and neither do we. Call any time — nights, weekends, holidays. We'll be there." },
-  { h: 'Local People, Local Company', p: 'We live here. Our kids go to school here. We treat your yard like it’s in our own neighborhood — because it is.' },
+  { h: '24 Years of Doing This', icon: 'clock', p: "Robbie started this company over two decades ago. There isn't a tree in Clark County we haven't seen before." },
+  { h: 'Licensed and Insured', icon: 'shield', p: "We carry full liability and workers' comp. If anything goes wrong on your property, you're covered. Period." },
+  { h: 'Free Estimates, No Pressure', icon: 'clipboard', p: 'We come look at the job, give you an honest price in writing, and let you decide. No pushy sales talk.' },
+  { h: 'We Clean Up Everything', icon: 'broom', p: 'We chip the brush, haul off the wood, and rake your yard before we leave. You won’t know we were there — except the tree is gone.' },
+  { h: '24/7 Emergency Calls', icon: 'bolt', p: "Storms don't wait, and neither do we. Call any time — nights, weekends, holidays. We'll be there." },
+  { h: 'Local People, Local Company', icon: 'house', p: 'We live here. Our kids go to school here. We treat your yard like it’s in our own neighborhood — because it is.' },
 ];
+const WHY_ICONS: Record<string, string> = {
+  clock: `<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.8"/>`,
+  shield: `<path d="M12 2l8 3v6c0 5-3.4 8.3-8 10-4.6-1.7-8-5-8-10V5z"/><path d="M9 12l2 2 4-4"/>`,
+  clipboard: `<rect x="5" y="5" width="14" height="16" rx="2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h6"/>`,
+  broom: `<path d="M19 3l-7 7"/><path d="M9.5 8.5l6 6"/><path d="M14.5 13.5l-5.4 5.4a3 3 0 0 1-2.5.85l-3.1-.45 1.4-2.8a3 3 0 0 1 .6-.8l4-4"/>`,
+  bolt: `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`,
+  house: `<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-6h5v6"/>`,
+};
 const steps = [
   { h: 'Give Us a Call', p: 'Call or fill out the form below. Tell us what’s going on with your tree. For emergencies, we pick up 24/7.' },
   { h: 'We Come Take a Look', p: 'Robbie or one of our guys comes out, looks at the tree, and gives you an honest price in writing. No cost, no obligation.' },
@@ -104,7 +112,10 @@ const schema = [
       <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">We show up, do the work right, and leave your yard clean.</p>
       <div class="grid grid-3">
         {whyUs.map((w) => (
-          <div class="card">
+          <div class="card why-card">
+            <span class="why-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill={w.icon === 'bolt' ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={WHY_ICONS[w.icon]} />
+            </span>
             <h3>{w.h}</h3>
             <p class="mb-0">{w.p}</p>
           </div>
@@ -201,4 +212,10 @@ const schema = [
   .ba-before { color: #b4503f; }
   .ba-after { color: var(--green-700); }
   @media (max-width: 560px) { .ba-grid { grid-template-columns: 1fr; } }
+  .why-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 12px; margin-bottom: 0.9rem;
+    background: var(--green-50); color: var(--green-600); border: 1px solid var(--green-100);
+  }
+  .why-icon svg { width: 26px; height: 26px; }
 </style>
