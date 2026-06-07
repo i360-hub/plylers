@@ -24,6 +24,19 @@ const { items, heading = 'Common Questions', intro = 'Quick answers to the thing
     </div>
   </section>
 )}
+<script>
+  // One-open-at-a-time: opening an item collapses the others (first item stays open on load).
+  document.querySelectorAll('.faq-list').forEach((list) => {
+    const items = list.querySelectorAll('details.faq-item');
+    items.forEach((d) => {
+      d.addEventListener('toggle', () => {
+        if ((d as HTMLDetailsElement).open) {
+          items.forEach((o) => { if (o !== d) (o as HTMLDetailsElement).open = false; });
+        }
+      });
+    });
+  });
+</script>
 <style>
   .faq-intro { margin-bottom: 2rem; color: var(--muted); }
   .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
