@@ -1,7 +1,7 @@
 ---
 import ServiceCard from './ServiceCard.astro';
 import links from '../data/links.json';
-const { heading = 'Our Tree Services', intro = 'Full-service tree care for homes and businesses across southwest Arkansas.', current = '' } = Astro.props;
+const { heading = 'Our Tree Services', intro = 'Full-service tree care for homes and businesses across southwest Arkansas.', current = '', cta = null } = Astro.props;
 const items = links.services.filter((s) => s.href !== current);
 ---
 <section class="section">
@@ -11,5 +11,8 @@ const items = links.services.filter((s) => s.href !== current);
     <div class="grid grid-4">
       {items.map((s) => <ServiceCard title={s.name} href={s.href} description={s.blurb} icon={s.icon} />)}
     </div>
+    {cta && (
+      <p class="center section-cta"><a class="btn btn-primary btn-lg" href={cta.href}>{cta.label}</a></p>
+    )}
   </div>
 </section>

@@ -86,7 +86,11 @@ const schema = [
     </div>
   </section>
 
-  <ServicesGrid heading="What We Do" intro="Big jobs, small jobs, and everything in between." />
+  <ServicesGrid
+    heading="What We Do"
+    intro="Big jobs, small jobs, and everything in between."
+    cta={{ label: 'Get a Free Estimate', href: '#quote' }}
+  />
 
   <section class="section section-alt">
     <div class="container">
@@ -100,6 +104,9 @@ const schema = [
           </div>
         ))}
       </div>
+      <p class="center section-cta">
+        <a class="btn btn-primary btn-lg" href={`tel:${business.phoneHref}`}>Call the Local Guys: {business.phoneDisplay}</a>
+      </p>
     </div>
   </section>
 
@@ -118,6 +125,9 @@ const schema = [
           </li>
         ))}
       </ol>
+      <p class="center section-cta">
+        <a class="btn btn-primary btn-lg" href="#quote">Start With Step 1</a>
+      </p>
     </div>
   </section>
 
@@ -134,7 +144,8 @@ const schema = [
 
   <AreasBlock
     heading="We Come to You"
-    intro="We're based in Arkadelphia and run jobs across southwest Arkansas — up to 40 miles out. Serving Clark, Garland, Hot Spring, Pike, and Montgomery counties. Don't see your town? Give us a call — if you're nearby, we'll make it work."
+    intro="We're based in Arkadelphia and run jobs across southwest Arkansas — up to 40 miles out."
+    cta={{ label: 'Get a Quote for Your Area', href: '#quote' }}
   />
 
   <section class="section">

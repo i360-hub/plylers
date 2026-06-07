@@ -67,6 +67,8 @@ li { margin-bottom: 0.4rem; }
 .lead { font-size: 1.18rem; color: var(--body); }
 .center { text-align: center; }
 .measure { max-width: 720px; margin-inline: auto; }
+.section-cta { margin-top: 2.5rem; }
+:target { scroll-margin-top: 90px; } /* keep anchored sections clear of the sticky header */
 
 /* ============ Buttons ============ */
 .btn {

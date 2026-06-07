@@ -5,6 +5,8 @@ const {
   heading = 'Areas We Serve',
   intro = 'Based in Arkadelphia and serving a 40-mile radius across southwest Arkansas.',
   current = '',
+  cta = null,
+  closing = '',
 } = Astro.props;
 const hubs = areas.hubs.filter((h) => h.slug !== current);
 ---
@@ -16,6 +18,10 @@ const hubs = areas.hubs.filter((h) => h.slug !== current);
       {hubs.map((h) => <a class="area-pill" href={h.slug}>Tree Service in {h.city}</a>)}
       <a class="area-pill area-all" href="/service-areas">All Service Areas →</a>
     </div>
+    {closing && <p class="center measure areas-closing">{closing}</p>}
+    {cta && (
+      <p class="center section-cta"><a class="btn btn-primary btn-lg" href={cta.href}>{cta.label}</a></p>
+    )}
   </div>
 </section>
 <style>
@@ -25,4 +31,5 @@ const hubs = areas.hubs.filter((h) => h.slug !== current);
   .area-pill:hover { background: var(--green-600); color: #fff; text-decoration: none; }
   .area-all { background: var(--green-700); color: #fff; }
   .area-all:hover { background: var(--green-800); }
+  .areas-closing { margin-top: 1.6rem; color: var(--muted); }
 </style>
