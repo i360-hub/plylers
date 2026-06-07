@@ -1,0 +1,331 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import HotSpringsServicesBlock from '../components/HotSpringsServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+
+const title = "Tree Removal Hot Springs AR | Plyler's Tree Service";
+const description =
+  "Tree removal in Hot Springs, AR since 2002. Sectional takedowns of big pines & oaks on steep, hilly Spa City lots. Free written estimates, full cleanup, 5.0 stars.";
+const path = '/tree-removal-hot-springs-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Hot Springs', path: '/tree-service-hot-springs-ar' },
+  { name: 'Tree Removal', path },
+];
+
+// Inline FAQ — tree removal specific to Hot Springs.
+const faq = [
+  {
+    q: 'Do I need a permit to remove a tree in Hot Springs?',
+    a: "For a tree on your own private lot inside the City of Hot Springs, you generally don't need a permit to take it down — it's your property. The cautions come with the historic districts near Central and Quapaw, where some properties carry overlay rules, and with anything along the Hot Springs National Park boundary. Trees that are actually on Park land are federally protected and we will not touch them. Robbie checks the property line before any saw runs, and if your situation needs a city sign-off, he'll tell you before we schedule.",
+  },
+  {
+    q: 'How do you remove a big tree on a steep, hillside lot off Park Avenue or West Mountain?',
+    a: "Carefully and from the top down. On the slopes climbing West Mountain and the streets off Park Avenue, there's usually nowhere to fell a tree in one piece — below it is a roof, a retaining wall, or the road. We rig the tree, cut it in sections, and lower each piece to a controlled spot. It's slower than a flat-lot drop, but it's the only way to take a 70-foot shortleaf pine off a hillside without damaging anything below it.",
+  },
+  {
+    q: 'What does tree removal cost in Hot Springs?',
+    a: "It depends on three things: the size of the tree, how close it is to your house or power lines, and how hard it is to get our equipment to it. A small pine in an open backyard off Highway 7 is a fraction of the price of a 60-foot oak wedged between a historic home near Central and the neighbor's garage, or a lakefront removal on a steep Lake Hamilton bank. Whatever the number is, you get it in writing before we start. No surprise add-ons.",
+  },
+  {
+    q: 'Which trees do you remove most around Hot Springs?',
+    a: "Loblolly and shortleaf pine top the list — they grow tall and fast in the Ouachita foothills and get top-heavy and storm-prone with age. After that it's the big white oaks, red oaks, and water oaks in the older neighborhoods, plus the occasional hickory or sweetgum. On the lakes we pull a lot of pines and hardwoods leaning out over the bank toward the water.",
+  },
+  {
+    q: 'Can you get equipment into a tight Quapaw or downtown historic lot?',
+    a: "Usually, yes — but those tight century-old lots near downtown are exactly why we plan access first. Narrow driveways, mature root systems running under old foundations, and neighbors a few feet away mean we often climb and rig rather than bring a bucket truck right up to the trunk. We've been doing this work in Hot Springs' historic neighborhoods for over 24 years, so we know how to get the tree down without tearing up the yard or the structures around it.",
+  },
+  {
+    q: 'Do you haul everything off, or do I have to deal with the wood?',
+    a: "We haul it all off — brush chipped, logs loaded, sawdust raked, every piece picked up. Half our reviews mention the cleanup, and that's on purpose. If you want the trunk cut into firewood lengths and left for you, just say so when Robbie gives the estimate and we'll stack it.",
+  },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Removal in Hot Springs, AR',
+    serviceType: 'Tree removal',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+
+// Trees we remove most in Hot Springs.
+const trees = [
+  { h: 'Loblolly & Shortleaf Pines', p: "The signature tree of the Ouachita foothills around Hot Springs. They shoot up tall and fast, get top-heavy, and lean toward whatever's downhill — usually a roof on a sloped lot. Ice loading and pine beetle damage take a steady toll. Most pine removals here are sectional takedowns, not single-cut fells." },
+  { h: 'White & Red Oaks', p: 'The big shade trees in the historic neighborhoods off Central Avenue and around Quapaw and Whittington. Many were here before the houses. Heavy, brittle limbs that fail in wind, and root systems woven through old foundations. We rig the canopy carefully on these.' },
+  { h: 'Water Oaks & Post Oaks', p: 'Common on lots all over Garland County. Quick-growing but weak-wooded, they shed large limbs in storms and rot from the inside as they age. A lot of our "lean toward the bedroom" calls are water oaks.' },
+  { h: 'Hickory & Sweetgum', p: "Scattered through the wooded lots and the foothills north toward Jessieville and Mountain Pine. Hickory is dense and heavy — slow, deliberate rigging. Sweetgums are shallow-rooted and among the first to uproot in saturated ground." },
+  { h: 'Lakefront Pines & Hardwoods', p: 'On Lake Hamilton and Lake Catherine, trees grow right to the bank and lean out over the water. Steep slopes, docks and boat houses below, and the need to keep debris out of the lake make these some of the most technical removals we do.' },
+  { h: 'Storm-Damaged Trees', p: 'Any species with a cracked trunk, split crotch, hanging limbs, or partial uprooting after a Garland County storm. These move to the front of the line — we respond fast, often the same day.' },
+];
+
+// How we remove a tree.
+const steps = [
+  { h: 'Free On-Site Estimate', p: 'Robbie comes to your Hot Springs property, walks the tree, checks the slope and the access for our chipper and bucket truck, and gives you a written price the same day. No charge, no pressure.' },
+  { h: 'Plan the Takedown', p: "We decide whether the tree can be felled in one piece — rare on these hillside and tight-lot properties — or needs sectional rigging. For trees near homes, retaining walls, or power lines, we map exactly what gets roped and where each piece lands." },
+  { h: 'Bring It Down Safely', p: "On the steep slopes off Park Avenue and the lakefront banks, we work top-down and lower sections to a controlled spot. Your house, landscaping, seawall, and the neighbor's property all stay intact." },
+  { h: 'Full Cleanup', p: 'We chip the brush, haul the logs, rake the sawdust, and pick up every piece — including off slopes where debris wants to roll downhill. Want firewood kept? Just say so.' },
+];
+
+// Neighborhood breakdowns.
+const neighborhoods = [
+  { h: '🏛️ Historic Districts & Downtown', p: "Quapaw, Whittington, Prospect, and the streets just off Central Avenue carry some of the oldest residential canopy in Arkansas — century-old white oaks, red oaks, and magnolias that grew up around the houses. Removals here are about precision: tight lots, mature roots under old foundations, and structures you can't replace. We climb and rig rather than risk a single-cut drop." },
+  { h: '⛰️ Park Avenue & the West Mountain Slopes', p: "Up the streets climbing West Mountain and off Park Avenue, lots get steep fast and shortleaf pines tower over driveways cut into the hillside. There's nowhere for a tree to fall that isn't a roof, a wall, or the road below — so every removal is rope-and-rigging, lowered piece by piece." },
+  { h: '🌊 Lake Hamilton & Lake Catherine', p: "Lakefront lots bring pines and hardwoods leaning out over the water on steep banks, with docks and boat houses directly below. Removals take care to protect the seawall and keep debris out of the lake. We've worked enough Garland County lakefront to know what does and doesn't work." },
+  { h: '🌲 Mountain Pine, Piney & the Foothills North', p: "Out the Highway 270 corridor west, toward Mountain Pine, Piney, and the wooded acreage north toward Jessieville, you're in the Ouachita foothills proper. Long-driveway access, pine plantation, and rural lots where multiple storm-damaged trees come down in one trip. We're set up for the terrain." },
+];
+
+// Why Hot Springs calls Plyler's for tree removal.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Reviews', p: 'A perfect Google rating from more than 70 customers across Hot Springs, Garland County, and the surrounding lakes. Real removals, real cleanup.' },
+  { h: '🚛 30 Minutes Away, No Trip Fee', p: "We're based in Arkadelphia, just down I-30 and Highway 7. Crews are in Hot Springs multiple times a week. The price is based on the job, never the drive." },
+  { h: '🪓 24 Years of Removals', p: 'Robbie founded the company in 2002. Two decades of taking trees down on Spa City hillsides, historic lots, and lakefront banks. We know what every species does on the way down.' },
+  { h: '📋 Licensed and Insured', p: "Full liability and workers' comp on every removal. We'll show you proof before we start a saw — critical on steep slopes and over historic structures." },
+  { h: '💬 Free Written Estimate', p: "Robbie walks the tree and gives you a price in writing. If the tree doesn't need to come down, he tells you that." },
+  { h: '🧹 Complete Cleanup', p: 'Brush chipped, logs hauled, sawdust raked — even off slopes where debris wants to roll. Your yard looks better than when we got there.' },
+];
+
+const testimonials = [
+  "Plyler's tree service removed several trees for us. The attention to detail and knowledge of tree removal was unmatched. They went above and beyond our expectations finishing the job ahead of schedule and right on budget. Highly recommend!!",
+  'These gentlemen completed outstanding work in an exceptional amount of time and conducted themselves with the highest level of professionalism. They truly transformed our backyard.',
+  "Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.",
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Hot Springs, Arkansas · Garland County"
+    title="Tree Removal in Hot Springs, AR"
+    subtitle="Big pines crowding a hillside roof off Park Avenue, a century-old oak leaning over a historic lot near Central, a hardwood hanging out over the bank on Lake Hamilton — we bring them down safely on Hot Springs' steep, tight, wooded lots, and we clean up every piece."
+    image="/images/hot-springs-ar-residential-tree-removal-wood-chip-cleanup.webp"
+    imageAlt="Residential tree removal with wood-chip cleanup at a Hot Springs, AR property"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Spa City's tree removal crew — not a call center two states away.</p>
+      <p class="lead">
+        Plyler's Tree Service has been taking trees down in
+        <a href="https://www.cityhs.net/" target="_blank" rel="noopener">Hot Springs</a> and Garland County for over
+        two decades. We're based 30 minutes down the road in Arkadelphia, with crews in the Spa City multiple times a
+        week — no trip fee, no travel charge. When you call about a tree, you talk to Robbie Plyler, the owner. He comes
+        out, looks at the tree, gives you a written price, and his crew does the work. That's been the model since 2002.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Why Tree Removal in Hot Springs Takes Local Knowledge</h2>
+      <p>
+        Hot Springs is unlike anywhere else we work. The city is wrapped around
+        <a href="https://www.nps.gov/hosp/index.htm" target="_blank" rel="noopener">Hot Springs National Park</a>,
+        tucked into the Ouachita Mountains, with neighborhoods built straight up the slopes of West Mountain and North
+        Mountain. The lots are steep, the canopy is dense, and in the historic districts the trees are older than the
+        houses around them. A removal that would be a single cut on a flat Clark County lot becomes a rope-and-rigging
+        sectional takedown here.
+      </p>
+      <p>
+        The older neighborhoods off Central Avenue — Quapaw, Whittington, Prospect — are full of century-old white oaks
+        and red oaks growing inches from foundations, gutters, and power drops. Up the West Mountain slopes off Park
+        Avenue, 70-foot shortleaf pines tower over driveways cut into the hillside, with nowhere to fall that isn't a
+        roof or the road below. And out on Lake Hamilton and Lake Catherine, lakefront pines lean over steep banks
+        toward docks and seawalls.
+      </p>
+      <p>
+        After 24 years of working Garland County, we know which species fail which way on which terrain. A water oak in
+        a downtown yard doesn't come down like a hillside pine off Park Avenue, and a lakefront removal on Lake Hamilton
+        takes different rigging than a hardwood near Mountain Pine. That's the difference between a clean removal and an
+        insurance claim. For the full picture of what we do across the Spa City, see our
+        <a href="/tree-service-hot-springs-ar">Hot Springs tree service hub</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Trees We Remove Most in Hot Springs</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        The Ouachita foothills grow a mix of upland pine and mature hardwood, and the lakes add their own challenges.
+        Each species comes down its own way.
+      </p>
+      <div class="grid grid-3">
+        {trees.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Signs a Tree Needs to Come Down</h2>
+      <p>
+        Not every tree we look at needs to be removed. Robbie has walked off plenty of Hot Springs properties telling
+        homeowners their tree is fine. But a cracked trunk, a sudden lean after a storm, mushroom growth at the base,
+        big dead limbs in the crown, or roots heaving on a slope are warning signs we take seriously here — especially
+        on hillside lots where a failing tree has only one direction to fall.
+      </p>
+      <p>
+        Not sure what you're looking at? Robbie will come walk your property for free and give you a straight answer. If
+        the tree can stay, he'll say so.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">How We Remove a Tree in Hot Springs</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every property is different. A pine on open acreage near Mountain Pine is a one-cut job. A 70-foot oak between a
+        historic home near Central and the neighbor's garage — or a pine on a West Mountain slope — takes a full morning
+        of rigging. Here's how we work either one.
+      </p>
+      <div class="grid grid-2">
+        {steps.map((s, i) => (
+          <div class="card">
+            <h3>{i + 1}. {s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Tree Removal Across Hot Springs Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different parts of the Spa City mean different removal challenges. Here's what we see most across the areas we
+        know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Tree Removal Cost in Hot Springs?</h2>
+      <p>
+        The honest answer is that it depends on the tree and the property. The three things that move the price most are
+        the size of the tree, how close it is to structures or power lines, and how hard it is to get our equipment to
+        it — and in Hot Springs, that last one matters more than almost anywhere we work.
+      </p>
+      <p>
+        A small pine in an open backyard off Highway 7 is a fraction of the price of a 60-foot oak wedged between a
+        historic home near Central and a detached garage. A hillside removal off Park Avenue that has to be lowered
+        piece by piece costs more than a flat-lot drop. A lakefront takedown on a steep Lake Hamilton bank, with a dock
+        and seawall to protect, costs more still.
+      </p>
+      <p>
+        What stays the same: we give you the exact price in writing before any work starts. No hidden fees, no surprise
+        add-ons, no upcharges after the tree is half down. If the estimate is $1,200, that's what you pay.
+      </p>
+      <p>
+        For an exact number on your tree, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>. The estimate is always free.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Hot Springs Calls Plyler's for Tree Removal</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with billboards. We built it one tree at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Hot Springs Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real removals across Garland County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <HotSpringsServicesBlock
+    current={path}
+    heading="More Tree Services in Hot Springs"
+    intro="Tree removal is one piece of the work we do across Garland County. Start with our full Hot Springs tree service hub for the complete picture, or jump straight to the service that fits your job."
+  />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Removal Questions — Hot Springs"
+    intro="Answers to what Hot Springs homeowners ask us most about removals."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead mb-0">
+        🌳 Back to our <a href="/tree-service-hot-springs-ar">Hot Springs tree service hub</a> for the complete picture
+        of what we do across Garland County and the lakes.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Ready to Get That Tree Down?"
+    text="We serve Hot Springs from our home base in Arkadelphia — 30 minutes down the road, crews in the Spa City every week. Call Robbie, tell him what's going on, and we'll have somebody at your property to give you an honest written price. No charge for the estimate. No obligation to say yes."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>
+</content>
+</invoke>

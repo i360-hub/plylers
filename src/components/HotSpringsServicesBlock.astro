@@ -1,0 +1,41 @@
+---
+// Internal-linking block: the Hot Springs service cluster (pillar -> cluster + Lake Hamilton).
+import links from '../data/links.json';
+const {
+  heading = 'Hot Springs Tree Services',
+  intro = 'Specialized tree work for Hot Springs, Garland County, and the lakes — pick the service that fits your job.',
+  current = '',          // href of the current page, to skip self-link
+  showLake = true,
+} = Astro.props;
+const items = links.hotSpringsCluster.filter((i) => i.href !== current);
+---
+<section class="hs-block section">
+  <div class="container">
+    <h2 class="center">{heading}</h2>
+    <p class="center lead measure hs-intro">{intro}</p>
+    <div class="grid grid-4">
+      {items.map((i) => (
+        <a class="hs-card" href={i.href}>
+          <h3>{i.name}</h3>
+          <p>{i.blurb}</p>
+          <span class="hs-link">View service →</span>
+        </a>
+      ))}
+    </div>
+    {showLake && links.lakeHamilton.href !== current && (
+      <a class="hs-lake" href={links.lakeHamilton.href}>
+        <strong>{links.lakeHamilton.name}</strong> — {links.lakeHamilton.blurb} <span aria-hidden="true">→</span>
+      </a>
+    )}
+  </div>
+</section>
+<style>
+  .hs-intro { margin-bottom: 2rem; color: var(--muted); }
+  .hs-card { display: flex; flex-direction: column; gap: 0.35rem; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.3rem; box-shadow: var(--shadow); color: var(--body); transition: transform .15s, box-shadow .15s; }
+  .hs-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); text-decoration: none; }
+  .hs-card h3 { margin: 0; font-size: 1.12rem; }
+  .hs-card p { margin: 0; font-size: 0.93rem; }
+  .hs-link { margin-top: auto; color: var(--green-700); font-weight: 700; font-size: 0.9rem; }
+  .hs-lake { display: block; margin-top: 1.5rem; padding: 1.1rem 1.3rem; background: var(--green-50); border: 1px solid var(--green-100); border-radius: var(--radius); color: var(--green-800); font-size: 1rem; }
+  .hs-lake:hover { background: var(--green-100); text-decoration: none; }
+</style>

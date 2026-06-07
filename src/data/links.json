@@ -29,5 +29,12 @@
     { "name": "Storm Damage Cleanup", "href": "/storm-damage-cleanup-arkadelphia-ar", "blurb": "Downed trees, debris hauling & insurance help." },
     { "name": "Commercial Tree Service", "href": "/commercial-tree-service-arkadelphia-ar", "blurb": "HOAs, churches, rentals & municipal work." }
   ],
-  "degray": { "name": "Lakefront Tree Service at DeGray Lake", "href": "/lakefront-tree-service-degray-lake-ar", "blurb": "Steep-slope removal & dock protection on DeGray Lake." }
+  "degray": { "name": "Lakefront Tree Service at DeGray Lake", "href": "/lakefront-tree-service-degray-lake-ar", "blurb": "Steep-slope removal & dock protection on DeGray Lake." },
+  "hotSpringsCluster": [
+    { "name": "Tree Removal in Hot Springs", "href": "/tree-removal-hot-springs-ar", "blurb": "Sectional takedowns of big pines & hardwoods on tight, hilly Spa City lots." },
+    { "name": "Emergency Tree Service", "href": "/emergency-tree-service-hot-springs-ar", "blurb": "24/7 storm response across Hot Springs & the lakes." },
+    { "name": "Stump Grinding", "href": "/stump-grinding-hot-springs-ar", "blurb": "Stumps ground below grade — replant, build, or mow." },
+    { "name": "Tree Trimming & Pruning", "href": "/tree-trimming-hot-springs-ar", "blurb": "Clearance, deadwood & view pruning — never topping." }
+  ],
+  "lakeHamilton": { "name": "Lakefront Tree Service at Lake Hamilton", "href": "/tree-service-lake-hamilton-ar", "blurb": "Steep-bank removal, dock protection & view thinning on Lake Hamilton." }
 }

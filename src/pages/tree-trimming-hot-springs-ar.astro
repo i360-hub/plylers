@@ -1,0 +1,323 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import HotSpringsServicesBlock from '../components/HotSpringsServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+
+const title = "Tree Trimming Hot Springs AR | Plyler's Tree Service";
+const description =
+  "Tree trimming & pruning in Hot Springs, AR. Roof & power-line clearance, deadwooding old oaks, and lakefront view pruning — done right, never topped. 5.0 stars, free quotes.";
+const path = '/tree-trimming-hot-springs-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Hot Springs', path: '/tree-service-hot-springs-ar' },
+  { name: 'Tree Trimming', path },
+];
+
+// Inline FAQ — tree trimming specific to Hot Springs.
+const faq = [
+  {
+    q: 'Do you top trees in Hot Springs?',
+    a: "No, and we'll talk you out of it if someone else suggested it. Topping — cutting a tree's leader back to stubs — looks tidy for a season, then triggers a flush of weak, fast-growing water sprouts that are far more likely to fail in the next ice storm or straight-line wind. On the tall pines and old oaks around Hot Springs, topping creates the exact hazard you were trying to avoid. We crown-reduce and thin with proper cuts at the branch collar so the tree stays strong and natural-looking.",
+  },
+  {
+    q: 'When is the best time to trim trees around Hot Springs?',
+    a: "Late winter to early spring — roughly December through February — is ideal for most hardwoods, while the tree is dormant. For oaks specifically, we avoid the April–July window when oak wilt can spread through fresh cuts in this region. Pines can be trimmed nearly any time. That said, clearance and safety pruning — a limb on the roof, a branch on the power drop, deadwood over the driveway — gets done whenever it's needed. Storm damage doesn't wait for a season.",
+  },
+  {
+    q: 'Can you prune a tree to open up my lake view without hurting it?',
+    a: "Yes — view pruning is one of our most-requested jobs on Lake Hamilton and Lake Catherine. We selectively thin and raise the canopy to open sightlines to the water while keeping the tree healthy and structurally sound. The key is taking the right limbs, not just whatever's in the way. We never gut a tree to force a view; that stresses it and invites decay. We open the window and keep the tree.",
+  },
+  {
+    q: 'How do you trim a tall tree on a steep hillside lot off Park Avenue?',
+    a: "We climb and rig it. On the West Mountain slopes and the streets off Park Avenue, there's often no room or footing for a bucket truck, so our climbers ascend the tree, set ropes, and lower cut limbs to a controlled spot instead of letting them drop onto the roof or road below. It's the same careful approach we use for hillside removals, applied to pruning.",
+  },
+  {
+    q: 'What does tree trimming cost in Hot Springs?',
+    a: "It depends on the size and number of trees, how much you want taken off, and how hard the access is. A simple clearance trim to pull limbs off a roof is modest; full crown work on a century-old oak near Central, or rope-and-rigging pruning on a steep hillside, costs more. Whatever it is, you get a written price before we start, and the estimate is free.",
+  },
+  {
+    q: 'Will trimming help my tree survive Hot Springs storms?',
+    a: "Done right, yes. Removing deadwood, thinning a dense canopy so wind passes through instead of pushing against it, and reducing an over-extended limb all lower the odds of failure in a storm or under ice. It won't make a tree storm-proof, but proper pruning is one of the best things you can do for a mature pine or oak on an exposed Ouachita-foothills lot. Robbie will point out the limbs that worry him when he walks your property.",
+  },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Tree Trimming & Pruning in Hot Springs, AR',
+    serviceType: 'Tree trimming & pruning',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+
+// Types of trimming we do.
+const trimTypes = [
+  { h: 'Clearance Pruning', p: "Limbs scraping the roof off Park Avenue, branches over the driveway, growth pushing against the power drop or rubbing the siding. We cut them back cleanly so your house and lines stay clear — without butchering the tree's shape." },
+  { h: 'Deadwooding', p: "The big old oaks and magnolias in the historic districts near Central carry dead limbs high in the crown that drop without warning. We climb up and take out the deadwood before it lands on a car, a roof, or a person." },
+  { h: 'Crown Thinning & Reduction', p: "Dense pine and hardwood canopies catch wind like a sail. We selectively thin the crown so wind passes through, and reduce over-extended limbs — lowering storm and ice-load risk on exposed foothill lots." },
+  { h: 'Canopy Raising', p: "Lifting the lower branches to clear sightlines, let light reach the lawn, or give clearance over a driveway, deck, or walkway. Common on the wooded lots where the canopy has crept down over the years." },
+  { h: 'Lakefront View Pruning', p: "Selective thinning and raising on Lake Hamilton and Lake Catherine to open a window to the water — without gutting the tree. We take the right limbs to keep the view and the tree both." },
+  { h: 'Storm-Prep & Restoration Pruning', p: "Before storm season, we reduce the limbs most likely to fail. After a storm, we clean up torn breaks and restore a damaged crown so the tree can recover instead of declining." },
+];
+
+// How we trim a tree.
+const steps = [
+  { h: 'Free On-Site Assessment', p: "Robbie walks your trees, reads the structure, points out deadwood and weak limbs, and tells you what's worth doing and what isn't. You get a written price the same day — and an honest answer if a tree just needs to be left alone." },
+  { h: 'Plan the Cuts', p: "We decide exactly which limbs come off and how — clearance, thinning, reduction, or view work — and plan the rigging for anything over a roof, a power line, a seawall, or a hillside drop." },
+  { h: 'Prune the Right Way', p: "Proper cuts at the branch collar, no topping, no flush cuts, no stubs. On steep lots and tall trees we climb and lower limbs to a controlled spot. The tree is left healthy, balanced, and natural-looking." },
+  { h: 'Clean Up Completely', p: "We chip the brush, haul it off, and rake the yard — including off slopes where clippings want to roll downhill and away from the water on lakefront jobs. You'd never know we were there except for the better-looking trees." },
+];
+
+// Trimming across neighborhoods.
+const neighborhoods = [
+  { h: '🏛️ Historic Districts & Downtown', p: "Century-old white oaks, red oaks, and magnolias near Central, Quapaw, and Whittington need careful deadwooding and structural pruning, not heavy cutting. These trees define the neighborhoods, and the right pruning preserves both the canopy and the historic character." },
+  { h: '⛰️ Park Avenue & West Mountain Slopes', p: "Tall shortleaf pines and oaks over hillside roofs and driveways, with no room for a bucket truck. We climb and rig, lowering each limb to a controlled spot rather than dropping it on the structure or road below." },
+  { h: '🌊 Lake Hamilton & Lake Catherine', p: "View pruning is the headline here — opening sightlines to the water while keeping lakefront trees healthy on steep banks. We thin and raise selectively, protect the seawall, and keep clippings out of the lake." },
+  { h: '🌲 Mountain Pine, Piney & the Foothills', p: "On the bigger wooded and rural lots north and west, we handle canopy raising over long driveways, clearing limbs off outbuildings, and storm-prep thinning on exposed pine and hardwood stands before the season hits." },
+];
+
+// Why Hot Springs calls Plyler's for trimming.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Reviews', p: 'A perfect Google rating from more than 70 customers across Hot Springs and Garland County. The clean, natural-looking results speak for themselves.' },
+  { h: '✂️ Proper Cuts, Never Topping', p: 'We prune to keep trees healthy and strong — branch-collar cuts, thinning, and reduction. We never top a tree, and we’ll explain why if anyone told you to.' },
+  { h: '🧗 Climbers for Hillside & Tall Trees', p: 'Where a bucket truck can’t reach — steep West Mountain lots, tight historic yards — our climbers rig and lower limbs safely.' },
+  { h: '🚛 30 Minutes Away, No Trip Fee', p: "Based in Arkadelphia, crews in Garland County every week. The price is the job, not the drive." },
+  { h: '📋 Licensed and Insured', p: "Full liability and workers' comp on every job — important when we're pruning over roofs, power lines, and seawalls." },
+  { h: '🧹 Complete Cleanup', p: 'Brush chipped, hauled, and the yard raked — even off slopes and away from the water. We leave it cleaner than we found it.' },
+];
+
+const testimonials = [
+  "Robbie did an amazing job trimming and cleaning up a beast of a tree in our front yard. He also helped remove several stumps even though that wasn't part of why we originally contacted him. Very friendly and quick service.",
+  'These gentlemen completed outstanding work in an exceptional amount of time and conducted themselves with the highest level of professionalism. They truly transformed our backyard.',
+  "Plyler's tree service removed several trees for us. The attention to detail and knowledge was unmatched. They went above and beyond, finishing ahead of schedule and right on budget. Highly recommend!!",
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Hot Springs, Arkansas · Garland County"
+    title="Tree Trimming & Pruning in Hot Springs, AR"
+    subtitle="Limbs scraping a hillside roof off Park Avenue, deadwood high in a century-old oak near Central, a lakefront canopy blocking the view on Lake Hamilton — we trim and prune the right way across Garland County. Proper cuts, never topping, full cleanup."
+    image="/images/hot-springs-ar-arborist-climbing-aerial-tree-work.webp"
+    imageAlt="Arborist climbing for aerial tree-trimming work in Hot Springs, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Trimming done right keeps your trees healthy — not just shorter.</p>
+      <p class="lead">
+        Plyler's Tree Service has been pruning trees across
+        <a href="https://www.cityhs.net/" target="_blank" rel="noopener">Hot Springs</a> and Garland County for over two
+        decades. Clearance off roofs and power lines, deadwooding the big old oaks downtown, crown thinning on
+        storm-exposed pines, and view pruning on the lakes — done with proper cuts that keep the tree strong. We're based
+        30 minutes away in Arkadelphia with crews in the Spa City every week, and there's never a trip fee.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Why Tree Trimming in Hot Springs Takes a Careful Hand</h2>
+      <p>
+        The trees around Hot Springs aren't ordinary suburban landscaping. The historic districts near Central carry
+        century-old white oaks, red oaks, and magnolias that define the neighborhoods. The West Mountain slopes off Park
+        Avenue grow tall shortleaf pines over hillside roofs. And the lakefront lots on Lake Hamilton and Lake Catherine
+        have canopy growing right to the water's edge. Each of these calls for a different kind of pruning — and all of
+        them call for restraint.
+      </p>
+      <p>
+        The single biggest mistake we see in Garland County is topping — cutting a tree's leaders back to stubs. It looks
+        tidy for one season, then the tree throws out a dense flush of weak water sprouts that are far more likely to
+        fail in the next ice storm. On the tall pines and big oaks here, topping manufactures the exact hazard you were
+        trying to prevent. We don't do it. We crown-reduce and thin with cuts at the branch collar, so the tree stays
+        strong, balanced, and natural-looking.
+      </p>
+      <p>
+        After 24 years of pruning trees in this area, we know how to deadwood an old historic oak, thin a storm-exposed
+        pine, open a lake view without gutting the tree, and climb-and-rig a hillside trim where a bucket truck can't
+        reach. For the full picture of what we do across the Spa City, see our
+        <a href="/tree-service-hot-springs-ar">Hot Springs tree service hub</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Types of Tree Trimming We Do in Hot Springs</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        From a quick clearance cut to full crown work on a heritage oak, here's the pruning we handle across Garland
+        County.
+      </p>
+      <div class="grid grid-3">
+        {trimTypes.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">When to Trim Your Trees in Hot Springs</h2>
+      <p>
+        For most hardwoods, late winter to early spring — roughly December through February, while the tree is dormant —
+        is the ideal window. For oaks specifically, we avoid the April–July stretch when oak wilt can spread through
+        fresh cuts in this region. Pines can be trimmed nearly any time of year.
+      </p>
+      <p>
+        That said, clearance and safety pruning don't wait for a season. A limb on the roof, a branch against the power
+        drop, deadwood hanging over the driveway, or storm-torn breaks get handled whenever they happen. If you're not
+        sure what your tree needs or when, Robbie will walk the property and tell you straight.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">How We Trim a Tree in Hot Springs</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Every tree is different. A clearance trim off a roof is quick; full crown work on a hillside oak takes a careful
+        morning. Here's how we work either one.
+      </p>
+      <div class="grid grid-2">
+        {steps.map((s, i) => (
+          <div class="card">
+            <h3>{i + 1}. {s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Tree Trimming Across Hot Springs Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different parts of the Spa City mean different pruning challenges. Here's what we handle most across the areas we
+        know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Tree Trimming Cost in Hot Springs?</h2>
+      <p>
+        The price depends on the size and number of trees, how much you want taken off, and how hard the access is. A
+        simple clearance trim to pull a few limbs off the roof is modest. Full crown reduction on a century-old oak near
+        Central, or rope-and-rigging pruning on a steep West Mountain lot where we have to climb and lower every limb,
+        costs more.
+      </p>
+      <p>
+        View pruning on a lakefront property lands in between — it's selective, careful work, but it's targeted. And like
+        everything we do, you get the exact price in writing before we start, with no surprise add-ons once the climber
+        is up the tree.
+      </p>
+      <p>
+        For a number on your trees, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>. The estimate is always free.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Hot Springs Calls Plyler's for Tree Trimming</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with billboards. We built it one tree at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">What Hot Springs Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real trimming and pruning jobs across Garland County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <HotSpringsServicesBlock
+    current={path}
+    heading="More Tree Services in Hot Springs"
+    intro="Trimming is one piece of the work we do across Garland County. Start with our full Hot Springs tree service hub for the complete picture, or jump straight to the service that fits your job."
+  />
+
+  <FaqSection
+    items={faq}
+    heading="Tree Trimming Questions — Hot Springs"
+    intro="Answers to what Hot Springs homeowners ask us most about trimming and pruning."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead mb-0">
+        🌳 Back to our <a href="/tree-service-hot-springs-ar">Hot Springs tree service hub</a> for the complete picture
+        of what we do across Garland County and the lakes.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Ready to Get Your Trees Pruned Right?"
+    text="We serve Hot Springs from our home base in Arkadelphia — 30 minutes down the road, crews in the Spa City every week. Call Robbie, show him the trees, and we'll give you an honest written price. No charge for the estimate. No obligation to say yes."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>
+</content>

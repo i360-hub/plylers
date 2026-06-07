@@ -1,0 +1,301 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import HotSpringsServicesBlock from '../components/HotSpringsServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+
+const title = "Stump Grinding Hot Springs AR | Plyler's Tree Service";
+const description =
+  "Stump grinding in Hot Springs, AR. Pine & oak stumps ground 6–8 inches below grade so you can replant, build, or mow. Multiple stumps in one trip. 5.0 stars, free quotes.";
+const path = '/stump-grinding-hot-springs-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Hot Springs', path: '/tree-service-hot-springs-ar' },
+  { name: 'Stump Grinding', path },
+];
+
+// Inline FAQ — stump grinding specific to Hot Springs.
+const faq = [
+  {
+    q: 'How deep do you grind a stump in Hot Springs?',
+    a: "We grind 6 to 8 inches below grade as standard — flat enough to lay sod, plant grass, or set a flower bed right over it. If you're planning to pour a slab, build a deck, or set a footing, tell Robbie and we'll grind deeper and chase the major surface roots so nothing telegraphs up through your new construction. On the rocky soil common in the Ouachita foothills, depth depends partly on how much ledge sits under the stump.",
+  },
+  {
+    q: 'Can you grind a stump on a steep hillside lot off Park Avenue or West Mountain?',
+    a: "Yes. Hillside stumps are routine for us in Hot Springs. The grinder is built to work on a slope, and where a lot is too steep or too tight for the machine to reach — common on the West Mountain streets — we bring a compact unit that fits through narrow gates and side yards. We'll look at the access when we quote so there are no surprises on grinding day.",
+  },
+  {
+    q: 'Do I need a permit to grind a stump in Hot Springs?',
+    a: "No. Stump grinding on your own private property doesn't require a permit — there's no tree coming down, just an existing stump being ground out. The one thing we always do first is locate underground utilities. Stumps near the street, the meter, or an irrigation line get an 811 utility locate before the grinder runs, so we don't hit a gas, water, or fiber line.",
+  },
+  {
+    q: 'What does stump grinding cost around Hot Springs?',
+    a: "Price comes down to stump diameter, how many you have, and how hard the access is. A single small pine stump in an open backyard is inexpensive; a wide old oak stump on a steep, gated lot costs more. The best value is grinding several at once — we charge less per stump when we do them in one trip, so it pays to point out every stump on the property when Robbie quotes it.",
+  },
+  {
+    q: 'What happens to the grindings and the hole?',
+    a: "Grinding produces a pile of wood chips and soil. We rake the grindings back into the hole to fill it, leaving a slight mound that settles flat over a few weeks. Haul-off and topsoil are available if you'd rather start with clean fill — just ask. We clean up the work area before we leave; half our reviews mention the cleanup.",
+  },
+  {
+    q: 'Will the roots keep growing or send up sprouts after grinding?',
+    a: "Grinding kills the stump, so it won't regrow into a tree. With a few species — sweetgum and some oaks especially — the remaining root system can push up small surface sprouts for a season or two. They're easy to mow or pull off and they die out as the roots starve. For a wide-rooting tree near a foundation or seawall, we can grind the visible structural roots back to reduce it.",
+  },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Stump Grinding in Hot Springs, AR',
+    serviceType: 'Stump grinding',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+
+// Why grind the stump.
+const reasons = [
+  { h: 'Reclaim the Yard', p: "A stump you've been mowing around for three years is wasted space — and a mower-blade hazard. Grind it out and you get usable lawn back, whether that's a Park Avenue side yard or a wide lot out toward Mountain Pine." },
+  { h: 'Replant or Build', p: "Want to plant a new tree, lay a patio, set a fence post, or pour a slab where the old tree stood? The stump and its main roots have to go first. We grind deep enough for whatever's going in next." },
+  { h: 'Stop the Pests', p: "Rotting pine and hardwood stumps draw carpenter ants, termites, and beetles — and in the wooded foothills around Hot Springs, you don't want to give them a reason to move toward the house. Grinding removes the buffet." },
+  { h: 'Clean Up the Curb Appeal', p: "On the historic lots near Central and the vacation rentals around the lakes, a row of old stumps drags down the whole look. Grinding them flat is the fastest way to sharpen up a property's appearance." },
+];
+
+// How stump grinding works.
+const steps = [
+  { h: 'Free Quote & Utility Check', p: "Robbie looks at the stumps, measures the diameter, checks the slope and gate access, and gives you a written price. For any stump near the street or a meter, we schedule an 811 utility locate before grinding day." },
+  { h: 'Set Up & Protect', p: "We position the grinder, lay down protection for nearby driveways, walkways, and seawalls, and screen off the cutting head so chips don't sandblast the siding or fly into the lake on lakefront jobs." },
+  { h: 'Grind Below Grade', p: "The cutting wheel takes the stump down 6–8 inches below the surface — deeper if you're building. On hillside lots we work the machine across the slope safely, chasing the surface roots that matter." },
+  { h: 'Fill & Clean Up', p: "We rake the grindings back to fill the hole, leaving a slight mound that settles flat, and clean the work area. Want the grindings hauled off and clean topsoil instead? Just say so." },
+];
+
+// Stump grinding across neighborhoods.
+const neighborhoods = [
+  { h: '🏛️ Historic Districts & Downtown', p: "On the tight century-old lots near Central, Quapaw, and Whittington, old oak and magnolia stumps sit close to foundations, walkways, and underground lines. We bring the compact grinder for narrow side yards and grind carefully around old utilities and root-bound foundations." },
+  { h: '⛰️ Park Avenue & West Mountain Slopes', p: "Hillside stumps on the West Mountain streets need a machine that works safely across a slope and fits through narrow hillside gates. We're set up for both, and we grind deep enough that the spot won't slump or erode after the next hard rain." },
+  { h: '🌊 Lake Hamilton & Lake Catherine', p: "Lakefront stumps near docks, decks, and seawalls take extra care — we screen the grinding head so chips stay out of the water and protect the seawall and hardscape. Popular ahead of a new patio, fire pit, or dock-side landscaping at a vacation rental." },
+  { h: '🌲 Mountain Pine, Piney & the Foothills', p: "On the bigger wooded and rural lots north and west, we often grind a whole batch of pine stumps left after a removal or land-clearing job — multiple stumps in one trip at a lower per-stump rate, ground flat so you can mow, replant, or fence the property line." },
+];
+
+// Why Hot Springs calls Plyler's for stump grinding.
+const whyUs = [
+  { h: '⭐ 5.0 Stars — 70+ Reviews', p: 'A perfect Google rating from more than 70 customers across Hot Springs and Garland County. The cleanup gets mentioned again and again.' },
+  { h: '🚛 30 Minutes Away, No Trip Fee', p: "Based in Arkadelphia, 30 minutes from the Spa City. Crews in Garland County every week. The price is the job, not the drive." },
+  { h: '🔧 Right Machine for the Lot', p: 'Full-size grinder for open lots and a compact unit for narrow gates, steep slopes, and tight historic side yards. We match the equipment to your property.' },
+  { h: '💰 Multiple Stumps, One Trip', p: 'Per-stump pricing drops when we grind several at once. Point out every stump on the property and we’ll quote the whole batch.' },
+  { h: '📋 Licensed and Insured', p: "Full liability and workers' comp on every job. We grind around foundations, seawalls, and utilities without putting your property at risk." },
+  { h: '🧹 Filled, Raked & Clean', p: 'We fill the hole, rake the grindings, and clean the area. Your yard is ready to mow, plant, or build over.' },
+];
+
+const testimonials = [
+  "Robbie did an amazing job trimming and cleaning up a beast of a tree in our front yard. He also helped remove several stumps (that would have otherwise taken a significant amount of manual labor) even though that wasn't part of why we originally contacted him. Very friendly and quick service.",
+  'These gentlemen completed outstanding work in an exceptional amount of time and conducted themselves with the highest level of professionalism. They truly transformed our backyard.',
+  "Plyler's tree service removed several trees for us. The attention to detail and knowledge was unmatched. They went above and beyond, finishing ahead of schedule and right on budget. Highly recommend!!",
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Hot Springs, Arkansas · Garland County"
+    title="Stump Grinding in Hot Springs, AR"
+    subtitle="That old pine or oak stump you've been mowing around for years? We grind it 6 to 8 inches below grade so you can replant, build, or mow right over it — on steep hillside lots, tight historic yards, and lakefront properties across Garland County."
+    image="/images/hot-springs-ar-gated-property-entrance-stump-removal.webp"
+    imageAlt="Stump removal at a gated property entrance in Hot Springs, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">The stump is the last step — let's finish the job right.</p>
+      <p class="lead">
+        After a tree comes down, the stump is what's left to deal with. Plyler's Tree Service grinds stumps below grade
+        across <a href="https://www.cityhs.net/" target="_blank" rel="noopener">Hot Springs</a> and Garland County —
+        single stumps, whole batches, hillside lots, lakefront properties, and tight historic yards near downtown. We're
+        based 30 minutes away in Arkadelphia with crews in the Spa City every week, and there's never a trip fee.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Why Stump Grinding in Hot Springs Takes the Right Machine</h2>
+      <p>
+        Hot Springs isn't flat, open ground. Lots climb the slopes of West Mountain off Park Avenue, squeeze tight
+        between century-old homes near Central, and drop down to docks and seawalls on Lake Hamilton and Lake Catherine.
+        A grinder that works fine on a flat Clark County yard has to be matched carefully to this terrain — and we bring
+        both a full-size machine and a compact unit that fits through narrow gates and works safely across a slope.
+      </p>
+      <p>
+        The soil matters too. The Ouachita foothills hide rock and ledge under a lot of stumps, which affects how deep we
+        can grind in one pass. Pine stumps — loblolly and shortleaf — are the most common around here after a removal,
+        but the big old oaks and magnolias in the historic districts leave wide, deep-rooted stumps that take more work.
+        And on lakefront lots, we screen the grinding head so chips stay out of the water and protect the seawall.
+      </p>
+      <p>
+        After 24 years working Garland County, we know how to grind a stump on a steep lot without slumping the hillside,
+        how to work near an old foundation or a seawall, and how to leave the spot ready to replant or build. For the
+        full picture of what we do across the Spa City, see our
+        <a href="/tree-service-hot-springs-ar">Hot Springs tree service hub</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Grind the Stump?</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Leaving a stump in the ground costs you usable space, invites pests, and gets in the way of whatever you want to
+        do next. Here's what grinding it out does for you.
+      </p>
+      <div class="grid grid-2">
+        {reasons.map((r) => (
+          <div class="card">
+            <h3>{r.h}</h3>
+            <p class="mb-0">{r.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">How Stump Grinding Works</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        From the free quote to a filled, raked spot ready to use — here's how we handle a stump on a Hot Springs
+        property.
+      </p>
+      <div class="grid grid-2">
+        {steps.map((s, i) => (
+          <div class="card">
+            <h3>{i + 1}. {s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Stump Grinding Across Hot Springs Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different parts of the Spa City mean different grinding challenges. Here's what we handle most across the areas we
+        know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">How Much Does Stump Grinding Cost in Hot Springs?</h2>
+      <p>
+        Price comes down to three things: the diameter of the stump, how many you have, and how hard it is to get the
+        grinder to them. A single small pine stump in an open backyard off Highway 7 is inexpensive. A wide old oak stump
+        on a steep, gated West Mountain lot — where we bring the compact machine and work across the slope — costs more.
+      </p>
+      <p>
+        The best value is grinding several stumps in one trip. Our per-stump price drops when we do a batch, so it pays
+        to point out every stump on the property — including the ones tucked at the back of a wooded lot — when Robbie
+        quotes the job.
+      </p>
+      <p>
+        Whatever the number is, you get it in writing before we start, and the estimate is free. Call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> and we'll get you a price.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Hot Springs Calls Plyler's for Stump Grinding</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with billboards. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What Hot Springs Customers Say</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real jobs across Garland County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <HotSpringsServicesBlock
+    current={path}
+    heading="More Tree Services in Hot Springs"
+    intro="Stump grinding is one piece of the work we do across Garland County. Start with our full Hot Springs tree service hub for the complete picture, or jump straight to the service that fits your job."
+  />
+
+  <FaqSection
+    items={faq}
+    heading="Stump Grinding Questions — Hot Springs"
+    intro="Answers to what Hot Springs homeowners ask us most about grinding out stumps."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead mb-0">
+        🌳 Back to our <a href="/tree-service-hot-springs-ar">Hot Springs tree service hub</a> for the complete picture
+        of what we do across Garland County and the lakes.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Ready to Get Rid of That Stump?"
+    text="We serve Hot Springs from our home base in Arkadelphia — 30 minutes down the road, crews in the Spa City every week. Call Robbie, point out the stumps, and we'll get you an honest written price. No charge for the estimate. No obligation to say yes."
+  />
+</BaseLayout>
+
+<style>
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>
+</content>

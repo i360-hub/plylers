@@ -1,0 +1,351 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import HotSpringsServicesBlock from '../components/HotSpringsServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+
+const title = "Emergency Tree Service Hot Springs AR | 24/7 | Plyler's";
+const description =
+  "24/7 emergency tree service in Hot Springs, AR. Storm-downed pine on your house or blocking a hillside road? We answer day or night and respond fast across Garland County.";
+const path = '/emergency-tree-service-hot-springs-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Hot Springs', path: '/tree-service-hot-springs-ar' },
+  { name: 'Emergency Tree Service', path },
+];
+
+// Inline FAQ — emergency tree service specific to Hot Springs.
+const faq = [
+  {
+    q: 'How fast can you get to a tree emergency in Hot Springs?',
+    a: "We're based in Arkadelphia, about 30 minutes down I-30 and Highway 7, and our crews are in Garland County multiple times a week. For most Hot Springs emergencies we can be on-site within an hour or two of your call — often faster during daytime. When you call, Robbie gives you an honest ETA, not what you want to hear. After a major storm rolls through the Ouachitas, call volume spikes and we triage by danger, putting trees-on-houses and blocked roads first.",
+  },
+  {
+    q: 'A tree fell across the only road off my hillside — can you clear it at night?',
+    a: "Yes. Trees blocking access are one of our most common Hot Springs emergency calls, especially on the steep streets off Park Avenue and West Mountain where there's only one way in or out. We get on-site, cut the tree into manageable sections, and clear a driveable path — often within an hour of arriving. Then we deal with the rest of the cleanup once you're not trapped.",
+  },
+  {
+    q: 'A storm-damaged tree is near the Hot Springs National Park boundary — who handles it?',
+    a: "If the tree is on your private property, we handle it like any other emergency. If it's actually on National Park land, that's federal property and the Park Service handles it — we won't cut a tree that isn't yours. Where a downed tree straddles the line or threatens your home from the Park side, call us and we'll assess what's yours to clear and help you coordinate the rest.",
+  },
+  {
+    q: 'Does emergency tree service cost more than scheduled work?',
+    a: "Usually a little, yes. Emergency response means crews working after-hours, weekends, or holidays, sometimes in rain or on a dark hillside, sometimes with overtime labor. That gets reflected in the price. What stays the same: we tell you the number before any work starts, even at 11 p.m. with a pine on your roof. We don't take advantage of a panicked homeowner.",
+  },
+  {
+    q: 'Will my homeowner’s insurance cover storm tree removal?',
+    a: "Most of the time, yes. If a tree fell on your house, garage, fence, or boat dock during a Garland County storm, your homeowner's policy almost certainly covers removal and repair. We provide itemized invoices and damage photos that Arkansas adjusters accept without question. We handle the tree first and help with the paperwork second.",
+  },
+  {
+    q: 'What should I do before your crew arrives after a storm?',
+    a: "Stay safe and stay back. Never approach a tree touching a power line — call Entergy first, then us. Keep clear of hanging limbs and don't go into any room with a tree through the ceiling. Don't try to chainsaw a tree off your own roof; the weight shifts unpredictably. Take wide and close photos for insurance, then call us and let the crew handle it.",
+  },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Emergency Tree Service in Hot Springs, AR',
+    serviceType: 'Emergency tree service',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+
+// Safety steps before touching a storm-damaged tree.
+const safetySteps = [
+  'Never approach a tree touching power lines. Even if the line looks intact, the ground around it can be energized — and on a wet hillside, water carries the charge. Call Entergy first, then us.',
+  'Stay out from under hanging limbs. "Widow makers" lodged in the canopy can drop without warning, especially on slopes where they slide as they fall. Keep people and pets clear.',
+  "Don't try to chainsaw a tree off your roof. The weight distribution is unpredictable, and on a sloped lot a shifting trunk can roll. Cutting the wrong piece can crush more of the structure.",
+  "Don't enter a room with a tree through the ceiling. The structural integrity is compromised. Stay out until a professional clears it.",
+  'Take photos before anything moves — for your insurance claim. Wide shots and close-ups of the damage, from multiple angles.',
+];
+
+// Emergency tree work we handle.
+const emergencyWork = [
+  { h: 'Tree-on-House Removal', p: "The hardest emergency job in tree work — lifting a tree off a structure without doing more damage than it already did. On Hot Springs' hillside lots we rig from above and lower sections off carefully, working with the slope instead of against it." },
+  { h: 'Storm Cleanup & Removal', p: 'After the Ouachitas funnel a bad storm through Garland County, a property can have several trees down across the yard. We bring the equipment, the crew, and the cleanup to handle the whole property in one push.' },
+  { h: 'Hillside Road & Driveway Clearance', p: "A tree across the only road off a West Mountain or Park Avenue hillside traps everyone above it. We get on-site, section the tree, and clear a driveable path — often within an hour of arriving." },
+  { h: 'Leaning Tree Stabilization or Removal', p: 'A pine or oak actively leaning toward a structure after a storm can’t wait for "next week" — and on a slope it has only one way to fall. We assess the lean and get it down before it goes on its own.' },
+  { h: 'Hanging Limb & Widow-Maker Removal', p: 'Broken limbs hung up in the canopy, partial breaks dangling 40 feet over your yard or driveway. We climb up, rig the piece, and bring it down controlled — the kind of job where doing it yourself ends in the ER.' },
+  { h: 'Lakefront Storm Damage', p: 'On Lake Hamilton and Lake Catherine, storms drop trees across docks and boat houses and shear limbs off steep banks. We clear the damage while protecting the seawall and keeping debris out of the water.' },
+];
+
+// How we respond to emergency calls.
+const responseSteps = [
+  { h: 'Robbie Answers', p: `You call ${business.phoneDisplay}. Robbie picks up — day, night, weekend, holiday. He asks what's down, where in Hot Springs, and what's threatened. Two-minute call to get the details.` },
+  { h: 'Dispatch & ETA', p: 'Robbie tells you straight whether the crew can be there in an hour, two hours, or first thing in the morning. No false promises, no "we’re on the way" stalling. Honest ETA, every time.' },
+  { h: 'On-Site Assessment', p: 'Crew arrives with the equipment likely needed — chainsaws, ropes, chipper, bucket truck where the hillside access allows. Quick walk-around, plan the cuts, get insurance-grade photos before any work starts.' },
+  { h: 'Make the Property Safe', p: "First priority is removing the active hazard — tree off the roof, hillside road cleared, hanging limb down. We can finish full cleanup the same visit or come back when it's safe and convenient." },
+];
+
+// Emergency response across neighborhoods.
+const neighborhoods = [
+  { h: '🏛️ Historic Districts & Downtown', p: "Quapaw, Whittington, Prospect, and the streets off Central Avenue have century-old oaks that drop massive limbs in storms. Older homes mean older trees with hidden decay. Most-frequent calls: oak limbs through second-story windows, dead limbs on parked cars, and big crown failures over historic structures that can’t be replaced." },
+  { h: '⛰️ Park Avenue & West Mountain Slopes', p: "On the steep streets climbing West Mountain, a downed tree usually blocks the only road off the hillside — trapping everyone above it. Shortleaf pines snap and slide downhill onto roofs and retaining walls. Access and footing are the challenge, and we’re equipped for night work on the slopes." },
+  { h: '🌊 Lake Hamilton & Lake Catherine', p: "Lakefront storm calls are their own animal — trees down across docks and boat houses, limbs sheared off steep banks, root plates lifting in saturated lakeside soil. We protect the seawall and keep debris out of the water while we clear the damage." },
+  { h: '🌲 Mountain Pine, Piney & the Foothills', p: "Out the Highway 270 corridor and north toward Jessieville, storm calls often mean access issues — trees blocking long rural driveways, multiple pines down across wooded acreage. We get there with the right equipment for the terrain and clear the way in first." },
+];
+
+// Why Hot Springs calls Plyler's for emergencies.
+const whyUs = [
+  { h: '📞 Robbie Answers, Day or Night', p: 'Not a call center. Not an answering service. The owner picks up — including at 2 a.m. on a holiday. Twenty-four years of taking those calls.' },
+  { h: '🚛 30 Minutes Out, No Trip Fee', p: "Trucks, chippers, climbing gear, and the bucket truck staged at our Arkadelphia yard — 30 minutes from Hot Springs down I-30 and Highway 7. We’re already in Garland County most days." },
+  { h: '🚨 Real Response Times', p: 'Most Hot Springs emergencies see crew on-site within 1–2 hours, often faster in daytime. We tell you the honest ETA when you call, not what you want to hear.' },
+  { h: '📋 Insurance-Ready Documentation', p: "Photos, itemized invoices, damage assessment — everything your homeowner’s adjuster needs. We’ve worked with every major Arkansas insurer." },
+  { h: '🛡️ Fully Licensed & Insured', p: 'Liability and workers’ comp on every emergency job — critical when working at night, in storms, or on a wet hillside where the risk runs higher.' },
+  { h: '⭐ 5.0 Stars · 70+ Reviews', p: 'Perfect Google rating from real Garland County customers, including plenty of emergency calls. The reviews tell the story.' },
+];
+
+const testimonials = [
+  'A big pine fell on our fence during a storm. They were out the next morning. Professional, fast, and they even fixed the fence section. Can’t say enough good things.',
+  "Robby has cut difficult and dangerous trees for me on multiple occasions over a period of several years. He is dependable and professional. He is a good man and I highly recommend him.",
+  'These gentlemen completed outstanding work in an exceptional amount of time and conducted themselves with the highest level of professionalism. They truly transformed our backyard.',
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Hot Springs, Arkansas · 24/7 Emergency Response"
+    title="Emergency Tree Service in Hot Springs, AR"
+    subtitle="Pine on the house? Tree across the only road off your hillside? Cracked trunk leaning toward the bedroom after a storm? Call now. We answer the phone 24 hours a day — nights, weekends, holidays — and our crew can be at your Garland County property fast."
+    image="/images/arkadelphia-ar-storm-damage-uprooted-oak-tree-removal.webp"
+    imageAlt="Storm-damaged uprooted oak being removed during an emergency call near Hot Springs, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">30 minutes from Hot Springs — answering the phone when it matters.</p>
+      <p class="lead">
+        When a tree comes down on your house at 2 a.m., the company two hours away can't help you. Plyler's Tree Service
+        is based 30 minutes down the road in Arkadelphia — crews in
+        <a href="https://www.cityhs.net/" target="_blank" rel="noopener">Hot Springs</a> and Garland County multiple
+        times a week, owner Robbie Plyler answering the phone himself. We've been the emergency call for the Spa City for
+        over two decades.
+      </p>
+      <p class="measure" style="color:var(--muted)">
+        When you call after-hours, you don't get a voicemail and a callback in the morning. Robbie picks up, gathers the
+        details, dispatches the crew, and most local emergencies have someone on-site within a couple of hours — often
+        faster.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">When to Call Emergency Tree Service in Hot Springs</h2>
+      <p>
+        Not every fallen branch is an emergency, and not every concerning tree needs a 2 a.m. response. Here's the line —
+        situations where you should call us right now, regardless of the hour. If you're not sure whether your situation
+        qualifies, call anyway — <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>. Robbie will tell you
+        straight whether it needs immediate response or can wait until morning. No charge for the conversation.
+      </p>
+      <h3>⚠️ Before You Do Anything: Stay Safe</h3>
+      <p>
+        A storm-damaged tree on a Hot Springs hillside is dangerous in ways that aren't obvious — gravity is working
+        against you on the slope. Do not try to handle it yourself.
+      </p>
+      <ul class="checklist">
+        {safetySteps.map((s) => <li>{s}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Emergency Tree Work We Handle in Hot Springs</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Whatever the storm left behind — on a hillside, in a historic district, or down on the lake — our crew is set up
+        to handle it.
+      </p>
+      <div class="grid grid-3">
+        {emergencyWork.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-green">
+    <div class="container">
+      <h2 class="center">How We Respond to Emergency Calls</h2>
+      <p class="center" style="margin-bottom:2.4rem;color:#bcd3c4">
+        When you call about an emergency in Hot Springs, here's exactly what happens.
+      </p>
+      <ol class="steps">
+        {responseSteps.map((s, i) => (
+          <li class="step">
+            <span class="step-num">{i + 1}</span>
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Storm Exposure in Hot Springs & Garland County</h2>
+      <p>
+        Hot Springs sits in the Ouachita Mountains, and the terrain shapes the weather. Storm systems funnel through the
+        valleys and ridges, and the dense pine-and-hardwood canopy on steep lots means a lot of trees catch a lot of
+        wind. When something fails here, it usually fails toward a house, a road, or the lake — there's rarely an open
+        field to fall into.
+      </p>
+      <p>The storm seasons we plan around in Garland County:</p>
+      <ul>
+        <li><strong>Late March through early June</strong> — primary severe-weather season. Tornadoes, straight-line winds, and supercells that drop trees on houses. Our heaviest emergency call volume of the year.</li>
+        <li><strong>August through early October</strong> — hurricane remnants and late-summer storms. Less frequent, but saturated hillside soil means trees uproot easier on the slopes.</li>
+        <li><strong>December through February</strong> — ice storms. Loblolly and shortleaf pine tops snap under ice loading, mature hardwood limbs fail, and whole trees come down. Slow-moving emergencies that stretch for days as ice keeps falling and refreezing.</li>
+      </ul>
+      <p>
+        We staff for these seasons. After major storm events we run extended hours and add crew to keep up. For the
+        broader picture of what we do across the Spa City, see our
+        <a href="/tree-service-hot-springs-ar">Hot Springs tree service hub</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Emergency Response Across Hot Springs Neighborhoods</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Different parts of the Spa City mean different emergency patterns. Here's what we see most across the areas we
+        know best.
+      </p>
+      <div class="grid grid-2">
+        {neighborhoods.map((n) => (
+          <div class="card">
+            <h3>{n.h}</h3>
+            <p class="mb-0">{n.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Does Emergency Tree Service Cost More?</h2>
+      <p>
+        Honest answer: usually yes, modestly. Emergency response means crews working after-hours, weekends, or holidays,
+        sometimes in rain, sometimes on a dark hillside, sometimes with overtime on the labor. That gets reflected in the
+        price.
+      </p>
+      <p>
+        What stays the same is how we price it: we tell you the number before any work starts. Even at 11 p.m. with a
+        pine on your roof, you get a verbal estimate before we start cutting — confirmed in writing as soon as conditions
+        allow. We're not the company that takes advantage of a panicked homeowner and surprises you with a five-figure
+        invoice the next day.
+      </p>
+      <p>
+        What also stays the same: most emergency work is insurance-covered. If a tree fell on your house during a Garland
+        County storm, your homeowner's policy almost certainly covers removal and repair. We provide itemized invoices
+        and damage documentation that Arkansas adjusters accept without question.
+      </p>
+      <p>
+        Call <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>. We'll handle the tree first and the
+        paperwork second.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="⚡ Tree Emergency Right Now?"
+    text="Don't wait. Don't try to handle it yourself. Don't call a company two hours away. We're 30 minutes from Hot Springs, we're answering the phone, and we can be on-site fast."
+  />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Why Hot Springs Calls Plyler's for Emergencies</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Lots of tree companies advertise "24/7 emergency response." Most of them mean "leave a voicemail and we'll call
+        you back tomorrow." Here's why we actually deliver on it.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Emergency Reviews from Hot Springs Customers</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        Real reviews from real emergencies across Garland County.
+      </p>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="testi-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{t}</blockquote>
+          </figure>
+        ))}
+      </div>
+      <p class="center" style="margin-top:1.5rem">
+        <a class="btn btn-green" href="/reviews">Read all 70+ five-star reviews →</a>
+      </p>
+    </div>
+  </section>
+
+  <HotSpringsServicesBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Emergency Tree Service Questions — Hot Springs"
+    intro="Answers to what Hot Springs homeowners ask us most during and after a tree emergency."
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="lead mb-0">
+        🌳 Back to our <a href="/tree-service-hot-springs-ar">Hot Springs tree service hub</a> for the complete picture
+        of what we do across Garland County and the lakes.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Tree Down? Call Right Now."
+    text="We're 30 minutes from Hot Springs. Robbie answers the phone. The crew can be on the way fast. Don't wait until morning — every hour a tree sits on your house, more damage happens."
+  />
+</BaseLayout>
+
+<style>
+  .steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.6rem; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--amber-500); color: var(--green-900); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .step h3 { color: #fff; margin: 0 0 0.4rem; }
+  .step p { color: #c9ddcf; }
+  .checklist { margin: 0 0 1.2rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.6rem; }
+  .testi-card .stars { color: var(--amber-500); letter-spacing: 1px; }
+  .testi-card blockquote { margin: 0; font-size: 0.98rem; color: var(--body); }
+</style>
+</content>
