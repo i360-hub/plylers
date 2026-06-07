@@ -52,9 +52,9 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.6rem); }
 h2 { font-size: clamp(1.9rem, 4.2vw, 2.8rem); }   /* ~30–45px, matches the original's bold section headings */
 h3 { font-size: clamp(1.35rem, 2.4vw, 1.8rem); }  /* ~22–29px */
 h4 { font-size: clamp(1.1rem, 1.8vw, 1.3rem); }
-p { margin: 0 0 1.1rem; text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
-/* centered contexts override justify */
-.center p, p.center, .center .lead, .hero p { text-align: center; hyphens: manual; }
+p { margin: 0 0 1.1rem; text-align: left; }
+/* centered contexts (short subheads under H2s, hero) stay centered */
+.center p, p.center, .center .lead, .hero p { text-align: center; }
 ul, ol { margin: 0 0 1.1rem; padding-left: 1.3rem; }
 li { margin-bottom: 0.4rem; }
 
