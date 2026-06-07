@@ -18,6 +18,25 @@
     { "city": "Glenwood", "slug": "/tree-service-glenwood-ar" },
     { "city": "Amity", "slug": "/tree-service-amity-ar" }
   ],
+  "_chipsNote": "Full legacy town list. Towns without a dedicated page link to the /service-areas index.",
+  "chips": [
+    { "city": "Arkadelphia", "href": "/tree-service-arkadelphia-ar" },
+    { "city": "Hot Springs", "href": "/tree-service-hot-springs-ar" },
+    { "city": "Hot Springs Village", "href": "/service-areas" },
+    { "city": "Caddo Valley", "href": "/tree-service-caddo-valley-ar" },
+    { "city": "Malvern", "href": "/tree-service-malvern-ar" },
+    { "city": "Glenwood", "href": "/tree-service-glenwood-ar" },
+    { "city": "Bismarck", "href": "/tree-service-bismarck-ar" },
+    { "city": "Gurdon", "href": "/tree-service-gurdon-ar" },
+    { "city": "Mount Ida", "href": "/service-areas" },
+    { "city": "Bonnerdale", "href": "/service-areas" },
+    { "city": "Amity", "href": "/tree-service-amity-ar" },
+    { "city": "Norman", "href": "/service-areas" },
+    { "city": "Caddo Gap", "href": "/service-areas" },
+    { "city": "Murfreesboro", "href": "/service-areas" },
+    { "city": "Prescott", "href": "/service-areas" },
+    { "city": "Camden", "href": "/service-areas" }
+  ],
   "cities": [
     "Arkadelphia",
     "Caddo Valley",

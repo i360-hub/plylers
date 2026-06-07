@@ -8,14 +8,14 @@ const {
   cta = null,
   closing = '',
 } = Astro.props;
-const hubs = areas.hubs.filter((h) => h.slug !== current);
+const chips = areas.chips.filter((c) => !(c.href === current && c.href !== '/service-areas'));
 ---
 <section class="areas-block section section-alt">
   <div class="container">
     <h2 class="center">{heading}</h2>
     <p class="center lead measure areas-intro">{intro}</p>
     <div class="areas-grid">
-      {hubs.map((h) => <a class="area-pill" href={h.slug}>Tree Service in {h.city}</a>)}
+      {chips.map((c) => <a class="area-pill" href={c.href}>Tree Service in {c.city}</a>)}
       <a class="area-pill area-all" href="/service-areas">All Service Areas →</a>
     </div>
     {closing && <p class="center measure areas-closing">{closing}</p>}
