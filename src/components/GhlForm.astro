@@ -1,6 +1,8 @@
 ---
 // Lead-capture form — verbatim GoHighLevel/LeadConnector embed (do NOT substitute).
-// Captured from the live site: a plain iframe to the GHL widget form.
+// Shows a loading state behind the iframe + a persistent phone fallback so the
+// section never collapses to an empty white card if the third-party script is
+// slow or blocked.
 import business from '../data/business.json';
 const { minHeight = 1200, heading = 'Request Your Free Estimate', id = 'quote' } = Astro.props;
 const src = business.embeds.ghlFormSrc;
@@ -9,10 +11,18 @@ const title = business.embeds.ghlFormTitle;
 <section class="ghl-wrap" id={id} aria-labelledby={`${id}-h`}>
   <div class="container">
     {heading && <h2 id={`${id}-h`} class="center ghl-h">{heading}</h2>}
-    <div class="ghl-card">
+    <div class="ghl-card" style={`--ghl-h:${minHeight}px`}>
+      <div class="ghl-loading">
+        <div class="ghl-spinner" aria-hidden="true"></div>
+        <p class="ghl-loading-text">Loading the estimate form…</p>
+        <p class="ghl-fallback">
+          Taking a moment? Call <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>
+          and we'll take your info right over the phone.
+        </p>
+      </div>
       <iframe
+        class="ghl-iframe"
         src={src}
-        style={`width:100%; min-height:${minHeight}px; border:none;`}
         title={title}
         loading="lazy"></iframe>
     </div>
@@ -21,9 +31,37 @@ const title = business.embeds.ghlFormTitle;
     </p>
   </div>
 </section>
+<script>
+  document.querySelectorAll<HTMLIFrameElement>('.ghl-iframe').forEach((f) => {
+    const done = () => f.closest('.ghl-card')?.classList.add('ghl-ready');
+    if (f.contentDocument || f.contentWindow) {} // touch to avoid TS noise
+    f.addEventListener('load', done);
+    // safety: if 'load' never fires, reveal the form area anyway after 10s
+    setTimeout(done, 10000);
+  });
+</script>
 <style>
   .ghl-wrap { padding-block: var(--space); background: var(--bg-alt); }
   .ghl-h { margin-bottom: 1.5rem; }
-  .ghl-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; max-width: 820px; margin-inline: auto; }
+  .ghl-card {
+    position: relative; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow); overflow: hidden; max-width: 820px; margin-inline: auto;
+    min-height: var(--ghl-h);
+  }
+  .ghl-loading {
+    position: absolute; inset: 0; z-index: 2; display: grid; place-content: center; justify-items: center;
+    gap: 0.6rem; text-align: center; padding: 2rem; color: var(--muted); background: #fff;
+    transition: opacity .3s ease;
+  }
+  .ghl-card.ghl-ready .ghl-loading { opacity: 0; pointer-events: none; }
+  .ghl-spinner {
+    width: 38px; height: 38px; border-radius: 50%; border: 3px solid var(--green-100);
+    border-top-color: var(--green-600); animation: ghl-spin 0.8s linear infinite;
+  }
+  @keyframes ghl-spin { to { transform: rotate(360deg); } }
+  .ghl-loading-text { font-weight: 700; color: var(--ink); margin: 0; }
+  .ghl-fallback { margin: 0; font-size: 0.95rem; max-width: 360px; }
+  .ghl-iframe { position: relative; z-index: 1; width: 100%; min-height: var(--ghl-h); border: 0; display: block; }
   .ghl-alt { margin-top: 1rem; color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { .ghl-spinner { animation: none; } }
 </style>
