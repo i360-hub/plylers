@@ -62,8 +62,8 @@ const company = [
   </div>
   <div class="footer-bar">
     <div class="container footer-bar-inner">
-      <span>© {year} {business.name}. All rights reserved.</span>
-      <span>Arkadelphia &amp; Southwest Arkansas</span>
+      <span>© {year} {business.name}. All rights reserved. · Arkadelphia &amp; Southwest Arkansas</span>
+      <span class="footer-credit">Smart Site by <a href="https://impact360media.com" target="_blank" rel="noopener">Impact 360</a></span>
     </div>
   </div>
 </footer>
@@ -89,6 +89,8 @@ const company = [
   .site-footer .text-muted { color: #9fb4a6; } /* a11y: readable muted on dark green */
   .footer-bar { border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.85rem; color: #9fb4a6; }
   .footer-bar-inner { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.1rem; flex-wrap: wrap; }
+  .footer-credit a { color: #c4d6cb; font-weight: 600; }
+  .footer-credit a:hover { color: #fff; }
   @media (max-width: 860px) {
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .footer-brand { grid-column: 1 / -1; }
