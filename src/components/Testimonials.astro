@@ -27,8 +27,8 @@ picks = picks.slice(0, count);
 ---
 <section class={`testi section ${alt ? 'section-alt' : ''}`}>
   <div class="container">
-    <h2 class="center">{heading}</h2>
-    <p class="center lead measure testi-intro">{intro}</p>
+    {heading && <h2 class="center">{heading}</h2>}
+    {intro && <p class="center lead measure testi-intro">{intro}</p>}
     <div class="grid grid-3">
       {picks.map((t) => (
         <figure class="testi-card">
