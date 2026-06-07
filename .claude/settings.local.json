@@ -99,7 +99,13 @@
       "Bash(curl -s -o /dev/null -w \"  home: %{http_code}\\\\n\" --max-time 5 http://localhost:4321/)",
       "Bash(xargs -I{} sh -c 'echo {}')",
       "Bash(node -e 'const s=require\\(\"sharp\"\\);s\\(\"public/images/plylers-tree-service-logo.png\"\\).metadata\\(\\).then\\(m=>console.log\\(\"logo asset:\",m.width+\"x\"+m.height\\)\\)')",
-      "Bash(curl -s -o /dev/null -w \"  /tree-service-lake-hamilton-ar -> %{http_code}\\\\n\" https://plylers-tree-service-staging.pages.dev/tree-service-lake-hamilton-ar)"
+      "Bash(curl -s -o /dev/null -w \"  /tree-service-lake-hamilton-ar -> %{http_code}\\\\n\" https://plylers-tree-service-staging.pages.dev/tree-service-lake-hamilton-ar)",
+      "Bash(node scripts/refetch-heroes.mjs)",
+      "Bash(sed -i '' 's#imageAlt=\"Hazardous leaning dead pine tree in Arkadelphia, AR before removal\"#imageAlt=\"Large dead tree being felled with a chainsaw in Clark County, AR\"#' src/pages/dead-tree-removal-arkadelphia-ar.astro)",
+      "Bash(sed -i '' 's#imageAlt=\"Hazardous leaning pine tree before removal in Arkadelphia, AR\"#imageAlt=\"Professional felling a large pine with a chainsaw in Arkadelphia, AR\"#' src/pages/pine-tree-removal-arkadelphia-ar.astro)",
+      "Bash(sed -i '' 's#imageAlt=\"Hazardous leaning pine tree before removal in Clark County, AR\"#imageAlt=\"Professional felling a large tree with a chainsaw near Gurdon, AR\"#' src/pages/tree-service-gurdon-ar.astro)",
+      "Bash(sed -i '' 's#imageAlt=\"Skid steer stump grinding and land clearing job near Malvern, AR\"#imageAlt=\"Stump grinding and removal at a residential property in Clark County, AR\"#' src/pages/stump-grinding.astro)",
+      "Bash(sed -i '' 's#imageAlt=\"Stump grinding and land clearing with a skid steer near Arkadelphia, AR\"#imageAlt=\"Stump grinding and removal at a property entrance in Arkadelphia, AR\"#' src/pages/stump-grinding-arkadelphia-ar.astro)"
     ]
   }
 }
