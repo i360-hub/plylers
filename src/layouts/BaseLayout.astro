@@ -77,7 +77,16 @@ const GA = business.embeds.ga4Id;
 
     <!-- Perf: preconnect to embed origins (forms/reviews load on demand) -->
     <link rel="preconnect" href="https://api.leadconnectorhq.com" />
-    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+    {preloadImage && (
+      <link
+        rel="preload"
+        as="image"
+        href={preloadImage}
+        imagesrcset={`${preloadImage.replace(/\.webp$/, '-768.webp')} 768w, ${preloadImage.replace(/\.webp$/, '-1024.webp')} 1024w, ${preloadImage} 1400w`}
+        imagesizes="100vw"
+        fetchpriority="high"
+      />
+    )}
 
     <!-- Global structured data (@graph) -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />

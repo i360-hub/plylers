@@ -105,7 +105,9 @@
       "Bash(sed -i '' 's#imageAlt=\"Hazardous leaning pine tree before removal in Arkadelphia, AR\"#imageAlt=\"Professional felling a large pine with a chainsaw in Arkadelphia, AR\"#' src/pages/pine-tree-removal-arkadelphia-ar.astro)",
       "Bash(sed -i '' 's#imageAlt=\"Hazardous leaning pine tree before removal in Clark County, AR\"#imageAlt=\"Professional felling a large tree with a chainsaw near Gurdon, AR\"#' src/pages/tree-service-gurdon-ar.astro)",
       "Bash(sed -i '' 's#imageAlt=\"Skid steer stump grinding and land clearing job near Malvern, AR\"#imageAlt=\"Stump grinding and removal at a residential property in Clark County, AR\"#' src/pages/stump-grinding.astro)",
-      "Bash(sed -i '' 's#imageAlt=\"Stump grinding and land clearing with a skid steer near Arkadelphia, AR\"#imageAlt=\"Stump grinding and removal at a property entrance in Arkadelphia, AR\"#' src/pages/stump-grinding-arkadelphia-ar.astro)"
+      "Bash(sed -i '' 's#imageAlt=\"Stump grinding and land clearing with a skid steer near Arkadelphia, AR\"#imageAlt=\"Stump grinding and removal at a property entrance in Arkadelphia, AR\"#' src/pages/stump-grinding-arkadelphia-ar.astro)",
+      "Bash(sed -i '' 's#`${img768} 768w, ${image} 1400w`#`${img768} 768w, ${image} 1280w`#' src/components/Hero.astro)",
+      "Bash(sed -i '' 's#const heroSrcset = image ? `${img768} 768w, ${image} 1280w` : undefined;#const img1024 = image ? image.replace\\(/\\\\\\\\.webp$/, \"-1024.webp\"\\) : \"\";\\\\nconst heroSrcset = image ? `${img768} 768w, ${img1024} 1024w, ${image} 1400w` : undefined;#' src/components/Hero.astro)"
     ]
   }
 }

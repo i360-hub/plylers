@@ -36,9 +36,12 @@ const ICON: Record<string, string> = {
   shield: `<path d="M12 2l8 3v6c0 5-3.4 8.3-8 10-4.6-1.7-8-5-8-10V5z"/><path d="M9 12l2 2 4-4"/>`,
   dollar: `<circle cx="12" cy="12" r="9"/><path d="M12 7v10M14.5 9.2C13.9 8.5 13 8 12 8c-1.5 0-2.6.9-2.6 2 0 2.6 5.2 1.4 5.2 4 0 1.1-1.1 2-2.6 2-1 0-1.9-.5-2.5-1.2"/>`,
 };
+const img768 = image ? image.replace(/\.webp$/, '-768.webp') : '';
+const img1024 = image ? image.replace(/\.webp$/, "-1024.webp") : "";
+const heroSrcset = image ? `${img768} 768w, ${img1024} 1024w, ${image} 1400w` : undefined;
 ---
 <section class={`hero ${compact ? 'hero-compact' : ''} ${image ? '' : 'hero-nobg'}`}>
-  {image && <img class="hero-bg" src={image} alt={imageAlt} fetchpriority="high" decoding="async" width="1600" height="900" />}
+  {image && <img class="hero-bg" src={image} srcset={heroSrcset} sizes="100vw" alt={imageAlt} fetchpriority="high" decoding="async" width="1600" height="900" />}
   <div class="hero-overlay"></div>
   <div class="container hero-content">
     {eyebrow && <p class="eyebrow hero-eyebrow">{eyebrow}</p>}
