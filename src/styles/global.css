@@ -69,6 +69,10 @@ li { margin-bottom: 0.4rem; }
 .measure { max-width: 720px; margin-inline: auto; }
 .section-cta { margin-top: 2.5rem; }
 :target { scroll-margin-top: 130px; } /* keep anchored sections clear of the sticky header */
+/* footer email link (rendered by a child component, so Footer's scoped styles can't
+   reach it) — match the phone link's light color for AA contrast on the dark footer */
+.site-footer .email-link { color: #c4d6cb; }
+.site-footer .email-link:hover { color: #fff; }
 
 /* ============ Buttons ============ */
 .btn {
