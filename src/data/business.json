@@ -25,10 +25,12 @@
   "rating": { "value": "5.0", "count": "70" },
   "social": {
     "facebook": "https://www.facebook.com/p/Plylers-Tree-Service-100093509250624/",
-    "googleMaps": "https://www.google.com/maps/place/Plylers+Tree+Service",
+    "googleMaps": "https://www.google.com/maps?cid=8867544852738399831",
+    "googleReview": "https://search.google.com/local/writereview?placeid=ChIJ0Wa6OZBbJkgRV95QsQ_ZD3s",
     "bbb": "https://www.bbb.org/us/ar/arkadelphia/profile/tree-service/plylers-tree-service-0935-90410363",
     "yelp": "https://www.yelp.com/biz/plyler-s-tree-service-arkadelphia"
   },
+  "gbp": { "cid": "8867544852738399831", "placeId": "ChIJ0Wa6OZBbJkgRV95QsQ_ZD3s" },
   "embeds": {
     "ghlFormId": "4GbeOTv0UeNs4bE2JDAe",
     "ghlFormSrc": "https://api.leadconnectorhq.com/widget/form/4GbeOTv0UeNs4bE2JDAe",
