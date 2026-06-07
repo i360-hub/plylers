@@ -1,10 +1,10 @@
 {
   "_comment": "Central link registry to preserve the internal-link structure. Edit here once.",
   "services": [
-    { "name": "Tree Removal", "href": "/tree-removal", "icon": "🪓", "blurb": "Safe sectional removal of hazardous, dead, and storm-damaged trees." },
-    { "name": "Tree Trimming & Pruning", "href": "/tree-trimming", "icon": "✂️", "blurb": "Proper branch-collar cuts that protect tree health — no topping." },
-    { "name": "Stump Grinding", "href": "/stump-grinding", "icon": "🌱", "blurb": "Ground 6–8 inches below grade so you can replant, build, or mow." },
-    { "name": "Emergency Storm Damage", "href": "/emergency-storm-damage", "icon": "⛈️", "blurb": "24/7 response when a tree is on your house, car, or blocking the road." }
+    { "name": "Tree Removal", "href": "/tree-removal", "icon": "tree", "blurb": "Safe sectional removal of hazardous, dead, and storm-damaged trees." },
+    { "name": "Tree Trimming & Pruning", "href": "/tree-trimming", "icon": "scissors", "blurb": "Proper branch-collar cuts that protect tree health — no topping." },
+    { "name": "Stump Grinding", "href": "/stump-grinding", "icon": "stump", "blurb": "Ground 6–8 inches below grade so you can replant, build, or mow." },
+    { "name": "Emergency Storm Damage", "href": "/emergency-storm-damage", "icon": "storm", "blurb": "24/7 response when a tree is on your house, car, or blocking the road." }
   ],
   "arkadelphiaCluster": [
     { "name": "Tree Removal in Arkadelphia", "href": "/tree-removal-arkadelphia-ar", "blurb": "Sectional takedowns of oaks, pines & storm-damaged trees." },
