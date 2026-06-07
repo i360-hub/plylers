@@ -1,6 +1,7 @@
 ---
 import business from '../data/business.json';
 import areas from '../data/areas.json';
+import { quoteHref } from '../lib/cta';
 
 const services = [
   { name: 'Tree Removal', href: '/tree-removal' },
@@ -50,7 +51,7 @@ const isActive = (h: string) => (h === '/' ? path === '/' : path === h);
         <li><a href="/gallery" aria-current={isActive('/gallery') ? 'page' : undefined}>Gallery</a></li>
         <li><a href="/blog" aria-current={isActive('/blog') ? 'page' : undefined}>Blog</a></li>
         <li><a href="/contact" aria-current={isActive('/contact') ? 'page' : undefined}>Contact</a></li>
-        <li class="nav-cta"><a class="btn btn-primary" href="/contact">Get a Free Quote</a></li>
+        <li class="nav-cta"><a class="btn btn-primary" href={quoteHref(path)}>Get a Free Quote</a></li>
       </ul>
     </nav>
   </div>

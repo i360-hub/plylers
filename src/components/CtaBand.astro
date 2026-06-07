@@ -1,9 +1,10 @@
 ---
 import business from '../data/business.json';
+import { quoteHref } from '../lib/cta';
 const {
   title = 'Need a tree handled? Get a free estimate today.',
   text = 'Same-week estimates across Clark County and a 40-mile radius. Storm emergency? We answer 24/7.',
-  href = '/contact',
+  href = quoteHref(Astro.url.pathname),
   label = 'Get a Free Estimate',
 } = Astro.props;
 ---

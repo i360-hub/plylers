@@ -1,5 +1,6 @@
 ---
 import business from '../data/business.json';
+import { quoteHref } from '../lib/cta';
 export interface Props {
   eyebrow?: string;
   title: string;
@@ -18,7 +19,7 @@ const {
   tagline,
   image,
   imageAlt = '',
-  primaryCta = { label: 'Get a Free Estimate', href: '/contact' },
+  primaryCta = { label: 'Get a Free Estimate', href: quoteHref(Astro.url.pathname) },
   showPhone = true,
   compact = false,
   trustBadges = false,
