@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import Testimonials from '../components/Testimonials.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import FaqSection from '../components/FaqSection.astro';
+import GhlForm from '../components/GhlForm.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID, ORG_ID } from '../lib/schema';
+import business from '../data/business.json';
+import maps from '../data/maps.json';
+
+const path = '/tree-service-lake-hamilton-ar';
+const title = "Lake Hamilton Tree Service | Garland County | Plyler's";
+const description =
+  'Lakefront tree service at Lake Hamilton, AR — steep-slope removals, dock & seawall protection, view thinning, stump grinding, and 24/7 storm cleanup for shoreline homes. Free estimates.';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Lake Hamilton', path },
+];
+
+const lakework = [
+  { h: 'Steep-Bank & Over-Water Removals', p: 'Most Lake Hamilton trees sit on a slope dropping straight to the water. We rig and lower them in sections with ropes instead of felling — nothing crashes onto your dock or into the lake.' },
+  { h: 'Dock, Boathouse & Seawall Protection', p: 'Boathouses, decks, retaining walls, and seawalls are the expensive part of a lakefront lot. We set rigging and ground protection so the structures come through the job untouched.' },
+  { h: 'Tight-Access Lots', p: 'Long driveways, gated entries, and narrow side yards are the norm on the lake. We know how to get equipment in — or work by rope and hand when a bucket truck can’t reach the back of the property.' },
+  { h: 'Lake-View Thinning', p: 'Want to open the water view without clear-cutting? We do proper crown thinning and canopy raising — never topping — so you keep healthy trees and gain the view.' },
+  { h: 'Wind & Storm Exposure', p: 'Trees on open water take the full force of a storm. We spot the leaners and weak unions that fail first and take them down before the next front rolls through.' },
+  { h: 'Pine & Hardwood Know-How', p: 'Loblolly and shortleaf pines, water oaks, and sweetgums all behave differently on a slope. Twenty-four years in this area means we’ve handled every one of them on lakefront ground.' },
+];
+
+const coves = [
+  { h: 'Highway 7 South & the Lake Hamilton School Area', p: 'The neighborhoods off Highway 7 South toward the school are full of established lots with tall pines close to the houses. We handle removals, storm work, and pruning for clearance off roofs and power drops here regularly.' },
+  { h: 'Pearcy & the West Shore', p: 'Out toward Pearcy and the west side of the lake, properties get larger and more wooded. We clear hazard trees on acreage, work fence lines, and handle the long-haul rural removals where the timber runs back from the water.' },
+  { h: 'The Coves Off Highway 290 & 270', p: 'The cove neighborhoods and resort properties off Highways 290 and 270 are tight, sloped, and full of mature hardwoods leaning over decks and boat slips. This is rope-and-rigging country, and it’s what we do best.' },
+  { h: 'Royal & the South End', p: 'Toward Royal and the south end near Carpenter Dam, it’s classic Ouachita lake country — steep banks, big pines, and storm-exposed shoreline. We cover all of it, same-day for emergencies.' },
+];
+
+const faq = [
+  {
+    q: 'Can you remove a tree right at the water’s edge on a steep bank?',
+    a: 'Yes — that’s the bulk of our Lake Hamilton work. Instead of felling, we climb and rig the tree, then lower it piece by piece with ropes so nothing drops onto your dock, deck, or into the lake. Steep slopes and tight banks are routine for us.',
+  },
+  {
+    q: 'Will my dock, boathouse, and seawall be protected during the work?',
+    a: 'Always. Those structures are the costly part of a lakefront property, so we set our rigging and ground protection around them before a saw ever starts. We lower limbs and logs in controlled sections rather than dropping them, and we walk the property with you afterward to confirm everything came through clean.',
+  },
+  {
+    q: 'Do I need a permit to remove a tree on my Lake Hamilton shoreline?',
+    a: 'Lake Hamilton’s shoreline is managed by Entergy Arkansas under its federal (FERC) license, so trees within the flowage easement near the water can require Entergy review, while trees higher up on your own property usually don’t need a city permit. It varies by lot. When we come out for your free estimate, we’ll help you figure out exactly what applies before any work begins.',
+  },
+  {
+    q: 'Can you open up my lake view without killing the trees?',
+    a: 'Yes. We do proper crown thinning and canopy raising — selectively removing limbs and lifting the canopy — so you get a clear water view while the trees stay healthy. We never top trees; topping ruins the structure and the look, and the regrowth just blocks the view again in a couple of years.',
+  },
+  {
+    q: 'How fast can you get out after a storm on the lake?',
+    a: 'We answer emergency calls 24 hours a day, 7 days a week, and we cover the Lake Hamilton and Hot Springs area. When wind comes across the open water and drops a tree on a house or blocks a drive, call us right away — we’ll get a crew headed your way.',
+  },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    publisher: { '@id': ORG_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Lakefront Tree Service at Lake Hamilton, AR',
+    serviceType: 'Lakefront tree removal, trimming, stump grinding & storm cleanup',
+    description,
+    path,
+  }),
+  faqPage(faq),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Lake Hamilton · Garland County"
+    title="Tree Service at Lake Hamilton, AR"
+    subtitle="Lakefront tree removal, trimming, stump grinding, and 24/7 storm cleanup for shoreline homes around Lake Hamilton."
+    image="/images/arkadelphia-ar-large-oak-overhanging-residential-home-sunset.webp"
+    imageAlt="Large oak overhanging a lakefront home at sunset near Lake Hamilton, AR"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Lakefront Tree Care, Done Right</h2>
+      <p class="lead">
+        Lake Hamilton is one big slope down to the water — 7,000 acres of shoreline lined with pines and
+        hardwoods growing on steep banks, leaning over docks, and crowding the decks and boathouses that
+        make a lakefront home worth it. That terrain is exactly where most tree companies struggle and where
+        we’ve spent 24 years working. Plyler’s Tree Service handles removals, trimming, view thinning, stump
+        grinding, and storm cleanup for shoreline properties across the Lake Hamilton and Hot Springs area —
+        rigging trees down in pieces so nothing touches your dock or the water. Licensed, insured, every
+        estimate free, and we clean up before we leave.
+      </p>
+    </div>
+  </section>
+
+  <ServicesGrid heading="What We Do at Lake Hamilton" intro="Full-service tree care built for lakefront lots." current={path} />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Lakefront Work Is Different</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">A tree on a flat city lot and a tree hanging over your boat slip are two completely different jobs.</p>
+      <div class="grid grid-3">
+        {lakework.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Testimonials heading="What Lake-Area Homeowners Say" />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Tree Work Around Lake Hamilton</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">We cover the whole lake — every cove, both shores, and the neighborhoods feeding into it.</p>
+      <div class="grid grid-2">
+        {coves.map((c) => (
+          <div class="card">
+            <h3>{c.h}</h3>
+            <p class="mb-0">{c.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <MapEmbed src={maps[path]} title="Lake Hamilton, AR service area map" height={420} />
+    </div>
+  </section>
+
+  <AreasBlock
+    heading="Serving Lake Hamilton & the Hot Springs Area"
+    intro="Based in Arkadelphia and covering the lake, Hot Springs, and the towns all around it."
+    current={path}
+  />
+
+  <FaqSection items={faq} heading="Lake Hamilton Tree Service — Questions" intro="Answers to what shoreline homeowners ask us most." />
+
+  <GhlForm heading="Get Your Free Lakefront Estimate" />
+
+  <CtaBand
+    title="Tree leaning over your dock or your lake view?"
+    text="Call Plyler's — we'll come look at it, give you an honest price in writing, and handle it without touching your dock or seawall."
+  />
+</BaseLayout>

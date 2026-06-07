@@ -16,7 +16,8 @@
     { "city": "Gurdon", "slug": "/tree-service-gurdon-ar" },
     { "city": "Malvern", "slug": "/tree-service-malvern-ar" },
     { "city": "Glenwood", "slug": "/tree-service-glenwood-ar" },
-    { "city": "Amity", "slug": "/tree-service-amity-ar" }
+    { "city": "Amity", "slug": "/tree-service-amity-ar" },
+    { "city": "Lake Hamilton", "slug": "/tree-service-lake-hamilton-ar" }
   ],
   "_chipsNote": "All 20 GBP service-area towns. The 8 hub towns link to their dedicated page; the other 12 link to the /service-areas index.",
   "chips": [
@@ -30,7 +31,7 @@
     { "city": "Gurdon", "href": "/tree-service-gurdon-ar" },
     { "city": "Amity", "href": "/tree-service-amity-ar" },
     { "city": "Mount Ida", "href": "/service-areas" },
-    { "city": "Lake Hamilton", "href": "/service-areas" },
+    { "city": "Lake Hamilton", "href": "/tree-service-lake-hamilton-ar" },
     { "city": "Pearcy", "href": "/service-areas" },
     { "city": "Mountain Pine", "href": "/service-areas" },
     { "city": "Magnet Cove", "href": "/service-areas" },
