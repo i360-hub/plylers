@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import GhlForm from '../components/GhlForm.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Hero from '../components/Hero.astro';
-import MapEmbed from '../components/MapEmbed.astro';
+import MapFacade from '../components/MapFacade.astro';
 import ServicesGrid from '../components/ServicesGrid.astro';
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
@@ -180,7 +180,7 @@ const schema = [
         including Malvern, Lake Catherine, Rockport, and the rest of Hot Spring County, just 25 minutes east on I-30.
         No trip fee, no travel charge — the price is based on the job, not the drive.
       </p>
-      <MapEmbed src={maps[path]} title="Malvern service area map" />
+      <MapFacade src={maps[path]} city="Malvern, AR" mapImage="/images/map-tree-service-malvern-ar.webp" height={380} />
       <div class="grid grid-3" style="margin-top:2.4rem">
         {towns.map((t) => (
           <div class="card">

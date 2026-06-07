@@ -5,7 +5,7 @@ import Hero from '../components/Hero.astro';
 import ServicesGrid from '../components/ServicesGrid.astro';
 import Testimonials from '../components/Testimonials.astro';
 import AreasBlock from '../components/AreasBlock.astro';
-import MapEmbed from '../components/MapEmbed.astro';
+import MapFacade from '../components/MapFacade.astro';
 import FaqSection from '../components/FaqSection.astro';
 import GhlForm from '../components/GhlForm.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -147,7 +147,7 @@ const schema = [
 
   <section class="section section-alt">
     <div class="container">
-      <MapEmbed src={maps[path]} title="Lake Hamilton, AR service area map" height={420} />
+      <MapFacade src={maps[path]} city="Lake Hamilton, AR" mapImage="/images/map-tree-service-lake-hamilton-ar.webp" height={380} />
     </div>
   </section>
 

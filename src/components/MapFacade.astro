@@ -1,61 +1,54 @@
 ---
-// Lightweight map "facade" for service-area pages.
-// - Renders ZERO third-party weight on load (no Google iframe until the user clicks).
+// Service-area map for local pages.
+// - Shows a SELF-HOSTED static map (OSM tiles, generated at build time) = real map, ~45KB, zero runtime third-party.
 // - Primary action links to the Google Business Profile (the part with real local value).
-// - On "Load interactive map", swaps in the official Google embed (TOS-compliant).
+// - "Load interactive map" swaps in the official Google embed only on click (TOS-compliant, rarely needed).
 import business from '../data/business.json';
 const {
-  src,                                   // Google Maps embed URL (loaded on click)
+  src,                                   // Google Maps embed URL (loaded only on click)
   city,                                  // e.g. "Hot Springs, AR"
-  gbpUrl = business.social.googleMaps,   // link to the Google Business Profile
-  height = 360,
+  mapImage,                              // /images/map-<slug>.webp static map
+  gbpUrl = business.social.googleMaps,   // Google Business Profile link
+  height = 380,
 } = Astro.props;
 const id = `map-${city.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 ---
-<div class="map-facade" style={`--map-h:${height}px`} data-src={src} id={id}>
-  <div class="mf-bg" aria-hidden="true">
-    <svg viewBox="0 0 48 48" class="mf-pin"><path fill="currentColor" d="M24 4a13 13 0 0 0-13 13c0 9 13 27 13 27s13-18 13-27A13 13 0 0 0 24 4z"/><circle cx="24" cy="17" r="5" fill="#fff"/></svg>
-    <p class="mf-area">Serving {city}</p>
-    <p class="mf-sub">Clark, Garland, Hot Spring, Pike &amp; Montgomery counties · 40-mile radius</p>
-  </div>
+<figure class="map-facade" style={`--map-h:${height}px`} data-src={src} id={id}>
+  <img class="mf-map" src={mapImage} width="1200" height="460" loading="lazy" decoding="async"
+       alt={`Service-area map centered on ${city} — Plyler's Tree Service`} />
+  <figcaption class="mf-chip">
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.6" fill="#fff"/></svg>
+    <span>Serving {city} &amp; a 40-mile radius</span>
+  </figcaption>
   <div class="mf-actions">
     <a class="btn btn-green" href={gbpUrl} target="_blank" rel="noopener noreferrer">View us on Google →</a>
     <button class="btn btn-dark mf-load" type="button">Load interactive map</button>
   </div>
-</div>
+</figure>
 <script>
   document.querySelectorAll('.map-facade').forEach((el) => {
-    const btn = el.querySelector('.mf-load');
-    btn?.addEventListener('click', () => {
+    el.querySelector('.mf-load')?.addEventListener('click', () => {
       const src = (el as HTMLElement).dataset.src;
       if (!src) return;
       const f = document.createElement('iframe');
-      f.src = src;
-      f.loading = 'lazy';
-      f.title = el.id.replace('map-', 'Map of ').replace(/-/g, ' ');
+      f.src = src; f.loading = 'lazy'; f.title = 'Interactive service-area map';
       f.setAttribute('allowfullscreen', '');
       f.style.cssText = 'width:100%;height:100%;border:0;display:block;';
       el.replaceChildren(f);
-      el.classList.add('mf-loaded');
+      (el as HTMLElement).classList.add('mf-loaded');
     });
   });
 </script>
 <style>
-  .map-facade {
-    position: relative; border-radius: var(--radius-lg); overflow: hidden;
-    border: 1px solid var(--line); box-shadow: var(--shadow); height: var(--map-h);
-    background:
-      linear-gradient(135deg, rgba(46,125,70,0.10), rgba(20,54,31,0.16)),
-      repeating-linear-gradient(0deg, var(--green-50), var(--green-50) 22px, #eef5f0 22px, #eef5f0 23px),
-      repeating-linear-gradient(90deg, var(--green-50), var(--green-50) 22px, #eef5f0 22px, #eef5f0 23px);
-    display: grid; place-items: center;
+  .map-facade { position: relative; margin: 0; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); height: var(--map-h); background: #e8eef0; }
+  .mf-map { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mf-chip { position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.94); color: var(--green-800); font-weight: 700; font-size: 0.9rem; padding: 0.4rem 0.75rem; border-radius: 999px; box-shadow: var(--shadow); }
+  .mf-chip svg { color: var(--green-600); }
+  .mf-actions { position: absolute; right: 12px; bottom: 12px; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .mf-actions .btn { padding: 0.55rem 1rem; font-size: 0.92rem; box-shadow: var(--shadow); }
+  .map-facade.mf-loaded .mf-chip, .map-facade.mf-loaded .mf-actions { display: none; }
+  @media (max-width: 480px) {
+    .mf-actions { left: 12px; right: 12px; justify-content: stretch; }
+    .mf-actions .btn { flex: 1; justify-content: center; }
   }
-  .map-facade.mf-loaded { display: block; }
-  .mf-bg { text-align: center; padding: 1.5rem; color: var(--green-800); }
-  .mf-pin { width: 46px; height: 46px; color: var(--green-600); filter: drop-shadow(0 3px 5px rgba(20,54,31,.25)); }
-  .mf-area { font-family: var(--font-heading); font-weight: 800; font-size: 1.4rem; color: var(--ink); margin: 0.4rem 0 0.2rem; }
-  .mf-sub { font-size: 0.9rem; color: var(--muted); margin: 0; max-width: 460px; }
-  .mf-actions { position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; padding: 1rem; background: linear-gradient(to top, rgba(255,255,255,0.96), rgba(255,255,255,0)); }
-  .mf-actions .btn { padding: 0.6rem 1.1rem; font-size: 0.95rem; }
-  @media (max-width: 480px) { .mf-actions .btn { flex: 1; justify-content: center; } }
 </style>

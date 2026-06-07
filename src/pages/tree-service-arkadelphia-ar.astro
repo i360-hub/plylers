@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import GhlForm from '../components/GhlForm.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Hero from '../components/Hero.astro';
-import MapEmbed from '../components/MapEmbed.astro';
+import MapFacade from '../components/MapFacade.astro';
 import ArkadelphiaServicesBlock from '../components/ArkadelphiaServicesBlock.astro';
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
@@ -258,7 +258,7 @@ const schema = [
         Arkadelphia is home base. Our crews head out from here every morning and cover a full 40-mile radius. No
         trip fee, no travel charge — the price is based on the job, not the drive.
       </p>
-      <MapEmbed src={maps[path]} title="Arkadelphia service area map" />
+      <MapFacade src={maps[path]} city="Arkadelphia, AR" mapImage="/images/map-tree-service-arkadelphia-ar.webp" height={380} />
       <div class="grid grid-3" style="margin-top:2.4rem">
         {towns.map((t) => (
           <div class="card">

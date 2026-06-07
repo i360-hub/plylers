@@ -6,7 +6,7 @@ import Testimonials from '../components/Testimonials.astro';
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import GhlForm from '../components/GhlForm.astro';
-import MapEmbed from '../components/MapEmbed.astro';
+import MapFacade from '../components/MapFacade.astro';
 import EmergencyBanner from '../components/EmergencyBanner.astro';
 import maps from '../data/maps.json';
 import { faqPage, service, LOCALBUSINESS_ID, WEBSITE_ID, ORG_ID, SITE } from '../lib/schema';
@@ -186,7 +186,7 @@ const schema = [
 
   <section class="section">
     <div class="container">
-      <MapEmbed src={maps['/']} title="Plyler's Tree Service area — Clark County and surrounding southwest Arkansas" height={420} />
+      <MapFacade src={maps['/']} city="Clark County" mapImage="/images/map-service-area.webp" height={380} />
     </div>
   </section>
 

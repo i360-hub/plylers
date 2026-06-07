@@ -107,7 +107,13 @@
       "Bash(sed -i '' 's#imageAlt=\"Skid steer stump grinding and land clearing job near Malvern, AR\"#imageAlt=\"Stump grinding and removal at a residential property in Clark County, AR\"#' src/pages/stump-grinding.astro)",
       "Bash(sed -i '' 's#imageAlt=\"Stump grinding and land clearing with a skid steer near Arkadelphia, AR\"#imageAlt=\"Stump grinding and removal at a property entrance in Arkadelphia, AR\"#' src/pages/stump-grinding-arkadelphia-ar.astro)",
       "Bash(sed -i '' 's#`${img768} 768w, ${image} 1400w`#`${img768} 768w, ${image} 1280w`#' src/components/Hero.astro)",
-      "Bash(sed -i '' 's#const heroSrcset = image ? `${img768} 768w, ${image} 1280w` : undefined;#const img1024 = image ? image.replace\\(/\\\\\\\\.webp$/, \"-1024.webp\"\\) : \"\";\\\\nconst heroSrcset = image ? `${img768} 768w, ${img1024} 1024w, ${image} 1400w` : undefined;#' src/components/Hero.astro)"
+      "Bash(sed -i '' 's#const heroSrcset = image ? `${img768} 768w, ${image} 1280w` : undefined;#const img1024 = image ? image.replace\\(/\\\\\\\\.webp$/, \"-1024.webp\"\\) : \"\";\\\\nconst heroSrcset = image ? `${img768} 768w, ${img1024} 1024w, ${image} 1400w` : undefined;#' src/components/Hero.astro)",
+      "Bash(node scripts/gen-static-maps.mjs /tree-service-hot-springs-ar)",
+      "Bash(node -e \"const s=require\\('sharp'\\);s\\('discovery/map-real2.webp'\\).resize\\({width:1100}\\).toFile\\('discovery/map-real2-sm.webp'\\).then\\(\\(\\)=>console.log\\('resized'\\)\\)\")",
+      "Bash(node scripts/gen-static-maps.mjs)",
+      "Bash(curl -s -o /dev/null \"https://plylers-tree-service-staging.pages.dev/tree-service-arkadelphia-ar\")",
+      "Bash(npx --yes lighthouse@12 \"https://plylers-tree-service-staging.pages.dev/tree-service-arkadelphia-ar\" --only-categories=performance --form-factor=mobile --screenEmulation.mobile --throttling-method=simulate --quiet --chrome-flags=\"--headless=new --no-sandbox\" --output=json --output-path=/tmp/lhmap.json)",
+      "Bash(node -e \"const r=require\\('/tmp/lhmap.json'\\);const a=r.audits;console.log\\('Arkadelphia hub \\(now static map\\): perf',Math.round\\(r.categories.performance.score*100\\),'| LCP',a['largest-contentful-paint'].displayValue,'| CLS',a['cumulative-layout-shift'].displayValue\\);\")"
     ]
   }
 }
