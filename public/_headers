@@ -1,9 +1,7 @@
 # Cloudflare Pages headers — caching + security.
 
-# ⚠️ STAGING ONLY — keep the *.pages.dev preview out of search indexes so it
-# never competes with the live #1-ranked site. REMOVE this block at production cutover.
+# Security headers (site is live + indexable; no X-Robots-Tag = fully crawlable).
 /*
-  X-Robots-Tag: noindex, nofollow
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin

@@ -1,6 +1,5 @@
 # robots.txt — Plyler's Tree Service
-# Production-ready. NOTE: on the *.pages.dev staging preview, indexing is additionally
-# blocked via the X-Robots-Tag: noindex header in public/_headers (remove at cutover).
+# Production — site is live and fully crawlable.
 
 User-agent: *
 Allow: /
