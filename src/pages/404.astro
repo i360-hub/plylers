@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import business from '../data/business.json';
+import { quoteHref } from '../lib/cta';
+
+const services = [
+  { name: 'Tree Removal', href: '/tree-removal' },
+  { name: 'Tree Trimming & Pruning', href: '/tree-trimming' },
+  { name: 'Stump Grinding', href: '/stump-grinding' },
+  { name: 'Emergency Storm Damage', href: '/emergency-storm-damage' },
+];
+---
+<BaseLayout
+  title="Page Not Found | Plyler's Tree Service"
+  description="That page couldn't be found. Browse Plyler's Tree Service — tree removal, trimming, stump grinding, and 24/7 storm cleanup across Clark County and southwest Arkansas."
+  robots="noindex, follow"
+>
+  <section class="section nf">
+    <div class="container measure center">
+      <p class="eyebrow">404 — Page Not Found</p>
+      <h1>We couldn't find that page</h1>
+      <p class="lead">
+        The link may be old or mistyped. No worries — here's where to go next, or just give Robbie a call.
+      </p>
+      <div class="nf-cta">
+        <a class="btn btn-primary btn-lg" href={`tel:${business.phoneHref}`}>Call {business.phoneDisplay}</a>
+        <a class="btn btn-dark btn-lg" href={quoteHref('/404')}>Get a Free Estimate</a>
+      </div>
+
+      <div class="nf-links">
+        <div>
+          <h2 class="nf-h">Our Services</h2>
+          <ul>{services.map((s) => <li><a href={s.href}>{s.name}</a></li>)}</ul>
+        </div>
+        <div>
+          <h2 class="nf-h">Go To</h2>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/service-areas">Service Areas</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/blog">Tree Care Articles</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .nf { padding-block: clamp(3rem, 8vw, 6rem); }
+  .nf h1 { margin-bottom: 0.6rem; }
+  .nf .lead { color: var(--muted); margin-bottom: 1.8rem; }
+  .nf-cta { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+  .nf-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; max-width: 540px; margin-inline: auto; text-align: left; }
+  .nf-h { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green-600); margin: 0 0 0.8rem; }
+  .nf-links ul { list-style: none; margin: 0; padding: 0; }
+  .nf-links li { margin-bottom: 0.5rem; }
+  .nf-links a { color: var(--green-800); font-weight: 600; }
+  @media (max-width: 480px) { .nf-links { grid-template-columns: 1fr; gap: 1.5rem; } }
+</style>

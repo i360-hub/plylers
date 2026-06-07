@@ -9,6 +9,9 @@
 /comparison/trim-vs-remove             /tree-trimming-vs-removal       301
 /comparison/stump-grinding-vs-removal  /stump-grinding-vs-removal      301
 
+# --- Conventional sitemap path -> the real sitemap index ---
+/sitemap.xml                           /sitemap-index.xml             301
+
 # NOTE: host canonicalization (apex + http -> https://www) and trailing-slash
 # stripping are handled at the Cloudflare/DNS layer in production and by Pages'
 # default behavior. They are intentionally not duplicated here for the *.pages.dev
