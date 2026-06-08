@@ -44,6 +44,8 @@ const canonical = `${SITE}${cleanPath}`;
 const ogImageAbs = ogImage.startsWith('http') ? ogImage : `${SITE}${ogImage}`;
 const jsonld = pageGraph(schema);
 const GA = business.embeds.ga4Id;
+const POOL = business.embeds.ghlNumberPoolSrc;
+const SESSION = business.embeds.ghlUserSessionSrc;
 ---
 
 <!doctype html>
@@ -118,5 +120,12 @@ const GA = business.embeds.ga4Id;
       <slot />
     </main>
     <Footer />
+
+    <!-- GHL call tracking (dynamic number insertion). Swaps the displayed phone
+         client-side for call attribution; the HTML + JSON-LD keep the canonical
+         (870) 245-7944 so NAP/schema stay consistent for crawlers. Loaded at end
+         of body so it runs on page load without blocking render. -->
+    <script is:inline src={POOL}></script>
+    <script is:inline src={SESSION}></script>
   </body>
 </html>
