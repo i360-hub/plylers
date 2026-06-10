@@ -1,5 +1,6 @@
 ---
 title: "When Should You Remove a Tree in Arkadelphia? A Homeowner's Guide"
+seoTitle: "When to Remove a Tree in Arkadelphia: Homeowner's Guide"
 description: "How to tell if a tree on your Arkadelphia property needs to come down — warning signs, judgment calls, and when to get a pro to look. From Plyler's Tree Service."
 pubDate: 2026-04-29
 heroImage: "/images/arkadelphia-ar-large-tree-risk-assessment-backyard-deck.webp"

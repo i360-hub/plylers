@@ -1,5 +1,6 @@
 ---
 title: "Is My Tree Too Close to My House? What Arkansas Homeowners Should Know"
+seoTitle: "Is My Tree Too Close to My House? Arkansas Homeowner Guide"
 description: "Is your tree too close to your house? A 24-year Arkansas tree pro explains safe distances, root risks, foundation damage, and when to trim vs remove."
 pubDate: 2026-05-03
 heroImage: "/images/arkadelphia-ar-large-oak-overhanging-residential-home-sunset.webp"

@@ -8,6 +8,9 @@ const blog = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
+    // Shorter <title> for search results (~60 chars); falls back to `title`.
+    // Does not affect the on-page H1, breadcrumb, or BlogPosting headline.
+    seoTitle: z.string().optional(),
     description: z.string(),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),

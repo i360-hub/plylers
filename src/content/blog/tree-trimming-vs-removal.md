@@ -1,5 +1,6 @@
 ---
 title: "When to Trim a Tree vs When to Remove It: How to Know the Difference"
+seoTitle: "Tree Trimming vs Removal: How to Know the Difference"
 description: "Not sure if your tree needs a trim or full removal? A 24-year pro explains how to tell the difference and when to act."
 pubDate: 2026-03-11
 heroImage: "/images/arkadelphia-ar-arborist-rope-climb-tall-tree-removal.webp"
