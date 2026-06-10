@@ -1,5 +1,6 @@
 ---
 title: "Stump Grinding vs Full Stump Removal: Which One Do You Actually Need?"
+seoTitle: "Stump Grinding vs Stump Removal: Which One Do You Need?"
 description: "Should you grind a stump or remove it completely? A 24-year pro breaks down the real differences so you pick the right option for your yard."
 pubDate: 2026-03-11
 heroImage: "/images/malvern-ar-stump-grinding-land-clearing-skid-steer.webp"
