@@ -127,5 +127,12 @@ const SESSION = business.embeds.ghlUserSessionSrc;
          of body so it runs on page load without blocking render. -->
     <script is:inline src={POOL}></script>
     <script is:inline src={SESSION}></script>
+
+    <!-- GHL external tracking (analytics attribution). Loaded at end of body. -->
+    <script
+      is:inline
+      src="https://link.msgsndr.com/js/external-tracking.js"
+      data-tracking-id="tk_90d12a0e49154a9892dbeef82a5d3368"
+    ></script>
   </body>
 </html>
