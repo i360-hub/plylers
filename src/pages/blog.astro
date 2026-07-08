@@ -1,9 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { breadcrumb, SITE, ORG_ID, WEBSITE_ID, LOCALBUSINESS_ID } from '../lib/schema';
+import { getPublishedPosts } from '../lib/posts';
 
 const title = "Tree Care Tips & Guides | Plyler's Tree Service Blog";
 const description =
@@ -15,9 +15,8 @@ const crumbs = [
 ];
 
 // Posts live at ROOT-level slugs (e.g. /signs-tree-is-dying), not under /blog/.
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
-);
+// Future-dated posts stay off the hub (and out of its Blog schema) until published.
+const posts = await getPublishedPosts();
 
 const dateFmt = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',

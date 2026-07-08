@@ -1,14 +1,17 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { breadcrumb, SITE, ORG_ID, WEBSITE_ID, LOCALBUSINESS_ID } from '../lib/schema';
+import { getPublishedPosts } from '../lib/posts';
 
 // Blog POSTS render at ROOT-level slugs (e.g. /signs-tree-is-dying), NOT under /blog/.
 // The /blog page (blog.astro) is only the index. Preserve these exact slugs.
+// MUST route from getPublishedPosts() (not raw getCollection) so future-dated posts
+// have no live URL — and no sitemap entry — until their pubDate.
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getPublishedPosts();
   return posts.map((post) => ({
     params: { post: post.id },
     props: { post },
