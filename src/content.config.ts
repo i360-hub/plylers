@@ -17,6 +17,10 @@ const blog = defineCollection({
     heroImage: z.string(),
     heroAlt: z.string(),
     author: z.string().default("Robbie Plyler"),
+    // Hide a post everywhere regardless of pubDate.
+    draft: z.boolean().default(false),
+    // Editorial note: a better photo/diagram is wanted for this post (doesn't block publish).
+    imageNeeded: z.string().optional(),
   }),
 });
 
