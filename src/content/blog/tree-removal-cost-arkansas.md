@@ -2,7 +2,7 @@
 title: "How Much Does Tree Removal Cost in Arkansas? (What Actually Sets the Price)"
 seoTitle: "How Much Does Tree Removal Cost in Arkansas?"
 description: "What sets the price of tree removal in Arkansas? A 24-year Arkadelphia pro explains what makes a job cost more or less — and why phone quotes are guesses."
-pubDate: 2026-07-21
+pubDate: 2026-07-08
 heroImage: "/images/glenwood-ar-large-tree-felling-chainsaw-professional.webp"
 heroAlt: "Professional tree crew felling a large tree with a chainsaw near Glenwood, AR"
 author: "Robbie Plyler"
