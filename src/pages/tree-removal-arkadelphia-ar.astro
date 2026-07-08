@@ -9,6 +9,10 @@ import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
+import { isPostPublished } from '../lib/posts';
+
+// Cross-link to the cost guide only once its pubDate has passed (no link → no 404).
+const costGuideLive = await isPostPublished('tree-removal-cost-arkansas');
 
 const title = "Tree Removal Arkadelphia AR | Plyler's Tree Service";
 const description =
@@ -225,6 +229,13 @@ const schema = [
         <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or fill out the estimate form. The estimate
         itself is always free.
       </p>
+      {costGuideLive && (
+        <p>
+          Want to know what you're looking at before you call? Robbie wrote up
+          <a href="/tree-removal-cost-arkansas"> what tree removal costs in Arkansas</a> — the four things that set
+          every quote.
+        </p>
+      )}
     </div>
   </section>
 

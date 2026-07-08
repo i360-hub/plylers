@@ -9,6 +9,10 @@ import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
+import { isPostPublished } from '../lib/posts';
+
+// Cross-link to the oak disease guide only once its pubDate has passed (no link → no 404).
+const oakDiseaseGuideLive = await isPostPublished('oak-tree-diseases-arkansas');
 
 const title = "Oak Tree Removal Arkadelphia AR | Plyler's Tree";
 const description =
@@ -244,6 +248,12 @@ const schema = [
         diagnostic guidance, see our <a href="/signs-tree-is-dying">signs a tree is dying</a> guide and
         <a href="/when-to-remove-a-tree-arkadelphia">when to remove a tree in Arkadelphia</a>.
       </p>
+      {oakDiseaseGuideLive && (
+        <p>
+          For the diseases behind most oak deaths around here — hypoxylon canker and oak wilt — read
+          <a href="/oak-tree-diseases-arkansas"> why Arkansas oaks die</a>.
+        </p>
+      )}
     </div>
   </section>
 

@@ -11,6 +11,10 @@ import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
+import { isPostPublished } from '../lib/posts';
+
+// Cross-link to the cost guide only once its pubDate has passed (no link → no 404).
+const costGuideLive = await isPostPublished('tree-removal-cost-arkansas');
 
 const title = "Tree Removal Services Arkansas | Plyler's Tree Service";
 const description =
@@ -167,6 +171,12 @@ const schema = [
         We always give you the exact price before we start — no hidden fees, no surprises. Call us or fill out the
         form below for a free estimate.
       </p>
+      {costGuideLive && (
+        <p>
+          Want the full breakdown of what moves a quote up or down? Read Robbie's guide to
+          <a href="/tree-removal-cost-arkansas"> what tree removal costs in Arkansas</a>.
+        </p>
+      )}
     </div>
   </section>
 

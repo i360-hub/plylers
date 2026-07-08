@@ -60,4 +60,4 @@ Most homeowners just want a clean yard. They want to stop mowing around the stum
 
 ## Not Sure Which One You Need?
 
-Robbie has been looking at stumps for 24 years across Arkadelphia, Hot Springs, and every town within 40 miles. He'll come out, look at your stump, and tell you straight — grind it or pull it. No charge for the estimate, no pressure to say yes. [Get your free estimate](/contact).
+Robbie has been looking at stumps for 24 years across Arkadelphia, Hot Springs, and every town within 40 miles. He'll come out, look at your stump, and tell you straight — grind it or pull it. No charge for the estimate, no pressure to say yes. [Get your free estimate](/contact). And if there's still a whole tree to bring down first, here's [what tree removal costs in Arkansas](/tree-removal-cost-arkansas).

@@ -9,6 +9,10 @@ import Testimonials from '../components/Testimonials.astro';
 import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
 import business from '../data/business.json';
 import faqData from '../data/faq.json';
+import { isPostPublished } from '../lib/posts';
+
+// Cross-link to the beetle guide only once its pubDate has passed (no link → no 404).
+const beetleGuideLive = await isPostPublished('pine-bark-beetles-arkansas');
 
 const title = "Pine Tree Removal Arkadelphia AR | Plyler's Tree";
 const description =
@@ -191,6 +195,13 @@ const schema = [
         <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>. Fast removal of infested trees is the best
         way to protect the rest of your stand.
       </p>
+      {beetleGuideLive && (
+        <p>
+          Not sure what you're looking at? Robbie's guide to
+          <a href="/pine-bark-beetles-arkansas"> pine bark beetles in Arkansas</a> walks through the warning signs
+          and what to do about each one.
+        </p>
+      )}
     </div>
   </section>
 
