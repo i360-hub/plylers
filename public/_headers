@@ -14,3 +14,10 @@
   Cache-Control: public, max-age=31536000, immutable
 /favicon.ico
   Cache-Control: public, max-age=604800
+
+# Keep the pages.dev alias (and per-deploy hash previews) out of search engines.
+# Host-scoped: these rules never apply on www.plylerstreeservice.com.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
