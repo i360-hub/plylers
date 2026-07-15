@@ -1,0 +1,51 @@
+# Push-to-deploy: build the Astro site and deploy to the existing Cloudflare
+# Pages project (named `plylers-tree-service-staging` for legacy reasons — it
+# serves production), then smoke-check the launch checklist.
+# Requires repo secrets CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID.
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name plylers-tree-service-staging
+
+      - name: Smoke-check launch checklist
+        run: |
+          sleep 10
+
+          echo "1/4 staging must serve 200 with noindex..."
+          curl -s -D - -o /dev/null "https://plylers-tree-service-staging.pages.dev/" | tee /tmp/h
+          grep -i "x-robots-tag: noindex" /tmp/h
+
+          echo "2/4 production must serve 200..."
+          curl -sf -o /tmp/page.html "https://www.plylerstreeservice.com/?cb=$(date +%s)"
+
+          echo "3/4 production must NOT be noindexed..."
+          ! curl -s -D - -o /dev/null "https://www.plylerstreeservice.com/?cb=$(date +%s)" | grep -qi "x-robots-tag"
+
+          echo "4/4 canonical must point at production domain..."
+          grep -q 'https://www.plylerstreeservice.com' /tmp/page.html
+
+          echo "All checks passed."
