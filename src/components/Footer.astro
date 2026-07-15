@@ -32,6 +32,9 @@ const company = [
         <span class="stars" aria-hidden="true">★★★★★</span>
         <span>{business.rating.value} · {business.rating.count}+ Reviews on Google</span>
       </p>
+      <a href={business.social.googleReview} rel="noopener" target="_blank" class="footer-review-btn">
+        <span class="stars" aria-hidden="true">★★★★★</span> Leave Us a Review
+      </a>
       <div class="footer-social">
         <a href={business.social.facebook} rel="noopener" target="_blank">Facebook</a>
         <a href={business.social.googleMaps} rel="noopener" target="_blank">Google</a>
@@ -78,7 +81,15 @@ const company = [
   .footer-brand p { font-size: 0.95rem; line-height: 1.6; }
   .footer-rating { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; color: #fff; }
   .stars { color: var(--amber-500); letter-spacing: 1px; }
-  .footer-social { display: flex; gap: 1rem; margin-top: 0.5rem; }
+  .footer-review-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem;
+    background: var(--amber-500); color: var(--green-900); font-weight: 700;
+    padding: 0.6rem 1.15rem; border-radius: 8px; font-size: 0.95rem;
+    transition: filter 0.15s ease, transform 0.15s ease;
+  }
+  .footer-review-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .footer-review-btn .stars { color: var(--green-900); letter-spacing: 1px; }
+  .footer-social { display: flex; gap: 1rem; margin-top: 1rem; }
   .footer-social a { color: #fff; font-weight: 600; }
   .footer-h { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber-500); margin: 0 0 0.9rem; font-weight: 700; }
   .footer-col ul { list-style: none; margin: 0; padding: 0; }
