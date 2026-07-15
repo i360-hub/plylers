@@ -12,6 +12,12 @@
 # --- Conventional sitemap path -> the real sitemap index ---
 /sitemap.xml                           /sitemap-index.xml             301
 
+# --- Old Duda-era URLs still 404ing in Search Console (2026-07) ---
+/bismarck                              /tree-service-bismarck-ar      301
+/blog-search                           /blog                          301
+/feed/atom                             /blog                          301
+/feed/rss2                             /blog                          301
+
 # NOTE: host canonicalization (apex + http -> https://www) and trailing-slash
 # stripping are handled at the Cloudflare/DNS layer in production and by Pages'
 # default behavior. They are intentionally not duplicated here for the *.pages.dev
