@@ -9,14 +9,14 @@ import business from '../data/business.json';
 
 const title = "Contact Us | Plyler's Tree Service | (870) 245-7944";
 const description =
-  "Call or email Plyler's Tree Service. Mon–Fri 7–6, Sat 7–2. 24/7 emergency response. Free estimates. Arkadelphia, AR and a 40-mile radius.";
+  "Call or email Plyler's Tree Service. Mon–Sat 7–8, Sun 9–5. 24/7 emergency response. Free estimates. Arkadelphia, AR and a 40-mile radius.";
 const path = "/contact";
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path }];
 
 const faq = [
   {
     q: 'What are your hours?',
-    a: 'We’re open Monday through Friday from 7:00 AM to 6:00 PM and Saturday from 7:00 AM to 2:00 PM. We’re closed on Sunday for regular work — but for storm emergencies, we answer the phone around the clock, every day of the year.',
+    a: 'We’re open Monday through Saturday from 7:00 AM to 8:00 PM, and Sunday from 9:00 AM to 5:00 PM for regular work — but for storm emergencies, we answer the phone around the clock, every day of the year.',
   },
   {
     q: 'Do you really answer 24/7 for emergencies?',
@@ -97,7 +97,6 @@ const schema = [
           <h2>Hours</h2>
           <ul class="hours">
             {business.hours.map((h) => <li>{h.label}</li>)}
-            <li>Sunday: Closed</li>
           </ul>
           <p class="emergency mb-0">⚡ 24/7 emergency response — call anytime.</p>
         </div>
