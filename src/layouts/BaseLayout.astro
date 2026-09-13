@@ -44,6 +44,7 @@ const canonical = `${SITE}${cleanPath}`;
 const ogImageAbs = ogImage.startsWith('http') ? ogImage : `${SITE}${ogImage}`;
 const jsonld = pageGraph(schema);
 const GA = business.embeds.ga4Id;
+const ADS = business.embeds.googleAdsId;
 const CLARITY = business.embeds.clarityId;
 const POOL = business.embeds.ghlNumberPoolSrc;
 const SESSION = business.embeds.ghlUserSessionSrc;
@@ -94,11 +95,20 @@ const SESSION = business.embeds.ghlUserSessionSrc;
     <!-- Global structured data (@graph) -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />
 
-    <!-- GA4 + Microsoft Clarity — loaded after first interaction or idle so they
-         never compete with LCP. tel: taps fire a tel_click conversion into GA4. -->
-    <script is:inline define:vars={{ GA, CLARITY }}>
+    <!-- GA4 + Google Ads + Microsoft Clarity — gtag.js is loaded after first
+         interaction or idle so it never competes with LCP. tel: taps fire a
+         tel_click conversion into GA4. -->
+    <script is:inline define:vars={{ GA, ADS, CLARITY }}>
+      // define:vars wraps this script in a function, so a bare function
+      // declaration here would stay local and never reach window. Assign the
+      // gtag stub to window explicitly so GHL and Google Ads can call it.
       window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
+      window.gtag = function gtag() { dataLayer.push(arguments); };
+      // Queue js/config now so any gtag() event fired before the lazy loader
+      // runs is still ordered after its destination config.
+      gtag('js', new Date());
+      gtag('config', GA);
+      gtag('config', ADS);
       let gaLoaded = false;
       function loadGA() {
         if (gaLoaded) return; gaLoaded = true;
@@ -106,8 +116,6 @@ const SESSION = business.embeds.ghlUserSessionSrc;
         s.async = true;
         s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA;
         document.head.appendChild(s);
-        gtag('js', new Date());
-        gtag('config', GA);
 
         // Microsoft Clarity — heatmaps + session recordings, same lazy trigger.
         (function (c, l, a, r, i, t, y) {

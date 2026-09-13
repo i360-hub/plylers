@@ -31,6 +31,10 @@ const title = business.embeds.ghlFormTitle;
     </p>
   </div>
 </section>
+<!-- GHL embed bridge: without it, the form's on-submit redirect navigates
+     inside the iframe instead of the top window. Each page renders GhlForm
+     once, so this loads once per page. -->
+<script is:inline src="https://link.msgsndr.com/js/form_embed.js"></script>
 <script>
   document.querySelectorAll<HTMLIFrameElement>('.ghl-iframe').forEach((f) => {
     const done = () => f.closest('.ghl-card')?.classList.add('ghl-ready');
