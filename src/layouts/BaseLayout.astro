@@ -54,6 +54,17 @@ const SESSION = business.embeds.ghlUserSessionSrc;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- GHL form redirects target our own pages but some browsers (e.g. Safari)
+         block the form iframe from navigating the top window, so the page loads
+         inside the form box. When we're framed under our own origin, move to top.
+         Same-origin with top, so this navigation is always allowed. -->
+    <script is:inline>
+      if (window.top !== window.self) {
+        try {
+          if (window.top.location.origin === location.origin) window.top.location.href = location.href;
+        } catch (e) {}
+      }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
