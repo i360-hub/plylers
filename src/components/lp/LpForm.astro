@@ -1,0 +1,91 @@
+---
+// Lead-capture form — verbatim GoHighLevel/LeadConnector embed (do NOT substitute).
+// Shows a loading state behind the iframe + a persistent phone fallback so the
+// section never collapses to an empty white card if the third-party script is
+// slow or blocked.
+import business from '../../data/business.json';
+import landing from '../../data/landing.json';
+const {
+  minHeight = 1200,
+  heading = 'Request Your Free Estimate',
+  id = 'quote',
+  intro = '',
+  src = landing.ghlFormSrc || business.embeds.ghlFormSrc,
+  phone = { display: landing.phoneDisplay, href: landing.phoneHref },
+} = Astro.props;
+const title = landing.ghlFormTitle;
+---
+<section class="ghl-wrap" id={id} aria-labelledby={`${id}-h`}>
+  <div class="container">
+    {heading && <h2 id={`${id}-h`} class="center ghl-h">{heading}</h2>}
+    {intro && <p class="center ghl-intro">{intro}</p>}
+    <div class="ghl-card" style={`--ghl-h:${minHeight}px`}>
+      <div class="ghl-loading">
+        <div class="ghl-spinner" aria-hidden="true"></div>
+        <p class="ghl-loading-text">Loading the estimate form…</p>
+        <p class="ghl-fallback">
+          Taking a moment? Call <a href={`tel:${phone.href}`}>{phone.display}</a>
+          and we'll take your info right over the phone.
+        </p>
+      </div>
+      <iframe
+        class="ghl-iframe"
+        src={src}
+        title={title}
+        loading="lazy"></iframe>
+    </div>
+    <p class="center ghl-alt">
+      Prefer to talk? Call <a href={`tel:${phone.href}`}>{phone.display}</a> — free estimates, no obligation.
+    </p>
+  </div>
+</section>
+<!-- GHL embed bridge: without it, the form's on-submit redirect navigates
+     inside the iframe instead of the top window. Each page renders GhlForm
+     once, so this loads once per page.
+     Must NOT be deferred: it hides the iframe and waits for the form's
+     "iframeLoaded" message to reveal it. Deferred, it can register its listener
+     after that message was sent, and the form stays invisible forever. -->
+<script is:inline src="https://link.msgsndr.com/js/form_embed.js"></script>
+<script>
+  document.querySelectorAll<HTMLIFrameElement>('.ghl-iframe').forEach((f) => {
+    const done = () => f.closest('.ghl-card')?.classList.add('ghl-ready');
+    if (f.contentDocument || f.contentWindow) {} // touch to avoid TS noise
+    f.addEventListener('load', done);
+    // Safety net: if form_embed.js still has the iframe hidden 10s after it loaded
+    // (missed handshake, blocked script), un-hide it rather than show an empty box.
+    const unhide = () => {
+      if (f.style.visibility === 'hidden' || f.style.opacity === '0') {
+        Object.assign(f.style, { opacity: '1', visibility: 'visible', pointerEvents: 'auto', position: 'relative', left: '0' });
+      }
+      done();
+    };
+    f.addEventListener('load', () => setTimeout(unhide, 10000));
+    setTimeout(unhide, 15000);
+  });
+</script>
+<style>
+  .ghl-wrap { padding-block: var(--space); background: var(--bg-alt); }
+  .ghl-h { margin-bottom: 1.5rem; }
+  .ghl-intro { margin: -0.8rem auto 1.5rem; max-width: 620px; color: var(--muted); }
+  .ghl-card {
+    position: relative; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow); overflow: hidden; max-width: 820px; margin-inline: auto;
+    min-height: var(--ghl-h);
+  }
+  .ghl-loading {
+    position: absolute; inset: 0; z-index: 2; display: grid; place-content: center; justify-items: center;
+    gap: 0.6rem; text-align: center; padding: 2rem; color: var(--muted); background: #fff;
+    transition: opacity .3s ease;
+  }
+  .ghl-card.ghl-ready .ghl-loading { opacity: 0; pointer-events: none; }
+  .ghl-spinner {
+    width: 38px; height: 38px; border-radius: 50%; border: 3px solid var(--green-100);
+    border-top-color: var(--green-600); animation: ghl-spin 0.8s linear infinite;
+  }
+  @keyframes ghl-spin { to { transform: rotate(360deg); } }
+  .ghl-loading-text { font-weight: 700; color: var(--ink); margin: 0; }
+  .ghl-fallback { margin: 0; font-size: 0.95rem; max-width: 360px; }
+  .ghl-iframe { position: relative; z-index: 1; width: 100%; min-height: var(--ghl-h); border: 0; display: block; }
+  .ghl-alt { margin-top: 1rem; color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { .ghl-spinner { animation: none; } }
+</style>

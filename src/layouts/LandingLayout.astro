@@ -1,0 +1,140 @@
+---
+// Layout for Google Ads landing pages under /lp/. Deliberately separate from
+// BaseLayout so nothing here can change the normal site. Differences from BaseLayout:
+//  - logo + call header and a minimal footer/call bar (no site nav)
+//  - hardwired tracking number: the GHL number pool script is NOT loaded
+//  - tel: taps can fire a Google Ads conversion (data/landing.json label)
+//  - optional eager tag loading for the thank-you page
+//  - tracking skipped when the page is framed (GHL form redirect landing in the iframe)
+// Fonts + base styles come in through landing.css (@import) rather than the same module
+// imports BaseLayout uses: sharing those modules makes Astro regroup — and reorder — the
+// normal site's inlined CSS. Keeping the LP's CSS graph separate leaves the site byte-identical.
+import '../styles/landing.css';
+import LandingHeader from '../components/lp/LandingHeader.astro';
+import LandingFooter from '../components/lp/LandingFooter.astro';
+import { pageGraph, SITE } from '../lib/schema';
+import business from '../data/business.json';
+import landing from '../data/landing.json';
+
+export interface Props {
+  title: string;
+  description: string;
+  path: string;
+  /** LCP image to preload (hero), e.g. "/images/foo.webp" (-768/-1024 variants required). */
+  preloadImage?: string;
+  schema?: object[];
+  /** Load gtag.js right away instead of on idle (conversion pages people close fast). */
+  eagerTags?: boolean;
+}
+
+const { title, description, path, preloadImage, schema = [], eagerTags = false } = Astro.props;
+const canonical = `${SITE}${path}`;
+const ogImageAbs = `${SITE}/images/plylers-tree-service-logo.png`;
+const jsonld = pageGraph(schema);
+const GA = business.embeds.ga4Id;
+const ADS = business.embeds.googleAdsId;
+const CALL_LABEL = landing.googleAdsCallClickLabel;
+const CLARITY = business.embeds.clarityId;
+const SESSION = business.embeds.ghlUserSessionSrc;
+const EAGER = eagerTags;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- If a GHL form redirect lands inside the form iframe, move to the top window. -->
+    <script is:inline>
+      if (window.top !== window.self) {
+        try {
+          if (window.top.location.origin === location.origin) window.top.location.href = location.href;
+        } catch (e) {}
+      }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageAbs} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/images/favicon.png" />
+    <meta name="theme-color" content="#14361f" />
+    <link rel="preconnect" href="https://api.leadconnectorhq.com" />
+    {preloadImage && (
+      <link
+        rel="preload"
+        as="image"
+        href={preloadImage}
+        imagesrcset={`${preloadImage.replace(/\.webp$/, '-768.webp')} 768w, ${preloadImage.replace(/\.webp$/, '-1024.webp')} 1024w, ${preloadImage} 1400w`}
+        imagesizes="100vw"
+        fetchpriority="high"
+      />
+    )}
+    <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />
+
+    <slot name="head" />
+
+    <script is:inline define:vars={{ GA, ADS, CALL_LABEL, CLARITY, EAGER }}>
+      // Framed copy (about to jump to the top window): don't count anything.
+      if (window.top !== window.self) return;
+      // define:vars wraps this script in a function — assign gtag to window explicitly.
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag() { dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', GA);
+      gtag('config', ADS);
+      let gaLoaded = false;
+      function loadGA() {
+        if (gaLoaded) return; gaLoaded = true;
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA;
+        document.head.appendChild(s);
+        (function (c, l, a, r, i, t, y) {
+          c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+          t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+          y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, 'clarity', 'script', CLARITY);
+      }
+      ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach((e) =>
+        window.addEventListener(e, loadGA, { once: true, passive: true }));
+      if (EAGER) loadGA();
+      else if ('requestIdleCallback' in window) requestIdleCallback(loadGA, { timeout: 5000 });
+      else window.addEventListener('load', () => setTimeout(loadGA, 3000));
+
+      document.addEventListener('click', (e) => {
+        const a = e.target && e.target.closest && e.target.closest('a[href^="tel:"]');
+        if (!a) return;
+        loadGA();
+        gtag('event', 'tel_click', {
+          link_text: (a.textContent || '').trim().slice(0, 60),
+          page_path: location.pathname,
+        });
+        if (CALL_LABEL) gtag('event', 'conversion', { send_to: ADS + '/' + CALL_LABEL });
+      });
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <LandingHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <LandingFooter />
+
+    <!-- No GHL number pool here: the landing number is hardwired (data/landing.json). -->
+    <script is:inline defer src={SESSION}></script>
+    <script
+      is:inline
+      defer
+      src="https://link.msgsndr.com/js/external-tracking.js"
+      data-tracking-id="tk_90d12a0e49154a9892dbeef82a5d3368"
+    ></script>
+  </body>
+</html>

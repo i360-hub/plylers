@@ -1,0 +1,64 @@
+---
+// Landing-page footer: business identity, phone, and privacy link (no other site
+// links). Also renders the sticky call bar phones get in place of a header button.
+import business from '../../data/business.json';
+import landing from '../../data/landing.json';
+const year = new Date().getFullYear();
+---
+<footer class="lp-footer">
+  <div class="container lp-footer-inner">
+    <p class="mb-0">© {year} {business.name} · {business.address.locality}, {business.address.region} · Licensed &amp; insured · <a class="lp-privacy" href="/lp/privacy">Privacy</a></p>
+    <a href={`tel:${landing.phoneHref}`}>{landing.phoneDisplay}</a>
+  </div>
+</footer>
+<nav class="lp-callbar" aria-label="Call or request an estimate">
+  <a class="btn btn-primary lp-callbar-call" href={`tel:${landing.phoneHref}`}>Call {landing.phoneDisplay}</a>
+  <a class="btn btn-dark lp-callbar-quote" href="#quote">Free Estimate</a>
+</nav>
+<script is:inline>
+  // Show the phone call bar only when it adds something: not while the hero's own
+  // buttons are on screen, and not while the form is on screen (no duplicate CTA,
+  // and it can't cover form fields when the keyboard is open).
+  (function () {
+    var bar = document.querySelector('.lp-callbar');
+    if (!bar || !('IntersectionObserver' in window)) return;
+    var watch = [document.querySelector('.hero-cta'), document.querySelector('#quote')].filter(Boolean);
+    if (!watch.length) return;
+    var onScreen = new Set();
+    bar.classList.add('lp-callbar-hidden');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) onScreen.add(e.target); else onScreen.delete(e.target);
+      });
+      bar.classList.toggle('lp-callbar-hidden', onScreen.size > 0);
+    });
+    watch.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+<style>
+  .lp-footer { background: var(--green-900); color: #c4d6cb; padding-block: 1.6rem; font-size: 0.95rem; }
+  .lp-footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem 1.5rem; }
+  .lp-footer a { color: #fff; font-weight: 700; }
+  .lp-footer .lp-privacy { font-weight: 400; color: #c4d6cb; }
+
+  /* Sticky call bar in thumb reach on phones */
+  .lp-callbar { display: none; }
+  @media (max-width: 768px) {
+    .lp-callbar {
+      display: flex; gap: 0.5rem; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+      padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom));
+      background: #fff; border-top: 1px solid var(--line); box-shadow: 0 -4px 16px rgba(20, 54, 31, 0.12);
+      transition: transform 0.2s ease;
+    }
+    .lp-callbar.lp-callbar-hidden { transform: translateY(110%); }
+    .lp-callbar .btn { justify-content: center; padding: 0.95rem 0.8rem; font-size: 1rem; }
+    .lp-callbar-call { flex: 1.5; }
+    /* Estimate button only where the page has the form, and never for emergencies */
+    .lp-callbar-quote { flex: 1; display: none; }
+    :global(body:has(#quote)) .lp-callbar-quote { display: inline-flex; }
+    /* same #id specificity as the :has() rule above, so this one wins */
+    :global(html[data-svc='emergency'] body:has(#quote)) .lp-callbar-quote { display: none; }
+    :global(body) { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+  }
+  @media (prefers-reduced-motion: reduce) { .lp-callbar { transition: none; } }
+</style>

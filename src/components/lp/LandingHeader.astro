@@ -1,0 +1,27 @@
+---
+// Landing-page header: logo + call button only. No nav links, so paid visitors
+// have one thing to do (call) and nowhere to wander off to.
+import business from '../../data/business.json';
+import landing from '../../data/landing.json';
+---
+<header class="lp-header">
+  <div class="container lp-header-inner">
+    <img src="/images/plylers-tree-service-logo.png" width="140" height="80" alt={`${business.name} logo`} class="lp-logo" />
+    <a class="btn btn-primary lp-call" href={`tel:${landing.phoneHref}`}>
+      <span class="lp-call-label">Call</span> {landing.phoneDisplay}
+    </a>
+  </div>
+</header>
+<style>
+  .lp-header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid var(--line); box-shadow: 0 2px 10px rgba(20, 54, 31, 0.06); }
+  .lp-header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.6rem; }
+  .lp-logo { width: 120px; height: auto; }
+  .lp-call { padding: 0.8rem 1.2rem; font-size: 1rem; white-space: nowrap; }
+  /* Phones get a sticky bottom call bar in thumb reach instead, so the header stays
+     logo-only and the first screen isn't stacked with three call buttons. */
+  @media (max-width: 768px) {
+    .lp-header-inner { justify-content: center; }
+    .lp-call { display: none; }
+    .lp-logo { width: 104px; }
+  }
+</style>

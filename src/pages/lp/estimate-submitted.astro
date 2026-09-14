@@ -1,0 +1,55 @@
+---
+// Thank-you page the GHL estimate form redirects to. The Google Ads "Submit lead
+// form" conversion fires on any URL containing "estimate-submitted", so landing
+// here is what records the lead. Noindex and out of the sitemap.
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import business from '../../data/business.json';
+import landing from '../../data/landing.json';
+
+const title = "Thanks — We Got Your Request | Plyler's Tree Service";
+const description = "Your free estimate request was sent to Plyler's Tree Service in Arkadelphia, AR.";
+---
+<LandingLayout title={title} description={description} path="/lp/estimate-submitted" eagerTags>
+  <section class="section ty">
+    <div class="container measure center">
+      <div class="ty-check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </div>
+      <h1>Thanks — we got your request.</h1>
+      <p class="lead">
+        We'll call you to set up your free estimate. Need to talk sooner, or is a tree already down on
+        something? Call us now.
+      </p>
+      <p class="ty-cta">
+        <a class="btn btn-primary btn-lg" href={`tel:${landing.phoneHref}`}>Call {landing.phoneDisplay}</a>
+      </p>
+      <p class="ty-meta">
+        ⭐ {business.rating.value} Stars · {business.rating.count}+ Google Reviews · {business.yearsExperience} Years in Arkadelphia · Licensed &amp; Insured
+      </p>
+      <p class="mb-0"><a href="/">Visit plylerstreeservice.com</a></p>
+    </div>
+  </section>
+</LandingLayout>
+
+<script is:inline>
+  // GA4 lead event, once per browser session so a refresh doesn't double count.
+  // Skipped inside a frame: the frame guard is about to move this page to the top window.
+  try {
+    if (window.top !== window.self) throw 0;
+    if (!sessionStorage.getItem('ghl_lead_sent')) {
+      sessionStorage.setItem('ghl_lead_sent', '1');
+      window.gtag && window.gtag('event', 'generate_lead', { form_name: 'ghl_estimate' });
+    }
+  } catch (e) {}
+</script>
+
+<style>
+  .ty { min-height: 60vh; display: grid; align-items: center; }
+  .ty-check {
+    width: 72px; height: 72px; margin: 0 auto 1.4rem; border-radius: 50%;
+    display: grid; place-items: center; background: var(--green-100); color: var(--green-600);
+  }
+  .ty-check svg { width: 38px; height: 38px; }
+  .ty-cta { margin: 1.6rem 0; display: flex; justify-content: center; }
+  .ty-meta { color: var(--muted); font-size: 0.95rem; }
+</style>

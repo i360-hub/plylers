@@ -1,0 +1,314 @@
+---
+// Google Ads landing page for the Arkadelphia Search campaign. Noindex and out of
+// the sitemap, so it never competes with /tree-service-arkadelphia-ar in organic.
+// Built for one job: get the visitor to call (primary) or send the estimate form.
+//
+// Message match: headline, subtitle, featured service, reviews, and CTA emphasis
+// follow the search theme — general (default) | removal | trimming | stump | emergency.
+// The theme comes from ?svc= or is inferred from ?kw= (Google Ads final URL suffix
+// kw={keyword}) / utm_term. A head script sets <html data-svc> before first paint.
+//
+// Claims policy: only what the site/GBP already states ("Licensed & insured" is the
+// client's standing claim). No same-day estimate promise (site FAQ: "within a day or two").
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import Hero from '../../components/lp/LpHero.astro';
+import GhlForm from '../../components/lp/LpForm.astro';
+import Testimonials from '../../components/lp/LpTestimonials.astro';
+import FaqSection from '../../components/lp/LpFaq.astro';
+import CtaBand from '../../components/lp/LpCtaBand.astro';
+import business from '../../data/business.json';
+import landing from '../../data/landing.json';
+import faqData from '../../data/faq.json';
+
+const title = "Arkadelphia Tree Service — Free Estimates | Plyler's Tree Service";
+const description =
+  "Tree service in Arkadelphia since 2002 — removal, trimming, stump grinding, and storm cleanup. 5.0 stars, 70+ Google reviews. Licensed & insured. Free estimates.";
+// LP-only crop of the Arkadelphia oak photo: 4:3, light blur, low quality — it sits under a
+// 62–78% dark overlay, so this is visually identical at ~1/5 the bytes (768w: 36KB vs 172KB).
+const heroImage = '/images/lp-arkadelphia-hero.webp';
+const formSrc = landing.ghlFormSrc || business.embeds.ghlFormSrc;
+// Hardwired ad-tracking number. The GHL number pool is not loaded on landing pages
+// (see LandingLayout), so this is what every visitor sees and dials.
+const phone = { display: landing.phoneDisplay, href: landing.phoneHref };
+const reviewLine = `★ ${business.rating.value} · ${business.rating.count}+ Google reviews · Licensed & insured`;
+
+// Per-theme hero copy (~20 words). Every claim already appears on the site or GBP.
+const themes = [
+  {
+    key: 'general',
+    reviews: 'general',
+    h1: 'Tree Service in Arkadelphia, AR',
+    sub: 'Removal, trimming, stump grinding, and storm cleanup — based right here in Arkadelphia. Robbie answers the phone.',
+  },
+  {
+    key: 'removal',
+    reviews: 'removal',
+    exclude: ['WalkingTall A.'], // handle reads as a fake name to a cold visitor
+    h1: 'Tree Removal in Arkadelphia, AR',
+    sub: 'Large, dead, and hazardous trees taken down safely, with every branch hauled off. Based right here in Arkadelphia.',
+  },
+  {
+    key: 'trimming',
+    reviews: 'trimming',
+    h1: 'Tree Trimming in Arkadelphia, AR',
+    sub: 'Limbs off the roof and driveway with proper cuts — no topping — and the yard cleaned up after.',
+  },
+  {
+    key: 'stump',
+    reviews: 'stump',
+    exclude: ['Rebecca O.'], // her review is about trimming, not stumps
+    h1: 'Stump Grinding in Arkadelphia, AR',
+    sub: 'Stumps ground 6–8 inches below grade, ready to re-sod or replant. Several stumps in one trip.',
+  },
+  {
+    key: 'emergency',
+    reviews: 'emergency',
+    h1: 'Tree Down in Arkadelphia? Call Now.',
+    sub: 'Tree on the house, car, or driveway — we answer day or night, weekends included, and we’re based right here in town.',
+  },
+];
+
+const services = [
+  {
+    key: 'removal',
+    h: 'Tree Removal',
+    p: 'Large, dead, and hazardous trees — near the house, the driveway, or power lines (we coordinate with the power company when needed) — brought down in sections, with full cleanup and haul-off.',
+    img: '/images/arkadelphia-ar-bucket-truck-dead-tree-removal-residential',
+    srcset: '-640.webp 640w, .webp 720w',
+    alt: 'Bucket truck removing a dead tree at a home in Arkadelphia, AR',
+  },
+  {
+    key: 'trimming',
+    h: 'Tree Trimming',
+    p: 'Limbs over the roof or driveway trimmed back with proper cuts — no topping, no hacking — so the tree stays healthy and your property stays safe.',
+    img: '/images/glenwood-ar-arborist-harness-high-canopy-branch-removal',
+    srcset: '-640.webp 640w, -1024.webp 1024w',
+    alt: "Plyler's climber in a harness trimming high branches",
+  },
+  {
+    key: 'stump',
+    h: 'Stump Grinding',
+    p: 'Stumps ground 6–8 inches below grade so you can re-sod or replant. Several stumps? We do them all in one trip.',
+    img: '/images/glenwood-ar-large-tree-felling-chainsaw-professional',
+    srcset: '-640.webp 640w, -1024.webp 1024w',
+    alt: "Plyler's crew member with a chainsaw beside a large cut tree and stump",
+  },
+];
+
+const steps = [
+  { n: '1', h: 'Call or send the form', p: 'Robbie answers the phone. Tell him what the tree is doing and where it is.' },
+  { n: '2', h: 'Get an honest price in writing', p: "Robbie comes out, looks at the tree, and quotes the job. If it doesn't need to come down, he'll tell you." },
+  { n: '3', h: 'We do the job and clean up', p: 'We chip the brush, haul the logs, and rake the yard before we leave.' },
+];
+
+const reasons = [
+  { h: 'Robbie answers the phone', p: 'No call center, no franchise. The owner answers, quotes the job, and shows up.' },
+  { h: 'Local since 2002', p: 'Family- and veteran-owned, with our equipment yard on Country Club Drive in Arkadelphia.' },
+  { h: 'Licensed & fully insured', p: "General liability and workers' comp — proof of insurance before any job starts." },
+  { h: 'Full cleanup & haul-off', p: 'Brush chipped, logs hauled, sawdust raked. Reviews keep mentioning the cleanup.' },
+];
+
+// FAQs picked by exact question (build fails loudly if the wording ever changes).
+const pickFaq = (key: string, q: string) => {
+  const hit = (faqData as Record<string, { q: string; a: string }[]>)[key]?.find((f) => f.q === q);
+  if (!hit) throw new Error(`LP FAQ not found: [${key}] ${q}`);
+  return hit;
+};
+const faq = [
+  pickFaq('index', 'How much does it cost to remove a tree in Arkadelphia, AR?'),
+  pickFaq('index', 'How soon can you come give me an estimate?'),
+  pickFaq('index', 'Do you come out for emergencies at night or on weekends?'),
+  pickFaq('tree-service-arkadelphia-ar', 'Will the city of Arkadelphia pick up tree debris from a removal?'),
+];
+
+const webpage = { '@type': 'WebPage', name: title, description };
+---
+<LandingLayout
+  title={title}
+  description={description}
+  path="/lp/arkadelphia-tree-service"
+  preloadImage={heroImage}
+  schema={[webpage]}
+>
+  <Fragment slot="head">
+    <script is:inline>
+      (function () {
+        try {
+          var q = new URLSearchParams(location.search);
+          var svc = (q.get('svc') || '').toLowerCase();
+          var kw = (q.get('kw') || q.get('utm_term') || '').toLowerCase();
+          if (!/^(general|removal|trimming|stump|emergency)$/.test(svc)) {
+            svc = /stump|grind/.test(kw) ? 'stump'
+              : /trim|prun/.test(kw) ? 'trimming'
+              : /emergenc|storm|fallen|24 ?hour|tree down/.test(kw) ? 'emergency'
+              : /remov|cut|dead/.test(kw) ? 'removal'
+              : 'general';
+          }
+          document.documentElement.setAttribute('data-svc', svc);
+        } catch (e) {}
+      })();
+    </script>
+  </Fragment>
+
+  <Hero
+    eyebrow="Family & Veteran-Owned · Since 2002"
+    title={themes[0].h1}
+    tagline={reviewLine}
+    image={heroImage}
+    imageAlt="Large oak tree overhanging a home in Arkadelphia, AR"
+    primaryCta={{ label: 'Get a Free Estimate', href: '#quote' }}
+    quoteClass="btn-ghost"
+    phone={phone}
+    compact
+  >
+    <Fragment slot="title">
+      {themes.map((t) => <span class={`v v-${t.key}`}>{t.h1}</span>)}
+    </Fragment>
+    <Fragment slot="subtitle">
+      {themes.map((t) => <span class={`v v-${t.key}`}>{t.sub}</span>)}
+    </Fragment>
+  </Hero>
+  <script is:inline>
+    // On slow mobile the web fonts arrive after first paint and re-wrap the hero
+    // (subtitle measured 145px -> 116px), pulling the CTAs and form up ~29px (CLS 0.12).
+    // While fonts are still loading, pin the text blocks to their first-paint height.
+    (function () {
+      try {
+        if (!document.fonts || document.fonts.status === 'loaded') return;
+        document.querySelectorAll('.hero h1, .hero-sub, .hero-tagline').forEach(function (el) {
+          el.style.minHeight = el.offsetHeight + 'px';
+        });
+      } catch (e) {}
+    })();
+  </script>
+
+  <GhlForm
+    heading="Get Your Free Estimate"
+    intro="Just your name and phone number. No pressure, no obligation — Robbie quotes every job in writing before any work starts."
+    minHeight={landing.ghlFormSrc ? landing.ghlFormHeight : 1200}
+    src={formSrc}
+    phone={phone}
+  />
+
+  <section class="section lp-services-section">
+    <div class="container">
+      <h2 class="center">What We Handle Around Arkadelphia</h2>
+      <p class="center lead measure lp-intro">
+        Serving Arkadelphia, Caddo Valley, Bismarck, Gurdon, and the DeGray Lake area.
+      </p>
+      <div class="grid grid-3 lp-services">
+        {services.map((s) => (
+          <div class={`card lp-service lp-service-${s.key}`}>
+            <img
+              src={`${s.img}-640.webp`}
+              srcset={s.srcset.split(', ').map((e) => s.img + e).join(', ')}
+              sizes="(max-width: 900px) 100vw, 380px"
+              alt={s.alt}
+              width="640"
+              height="400"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="lp-service-body">
+              <h3>{s.h}</h3>
+              <p class="mb-0">{s.p}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="center lp-emergency">
+        <strong>Tree on the house after a storm?</strong> We answer day or night —
+        <a href={`tel:${phone.href}`}>call {phone.display}</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt lp-steps-section">
+    <div class="container">
+      <h2 class="center">How It Works</h2>
+      <ol class="grid grid-3 lp-steps">
+        {steps.map((s) => (
+          <li class="card">
+            <span class="lp-step-n" aria-hidden="true">{s.n}</span>
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {themes.map((t) => (
+    <div class={`v v-${t.key} lp-reviews`}>
+      <Testimonials
+        category={t.reviews}
+        exclude={t.exclude ?? []}
+        heading={`${business.rating.value} Stars from ${business.rating.count}+ Google Reviews`}
+        showCta={false}
+      />
+    </div>
+  ))}
+
+  <section class="section section-alt lp-reasons-section">
+    <div class="container">
+      <h2 class="center">Why Arkadelphia Calls Plyler's</h2>
+      <div class="grid grid-4 lp-reasons">
+        {reasons.map((r) => (
+          <div class="card">
+            <h3>{r.h}</h3>
+            <p class="mb-0">{r.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FaqSection items={faq} heading="Quick Questions" intro="" />
+
+  <CtaBand
+    title="Get that tree taken care of."
+    text="Robbie answers the phone. Free estimate, no pressure — price in writing before we start, full cleanup when we're done."
+    href="#quote"
+    label="Get a Free Estimate"
+    callFirst
+    phone={phone}
+  />
+</LandingLayout>
+
+<style is:global>
+  /* Theme variants: hidden unless they match <html data-svc>; general is the no-JS default. */
+  .v { display: none; }
+  html:not([data-svc]) .v-general,
+  html[data-svc='general'] .v-general,
+  html[data-svc='removal'] .v-removal,
+  html[data-svc='trimming'] .v-trimming,
+  html[data-svc='stump'] .v-stump,
+  html[data-svc='emergency'] .v-emergency { display: revert; }
+  /* Featured service card first */
+  html[data-svc='trimming'] .lp-service-trimming,
+  html[data-svc='stump'] .lp-service-stump { order: -1; }
+  /* Emergency: call only up top, form moved below the reviews */
+  html[data-svc='emergency'] .hero-cta-quote { display: none; }
+  html[data-svc='emergency'] main#main { display: flex; flex-direction: column; }
+  html[data-svc='emergency'] main#main > .ghl-wrap { order: 5; }
+  html[data-svc='emergency'] main#main > .lp-reasons-section,
+  html[data-svc='emergency'] main#main > .faq { order: 6; }
+  html[data-svc='emergency'] main#main > .cta-band { order: 7; }
+</style>
+
+<style>
+  .lp-intro { margin-bottom: 2.2rem; color: var(--muted); }
+  .lp-service { padding: 0; overflow: hidden; }
+  .lp-service img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+  .lp-service-body { padding: 1.4rem 1.6rem 1.6rem; }
+  .lp-emergency { margin-top: 2rem; }
+  .lp-steps { list-style: none; padding: 0; margin: 2rem 0 0; }
+  .lp-steps li { margin: 0; }
+  .lp-step-n {
+    display: inline-grid; place-items: center; width: 2.4rem; height: 2.4rem; margin-bottom: 0.8rem;
+    border-radius: 50%; background: var(--green-600); color: #fff; font-weight: 800; font-family: var(--font-heading);
+  }
+  .lp-reasons { margin-top: 2rem; }
+  .lp-reasons h3 { font-size: 1.25rem; }
+  :global(.hero .hero-tagline) { color: #fff; font-weight: 600; margin-bottom: 1.4rem; }
+</style>

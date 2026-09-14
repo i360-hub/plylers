@@ -62,6 +62,8 @@ export default defineConfig({
     sitemap({
       changefreq: 'monthly',
       priority: 0.8,
+      // Paid-traffic landing pages and the form thank-you page are noindex — keep them out.
+      filter: (page) => !/\/(lp\/|estimate-submitted)/.test(new URL(page).pathname),
       // Blog posts get priority 0.8; everything else 1.0 (matches the live sitemap).
       // Unpublished posts never reach here — they aren't routed, so they aren't built.
       serialize(item) {

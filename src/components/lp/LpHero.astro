@@ -1,0 +1,103 @@
+---
+import business from '../../data/business.json';
+import landing from '../../data/landing.json';
+import { quoteHref } from '../../lib/cta';
+export interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  tagline?: string;        // smaller line under subtitle (e.g. "Serving … Licensed & insured.")
+  image?: string;          // /images/... path — full-bleed background
+  imageAlt?: string;
+  primaryCta?: { label: string; href: string };
+  showPhone?: boolean;
+  compact?: boolean;
+}
+const {
+  eyebrow,
+  title,
+  subtitle,
+  tagline,
+  image,
+  imageAlt = '',
+  primaryCta = { label: 'Get a Free Estimate', href: quoteHref(Astro.url.pathname) },
+  showPhone = true,
+  compact = false,
+  trustBadges = false,
+  /** Button style for the estimate CTA (e.g. btn-ghost to de-emphasize it vs. Call). */
+  quoteClass = 'btn-dark',
+  /** Override the displayed number (landing pages hardwire their own). */
+  phone = { display: landing.phoneDisplay, href: landing.phoneHref },
+} = Astro.props;
+
+const badges = [
+  { k: 'star', text: `${business.rating.value} Stars · ${business.rating.count}+ Reviews` },
+  { k: 'years', text: `${business.yearsExperience} Years in Business` },
+  { k: 'shield', text: 'Licensed & Insured' },
+  { k: 'dollar', text: 'Free Estimates' },
+];
+const ICON: Record<string, string> = {
+  star: `<path d="M12 2l2.9 6.26L21.5 9.2l-4.75 4.43 1.2 6.62L12 17.1 6.05 20.25l1.2-6.62L2.5 9.2l6.6-.94z"/>`,
+  years: `<rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/><path d="M7.5 13.5l2 2 4-4.5"/>`,
+  shield: `<path d="M12 2l8 3v6c0 5-3.4 8.3-8 10-4.6-1.7-8-5-8-10V5z"/><path d="M9 12l2 2 4-4"/>`,
+  dollar: `<circle cx="12" cy="12" r="9"/><path d="M12 7v10M14.5 9.2C13.9 8.5 13 8 12 8c-1.5 0-2.6.9-2.6 2 0 2.6 5.2 1.4 5.2 4 0 1.1-1.1 2-2.6 2-1 0-1.9-.5-2.5-1.2"/>`,
+};
+const img768 = image ? image.replace(/\.webp$/, '-768.webp') : '';
+const img1024 = image ? image.replace(/\.webp$/, "-1024.webp") : "";
+const heroSrcset = image ? `${img768} 768w, ${img1024} 1024w, ${image} 1400w` : undefined;
+---
+<section class={`hero ${compact ? 'hero-compact' : ''} ${image ? '' : 'hero-nobg'}`}>
+  {image && <img class="hero-bg" src={image} srcset={heroSrcset} sizes="100vw" alt={imageAlt} fetchpriority="high" decoding="async" width="1600" height="900" />}
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    {eyebrow && <p class="eyebrow hero-eyebrow">{eyebrow}</p>}
+    {Astro.slots.has('title') ? <h1><slot name="title" /></h1> : <h1>{title}</h1>}
+    {Astro.slots.has('subtitle') ? <p class="hero-sub"><slot name="subtitle" /></p> : subtitle && <p class="hero-sub">{subtitle}</p>}
+    {tagline && <p class="hero-tagline">{tagline}</p>}
+    <div class="hero-cta">
+      {showPhone && <a class="btn btn-primary btn-lg" href={`tel:${phone.href}`}>Call {phone.display}</a>}
+      <a class={`btn ${quoteClass} btn-lg hero-cta-quote`} href={primaryCta.href}>{primaryCta.label}</a>
+    </div>
+    {trustBadges && (
+      <ul class="hero-badges">
+        {badges.map((b) => (
+          <li>
+            <svg viewBox="0 0 24 24" fill={b.k === 'star' ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICON[b.k]} />
+            <span>{b.text}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</section>
+<style>
+  .hero { position: relative; display: grid; place-items: center; overflow: hidden; color: #fff; min-height: clamp(440px, 64vh, 660px); isolation: isolate; }
+  .hero-compact { min-height: clamp(320px, 44vh, 460px); }
+  .hero-nobg { background: linear-gradient(160deg, var(--green-900), var(--green-800) 60%, var(--green-700)); }
+  .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  /* slate overlay matching the live site (rgba(15,23,42,.66 -> .78)) */
+  .hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(rgba(15, 23, 42, 0.62), rgba(15, 23, 42, 0.78)); }
+  .hero-content { position: relative; z-index: 2; text-align: center; max-width: 900px; padding-block: clamp(3rem, 8vw, 5rem); }
+  .hero-eyebrow { color: var(--amber-500); }
+  .hero h1 { color: #fff; font-weight: 900; font-size: clamp(2.2rem, 5.6vw, 4.1rem); text-shadow: 0 2px 18px rgba(0,0,0,0.35); margin-bottom: 1rem; }
+  .hero-sub { color: #eaf1ec; font-size: clamp(1.1rem, 2.2vw, 1.4rem); font-weight: 600; max-width: 760px; margin: 0 auto 0.9rem; text-shadow: 0 1px 10px rgba(0,0,0,0.3); }
+  .hero-tagline { color: #c8d6cd; font-size: 1rem; max-width: 680px; margin: 0 auto 1.8rem; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; }
+  .hero-badges {
+    list-style: none; margin: 1.8rem auto 0; padding: 0.7rem 1.1rem; display: flex; flex-wrap: nowrap;
+    justify-content: center; gap: 0.5rem 1.3rem; max-width: 880px; width: fit-content;
+    background: rgba(10, 22, 14, 0.42); border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px; backdrop-filter: blur(2px);
+  }
+  .hero-badges li { display: inline-flex; align-items: center; gap: 0.45rem; color: #fff; font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
+  .hero-badges svg { width: 17px; height: 17px; color: var(--amber-500); flex: none; }
+  /* below ~1100px the 4 stop fitting one row -> balanced 2x2 (never 3+1) */
+  @media (max-width: 1100px) {
+    .hero-badges { flex-wrap: wrap; gap: 0.7rem 1.2rem; max-width: 460px; }
+    .hero-badges li { flex: 0 0 45%; justify-content: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .hero-cta { flex-direction: column; align-items: stretch; }
+    .hero-cta .btn { justify-content: center; }
+  }
+</style>
