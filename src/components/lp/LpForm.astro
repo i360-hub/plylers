@@ -28,11 +28,12 @@ const title = landing.ghlFormTitle;
           and we'll take your info right over the phone.
         </p>
       </div>
+      {/* No loading="lazy": form_embed.js parks the iframe at left:-9999px until the
+           form reports in, and a lazy iframe off-screen never loads — blank card. */}
       <iframe
         class="ghl-iframe"
         src={src}
-        title={title}
-        loading="lazy"></iframe>
+        title={title}></iframe>
     </div>
     <p class="center ghl-alt">
       Prefer to talk? Call <a href={`tel:${phone.href}`}>{phone.display}</a> — free estimates, no obligation.

@@ -20,11 +20,12 @@ const title = business.embeds.ghlFormTitle;
           and we'll take your info right over the phone.
         </p>
       </div>
+      {/* No loading="lazy": form_embed.js parks the iframe at left:-9999px until the
+           form reports in, and a lazy iframe off-screen never loads — blank card. */}
       <iframe
         class="ghl-iframe"
         src={src}
-        title={title}
-        loading="lazy"></iframe>
+        title={title}></iframe>
     </div>
     <p class="center ghl-alt">
       Prefer to talk? Call <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> — free estimates, no obligation.
@@ -40,8 +41,16 @@ const title = business.embeds.ghlFormTitle;
     const done = () => f.closest('.ghl-card')?.classList.add('ghl-ready');
     if (f.contentDocument || f.contentWindow) {} // touch to avoid TS noise
     f.addEventListener('load', done);
-    // safety: if 'load' never fires, reveal the form area anyway after 10s
-    setTimeout(done, 10000);
+    // Safety net: if form_embed.js still has the iframe hidden 10s after it loaded
+    // (missed handshake, blocked script), un-hide it rather than show an empty box.
+    const unhide = () => {
+      if (f.style.visibility === 'hidden' || f.style.opacity === '0') {
+        Object.assign(f.style, { opacity: '1', visibility: 'visible', pointerEvents: 'auto', position: 'relative', left: '0' });
+      }
+      done();
+    };
+    f.addEventListener('load', () => setTimeout(unhide, 10000));
+    setTimeout(unhide, 15000);
   });
 </script>
 <style>
