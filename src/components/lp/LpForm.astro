@@ -87,6 +87,9 @@ const title = landing.ghlFormTitle;
   .ghl-loading-text { font-weight: 700; color: var(--ink); margin: 0; }
   .ghl-fallback { margin: 0; font-size: 0.95rem; max-width: 360px; }
   .ghl-iframe { position: relative; z-index: 1; width: 100%; min-height: var(--ghl-h); border: 0; display: block; }
+  /* Once form_embed.js sizes the iframe to the form, drop the placeholder height so
+     no white gap is left under the form. */
+  .ghl-card:has(.ghl-iframe[style*="height"]), .ghl-iframe[style*="height"] { min-height: 0; }
   .ghl-alt { margin-top: 1rem; color: var(--muted); }
   @media (prefers-reduced-motion: reduce) { .ghl-spinner { animation: none; } }
 </style>
