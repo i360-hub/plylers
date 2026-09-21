@@ -1,0 +1,33 @@
+---
+// Internal-linking block: the Malvern service cluster (hub <-> 4 service pages).
+import links from '../data/links.json';
+const {
+  heading = 'Malvern Tree Services',
+  intro = 'Tree work for Malvern, Lake Catherine, and Hot Spring County. Pick the service that fits your job.',
+  current = '',          // href of the current page, to skip self-link
+} = Astro.props;
+const items = links.malvernCluster.filter((i) => i.href !== current);
+---
+<section class="mv-block section">
+  <div class="container">
+    <h2 class="center">{heading}</h2>
+    <p class="center lead measure mv-intro">{intro}</p>
+    <div class="grid grid-4">
+      {items.map((i) => (
+        <a class="mv-card" href={i.href}>
+          <h3>{i.name}</h3>
+          <p>{i.blurb}</p>
+          <span class="mv-link">View service →</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .mv-intro { margin-bottom: 2rem; color: var(--muted); }
+  .mv-card { display: flex; flex-direction: column; gap: 0.35rem; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.3rem; box-shadow: var(--shadow); color: var(--body); transition: transform .15s, box-shadow .15s; }
+  .mv-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); text-decoration: none; }
+  .mv-card h3 { margin: 0; font-size: 1.12rem; }
+  .mv-card p { margin: 0; font-size: 0.93rem; }
+  .mv-link { margin-top: auto; color: var(--green-700); font-weight: 700; font-size: 0.9rem; }
+</style>

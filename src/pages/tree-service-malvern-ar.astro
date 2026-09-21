@@ -4,7 +4,7 @@ import GhlForm from '../components/GhlForm.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Hero from '../components/Hero.astro';
 import MapFacade from '../components/MapFacade.astro';
-import ServicesGrid from '../components/ServicesGrid.astro';
+import MalvernServicesBlock from '../components/MalvernServicesBlock.astro';
 import AreasBlock from '../components/AreasBlock.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -151,7 +151,11 @@ const schema = [
     </div>
   </section>
 
-  <ServicesGrid current={path} />
+  <MalvernServicesBlock
+    current={path}
+    heading="Malvern Tree Services in Detail"
+    intro="Each service has its own page with the details for Malvern and Hot Spring County."
+  />
 
   <section class="section section-alt">
     <div class="container">

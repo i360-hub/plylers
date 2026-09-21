@@ -36,5 +36,32 @@
     { "name": "Stump Grinding", "href": "/stump-grinding-hot-springs-ar", "blurb": "Stumps ground below grade — replant, build, or mow." },
     { "name": "Tree Trimming & Pruning", "href": "/tree-trimming-hot-springs-ar", "blurb": "Clearance, deadwood & view pruning — never topping." }
   ],
-  "lakeHamilton": { "name": "Lakefront Tree Service at Lake Hamilton", "href": "/tree-service-lake-hamilton-ar", "blurb": "Steep-bank removal, dock protection & view thinning on Lake Hamilton." }
+  "lakeHamilton": { "name": "Lakefront Tree Service at Lake Hamilton", "href": "/tree-service-lake-hamilton-ar", "blurb": "Steep-bank removal, dock protection & view thinning on Lake Hamilton." },
+  "malvernCluster": [
+    {
+      "name": "Malvern Tree Service",
+      "href": "/tree-service-malvern-ar",
+      "blurb": "Everything we do across Malvern & Hot Spring County."
+    },
+    {
+      "name": "Tree Removal in Malvern",
+      "href": "/tree-removal-malvern-ar",
+      "blurb": "Safe sectional takedowns of oaks, pecans & pines."
+    },
+    {
+      "name": "Tree Trimming in Malvern",
+      "href": "/tree-trimming-malvern-ar",
+      "blurb": "Roof clearance, deadwood & canopy thinning. No topping."
+    },
+    {
+      "name": "Stump Grinding in Malvern",
+      "href": "/stump-grinding-malvern-ar",
+      "blurb": "Ground 6 to 8 inches below grade, hole filled."
+    },
+    {
+      "name": "Emergency Tree Service",
+      "href": "/emergency-tree-service-malvern-ar",
+      "blurb": "24/7 storm response for Malvern & Lake Catherine."
+    }
+  ]
 }

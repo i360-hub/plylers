@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import EmergencyBanner from '../components/EmergencyBanner.astro';
+import MalvernServicesBlock from '../components/MalvernServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Tree Removal Malvern, AR | Free Estimates | Plyler's";
+const description =
+  "Tree removal in Malvern, AR & Hot Spring County. Safe sectional takedowns of oaks, pecans & pines, full cleanup, free written estimates. 5.0 stars, 70+ reviews.";
+const path = '/tree-removal-malvern-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Malvern', path: '/tree-service-malvern-ar' },
+  { name: "Tree Removal", path },
+];
+const faq = faqData['tree-removal-malvern-ar'] ?? [];
+
+const grid = [
+  {
+    "h": "White Oaks & Red Oaks",
+    "p": "The big shade trees in Malvern's older neighborhoods. Heavy wood, and they tend to split at the crotch as they age. Where we can, we schedule oak removals outside April through July to lower the risk of oak wilt spreading."
+  },
+  {
+    "h": "Pecans",
+    "p": "Often the largest tree on an older lot, and known for dropping heavy limbs in storms. Removals near homes usually mean sectional rigging, taking the tree apart piece by piece."
+  },
+  {
+    "h": "Shortleaf & Loblolly Pines",
+    "p": "Tall, fast-growing, and top-heavy by the time they're mature. They snap in ice storms and lean toward houses. We see them most on hillsides and rural lots around Malvern."
+  },
+  {
+    "h": "Sweetgums",
+    "p": "Shallow roots and common in yards. Often the first to go over in high wind. The removal is usually simple, but the roots need careful stump grinding afterward."
+  },
+  {
+    "h": "Hickories",
+    "p": "Hold dead branches that can fall without warning. A hickory with a lot of deadwood over a driveway or play area is one we look at closely."
+  },
+  {
+    "h": "Storm-Damaged Trees",
+    "p": "Cracked trunks, hanging limbs, or a tree partly pulled out of the ground after a storm. These don't wait. Call us any time, day or night, and we'll get a crew moving."
+  }
+];
+
+const steps = [
+  {
+    "h": "Free On-Site Estimate",
+    "p": "Robbie walks the tree, checks what's around it, looks at access for the truck and chipper, and gives you a written price. No charge and no pressure."
+  },
+  {
+    "h": "Plan the Removal",
+    "p": "We decide whether the tree can come down in one piece or needs to be taken down in sections. Near homes, fences, or power lines, we plan exactly where every piece will land."
+  },
+  {
+    "h": "Bring It Down Safely",
+    "p": "The crew works the tree top-down or in sections, depending on the plan. Your house, landscaping, fence, and your neighbor's property all stay intact."
+  },
+  {
+    "h": "Full Cleanup",
+    "p": "We chip the brush, haul the logs, rake the sawdust, and pick up every piece. If you want firewood kept, just say so."
+  }
+];
+
+const whyUs = [
+  {
+    "h": "⭐ 5.0 Stars, 70+ Google Reviews",
+    "p": "A perfect rating from more than 70 homeowners across Malvern, Lake Catherine, Rockport, and the surrounding counties."
+  },
+  {
+    "h": "25 Minutes Up I-30",
+    "p": "We're based in Arkadelphia and in Malvern multiple times a week. No trip fee or travel charge, ever."
+  },
+  {
+    "h": "24 Years and Counting",
+    "p": "Robbie started this company in 2002. Storm-chasing crews come and go. We're still here."
+  },
+  {
+    "h": "Licensed and Insured",
+    "p": "Full liability and workers' comp on every job. We'll show you proof before we start a saw."
+  },
+  {
+    "h": "Free Written Estimates",
+    "p": "Robbie comes out, looks at the job, and gives you an honest number in writing. If it doesn't need doing, he'll tell you."
+  },
+  {
+    "h": "Cleaner Than We Found It",
+    "p": "Brush chipped, logs hauled, sawdust raked. Half our reviews mention the cleanup."
+  }
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: "Tree Removal in Malvern, AR",
+    serviceType: "Tree removal",
+    description,
+    path,
+  }),
+  ...(faq.length ? [faqPage(faq)] : []),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+  
+  <Hero
+    eyebrow="Malvern, Arkansas · Hot Spring County"
+    title="Tree Removal in Malvern, AR"
+    subtitle="Big oaks over rooflines on Page Avenue, dead pines leaning toward the house near Lake Catherine, storm-split pecans in the backyard. We take them down safely, haul off every piece, and stand behind the work."
+    image="/images/malvern-ar-tree-removal-crew-residential-yard-cleanup.webp"
+    imageAlt="Plyler's crew cleaning up after a residential tree removal in Malvern, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Malvern tree removal from a local crew, not a call center.</p>
+      <p class="lead">When you call about a tree in Malvern, you talk to Robbie Plyler, the owner. He comes out, walks the tree, gives you a written price, and his crew does the work. That's how we've done it since 2002. We run jobs up I-30 to Malvern multiple times a week, and there's never a trip fee. The price is based on the job, not the drive.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Why Tree Removal in Malvern Takes Local Knowledge</h2>
+      <p>Malvern sits along the Ouachita River, where the foothills meet the flatter timber country of south-central Arkansas. In town, that means old white oaks, red oaks, and pecans that were planted long before the houses around them. On the hillsides and rural lots, it means tall shortleaf and loblolly pines that lean toward houses as they age.</p>
+      <p>Those trees don't all come down the same way. A pecan over a porch on Main Street needs to be rigged and lowered in sections. A pine on open acreage out toward Rockport or Magnet Cove can often be felled in one piece. A lakefront pine on Lake Catherine means steep ground, tight access, and a dock or retaining wall to protect.</p>
+      <p>After 24 years of tree work across this area, we know how each species fails and which way it wants to go. That's the difference between a clean removal and an insurance claim. For everything else we do in town, see our <a href="/tree-service-malvern-ar">Malvern tree service overview</a>.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Trees We Remove Most in Malvern</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">Hot Spring County has a heavy mix of mature hardwoods in town and pine on the hills. Each one brings its own removal challenges.</p>
+      <div class="grid grid-3">
+        {grid.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">How We Remove a Tree in Malvern</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">A pine in the middle of an open lot is a quick job. A big oak between a house and a detached garage takes a full morning of rigging. Here's how we handle either one.</p>
+      <div class="grid grid-2">
+        {steps.map((s, i) => (
+          <div class="card">
+            <h3>{i + 1}. {s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Tree Removal Cost in Malvern?</h2>
+      <p>It depends on the tree and the property. The three things that move the price most are the size of the tree, how close it is to structures or power lines, and how easy it is to get equipment to it.</p>
+      <p>A small pine in an open backyard costs a fraction of what a large oak wedged between a house and a garage does. A lakefront removal on a steep lot at Lake Catherine takes more time and rigging than a flat in-town lot.</p>
+      <p>What stays the same: every job is quoted on site, the price is in writing before we start, and there are no add-ons after the tree is half down. There's no trip fee for Malvern either.</p>
+      <p>
+        For an exact price, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or fill out the estimate form below. The
+        estimate is always free.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Malvern Calls Plyler's</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Testimonials category="removal" heading="What Our Customers Say" />
+
+  <MalvernServicesBlock
+    current={path}
+    heading="More Tree Services in Malvern"
+    intro="Start with our Malvern tree service hub for the full picture, or jump to the service that fits your job."
+  />
+
+  <FaqSection items={faq} heading="Tree Removal Questions: Malvern" intro="What Malvern homeowners ask us most about removals." />
+
+  <GhlForm heading="Get Your Free Estimate" />
+
+  <CtaBand title="Ready to Get That Tree Down?" text="Call Robbie, tell him what's going on, and we'll have somebody at your Malvern property to give you an honest written price. No charge for the estimate and no trip fee." />
+</BaseLayout>

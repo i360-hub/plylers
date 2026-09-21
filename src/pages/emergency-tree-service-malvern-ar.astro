@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import EmergencyBanner from '../components/EmergencyBanner.astro';
+import MalvernServicesBlock from '../components/MalvernServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Emergency Tree Service Malvern, AR | 24/7 | Plyler's";
+const description =
+  "24/7 emergency tree service in Malvern, AR. Trees on houses, cars, fences, or blocking driveways after storms. Nights, weekends & holidays. Call Plyler's now.";
+const path = '/emergency-tree-service-malvern-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Malvern', path: '/tree-service-malvern-ar' },
+  { name: "Emergency Tree Service", path },
+];
+const faq = faqData['emergency-tree-service-malvern-ar'] ?? [];
+
+const grid = [
+  {
+    "h": "Tree on the House",
+    "p": "We remove the tree from the roof in sections so we don't cause more damage getting it off."
+  },
+  {
+    "h": "Tree on a Vehicle",
+    "p": "Trees and limbs lifted off cars, trucks, and campers carefully, piece by piece."
+  },
+  {
+    "h": "Blocked Driveway or Road",
+    "p": "Trunks across driveways and private roads cut and cleared so you can get in and out."
+  },
+  {
+    "h": "Hanging & Split Limbs",
+    "p": "Cracked limbs still hanging in the canopy get taken down before they fall on their own."
+  },
+  {
+    "h": "Fence & Outbuilding Damage",
+    "p": "Trees on fences, sheds, and barns removed so you can start repairs."
+  },
+  {
+    "h": "Leaning or Uprooted Trees",
+    "p": "A tree that's partly pulled out of the ground after a storm can come down at any time. We assess it and take it down safely."
+  }
+];
+
+const steps = [
+  {
+    "h": "Get Everyone Clear",
+    "p": "Keep people and pets away from the tree and anything it's touching. Don't try to cut it yourself."
+  },
+  {
+    "h": "Stay Away From Lines",
+    "p": "If a tree is on or near a power line, assume the line is live. Call the power company and stay back."
+  },
+  {
+    "h": "Call Us",
+    "p": "Call Plyler's any time, day or night. Tell us what's down and where, and we'll get a crew moving."
+  },
+  {
+    "h": "Take Photos",
+    "p": "If it's safe, take photos of the damage before anything is moved. It helps with your insurance claim."
+  }
+];
+
+const whyUs = [
+  {
+    "h": "⭐ 5.0 Stars, 70+ Google Reviews",
+    "p": "A perfect rating from more than 70 homeowners across Malvern, Lake Catherine, Rockport, and the surrounding counties."
+  },
+  {
+    "h": "25 Minutes Up I-30",
+    "p": "We're based in Arkadelphia and in Malvern multiple times a week. No trip fee or travel charge, ever."
+  },
+  {
+    "h": "24 Years and Counting",
+    "p": "Robbie started this company in 2002. Storm-chasing crews come and go. We're still here."
+  },
+  {
+    "h": "Licensed and Insured",
+    "p": "Full liability and workers' comp on every job. We'll show you proof before we start a saw."
+  },
+  {
+    "h": "Free Written Estimates",
+    "p": "Robbie comes out, looks at the job, and gives you an honest number in writing. If it doesn't need doing, he'll tell you."
+  },
+  {
+    "h": "Cleaner Than We Found It",
+    "p": "Brush chipped, logs hauled, sawdust raked. Half our reviews mention the cleanup."
+  }
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: "Emergency Tree Service in Malvern, AR",
+    serviceType: "Emergency tree removal and storm damage cleanup",
+    description,
+    path,
+  }),
+  ...(faq.length ? [faqPage(faq)] : []),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+  <EmergencyBanner />
+  <Hero
+    eyebrow="Malvern, Arkansas · 24/7 Storm Response"
+    title="Emergency Tree Service in Malvern, AR"
+    subtitle="A tree on your house, a limb through the roof, or a trunk across the driveway at 2 a.m. Call us any time, nights, weekends, and holidays. We'll get a crew headed your way."
+    image="/images/arkadelphia-ar-storm-damage-uprooted-oak-tree-removal.webp"
+    imageAlt="Storm-uprooted oak tree being removed by Plyler's emergency crew"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">24/7 emergency tree service for Malvern and Hot Spring County.</p>
+      <p class="lead">When a storm drops a tree on your house, blocks Highway 67, or takes out a fence in the middle of the night, you need a crew that answers the phone. We take emergency calls 24 hours a day, 7 days a week. Our crew is about 25 minutes west in Arkadelphia, and for emergencies we can usually be on-site within an hour.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Storm Season in Malvern</h2>
+      <p>Hot Spring County gets its heaviest storms from late March through early June, with another rough stretch in October and November. Ice storms hit hardest from December through February. Malvern sits along the Ouachita River where storm systems funnel in off the mountains.</p>
+      <p>Mature pecans and oaks in the older neighborhoods take the most damage when straight-line winds move through, and tall pines on the hillsides snap under ice. Around Lake Catherine, a downed tree can take out a dock, a retaining wall, or the only way out of a long driveway.</p>
+      <p>Storm season also brings out-of-town crews who knock on doors and disappear a month later. We've been doing this work for 24 years and we'll be here after the storm passes. For the rest of what we do in town, see our <a href="/tree-service-malvern-ar">Malvern tree service overview</a>.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Emergencies We Handle in Malvern</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">If a tree or limb is threatening people or property, call us right away.</p>
+      <div class="grid grid-3">
+        {grid.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What to Do Right Now</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">If a tree just came down on your property, here's what to do while we're on the way.</p>
+      <div class="grid grid-2">
+        {steps.map((s, i) => (
+          <div class="card">
+            <h3>{i + 1}. {s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">What Does Emergency Tree Service Cost in Malvern?</h2>
+      <p>Emergency work is priced by the job: the size of the tree, what it's resting on, and how much rigging it takes to remove it without more damage.</p>
+      <p>When a tree damages your home, your homeowner's insurance may cover some or all of the removal. We give you a written price and can provide what your adjuster needs.</p>
+      <p>There's no trip fee for Malvern, even in the middle of the night.</p>
+      <p>
+        For an exact price, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or fill out the estimate form below. The
+        estimate is always free.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Malvern Calls Plyler's</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Testimonials category="emergency" heading="What Our Customers Say" />
+
+  <MalvernServicesBlock
+    current={path}
+    heading="More Tree Services in Malvern"
+    intro="Start with our Malvern tree service hub for the full picture, or jump to the service that fits your job."
+  />
+
+  <FaqSection items={faq} heading="Emergency Tree Service Questions: Malvern" intro="What Malvern homeowners ask us most when a tree comes down." />
+
+  <GhlForm heading="Get Your Free Estimate" />
+
+  <CtaBand title="Tree Down? Call Now." text="Nights, weekends, and holidays. Call Robbie and tell him what's down and where. We'll get a crew headed to your Malvern property, with no trip fee." />
+</BaseLayout>

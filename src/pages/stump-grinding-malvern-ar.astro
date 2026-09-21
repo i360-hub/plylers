@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import EmergencyBanner from '../components/EmergencyBanner.astro';
+import MalvernServicesBlock from '../components/MalvernServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Stump Grinding Malvern, AR | Below-Grade Grinding | Plyler's";
+const description =
+  "Stump grinding in Malvern, AR & Hot Spring County. Ground 6 to 8 inches below grade, hole filled, ready for grass. Multiple stumps, one trip. Free estimates.";
+const path = '/stump-grinding-malvern-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Malvern', path: '/tree-service-malvern-ar' },
+  { name: "Stump Grinding", path },
+];
+const faq = faqData['stump-grinding-malvern-ar'] ?? [];
+
+const grid = [
+  {
+    "h": "Single Yard Stumps",
+    "p": "The stump in the middle of the lawn you've been mowing around. Ground down and filled in one visit."
+  },
+  {
+    "h": "Multiple Stumps",
+    "p": "Several stumps on one property get done in the same trip, which lowers the cost per stump."
+  },
+  {
+    "h": "Large Oak & Pecan Stumps",
+    "p": "Big hardwood stumps in Malvern's older neighborhoods take more time to grind, and we have the equipment for them."
+  },
+  {
+    "h": "Pine Stumps on Acreage",
+    "p": "Rural lots out toward Rockport, Magnet Cove, and Donaldson often have pine stumps scattered across cleared ground."
+  },
+  {
+    "h": "Surface Root Grinding",
+    "p": "Roots running across the lawn from a shallow-rooted sweetgum can be ground down along with the stump."
+  },
+  {
+    "h": "After Removal Cleanup",
+    "p": "When we take a tree down, we can grind the stump the same trip so the job is finished in one visit."
+  }
+];
+
+const steps = [
+  {
+    "h": "Free Estimate",
+    "p": "Robbie looks at each stump, its size, and how easy it is to get the grinder to it, and gives you a written price."
+  },
+  {
+    "h": "Mark Utilities",
+    "p": "Before we grind, any buried lines near the stump need to be located and marked so we can work around them."
+  },
+  {
+    "h": "Grind Below Grade",
+    "p": "The grinder chews the stump down to 6 to 8 inches below the ground, along with any surface roots you want taken out."
+  },
+  {
+    "h": "Fill & Clean Up",
+    "p": "We fill the hole and clean up the area so it's flat and ready for grass or planting."
+  }
+];
+
+const whyUs = [
+  {
+    "h": "⭐ 5.0 Stars, 70+ Google Reviews",
+    "p": "A perfect rating from more than 70 homeowners across Malvern, Lake Catherine, Rockport, and the surrounding counties."
+  },
+  {
+    "h": "25 Minutes Up I-30",
+    "p": "We're based in Arkadelphia and in Malvern multiple times a week. No trip fee or travel charge, ever."
+  },
+  {
+    "h": "24 Years and Counting",
+    "p": "Robbie started this company in 2002. Storm-chasing crews come and go. We're still here."
+  },
+  {
+    "h": "Licensed and Insured",
+    "p": "Full liability and workers' comp on every job. We'll show you proof before we start a saw."
+  },
+  {
+    "h": "Free Written Estimates",
+    "p": "Robbie comes out, looks at the job, and gives you an honest number in writing. If it doesn't need doing, he'll tell you."
+  },
+  {
+    "h": "Cleaner Than We Found It",
+    "p": "Brush chipped, logs hauled, sawdust raked. Half our reviews mention the cleanup."
+  }
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: "Stump Grinding in Malvern, AR",
+    serviceType: "Stump grinding",
+    description,
+    path,
+  }),
+  ...(faq.length ? [faqPage(faq)] : []),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+  
+  <Hero
+    eyebrow="Malvern, Arkansas · Hot Spring County"
+    title="Stump Grinding in Malvern, AR"
+    subtitle="That stump you've been mowing around for three years? We grind it 6 to 8 inches below ground and fill the hole, flat enough to grow grass over or plant something new."
+    image="/images/malvern-ar-stump-grinding-land-clearing-skid-steer.webp"
+    imageAlt="Stump grinding and land clearing work on a property in Malvern, AR"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Stump grinding for Malvern, Lake Catherine, and Hot Spring County.</p>
+      <p class="lead">A stump left behind is a mowing hazard, a trip hazard, and a home for insects. We grind it below grade, fill the hole, and leave the spot ready for grass. If you've got more than one, we do them all in the same trip, which saves you money. There's never a trip fee for Malvern.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Why Grind the Stump Instead of Leaving It</h2>
+      <p>Old stumps rot slowly. Oak and pecan stumps in Malvern's older neighborhoods can sit there for years, drawing insects and sending up sprouts around the yard. Pine stumps break down faster but leave soft, uneven ground where the roots used to be.</p>
+      <p>Grinding takes the stump below the surface so you can mow straight across, lay sod, or plant something new in the same spot. It's faster and cheaper than digging the whole root ball out, and it doesn't tear up the yard.</p>
+      <p>We grind stumps left from our own removals and stumps left by someone else years ago. For everything else we do in town, see our <a href="/tree-service-malvern-ar">Malvern tree service overview</a>.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Stump Jobs We Handle in Malvern</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">From one stump in a front yard to a whole lot of them on acreage, here's what we grind most around Hot Spring County.</p>
+      <div class="grid grid-3">
+        {grid.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">How Stump Grinding Works</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">Most stumps take less than an hour. Here's what to expect.</p>
+      <div class="grid grid-2">
+        {steps.map((s, i) => (
+          <div class="card">
+            <h3>{i + 1}. {s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Stump Grinding Cost in Malvern?</h2>
+      <p>Stump grinding prices depend on how wide the stump is, how many stumps you have, and how easy they are to reach. A small stump in an open yard is a quick job. A large oak stump against a fence or retaining wall takes longer.</p>
+      <p>Grinding several stumps in one trip costs less per stump than doing them one at a time.</p>
+      <p>Every job is quoted on site and put in writing before we start, with no trip fee for Malvern.</p>
+      <p>
+        For an exact price, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or fill out the estimate form below. The
+        estimate is always free.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Malvern Calls Plyler's</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Testimonials category="stump" heading="What Our Customers Say" />
+
+  <MalvernServicesBlock
+    current={path}
+    heading="More Tree Services in Malvern"
+    intro="Start with our Malvern tree service hub for the full picture, or jump to the service that fits your job."
+  />
+
+  <FaqSection items={faq} heading="Stump Grinding Questions: Malvern" intro="What Malvern homeowners ask us most about stump grinding." />
+
+  <GhlForm heading="Get Your Free Estimate" />
+
+  <CtaBand title="Ready to Get Rid of That Stump?" text="Call Robbie, tell him how many stumps you've got, and we'll come out to your Malvern property with a written price. No charge for the estimate and no trip fee." />
+</BaseLayout>

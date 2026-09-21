@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import EmergencyBanner from '../components/EmergencyBanner.astro';
+import MalvernServicesBlock from '../components/MalvernServicesBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Tree Trimming Malvern, AR | Pruning & Clearance | Plyler's";
+const description =
+  "Tree trimming and pruning in Malvern, AR. Roof and driveway clearance, deadwood removal, canopy thinning. No topping. Free estimates, 5.0 stars, 70+ reviews.";
+const path = '/tree-trimming-malvern-ar';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Service Areas', path: '/service-areas' },
+  { name: 'Malvern', path: '/tree-service-malvern-ar' },
+  { name: "Tree Trimming", path },
+];
+const faq = faqData['tree-trimming-malvern-ar'] ?? [];
+
+const grid = [
+  {
+    "h": "Roof & Gutter Clearance",
+    "p": "Limbs rubbing shingles or dumping leaves in the gutters get cut back to a safe distance from the house."
+  },
+  {
+    "h": "Deadwood Removal",
+    "p": "Dead branches in oaks, pecans, and hickories can fall without warning. We take them out before they come down on their own."
+  },
+  {
+    "h": "Driveway & Street Clearance",
+    "p": "Low limbs over driveways, sidewalks, and streets get raised so trucks, mowers, and people can pass under safely."
+  },
+  {
+    "h": "Canopy Thinning",
+    "p": "Opening up a dense canopy lets wind pass through in storms and lets more light reach the lawn below."
+  },
+  {
+    "h": "Storm Prep Pruning",
+    "p": "Before spring storms and winter ice, we look for weak crotches and heavy limbs over the house and cut them back first."
+  },
+  {
+    "h": "Lakefront View Pruning",
+    "p": "On Lake Catherine lots, we can open up a view to the water while keeping enough canopy for shade and privacy."
+  }
+];
+
+const steps = [
+  {
+    "h": "Free On-Site Look",
+    "p": "Robbie walks the tree with you, points out deadwood, weak limbs, and anything touching the house, and gives you a written price."
+  },
+  {
+    "h": "Agree on the Plan",
+    "p": "You'll know exactly which limbs come off and why. If something doesn't need trimming, we'll say so."
+  },
+  {
+    "h": "Proper Cuts",
+    "p": "The crew climbs or uses the bucket truck and cuts at the branch collar. No topping and no stubs left behind."
+  },
+  {
+    "h": "Full Cleanup",
+    "p": "Brush is chipped, limbs are hauled, and the yard is raked before we leave."
+  }
+];
+
+const whyUs = [
+  {
+    "h": "⭐ 5.0 Stars, 70+ Google Reviews",
+    "p": "A perfect rating from more than 70 homeowners across Malvern, Lake Catherine, Rockport, and the surrounding counties."
+  },
+  {
+    "h": "25 Minutes Up I-30",
+    "p": "We're based in Arkadelphia and in Malvern multiple times a week. No trip fee or travel charge, ever."
+  },
+  {
+    "h": "24 Years and Counting",
+    "p": "Robbie started this company in 2002. Storm-chasing crews come and go. We're still here."
+  },
+  {
+    "h": "Licensed and Insured",
+    "p": "Full liability and workers' comp on every job. We'll show you proof before we start a saw."
+  },
+  {
+    "h": "Free Written Estimates",
+    "p": "Robbie comes out, looks at the job, and gives you an honest number in writing. If it doesn't need doing, he'll tell you."
+  },
+  {
+    "h": "Cleaner Than We Found It",
+    "p": "Brush chipped, logs hauled, sawdust raked. Half our reviews mention the cleanup."
+  }
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: "Tree Trimming in Malvern, AR",
+    serviceType: "Tree trimming and pruning",
+    description,
+    path,
+  }),
+  ...(faq.length ? [faqPage(faq)] : []),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+  
+  <Hero
+    eyebrow="Malvern, Arkansas · Hot Spring County"
+    title="Tree Trimming in Malvern, AR"
+    subtitle="Limbs scraping the roof on Main Street, branches hanging over the driveway, a canopy shading out the lawn. We trim them back the right way, with proper cuts that keep the tree healthy and your property safe."
+    image="/images/arkadelphia-ar-tree-trimming-before-after-transformation.webp"
+    imageAlt="Before and after view of a mature tree trimmed by Plyler's Tree Service"
+  />
+
+  <section class="section">
+    <div class="container measure center">
+      <p class="eyebrow">Tree trimming and pruning for Malvern and Hot Spring County.</p>
+      <p class="lead">Good trimming keeps a tree you like and gets rid of the parts that cause problems. Robbie looks at the whole tree before anyone makes a cut, tells you what needs to come off and what should stay, and puts the price in writing. No topping, no hacking. We're in Malvern multiple times a week, with no trip fee.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container measure">
+      <h2 class="center">Why Trimming Matters for Malvern Trees</h2>
+      <p>Malvern's older neighborhoods off Highway 67 and along Page Avenue are full of mature oaks and pecans that grew up over decades. By now, many of them hang over roofs, gutters, and power drops. Pecans in particular drop heavy limbs when storms roll in off the Ouachitas.</p>
+      <p>Trimming ahead of storm season is the cheapest way to avoid a bigger bill later. Taking out deadwood and cutting back limbs over the house means less to come down in the next wind or ice storm.</p>
+      <p>Done wrong, trimming hurts a tree. Topping and flush cuts invite rot and weak regrowth. We cut at the branch collar, remove only what needs to go, and leave a tree that looks natural. For everything else we do in town, see our <a href="/tree-service-malvern-ar">Malvern tree service overview</a>.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center">Trimming Work We Do Most in Malvern</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">Most trimming calls fall into a few categories. Here's what we handle across Malvern and the Lake Catherine area.</p>
+      <div class="grid grid-3">
+        {grid.map((t) => (
+          <div class="card">
+            <h3>{t.h}</h3>
+            <p class="mb-0">{t.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">How We Trim a Tree in Malvern</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">Every trim starts with a look at the whole tree, not just the branch you called about.</p>
+      <div class="grid grid-2">
+        {steps.map((s, i) => (
+          <div class="card">
+            <h3>{i + 1}. {s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Tree Trimming Cost in Malvern?</h2>
+      <p>Trimming prices come down to how big the tree is, how much needs to come off, and how hard it is to reach. A few low limbs over a driveway is a short job. A large pecan with deadwood over the roof takes a climber and more time.</p>
+      <p>Doing several trees in one visit usually costs less per tree than calling us out for each one separately.</p>
+      <p>Every job is quoted on site and put in writing before we start. There's no trip fee for Malvern.</p>
+      <p>
+        For an exact price, call Robbie at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or fill out the estimate form below. The
+        estimate is always free.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Malvern Calls Plyler's</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We didn't build our reputation with ads. We built it one yard at a time.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Testimonials category="trimming" heading="What Our Customers Say" />
+
+  <MalvernServicesBlock
+    current={path}
+    heading="More Tree Services in Malvern"
+    intro="Start with our Malvern tree service hub for the full picture, or jump to the service that fits your job."
+  />
+
+  <FaqSection items={faq} heading="Tree Trimming Questions: Malvern" intro="What Malvern homeowners ask us most about trimming and pruning." />
+
+  <GhlForm heading="Get Your Free Estimate" />
+
+  <CtaBand title="Ready to Get Those Limbs Off the Roof?" text="Call Robbie and tell him what you've got. We'll come out to your Malvern property, walk the trees with you, and give you a written price. No charge for the estimate and no trip fee." />
+</BaseLayout>

@@ -642,5 +642,77 @@
       "q": "Can trimming save a tree that looks rough?",
       "a": "Sometimes. If the trunk and main limbs are solid but there's a lot of deadwood, a good trim can bring it back. We remove the dead branches, thin the canopy, and let the healthy parts grow. If it's too far gone, we'll be honest and recommend removal instead."
     }
+  ],
+  "tree-removal-malvern-ar": [
+    {
+      "q": "Do I need a permit to remove a tree in Malvern, AR?",
+      "a": "For trees on private residential property inside Malvern city limits, a permit is generally not required. Exceptions can include trees in the public right-of-way, historic districts, or properties under specific easements. The City of Malvern can answer questions about the right-of-way. Rural properties in Hot Spring County outside city limits do not need a permit. Robbie will help you check at the free estimate."
+    },
+    {
+      "q": "Do you charge extra to come to Malvern from Arkadelphia?",
+      "a": "No. There is no trip fee or travel charge for Malvern, Lake Catherine, Rockport, or the rest of Hot Spring County. Our crews run jobs up I-30 to Malvern multiple times a week. The price is based on the job, not the drive."
+    },
+    {
+      "q": "Can you remove a tree that's close to my house or a power line?",
+      "a": "Yes. Trees near homes, garages, and fences are taken down in sections with ropes and rigging so each piece is lowered where we want it. For trees touching or near energized power lines, the utility may need to make the line safe first. We'll tell you at the estimate if that applies."
+    },
+    {
+      "q": "Do you grind the stump after removing the tree?",
+      "a": "We can. Just ask and we'll include it in your estimate. We grind stumps 6 to 8 inches below ground and fill the hole, so the spot is ready for grass. See our Malvern stump grinding page for details."
+    }
+  ],
+  "tree-trimming-malvern-ar": [
+    {
+      "q": "When is the best time to trim trees in Malvern?",
+      "a": "Late fall through winter is a good time for most trees, when leaves are down and the structure is easy to see. For oaks, we prefer to avoid heavy pruning from April through July to lower the risk of oak wilt. Storm-damaged or hazardous limbs should be handled any time of year."
+    },
+    {
+      "q": "Do you top trees?",
+      "a": "No. Topping leaves large wounds, invites rot, and causes weak regrowth that breaks easily in storms. We thin and reduce with proper cuts instead, which keeps the tree healthier and safer."
+    },
+    {
+      "q": "Can you trim limbs near power lines?",
+      "a": "We handle limbs near the service drop to your house. Lines on the utility poles are the power company's responsibility, and they may need to make the line safe first. We'll let you know at the estimate."
+    },
+    {
+      "q": "Do you charge a trip fee to trim trees in Malvern?",
+      "a": "No. There's no trip fee or travel charge anywhere in Malvern or Hot Spring County. We're in the area multiple times a week."
+    }
+  ],
+  "stump-grinding-malvern-ar": [
+    {
+      "q": "How deep do you grind stumps?",
+      "a": "We grind stumps 6 to 8 inches below ground and fill the hole, so the spot is level and ready for grass or new planting."
+    },
+    {
+      "q": "Can you grind a stump from a tree someone else removed?",
+      "a": "Yes. We grind stumps whether we took the tree down or it was cut years ago by someone else."
+    },
+    {
+      "q": "Is it cheaper to do several stumps at once?",
+      "a": "Yes. Grinding multiple stumps in the same trip costs less per stump than scheduling them separately."
+    },
+    {
+      "q": "Do you remove the tree too?",
+      "a": "We do. If the tree is still standing, we can take it down and grind the stump the same trip. See our Malvern tree removal page."
+    }
+  ],
+  "emergency-tree-service-malvern-ar": [
+    {
+      "q": "Do you really answer calls at night and on weekends?",
+      "a": "Yes. We take emergency calls 24 hours a day, 7 days a week, including nights, weekends, and holidays."
+    },
+    {
+      "q": "How fast can you get to Malvern in an emergency?",
+      "a": "Our crew is about 25 minutes west in Arkadelphia by way of I-30. For emergencies, we can usually be on-site within an hour."
+    },
+    {
+      "q": "Will my insurance cover emergency tree removal?",
+      "a": "If a tree falls on your home or another covered structure, homeowner's insurance often covers some or all of the removal. Check with your insurance company. We provide a written price and photos for your adjuster."
+    },
+    {
+      "q": "A tree fell on a power line. Should I call you first?",
+      "a": "Call the power company first and stay away from the line. Once the line is made safe, we can remove the tree."
+    }
   ]
 }
