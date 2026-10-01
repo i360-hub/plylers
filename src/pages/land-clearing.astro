@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import AreasBlock from '../components/AreasBlock.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import GhlForm from '../components/GhlForm.astro';
+import { breadcrumb, faqPage, service, SITE, LOCALBUSINESS_ID, WEBSITE_ID } from '../lib/schema';
+import business from '../data/business.json';
+import faqData from '../data/faq.json';
+
+const title = "Land & Lot Clearing Arkansas | Plyler's Tree Service";
+const description =
+  'Land and lot clearing across Clark County, Arkansas — trees, brush, and stumps cleared for home sites, pasture, and new construction. Free on-site estimates.';
+const path = '/land-clearing';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Land & Lot Clearing', path },
+];
+const faq = faqData['land-clearing'] ?? [];
+
+// What we clear.
+const work = [
+  { h: 'Lot Clearing for New Construction', p: 'Building lots cleared of trees, stumps, brush, and debris so they’re ready to build on, sell, or maintain. We work with homeowners and builders in Arkadelphia, Caddo Valley, Malvern, Bismarck, and Gurdon.' },
+  { h: 'Land Clearing', p: 'Trees, brush, and undergrowth cleared for home sites, pasture, hunting land, and development around Arkadelphia, Gurdon, Amity, and Glenwood.' },
+  { h: 'Selective Thinning', p: 'Not every job is a clean sweep. Tell us which trees you want to keep, and we take out the rest and work around the ones that stay.' },
+  { h: 'Stumps Handled', p: 'Stumps are ground below grade, or dug out completely where you’re pouring a foundation or building right on the spot.' },
+  { h: 'Site Preparation & Grading', p: 'Tree clearing, stump removal, and finish grading to get your land ready for construction, drainage, and landscaping — one crew from the first tree to a level pad.' },
+  { h: 'Debris Hauled Off', p: 'Branches, logs, brush, and wood chips are gathered and hauled away. The site is clean when we leave.' },
+];
+
+// How a clearing job works.
+const steps = [
+  { h: 'Free On-Site Estimate', p: 'Robbie or a crew lead walks the property with you, looks at the trees, the brush, and the access, and gives you an honest price. No cost, no obligation.' },
+  { h: 'Mark What Stays', p: 'You tell us which trees to keep. We plan the work around them and around the structures and fences already on the property.' },
+  { h: 'Clear and Grind', p: 'We take down the trees, clear the brush and undergrowth, and handle the stumps.' },
+  { h: 'Haul Off and Level', p: 'Debris is hauled away, and grading is available to finish the job so the ground is ready for what comes next.' },
+];
+
+// Why folks call us first.
+const whyUs = [
+  { h: '24 Years of Doing This', p: 'Robbie Plyler started this company in 2002. Two decades of experience on every job.' },
+  { h: 'Licensed and Insured', p: 'Full liability coverage. If anything goes wrong, you’re protected. Period.' },
+  { h: 'Free Estimates, No Pressure', p: 'We come out, look at the job, and give you an honest price. No obligation.' },
+  { h: 'We Clean Up Everything', p: 'Brush, logs, and debris are hauled off. We don’t leave a mess behind for you to deal with.' },
+  { h: 'One Crew, Start to Finish', p: 'The same crew clears the trees, handles the stumps, and finishes the ground.' },
+  { h: 'Local People, Local Company', p: 'We live here. Our kids go to school here. We treat your property like it’s our own.' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE}${path}#webpage`,
+    url: `${SITE}${path}`,
+    name: title,
+    description,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': LOCALBUSINESS_ID },
+    breadcrumb: { '@id': `${SITE}${path}#breadcrumb` },
+  },
+  { ...breadcrumb(crumbs), '@id': `${SITE}${path}#breadcrumb` },
+  service({
+    name: 'Land & Lot Clearing',
+    serviceType: 'Land clearing',
+    description,
+    path,
+  }),
+  ...(faq.length ? [faqPage(faq)] : []),
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <Hero
+    eyebrow="Clark County & Surrounding Areas"
+    title="Land & Lot Clearing in Clark County & Surrounding Areas"
+    subtitle="Trees, brush, and stumps cleared so your land is ready to build on, sell, or use. Licensed and insured, with free on-site estimates."
+    image="/images/glenwood-ar-large-tree-felling-chainsaw-professional.webp"
+    imageAlt="Crew felling a large tree during a clearing job near Glenwood, AR"
+  />
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">Land and Lot Clearing From a Crew That Knows Trees</h2>
+      <p class="lead">
+        Plyler’s Tree Service has been taking down trees in Arkadelphia and Clark County since 2002. Land and lot
+        clearing is the same work on a bigger scale: we take down the trees, clear the brush and undergrowth, handle
+        the stumps, and haul off the debris, so the ground is ready for whatever comes next. We clear building lots
+        for new homes, open up land for pasture and hunting ground, and do pre-construction clearing for commercial
+        sites. We’re {business.ownership.toLowerCase()}, licensed and insured, and every estimate is free and done
+        on site.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">What We Clear</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        From a single building lot to open acreage, here’s the clearing work we do.
+      </p>
+      <div class="grid grid-3">
+        {work.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center measure" style="margin-top:2.4rem;color:var(--muted)">
+        Clearing for a business or a development? See our
+        <a href="/commercial-tree-service-arkadelphia-ar">commercial tree service</a> page. Building at the lake? See
+        <a href="/lakefront-tree-service-degray-lake-ar">lakefront tree service at DeGray Lake</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-green">
+    <div class="container">
+      <h2 class="center">How a Clearing Job Works</h2>
+      <p class="center measure" style="margin-bottom:2.4rem;color:#bcd3c4">
+        Four steps from an overgrown lot to clear, usable ground.
+      </p>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step">
+            <span class="step-num">{i + 1}</span>
+            <h3>{s.h}</h3>
+            <p class="mb-0">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure">
+      <h2 class="center">How Much Does Land Clearing Cost?</h2>
+      <p>
+        Every property is different, so clearing is quoted on site. The price depends on how much ground there is,
+        how thick the trees and brush are, how easy it is to get equipment in, and whether you want the stumps
+        handled, the debris hauled, and the ground graded.
+      </p>
+      <p>
+        We always give you the exact price before we start — no hidden fees, no surprises. Call us at
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> or fill out the form below for a free
+        estimate.
+      </p>
+      <p class="center" style="margin-top:1.6rem">
+        <img
+          src="/images/malvern-ar-stump-grinding-land-clearing-skid-steer.webp"
+          width="592" height="448" loading="lazy" decoding="async"
+          alt="Skid-steer stump grinding and land clearing in Malvern, AR"
+          style="border-radius:var(--radius-lg);box-shadow:var(--shadow);max-width:100%;height:auto"
+        />
+      </p>
+      <p>
+        Only need a few trees gone, or one stump out of the way? See <a href="/tree-removal">tree removal</a> and
+        <a href="/stump-grinding">stump grinding</a>.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Got Land That Needs Clearing?"
+    text="Call Robbie. He’ll walk the property, tell you what it’ll take, and give you a straight price."
+  />
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="center">Why Folks Around Here Call Us First</h2>
+      <p class="center lead measure" style="margin-bottom:2.4rem;color:var(--muted)">
+        We show up, do the work right, and leave the site clean.
+      </p>
+      <div class="grid grid-3">
+        {whyUs.map((w) => (
+          <div class="card">
+            <h3>{w.h}</h3>
+            <p class="mb-0">{w.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <AreasBlock current={path} />
+
+  <FaqSection
+    items={faq}
+    heading="Land & Lot Clearing Questions"
+    intro="Answers to the things property owners ask us most about clearing."
+  />
+
+  <GhlForm heading="Get Your Free Estimate" />
+</BaseLayout>
+
+<style>
+  .steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.6rem; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--amber-500); color: var(--green-900); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .step h3 { color: #fff; margin: 0 0 0.4rem; }
+  .step p { color: #c9ddcf; }
+</style>

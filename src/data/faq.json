@@ -714,5 +714,27 @@
       "q": "A tree fell on a power line. Should I call you first?",
       "a": "Call the power company first and stay away from the line. Once the line is made safe, we can remove the tree."
     }
+  ],
+  "land-clearing": [
+    {
+      "q": "What does land clearing include?",
+      "a": "We take down the trees, clear the brush and undergrowth, handle the stumps, and haul off the debris. Stump removal and grading are available to finish the job, so the ground is ready to build on, sell, or use."
+    },
+    {
+      "q": "Do you clear single lots, or only larger pieces of land?",
+      "a": "Both. We clear single building lots for new homes, and larger pieces of land for home sites, pasture, and hunting ground."
+    },
+    {
+      "q": "Can you leave some trees standing?",
+      "a": "Yes. Tell us which trees you want to keep and we clear around them. Selective thinning is a common request."
+    },
+    {
+      "q": "How much does land clearing cost?",
+      "a": "Clearing is quoted on site, because every property is different. The amount of ground, how thick the trees and brush are, equipment access, and whether you want stumps handled and the ground graded all affect the price. The estimate is free, and you get the exact price before we start."
+    },
+    {
+      "q": "What areas do you serve for land and lot clearing?",
+      "a": "Arkadelphia, Caddo Valley, Gurdon, Amity, Glenwood, Malvern, Bismarck, Hot Springs, and the rest of our 40-mile service area across Clark, Garland, Hot Spring, Pike, and Montgomery counties."
+    }
   ]
 }

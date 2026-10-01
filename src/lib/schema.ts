@@ -1,5 +1,6 @@
 import business from '../data/business.json';
 import areas from '../data/areas.json';
+import links from '../data/links.json';
 
 const SITE = business.url; // https://www.plylerstreeservice.com
 
@@ -43,9 +44,20 @@ const geo = {
 const aggregateRating = {
   '@type': 'AggregateRating',
   ratingValue: business.rating.value,
-  reviewCount: business.rating.count,
+  // schemaCount is the exact Google review count; count is the rounded-down figure used in "70+" copy.
+  reviewCount: business.rating.schemaCount ?? business.rating.count,
   bestRating: '5',
   worstRating: '1',
+};
+
+// Services offered, mirroring the Google Business Profile service list.
+const hasOfferCatalog = {
+  '@type': 'OfferCatalog',
+  name: 'Tree services',
+  itemListElement: links.catalog.map((s) => ({
+    '@type': 'Offer',
+    itemOffered: { '@type': 'Service', name: s.name, url: `${SITE}${s.href}` },
+  })),
 };
 
 /** Stable global nodes present on every page. */
@@ -81,6 +93,7 @@ export function globalGraph() {
     areaServed,
     openingHoursSpecification,
     aggregateRating,
+    hasOfferCatalog,
     sameAs,
     foundingDate: business.founded,
     founder: { '@type': 'Person', name: business.owner },

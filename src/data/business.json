@@ -46,7 +46,8 @@
   "hoursNote": "24/7 emergency response",
   "rating": {
     "value": "5.0",
-    "count": "70"
+    "count": "70",
+    "schemaCount": "78"
   },
   "social": {
     "facebook": "https://www.facebook.com/p/Plylers-Tree-Service-100093509250624/",

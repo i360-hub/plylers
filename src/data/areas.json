@@ -1,5 +1,5 @@
 {
-  "_comment": "Service area aligned 1:1 with the Google Business Profile service-area list (20 towns). GBP is the authoritative source Google cross-references for local ranking; schema areaServed + on-page chips mirror it. Hubs have dedicated pages; other towns link to /service-areas.",
+  "_comment": "Service area mirrors the Google Business Profile service-area list. As of Oct 2026 the profile lists Sparkman and not Hot Springs Village; both are kept here (21 towns) until the 20th profile slot is settled. GBP is the authoritative source Google cross-references for local ranking; schema areaServed + on-page chips mirror it. Hubs have dedicated pages; other towns link to /service-areas.",
   "counties": [
     "Clark County, Arkansas",
     "Garland County, Arkansas",
@@ -40,7 +40,8 @@
     { "city": "Friendship", "href": "/service-areas" },
     { "city": "Bonnerdale", "href": "/service-areas" },
     { "city": "Kirby", "href": "/service-areas" },
-    { "city": "Daisy", "href": "/service-areas" }
+    { "city": "Daisy", "href": "/service-areas" },
+    { "city": "Sparkman", "href": "/service-areas" }
   ],
   "cities": [
     "Arkadelphia",
@@ -62,6 +63,7 @@
     "Friendship",
     "Bonnerdale",
     "Kirby",
-    "Daisy"
+    "Daisy",
+    "Sparkman"
   ]
 }

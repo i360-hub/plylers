@@ -8,6 +8,8 @@ const services = [
   { name: 'Tree Trimming', href: '/tree-trimming' },
   { name: 'Stump Grinding', href: '/stump-grinding' },
   { name: 'Emergency Storm Damage', href: '/emergency-storm-damage' },
+  { name: 'Land & Lot Clearing', href: '/land-clearing' },
+  { name: 'Commercial Tree Service', href: '/commercial-tree-service-arkadelphia-ar' },
 ];
 const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isActive = (h: string) => (h === '/' ? path === '/' : path === h);
@@ -16,7 +18,7 @@ const isActive = (h: string) => (h === '/' ? path === '/' : path === h);
 <header class="site-header">
   <div class="topbar">
     <div class="container topbar-inner">
-      <span class="topbar-note">Locally owned in Arkadelphia since 2002 · Free estimates · Licensed &amp; insured</span>
+      <span class="topbar-note">{business.ownership} in Arkadelphia since {business.founded} · Free estimates · Licensed &amp; insured</span>
       <a class="topbar-phone" href={`tel:${business.phoneHref}`}>Call {business.phoneDisplay}</a>
     </div>
   </div>

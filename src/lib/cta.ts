@@ -8,6 +8,7 @@ export const FORM_PATHS = new Set<string>([
   '/tree-trimming',
   '/stump-grinding',
   '/emergency-storm-damage',
+  '/land-clearing',
   '/tree-service-arkadelphia-ar',
   '/tree-service-hot-springs-ar',
   '/tree-service-caddo-valley-ar',

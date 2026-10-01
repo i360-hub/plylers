@@ -8,7 +8,7 @@ const items = links.services.filter((s) => s.href !== current);
   <div class="container">
     {heading && <h2 class="center">{heading}</h2>}
     {intro && <p class="center lead measure" style="margin-bottom:2rem;color:var(--muted)">{intro}</p>}
-    <div class="grid grid-4">
+    <div class={items.length > 4 ? 'grid grid-3' : 'grid grid-4'}>
       {items.map((s) => <ServiceCard title={s.name} href={s.href} description={s.blurb} icon={s.icon} image={s.image} imageAlt={s.imageAlt} linkLabel={s.linkLabel} />)}
     </div>
     {cta && (

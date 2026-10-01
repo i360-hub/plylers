@@ -8,6 +8,8 @@ const services = [
   { name: 'Tree Trimming & Pruning', href: '/tree-trimming' },
   { name: 'Stump Grinding', href: '/stump-grinding' },
   { name: 'Emergency Storm Damage', href: '/emergency-storm-damage' },
+  { name: 'Land & Lot Clearing', href: '/land-clearing' },
+  { name: 'Commercial Tree Service', href: '/commercial-tree-service-arkadelphia-ar' },
 ];
 const company = [
   { name: 'About Us', href: '/about' },
@@ -24,9 +26,9 @@ const company = [
     <div class="footer-brand">
       <img src="/images/plylers-tree-service-logo.png" width="210" height="54" alt={`${business.name} logo`} class="footer-logo" />
       <p>
-        Locally owned and operated by {business.owner}. Arkadelphia-based since {business.founded}.
-        Tree removal, trimming, stump grinding, and 24/7 emergency storm cleanup. Licensed, insured,
-        and every estimate is free.
+        {business.ownership}, locally run by {business.owner}. Arkadelphia-based since {business.founded}.
+        Tree removal, trimming, stump grinding, land and lot clearing, and 24/7 emergency storm cleanup.
+        Licensed, insured, and every estimate is free.
       </p>
       <p class="footer-rating">
         <span class="stars" aria-hidden="true">★★★★★</span>
@@ -55,6 +57,7 @@ const company = [
       <p class="footer-h">Contact</p>
       <ul class="footer-contact">
         <li><a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a></li>
+        <li><a href={`sms:${business.phoneHref}`}>Text us at this number</a></li>
         <li><EmailLink /></li>
         <li>{business.address.locality}, {business.address.region} {business.address.postalCode}</li>
         <li class="text-muted">Service Area Business · Serving Clark County and a 40-mile radius</li>
