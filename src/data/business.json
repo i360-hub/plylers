@@ -69,7 +69,8 @@
     "googleAdsId": "AW-18449318307",
     "clarityId": "xogryngtu3",
     "ghlNumberPoolSrc": "https://backend.leadconnectorhq.com/appengine/loc/gmgznEWM6sm6aqWPghSP/pool/qUea8qbtzIpBZVli2Ndq/number_pool.js",
-    "ghlUserSessionSrc": "https://backend.leadconnectorhq.com/appengine/js/user_session.js"
+    "ghlUserSessionSrc": "https://backend.leadconnectorhq.com/appengine/js/user_session.js",
+    "ghlChatWidgetId": "6ac55756c02b2c1d09f2a099"
   },
   "ownership": "Family- and veteran-owned"
 }

@@ -48,6 +48,7 @@ const ADS = business.embeds.googleAdsId;
 const CLARITY = business.embeds.clarityId;
 const POOL = business.embeds.ghlNumberPoolSrc;
 const SESSION = business.embeds.ghlUserSessionSrc;
+const CHAT_WIDGET = business.embeds.ghlChatWidgetId;
 ---
 
 <!doctype html>
@@ -173,6 +174,16 @@ const SESSION = business.embeds.ghlUserSessionSrc;
       is:inline
       src="https://link.msgsndr.com/js/external-tracking.js"
       data-tracking-id="tk_90d12a0e49154a9892dbeef82a5d3368"
+    ></script>
+
+    <!-- Website chat assistant (AI message-taker). Takes the visitor's name,
+         number and message and alerts staff; it never books or quotes. Not
+         loaded on /lp ad pages (LandingLayout), which keep one call-only CTA. -->
+    <script
+      is:inline
+      src="https://widgets.leadconnectorhq.com/loader.js"
+      data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+      data-widget-id={CHAT_WIDGET}
     ></script>
   </body>
 </html>
