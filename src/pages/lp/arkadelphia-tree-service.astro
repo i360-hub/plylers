@@ -4,7 +4,9 @@
 // Built for one job: get the visitor to call (primary) or send the estimate form.
 //
 // Message match: headline, subtitle, featured service, reviews, and CTA emphasis
-// follow the search theme — general (default) | removal | trimming | stump | emergency.
+// follow the search theme — general (default) | removal | trimming | emergency.
+// No stump theme: paid messaging does not sell stump grinding (owner directive,
+// 2026-11-14); stump-intent keywords fall back to the general theme.
 // The theme comes from ?svc= or is inferred from ?kw= (Google Ads final URL suffix
 // kw={keyword}) / utm_term. A head script sets <html data-svc> before first paint.
 //
@@ -22,7 +24,7 @@ import faqData from '../../data/faq.json';
 
 const title = "Arkadelphia Tree Service — Free Estimates | Plyler's Tree Service";
 const description =
-  "Tree service in Arkadelphia since 2002 — removal, trimming, stump grinding, and storm cleanup. 5.0 stars, 70+ Google reviews. Licensed & insured. Free estimates.";
+  "Tree service in Arkadelphia since 2002 — removal, trimming, and storm cleanup. 5.0 stars, 70+ Google reviews. Licensed & insured. Free estimates.";
 // LP-only crop of the Arkadelphia oak photo: 4:3, light blur, low quality — it sits under a
 // 62–78% dark overlay, so this is visually identical at ~1/5 the bytes (768w: 36KB vs 172KB).
 const heroImage = '/images/lp-arkadelphia-hero.webp';
@@ -38,7 +40,7 @@ const themes = [
     key: 'general',
     reviews: 'general',
     h1: 'Tree Service in Arkadelphia, AR',
-    sub: 'Removal, trimming, stump grinding, and storm cleanup — based right here in Arkadelphia. Robbie answers the phone.',
+    sub: 'Removal, trimming, and storm cleanup — based right here in Arkadelphia. Robbie answers the phone.',
   },
   {
     key: 'removal',
@@ -52,13 +54,6 @@ const themes = [
     reviews: 'trimming',
     h1: 'Tree Trimming in Arkadelphia, AR',
     sub: 'Limbs off the roof and driveway with proper cuts — no topping — and the yard cleaned up after.',
-  },
-  {
-    key: 'stump',
-    reviews: 'stump',
-    exclude: ['Rebecca O.'], // her review is about trimming, not stumps
-    h1: 'Stump Grinding in Arkadelphia, AR',
-    sub: 'Stumps ground 6–8 inches below grade, ready to re-sod or replant. Several stumps in one trip.',
   },
   {
     key: 'emergency',
@@ -86,12 +81,12 @@ const services = [
     alt: "Plyler's climber in a harness trimming high branches",
   },
   {
-    key: 'stump',
-    h: 'Stump Grinding',
-    p: 'Stumps ground 6–8 inches below grade so you can re-sod or replant. Several stumps? We do them all in one trip.',
-    img: '/images/glenwood-ar-large-tree-felling-chainsaw-professional',
+    key: 'emergency',
+    h: 'Emergency & Storm Cleanup',
+    p: 'Tree on the house, car, or driveway after a storm? We answer day or night — weekends included — and haul off every branch.',
+    img: '/images/arkadelphia-ar-storm-damage-uprooted-oak-tree-removal',
     srcset: '-640.webp 640w, -1024.webp 1024w',
-    alt: "Plyler's crew member with a chainsaw beside a large cut tree and stump",
+    alt: 'Uprooted oak tree after a storm in Arkadelphia, AR',
   },
 ];
 
@@ -137,8 +132,8 @@ const webpage = { '@type': 'WebPage', name: title, description };
           var q = new URLSearchParams(location.search);
           var svc = (q.get('svc') || '').toLowerCase();
           var kw = (q.get('kw') || q.get('utm_term') || '').toLowerCase();
-          if (!/^(general|removal|trimming|stump|emergency)$/.test(svc)) {
-            svc = /stump|grind/.test(kw) ? 'stump'
+          if (!/^(general|removal|trimming|emergency)$/.test(svc)) {
+            svc = /stump|grind/.test(kw) ? 'general'
               : /trim|prun/.test(kw) ? 'trimming'
               : /emergenc|storm|fallen|24 ?hour|tree down/.test(kw) ? 'emergency'
               : /remov|cut|dead/.test(kw) ? 'removal'
@@ -282,11 +277,10 @@ const webpage = { '@type': 'WebPage', name: title, description };
   html[data-svc='general'] .v-general,
   html[data-svc='removal'] .v-removal,
   html[data-svc='trimming'] .v-trimming,
-  html[data-svc='stump'] .v-stump,
   html[data-svc='emergency'] .v-emergency { display: revert; }
   /* Featured service card first */
   html[data-svc='trimming'] .lp-service-trimming,
-  html[data-svc='stump'] .lp-service-stump { order: -1; }
+  html[data-svc='emergency'] .lp-service-emergency { order: -1; }
   /* Emergency: call only up top, form moved below the reviews */
   html[data-svc='emergency'] .hero-cta-quote { display: none; }
   html[data-svc='emergency'] main#main { display: flex; flex-direction: column; }
