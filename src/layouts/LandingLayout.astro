@@ -25,9 +25,12 @@ export interface Props {
   schema?: object[];
   /** Load gtag.js right away instead of on idle (conversion pages people close fast). */
   eagerTags?: boolean;
+  /** Per-page call number (default: the Arkadelphia tracking number in data/landing.json). */
+  phoneDisplay?: string;
+  phoneHref?: string;
 }
 
-const { title, description, path, preloadImage, schema = [], eagerTags = false } = Astro.props;
+const { title, description, path, preloadImage, schema = [], eagerTags = false, phoneDisplay = landing.phoneDisplay, phoneHref = landing.phoneHref } = Astro.props;
 const canonical = `${SITE}${path}`;
 const ogImageAbs = `${SITE}/images/plylers-tree-service-logo.png`;
 const jsonld = pageGraph(schema);
@@ -71,7 +74,7 @@ const EAGER = eagerTags;
         rel="preload"
         as="image"
         href={preloadImage}
-        imagesrcset={`${preloadImage.replace(/\.webp$/, '-768.webp')} 768w, ${preloadImage.replace(/\.webp$/, '-1024.webp')} 1024w, ${preloadImage} 1400w`}
+        imagesrcset={`${preloadImage.replace(/\.webp$/, '-768.webp')} 768w, ${preloadImage.replace(/\.webp$/, '-1024.webp')} 1024w`}
         imagesizes="100vw"
         fetchpriority="high"
       />
@@ -122,11 +125,11 @@ const EAGER = eagerTags;
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
-    <LandingHeader />
+    <LandingHeader phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
     <main id="main">
       <slot />
     </main>
-    <LandingFooter />
+    <LandingFooter phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
 
     <!-- No GHL number pool here: the landing number is hardwired (data/landing.json). -->
     <script is:inline defer src={SESSION}></script>

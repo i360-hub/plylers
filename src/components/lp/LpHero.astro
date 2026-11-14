@@ -44,7 +44,7 @@ const ICON: Record<string, string> = {
 };
 const img768 = image ? image.replace(/\.webp$/, '-768.webp') : '';
 const img1024 = image ? image.replace(/\.webp$/, "-1024.webp") : "";
-const heroSrcset = image ? `${img768} 768w, ${img1024} 1024w, ${image} 1400w` : undefined;
+const heroSrcset = image ? `${img768} 768w, ${img1024} 1024w` : undefined;
 ---
 <section class={`hero ${compact ? 'hero-compact' : ''} ${image ? '' : 'hero-nobg'}`}>
   {image && <img class="hero-bg" src={image} srcset={heroSrcset} sizes="100vw" alt={imageAlt} fetchpriority="high" decoding="async" width="1600" height="900" />}

@@ -3,12 +3,13 @@
 // have one thing to do (call) and nowhere to wander off to.
 import business from '../../data/business.json';
 import landing from '../../data/landing.json';
+const { phoneDisplay = landing.phoneDisplay, phoneHref = landing.phoneHref } = Astro.props;
 ---
 <header class="lp-header">
   <div class="container lp-header-inner">
     <img src="/images/plylers-tree-service-logo.png" width="140" height="80" alt={`${business.name} logo`} class="lp-logo" />
-    <a class="btn btn-primary lp-call" href={`tel:${landing.phoneHref}`}>
-      <span class="lp-call-label">Call</span> {landing.phoneDisplay}
+    <a class="btn btn-primary lp-call" href={`tel:${phoneHref}`}>
+      <span class="lp-call-label">Call</span> {phoneDisplay}
     </a>
   </div>
 </header>

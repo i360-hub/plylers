@@ -3,16 +3,17 @@
 // links). Also renders the sticky call bar phones get in place of a header button.
 import business from '../../data/business.json';
 import landing from '../../data/landing.json';
+const { phoneDisplay = landing.phoneDisplay, phoneHref = landing.phoneHref } = Astro.props;
 const year = new Date().getFullYear();
 ---
 <footer class="lp-footer">
   <div class="container lp-footer-inner">
     <p class="mb-0">© {year} {business.name} · {business.address.locality}, {business.address.region} · Licensed &amp; insured · <a class="lp-privacy" href="/lp/privacy">Privacy</a></p>
-    <a href={`tel:${landing.phoneHref}`}>{landing.phoneDisplay}</a>
+    <a href={`tel:${phoneHref}`}>{phoneDisplay}</a>
   </div>
 </footer>
 <nav class="lp-callbar" aria-label="Call or request an estimate">
-  <a class="btn btn-primary lp-callbar-call" href={`tel:${landing.phoneHref}`}>Call {landing.phoneDisplay}</a>
+  <a class="btn btn-primary lp-callbar-call" href={`tel:${phoneHref}`}>Call {phoneDisplay}</a>
   <a class="btn btn-dark lp-callbar-quote" href="#quote">Free Estimate</a>
 </nav>
 <script is:inline>
