@@ -1,7 +1,10 @@
 ---
-// Thank-you page the GHL estimate form redirects to. The Google Ads "Submit lead
-// form" conversion fires on any URL containing "estimate-submitted", so landing
-// here is what records the lead. Noindex and out of the sitemap.
+// Thank-you page the GHL estimate form redirects to. Today the Google Ads
+// "Submit lead form" conversion is the codeless kind — it fires on any URL
+// containing "estimate-submitted". Once a tag-based "Estimate Form Submission"
+// action exists in Ads, put its label in data/landing.json (googleAdsFormLabel)
+// and the script below fires the real tag event next to generate_lead; until
+// then the label is empty and this page fires nothing extra. Noindex, no sitemap.
 import LandingLayout from '../../layouts/LandingLayout.astro';
 import business from '../../data/business.json';
 import landing from '../../data/landing.json';
@@ -31,14 +34,17 @@ const description = "Your free estimate request was sent to Plyler's Tree Servic
   </section>
 </LandingLayout>
 
-<script is:inline>
-  // GA4 lead event, once per browser session so a refresh doesn't double count.
+<script is:inline define:vars={{ FORM_LABEL: landing.googleAdsFormLabel || '', ADS_ID: business.embeds.googleAdsId }}>
+  // GA4 lead event + (once the label is set) the tag-based Ads form conversion,
+  // once per browser session so a refresh doesn't double count. The GHL widget
+  // exposes no parent-page submit message — this redirect is the submit signal.
   // Skipped inside a frame: the frame guard is about to move this page to the top window.
   try {
     if (window.top !== window.self) throw 0;
     if (!sessionStorage.getItem('ghl_lead_sent')) {
       sessionStorage.setItem('ghl_lead_sent', '1');
       window.gtag && window.gtag('event', 'generate_lead', { form_name: 'ghl_estimate' });
+      if (FORM_LABEL) window.gtag && window.gtag('event', 'conversion', { send_to: ADS_ID + '/' + FORM_LABEL });
     }
   } catch (e) {}
 </script>
