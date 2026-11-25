@@ -25,10 +25,10 @@ import faqData from '../../data/faq.json';
 const title = "Malvern Tree Service — Free Estimates | Plyler's Tree Service";
 const description =
   "Tree service in Malvern since 2002 — removal, trimming, and storm cleanup. In Malvern weekly, no trip fee. 5.0 stars, 70+ reviews. Licensed & insured.";
-// Shared LP hero crop (oak overhanging a home): 4:3, light blur, low quality — it sits under a
-// 62–78% dark overlay, so this is visually identical at ~1/5 the bytes (768w: 36KB vs 172KB).
-// The Malvern originals are 170KB+, so the LP crop is reused rather than shipping a heavy hero.
-const heroImage = '/images/lp-arkadelphia-hero.webp';
+// Malvern's own hero: the mature-oak photo from Malvern (its -768/-1024 variants already
+// exist, which LpHero's srcset and the layout preload require). Heavier than the Arkadelphia
+// LP crop — an optimized lp-malvern-hero set is prepared but still needs a binary upload path.
+const heroImage = '/images/malvern-ar-large-mature-oak-tree-assessment-commercial.webp';
 const formSrc = landing.ghlFormSrc || business.embeds.ghlFormSrc;
 // Same 3-field GHL form as the Arkadelphia LP (no distinct Malvern 3-field form
 // exists; the Malvern site page's own form is 8 fields). The Town field and the
