@@ -7,6 +7,7 @@ const {
   current = '',
   cta = null,
   closing = '',
+  popular = [],
 } = Astro.props;
 const chips = areas.chips.filter((c) => !(c.href === current && c.href !== '/service-areas'));
 ---
@@ -18,6 +19,14 @@ const chips = areas.chips.filter((c) => !(c.href === current && c.href !== '/ser
       {chips.map((c) => <a class="area-pill" href={c.href}>Tree Service in {c.city}</a>)}
       <a class="area-pill area-all" href="/service-areas">All Service Areas →</a>
     </div>
+    {popular.map((g) => (
+      <div class="areas-popular">
+        <h3 class="center areas-popular-heading">{g.heading}</h3>
+        <div class="areas-grid">
+          {g.links.map((l) => <a class="area-pill" href={l.href}>{l.name}</a>)}
+        </div>
+      </div>
+    ))}
     {closing && <p class="center measure areas-closing">{closing}</p>}
     {cta && (
       <p class="center section-cta"><a class="btn btn-primary btn-lg" href={cta.href}>{cta.label}</a></p>
@@ -32,4 +41,6 @@ const chips = areas.chips.filter((c) => !(c.href === current && c.href !== '/ser
   .area-all { background: var(--green-700); color: #fff; }
   .area-all:hover { background: var(--green-800); }
   .areas-closing { margin-top: 1.6rem; color: var(--muted); }
+  .areas-popular { margin-top: 2rem; }
+  .areas-popular-heading { font-size: 1.1rem; margin: 0 0 0.9rem; }
 </style>
