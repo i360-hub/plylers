@@ -29,11 +29,11 @@ const faq = faqData['tree-service-malvern-ar'] ?? [];
 const coreServices = [
   {
     h: 'Tree Removal',
-    p: "A storm-cracked pecan leaning over the porch on Page Avenue, a dead oak threatening the garage off Highway 270, or a giant pine that's outgrown a lakefront lot on Lake Catherine — we bring them down safe and haul off every branch. In-town tight lots, rural acreage, lakefront property — doesn't matter. We handle it.",
+    p: "A storm-cracked pecan leaning over the porch on Page Avenue, a dead oak threatening the garage off Highway 270, or a giant pine that's outgrown a lakefront lot on Lake Catherine. We bring them down safe and haul off every branch. When a house, a fence, or a dock is in the way, we take the tree apart in sections with ropes and rigging. In-town tight lots near Main Street, rural acreage out toward Rockport and Magnet Cove, lakefront property around Lake Catherine: doesn't matter. We handle it.",
   },
   {
     h: 'Tree Trimming',
-    p: 'Limbs scraping the roof on Main Street, branches hanging over the driveway, canopy shading out your lawn — we trim them back the right way. No topping, no hacking. Just proper cuts that keep the tree healthy and your property safe.',
+    p: "Limbs scraping the roof on Main Street, branches hanging over the driveway, canopy shading out your lawn. We trim them back the right way. In the established neighborhoods off Highway 67 and along Page Avenue, where big oaks and pecans hang over the houses, that means lifting limbs off the roof, cutting out deadwood, and thinning a crowded canopy. No topping, no hacking. Just proper cuts that keep the tree healthy and your property safe.",
   },
   {
     h: 'Stump Grinding',
@@ -41,7 +41,7 @@ const coreServices = [
   },
   {
     h: 'Emergency Storm Damage',
-    p: 'When a storm drops a tree on your house, blocks Highway 67, or takes out a fence at 2 a.m., call us any time — nights, weekends, holidays. Our crew is just 25 minutes west in Arkadelphia and can be on the way fast.',
+    p: "When a storm drops a tree on your house, blocks Highway 67, or takes out a fence at 2 a.m., call us any time: nights, weekends, holidays, 24/7. Our crew is just 25 minutes west in Arkadelphia and can be on the way fast. Hot Spring County's worst storms run from late March through early June, with another rough stretch in October and November, and ice hits hardest from December through February. That's when pecans drop heavy limbs on the older streets in town and pines snap on the hillsides around Lake Catherine.",
   },
   {
     h: 'Tree Assessments',
@@ -147,6 +147,28 @@ const schema = [
             <p class="mb-0">{s.p}</p>
           </div>
         ))}
+      </div>
+      <div class="measure" style="margin:3.2rem auto 0">
+        <h2 class="center">Tree Care in Malvern</h2>
+        <p>
+          Not every tree job is a removal. Plenty of the big oaks, pecans, and pines around Malvern are worth keeping,
+          and keeping them means looking after them. Tree care starts with the same free walk-through as any estimate.
+          Robbie checks the lean, the trunk, and the roots, and looks for the root damage and disease that most people
+          walk right past. Then he tells you straight what's healthy and what's a problem.
+        </p>
+        <p>
+          Deadwood is the first thing we look for. Hickories hold dead branches that fall without warning, pecans drop
+          heavy limbs in storms, and oaks split at the crotch as they age. Cutting out deadwood and thinning a crowded
+          canopy takes weight off those trees, keeps limbs off the roof and the driveway, and lets light back onto the
+          lawn. We make proper cuts and never top a tree. Our page on
+          <a href="/tree-trimming-malvern-ar">tree trimming in Malvern</a> covers that canopy work in more detail.
+        </p>
+        <p class="mb-0">
+          The time to do it is before storm season, not after a limb is on the roof. In Hot Spring County that means
+          before ice season (December through February) and the spring storms (late March through early June). Call
+          <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a> and Robbie will come take a look. The
+          assessment is free, and you'll get the price in writing before any work starts.
+        </p>
       </div>
     </div>
   </section>
